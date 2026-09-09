@@ -3,6 +3,8 @@
 The probe proves connectivity, block-pinned state reads and exact cross-venue
 quotes without signing or broadcasting. RPC selection is adaptive and uses a
 zero-cost-first candidate pool; no single provider is an architectural dependency.
+Execution gas is deliberately excluded: transaction-path gas belongs to the
+exact PhantomX executor calldata and is measured separately with eth_estimateGas.
 """
 from __future__ import annotations
 
@@ -113,7 +115,6 @@ def main() -> int:
                 v2_pool=QUICK_V2_WMATIC_POOL,
                 loan_usd=Decimal("1000"),
                 rpc_call_at_block=pinned_call,
-                v2_gas_units=150_000,
                 direction=direction,
             )
             results[direction] = {
@@ -122,6 +123,7 @@ def main() -> int:
                 "final_out_usd": str(legs[1].amount_out_usd),
                 "quoted_block": legs[1].quoted_block,
                 "venue_path": [legs[0].venue, legs[1].venue],
+                "execution_gas_available": False,
             }
         except Exception as exc:
             results[direction] = {"error_class": classify_error(exc), "error": repr(exc)}
