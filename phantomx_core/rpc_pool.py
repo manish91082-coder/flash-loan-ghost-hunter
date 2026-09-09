@@ -55,7 +55,7 @@ class AdaptiveRpcPool:
         self.endpoints = tuple(cleaned)
         self.cooldown_seconds = max(1.0, cooldown_seconds)
         self.health = {endpoint: RpcHealth() for endpoint in self.endpoints}
-        self._cursor = 0
+        self._cursor = -1
 
     def ordered(self) -> list[str]:
         now = time.monotonic()
