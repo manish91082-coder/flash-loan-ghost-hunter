@@ -21,7 +21,8 @@ class EconomicTruthTests(unittest.TestCase):
             gas_token_price_usd=D("0.25"),
         )
 
-    def leg(self, venue, tin, tout, amount_in, amount_out, fee, block=100):
+    def leg(self, venue, tin, tout, amount_in, amount_out, fee, block=100,
+            amount_in_raw=None, amount_out_raw=None):
         return QuoteLeg(
             venue=venue,
             token_in=tin,
@@ -32,6 +33,8 @@ class EconomicTruthTests(unittest.TestCase):
             gas_units=100_000,
             quoted_block=block,
             quote_id=f"{venue}-{tin}-{tout}-{amount_in}",
+            amount_in_raw=amount_in_raw,
+            amount_out_raw=amount_out_raw,
         )
 
     def test_profit_floor_must_be_exceeded(self):
@@ -81,6 +84,23 @@ class EconomicTruthTests(unittest.TestCase):
                 route=[
                     self.leg("DEX-A", "USDC", "WETH", 1000, 1003, 0.1),
                     self.leg("DEX-B", "WETH", "USDC", 1002, 1005, 0.1),
+                ],
+                loan_usd=D("1000"),
+                flash_loan_fee_usd=D("0.05"),
+            )
+
+    def test_raw_amount_continuity_is_authoritative(self):
+        with self.assertRaises(EconomicTruthError):
+            evaluate_route(
+                opportunity_id="bad-raw-amounts",
+                snapshot=self.snapshot,
+                route=[
+                    self.leg("DEX-A", "USDC", "WETH", 1000, 1003, 0.1,
+                             amount_in_raw=1_000_000, amount_out_raw=2_000_000),
+                    # USD is intentionally equal to the previous leg, but the
+                    # actual WETH quantity is not what the next swap receives.
+                    self.leg("DEX-B", "WETH", "USDC", 1003, 1005, 0.1,
+                             amount_in_raw=1_999_999, amount_out_raw=1_005_000),
                 ],
                 loan_usd=D("1000"),
                 flash_loan_fee_usd=D("0.05"),
