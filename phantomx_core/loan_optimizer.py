@@ -61,20 +61,27 @@ def _refinement_grid(lo: Decimal, hi: Decimal, points: int, precision: Decimal) 
     })
 
 
-def optimize_loan(
-    *,
-    snapshot: EconomicSnapshot,
-    route_sampler: Callable[[Decimal], tuple[Sequence[QuoteLeg], Decimal]],
-    config: LoanSearchConfig = LoanSearchConfig(),
-) -> ProfitCertificate | None:
+def optimize_loan(*, snapshot: object,
+                  route_sampler: Callable[[Decimal], tuple[Sequence[QuoteLeg], Decimal]],
+                  config: LoanSearchConfig = LoanSearchConfig(),
+                  ) -> ProfitCertificate | None:
     """Optimize loan size from executable quotes only.
 
     route_sampler(loan_usd) returns ``(route, flash_loan_fee_usd)``. Any quote
     failure should raise or return an invalid route; invalid candidates are
     ignored by the economic truth engine. The search refines around the best
-    verified neighborhood instead of assuming a fixed 70% reserve ratio.
+    verified neighborhood instead of assuming a fixed reserve ratio.
     """
     config.validate()
+    # Normalize adapter snapshots while retaining the public function's simple API.
+    economic_snapshot = (
+        snapshot if isinstance(snapshot, EconomicSnapshot)
+        else snapshot.as_economic_snapshot() if callable(getattr(snapshot, "as_economic_snapshot", None))
+        else None
+    )
+    if not isinstance(economic_snapshot, EconomicSnapshot):
+        raise ValueError("Unsupported snapshot type")
+
     samples: dict[Decimal, tuple[Sequence[QuoteLeg], Decimal]] = {}
     candidates: list[tuple[Decimal, Sequence[QuoteLeg], Decimal]] = []
 
@@ -88,9 +95,8 @@ def optimize_loan(
                 samples[size] = (route, flash_fee)
                 candidates.append((size, route, flash_fee))
             except Exception:
-                # Quote failure is a blocked candidate, never a reason to invent output.
                 continue
-        return select_best_loan(snapshot=snapshot, quote_sampler=list(candidates))
+        return select_best_loan(snapshot=economic_snapshot, quote_sampler=list(candidates))
 
     best = evaluate_sizes(geometric_candidates(config))
     for _ in range(config.refinement_rounds):
@@ -104,8 +110,6 @@ def optimize_loan(
             break
         refined = _refinement_grid(lo, hi, config.refinement_points, config.step_precision)
         new_best = evaluate_sizes(refined)
-        if new_best is None or new_best.conservative_net_profit_usd <= best.conservative_net_profit_usd:
-            best = best
-        else:
+        if new_best is not None and new_best.conservative_net_profit_usd > best.conservative_net_profit_usd:
             best = new_best
     return best
