@@ -1,9 +1,7 @@
 """PHANTOMX live-data bridge for P0-A.
 
-The bridge creates one block/gas snapshot from a single healthy RPC endpoint,
-then performs all configured pool reads at that exact block using the same RPC.
-It never falls back to ``latest`` for stateful pool reads and never fabricates
-prices when a read fails.
+Creates one block/gas snapshot from a single healthy RPC endpoint, then reads
+all configured pools at that exact block using the same endpoint.
 """
 from __future__ import annotations
 
@@ -12,7 +10,7 @@ from decimal import Decimal
 from typing import Any, Mapping
 
 from .block_pinned_rpc import BlockPinnedRpc
-from .block_snapshot import BlockSnapshot
+from .block_snapshot import BlockSnapshot, build_block_snapshot
 from .economic_truth import EconomicTruthError
 from .live_pool_snapshot import PoolRead, read_configured_pool
 
@@ -43,7 +41,7 @@ class LiveDataSnapshot:
 
 def _rpc_call_at(rpc: BlockPinnedRpc, rpc_url: str):
     def call(pool: str, selector: str, block_number: int) -> str:
-        result = rpc.eth_call_at_block_on_rpc(
+        result = rpc.eth_call_at_block(
             to=pool,
             data=selector,
             block_number=block_number,
@@ -60,11 +58,7 @@ def collect_live_data_snapshot(
     pool_groups: tuple[tuple[str, str, Mapping[str, Any]], ...],
     chain_id: int = 137,
 ) -> LiveDataSnapshot:
-    """Capture one coherent block/gas state and read all pools at that block.
-
-    pool_groups entries are ``(kind, venue, config)`` where kind is ``v2`` or
-    ``v3`` and config is one of the existing repository pool configuration dicts.
-    """
+    """Capture one coherent block/gas state and read every pool at that block."""
     last_error: Exception | None = None
     for endpoint in rpc.endpoints:
         try:
@@ -76,9 +70,8 @@ def collect_live_data_snapshot(
                 raise EconomicTruthError("RPC returned no block object")
             if not isinstance(gas_hex, str) or not gas_hex.startswith("0x"):
                 raise EconomicTruthError("RPC returned invalid gas price")
-            block_number = int(block.get("number", "0x0"), 16)
             gas_wei = int(gas_hex, 16)
-            snapshot = BlockSnapshot.from_raw(
+            snapshot = build_block_snapshot(
                 chain_id=chain_id,
                 block=block,
                 gas_price_wei=gas_wei,
