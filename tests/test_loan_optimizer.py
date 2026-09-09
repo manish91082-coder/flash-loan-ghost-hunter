@@ -40,8 +40,8 @@ class LoanOptimizerTests(unittest.TestCase):
 
     def test_selects_best_real_quote_not_max_allowed_loan(self):
         def sampler(loan):
-            # Executable output peaks around $20k due to deteriorating price impact.
-            gain = D("0.004") * loan - D("0.000000000004") * (loan - D("20000")) ** 2
+            # Executable output peaks near $20k due to deteriorating price impact.
+            gain = D("0.004") * loan - D("0.0000001") * (loan - D("20000")) ** 2
             out = loan + gain
             return [
                 self.leg("A", "USDC", "WETH", loan, loan + gain / D("2"), "0.5"),
