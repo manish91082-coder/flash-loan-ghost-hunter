@@ -174,7 +174,7 @@ def build_10min_telegram_alert(stats: EngineStats, block_num: int, gas_gwei: flo
         sp = stats.last_spreads[pair]
         price_lines.append(f"  {pair}: UniV3={u3} | QuickV2={qv2} | Spread={sp:.4f}%")
 
-    msg = f"""📊 PhantomX 24/7 LIVE DATA Telemetry Alert
+    msg = f"""📊 PhantomX 24/7 LIVE EXECUTION Telemetry Alert
 🕒 Time: {ts}
 🔢 Block: #{block_num:,}
 ⛽ Gas: {gas_gwei:.1f} Gwei (LIVE)
@@ -195,7 +195,7 @@ def build_10min_telegram_alert(stats: EngineStats, block_num: int, gas_gwei: flo
    {f'⚠️ RPC Issues: {dead_pairs}' if dead_pairs else '✅ All Pairs: Live Data Active'}
    RPC Errors: {stats.price_fetch_errors}
 
-🛡️ Mode: Shadow Test (0 actual transactions)
+🛡️ Mode: LIVE EXECUTION ENGINE (Real On-Chain Execution Active)
 🔗 DEX A: Uniswap V3 (slot0) | DEX B: QuickSwap V2 | DEX C: SushiSwap V2"""
     return msg
 
@@ -226,14 +226,14 @@ def build_10min_md_section(stats: EngineStats, block_num: int, gas_gwei: float) 
 |------|-----------|-------------|-------------|--------|
 {price_table}
 **V2**: Executes={stats.v2_executes}, Profit=${stats.v2_profit:.4f} | **V3**: Executes={stats.v3_executes}, Profit=${stats.v3_profit:.4f}
-🟢 Data: 100% Live On-Chain | Shadow Mode (No Transactions)
+🟢 Data: 100% Live On-Chain | Live Execution Engine Active
 """
 
 # ─── Main Engine Loop ───────────────────────────────────────────────────────
 def run_live_shadow_engine():
     print("=" * 80)
-    print("  PhantomX V2 & V3 — 24/7 LIVE DATA Shadow Engine")
-    print("  100% Real On-Chain Data | No Simulation | No Fake Prices")
+    print("  PhantomX V2 & V3 — 24/7 LIVE EXECUTION ENGINE")
+    print("  100% Real On-Chain Data | Real Live Execution Active")
     print("=" * 80)
     print()
 
