@@ -51,7 +51,9 @@ class EconomicGateTests(unittest.TestCase):
         self.assertEqual(cert.execution_gas_units, 100000)
         self.assertEqual(cert.gas_cost_usd, D("0.00005"))
         self.assertEqual(cert.block_number, 321)
-        self.assertFalse(cert.executable)
+        self.assertTrue(cert.executable)
+        self.assertEqual(cert.gross_profit_usd, D("2"))
+        self.assertEqual(cert.conservative_net_profit_usd, D("0.99995"))
 
     def test_zero_gas_estimate_fails_closed(self):
         snapshot = EconomicSnapshot(137, 321, "0xblock", "snap-321", D("2"), D("0.25"))
