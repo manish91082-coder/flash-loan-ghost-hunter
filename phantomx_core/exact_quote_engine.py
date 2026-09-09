@@ -85,11 +85,39 @@ def _decode_address(result: str) -> str:
 
 def _decode_symbol(result: str) -> str:
     raw = bytes.fromhex(result[2:] if result.startswith("0x") else result)
-    if len(raw) >= 64:
-        length = int.from_bytes(raw[:32], "big")
-        if 32 + length <= len(raw):
-            return raw[32:32 + length].decode("utf-8", errors="strict")
-    return raw.rstrip(b"\x00").decode("utf-8", errors="strict")
+    if len(raw) < 32:
+        raise EconomicTruthError("ABI symbol response too short")
+
+    # ERC-20 symbol() implementations commonly return either dynamic string
+    # ABI (offset, length, data) or bytes32. Detect dynamic ABI first.
+    offset = int.from_bytes(raw[:32], "big")
+    if offset % 32 == 0 and 0 < offset <= len(raw) - 32:
+        length_pos = offset
+        length = int.from_bytes(raw[length_pos:length_pos + 32], "big")
+        data_start = length_pos + 32
+        data_end = data_start + length
+        if length <= 128 and data_end <= len(raw):
+            try:
+                return raw[data_start:data_end].decode("utf-8", errors="strict").strip("\x00")
+            except UnicodeDecodeError:
+                pass
+
+    # bytes32/string-style fixed response, right-trim padding.
+    candidate = raw[:32].rstrip(b"\x00")
+    if candidate:
+        try:
+            return candidate.decode("utf-8", errors="strict")
+        except UnicodeDecodeError:
+            pass
+
+    # Some mocks encode bytes32 in the final 32-byte word.
+    candidate = raw[-32:].rstrip(b"\x00")
+    if candidate:
+        try:
+            return candidate.decode("utf-8", errors="strict")
+        except UnicodeDecodeError:
+            pass
+    raise EconomicTruthError("Unable to decode ERC-20 symbol")
 
 
 def _encode_u256(value: int) -> str:
@@ -154,13 +182,12 @@ def _assert_pair_compatibility(a: tuple[TokenMeta, TokenMeta], b: tuple[TokenMet
 
 def quote_v2_single(*, snapshot: BlockSnapshot, router: str, token_in: TokenMeta, token_out: TokenMeta,
                     amount_in_raw: int, rpc_call_at_block: Callable[[str, str, int], str],
-                    gas_units: int, fee_rate: Decimal = D("0.0025")) -> ExactQuote:
+                    gas_units: int, fee_rate: Decimal = D("0.003")) -> ExactQuote:
     if amount_in_raw <= 0 or gas_units <= 0:
         raise EconomicTruthError("V2 quote amount/gas must be positive")
     path = _encode_address(token_in.address) + _encode_address(token_out.address)
     calldata = GET_AMOUNTS_OUT + _encode_u256(amount_in_raw) + _encode_u256(64) + _encode_u256(2) + path
     raw = rpc_call_at_block(router, calldata, snapshot.block_number)
-    # ABI encoding of uint256[]: offset(word0), length(word1), amount0(word2), amount1(word3).
     amount_out = _decode_word(raw, 3)
     if amount_out <= 0:
         raise EconomicTruthError("V2 quote returned zero output")
@@ -227,6 +254,8 @@ def quote_cross_venue_roundtrip(*, snapshot: BlockSnapshot, v3_pool: str, v2_poo
     _assert_pair_compatibility(v3_pair[:2], v2_pair)
     stable, asset = _find_stable_and_asset(v3_pair[:2], stable_symbols)
     amount_in_raw = int((loan_usd * (D(10) ** stable.decimals)).to_integral_exact())
+    if amount_in_raw <= 0:
+        raise EconomicTruthError("Loan is below token raw precision")
     if direction == "V2_TO_V3":
         first = quote_v2_single(snapshot=snapshot, router=QUICKSWAP_V2_ROUTER, token_in=stable, token_out=asset,
                                 amount_in_raw=amount_in_raw, rpc_call_at_block=rpc_call_at_block, gas_units=v2_gas_units)
