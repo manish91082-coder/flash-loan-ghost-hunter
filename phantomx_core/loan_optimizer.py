@@ -2,8 +2,9 @@
 
 The optimizer never derives PnL from spot spread, reserve percentage, or a
 fixed friction assumption. A caller supplies an executable quote sampler that
-returns the complete route for each candidate loan size. The economic truth
-engine then evaluates every candidate under the same pinned snapshot.
+returns the complete route and the exact transaction-path gas estimate for
+each candidate loan size. The economic truth engine evaluates every candidate
+under the same pinned snapshot.
 """
 from __future__ import annotations
 
@@ -62,18 +63,18 @@ def _refinement_grid(lo: Decimal, hi: Decimal, points: int, precision: Decimal) 
 
 
 def optimize_loan(*, snapshot: object,
-                  route_sampler: Callable[[Decimal], tuple[Sequence[QuoteLeg], Decimal]],
+                  route_sampler: Callable[[Decimal], tuple[Sequence[QuoteLeg], Decimal, int]],
                   config: LoanSearchConfig = LoanSearchConfig(),
                   ) -> ProfitCertificate | None:
     """Optimize loan size from executable quotes only.
 
-    route_sampler(loan_usd) returns ``(route, flash_loan_fee_usd)``. Any quote
-    failure should raise or return an invalid route; invalid candidates are
-    ignored by the economic truth engine. The search refines around the best
-    verified neighborhood instead of assuming a fixed reserve ratio.
+    route_sampler(loan_usd) returns ``(route, flash_loan_fee_usd,
+    execution_gas_units)``. The gas value MUST come from the exact executor
+    transaction path at the pinned block. Quote/Quoter call gas or a generic
+    swap estimate is not accepted. Any quote failure should raise or return an
+    invalid route; invalid candidates are ignored by the economic truth engine.
     """
     config.validate()
-    # Normalize adapter snapshots while retaining the public function's simple API.
     economic_snapshot = (
         snapshot if isinstance(snapshot, EconomicSnapshot)
         else snapshot.as_economic_snapshot() if callable(getattr(snapshot, "as_economic_snapshot", None))
@@ -82,8 +83,8 @@ def optimize_loan(*, snapshot: object,
     if not isinstance(economic_snapshot, EconomicSnapshot):
         raise ValueError("Unsupported snapshot type")
 
-    samples: dict[Decimal, tuple[Sequence[QuoteLeg], Decimal]] = {}
-    candidates: list[tuple[Decimal, Sequence[QuoteLeg], Decimal]] = []
+    samples: dict[Decimal, tuple[Sequence[QuoteLeg], Decimal, int]] = {}
+    candidates: list[tuple[Decimal, Sequence[QuoteLeg], Decimal, int]] = []
 
     def evaluate_sizes(sizes: list[Decimal]) -> ProfitCertificate | None:
         nonlocal candidates
@@ -91,9 +92,9 @@ def optimize_loan(*, snapshot: object,
             if size in samples:
                 continue
             try:
-                route, flash_fee = route_sampler(size)
-                samples[size] = (route, flash_fee)
-                candidates.append((size, route, flash_fee))
+                route, flash_fee, execution_gas_units = route_sampler(size)
+                samples[size] = (route, flash_fee, execution_gas_units)
+                candidates.append((size, route, flash_fee, execution_gas_units))
             except Exception:
                 continue
         return select_best_loan(snapshot=economic_snapshot, quote_sampler=list(candidates))
