@@ -1,12 +1,8 @@
 """PHANTOMX block-pinned snapshot primitives (P0-A).
 
 This module defines the minimum chain-state identity required before a live
-opportunity can be priced. It deliberately fails closed on missing block hash,
-gas state, or chain identity and never invents a fallback gas price.
-
-The RPC adapter is injected so this layer stays deterministic in tests and can
-later be wired to the existing live_price_fetcher without coupling the core to
-HTTP implementation details.
+opportunity can be priced. It fails closed on missing block hash, gas state,
+or chain identity and never invents a fallback gas price.
 """
 from __future__ import annotations
 
@@ -96,11 +92,11 @@ def collect_block_snapshot(
     chain_id: int,
     gas_token_price_usd: Decimal,
 ) -> BlockSnapshot:
-    """Collect block and gas state through an injected JSON-RPC callable.
+    """Collect a block and gas state, refusing silent fallbacks.
 
-    Both reads use the node's latest state at collection time; callers that need
-    a stricter execution boundary should perform final quote validation against
-    the returned block hash/number immediately before submission.
+    This captures the node's current block and gas state. Pool quote adapters
+    must subsequently read against the returned block number; this function
+    intentionally does not pretend that independent `latest` reads are atomic.
     """
     block = rpc_call("eth_getBlockByNumber", ["latest", False])
     if not isinstance(block, Mapping):
