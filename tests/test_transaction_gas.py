@@ -33,7 +33,8 @@ class TransactionGasTests(unittest.TestCase):
         self.assertEqual(estimate.gas_units, int("0x1e848", 16))
         self.assertEqual(estimate.block_number, 123)
         self.assertEqual(estimate.rpc_url, "test://rpc")
-        self.assertEqual(estimate.gas_cost_usd, D("0.375"))
+        # 125,000 gas × 30 gwei × $0.25/POL = $0.0009375.
+        self.assertEqual(estimate.gas_cost_usd, D("0.0009375"))
         self.assertEqual(rpc.calls[0][0], "eth_estimateGas")
         self.assertEqual(rpc.calls[0][1][1], hex(123))
         self.assertEqual(rpc.calls[0][1][0]["value"], "0x0")
