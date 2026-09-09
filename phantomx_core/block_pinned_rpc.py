@@ -1,7 +1,8 @@
 """PHANTOMX block-pinned JSON-RPC transport (P0-A).
 
-Stateful calls accept an explicit block number and can be pinned to one RPC
-endpoint so a complete snapshot uses one coherent transport source.
+Stateful reads require an explicit block number. Snapshot acquisition may use
+``latest`` only for the block header itself. All later pool/quoter calls must
+use ``eth_call_at_block`` with the captured block number.
 """
 from __future__ import annotations
 
@@ -22,7 +23,7 @@ class RpcResult:
 
 
 class BlockPinnedRpc:
-    """Small dependency-free JSON-RPC adapter for deterministic block reads."""
+    """Dependency-free JSON-RPC adapter with explicit endpoint selection."""
 
     def __init__(self, endpoints: list[str], timeout: float = 5.0):
         if not endpoints:
@@ -65,10 +66,8 @@ class BlockPinnedRpc:
                 last_error = exc
         raise EconomicTruthError(f"All RPC endpoints failed: {last_error}")
 
-    def eth_call_at_block(
-        self, to: str, data: str, block_number: int, *, rpc_url: str | None = None
-    ) -> RpcResult:
-        """Perform eth_call at exactly block_number, never `latest`."""
+    def eth_call_at_block(self, to: str, data: str, block_number: int, *, rpc_url: str | None = None) -> RpcResult:
+        """Perform eth_call against exactly ``block_number``."""
         if not to or not data.startswith("0x"):
             raise EconomicTruthError("eth_call target/data invalid")
         return self.call(
@@ -78,7 +77,7 @@ class BlockPinnedRpc:
         )
 
     def get_block(self, block_tag: str = "latest", *, rpc_url: str | None = None) -> RpcResult:
-        """Read a block header. `latest` is permitted only for snapshot acquisition."""
+        """Read a block header. ``latest`` is permitted only for snapshot capture."""
         if block_tag != "latest" and not block_tag.startswith("0x"):
             raise EconomicTruthError("block_tag must be latest or a hex quantity")
         return self.call("eth_getBlockByNumber", [block_tag, False], rpc_url=rpc_url)
