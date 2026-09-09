@@ -24,7 +24,7 @@ class LoanOptimizerTests(unittest.TestCase):
             amount_in_usd=D(str(amount_in)),
             amount_out_usd=D(str(amount_out)),
             swap_fee_usd=D(str(fee)),
-            gas_units=100_000,
+            gas_units=1,
             quoted_block=100,
             quote_id=f"{venue}-{amount_in}",
         )
@@ -46,7 +46,7 @@ class LoanOptimizerTests(unittest.TestCase):
             return [
                 self.leg("A", "USDC", "WETH", loan, loan + gain / D("2"), "0.5"),
                 self.leg("B", "WETH", "USDC", loan + gain / D("2"), out, "0.5"),
-            ], D("0.05")
+            ], D("0.05"), 100_000
 
         cert = optimize_loan(
             snapshot=self.snapshot,
