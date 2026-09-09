@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from phantomx_core.block_pinned_rpc import BlockPinnedRpc
 from phantomx_core.economic_truth import EconomicTruthError
-from phantomx_core.rpc_pool import AdaptiveRpcPool
+from phantomx_core.rpc_pool import AdaptiveRpcPool, DEFAULT_PUBLIC_POLYGON_RPCS
 
 
 class BlockPinnedRpcTests(unittest.TestCase):
@@ -76,6 +76,9 @@ class BlockPinnedRpcTests(unittest.TestCase):
         pool = AdaptiveRpcPool(["https://a", "https://a", "https://b"])
         self.assertEqual(pool.endpoints, ("https://a", "https://b"))
         self.assertEqual(set(pool.ordered()), {"https://a", "https://b"})
+
+    def test_default_public_pool_contains_official_tenderly_endpoint(self):
+        self.assertIn("https://tenderly.rpc.polygon.community/", DEFAULT_PUBLIC_POLYGON_RPCS)
 
 
 if __name__ == "__main__":
