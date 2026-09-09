@@ -1,0 +1,20 @@
+{
+  "test_id": "20260905_204526",
+  "hours": 3.0,
+  "scan_interval": 3,
+  "contract": "0x36623Fbc918ceFf4d28691477D3006091987ED59",
+  "wallet": "0x6c32820FC0fEd00E9CF28b67425ba1Ca753bd69e",
+  "pools": [
+    "WETH",
+    "WMATIC",
+    "WBTC"
+  ],
+  "start_time": "2026-09-05T15:15:29.674294+00:00",
+  "categories": [
+    "A_price_accuracy",
+    "B_ai_quality",
+    "C_eth_call_sim",
+    "D_gas_economics",
+    "E_volatility"
+  ]
+}

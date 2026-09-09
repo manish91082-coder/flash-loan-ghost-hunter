@@ -1,0 +1,22 @@
+# PhantomX Strategy Matrix: Tenet (Chain ID: 1559)
+
+**Status:** VERIFIED
+**DeFi Active:** Yes
+**TVL:** $0.00
+
+## Applicable Master Strategies
+- `[x]` **DEX Spatial Arbitrage** (Buy low on DEX A, sell high on DEX B)
+- `[ ]` Triangular Arbitrage (Requires >= 3 pools)
+- `[ ]` Liquidations (Requires Lending protocol)
+- `[ ]` Collateral Swaps (Requires Lending protocol)
+- `[ ]` Interest Rate Arbitrage (Requires Lending protocol)
+
+## Flash Loan Providers (0)
+*None detected locally.*
+
+## Mapped DEXs (2)
+- Tenx (ID: tenx-1559)
+- Tendie Swap (ID: tendie-swap-1559)
+
+## Liquidity Pools / Pairs (0)
+*None detected locally.*

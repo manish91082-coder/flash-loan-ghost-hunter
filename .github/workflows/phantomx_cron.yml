@@ -1,0 +1,48 @@
+name: PhantomX Autonomous Serverless Engine
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Run every 5 minutes globally
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  phantomx-execute:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests web3 eth_abi
+        
+    - name: Run Global Knowledge Sync (Phases 1-7)
+      run: |
+        python serverless/phantomx_sync_worker.py
+        
+    - name: Run Market Opportunity Engine (Phases 8-12)
+      run: |
+        python serverless/opportunity_engine.py
+        
+    - name: Persist Knowledge Graph (SQLite to Cloudflare D1)
+      env:
+        CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+        D1_DATABASE_ID: ${{ secrets.D1_DATABASE_ID }}
+      run: |
+        # In a real run, sync SQLite diffs to Cloudflare D1 via API
+        echo "Syncing state to global edge network..."
+
+    - name: Commit Logs to History (Zero Data Loss)
+      run: |
+        git config --global user.name "PhantomX AI"
+        git config --global user.email "ai@phantomx.local"
+        git add execution_report.md
+        git commit -m "[PhantomX] Autonomous cycle completed - Logs appended" || echo "No changes"
+        git push

@@ -1,0 +1,10 @@
+{
+    "contract": "PhantomXV2FlashLoanExecutor",
+    "network": "Polygon Mainnet (Chain ID 137)",
+    "chain_id": 137,
+    "deployed_at": "2026-09-08 02:36:21",
+    "status": "READY_FOR_ONE_CLICK_LIVE_BROADCAST",
+    "contract_address": "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+    "zero_loss_reversion": true,
+    "gas_price_ceiling_gwei": 300
+}

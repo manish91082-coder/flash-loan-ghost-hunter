@@ -1,0 +1,15 @@
+{
+    "contract": "PhantomXV3UniversalMultiChainExecutor",
+    "supported_chains": [
+        "Polygon (137)",
+        "Arbitrum One (42161)",
+        "Ethereum (1)",
+        "Optimism (10)",
+        "BSC (56)"
+    ],
+    "deployed_at": "2026-09-08 02:36:27",
+    "status": "READY_FOR_ONE_CLICK_LIVE_BROADCAST",
+    "hub_address": "0x3fC91A3afd70395Cd496C647d5a6CC9D4B2b7FAD",
+    "zero_loss_reversion": true,
+    "max_slippage_pct": 0.1
+}

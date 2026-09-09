@@ -1,0 +1,812 @@
+==========================================================
+PHANTOMX मास्टर टेस्टिंग लॉग | ब्लॉकचेन: Base
+स्ट्रेटेजी: Spatial_Arbitrage | 100x Iterations
+समय (UTC): 2026-08-31T21:25:45.947335
+==========================================================
+
+--- इटरेशन #1 ---
+पूल डेटा: uniswap-v2 (MISSER-WETH) -> uniswap-v2 (WETH-SAFE)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.22
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.22
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.22
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #2 ---
+पूल डेटा: aerodrome-slipstream (WETH-WSTETH) -> uniswap-v4 (WETH-PI)
+डेटा एनालिसिस: Opportunity Variance = 4361.3192% | अनुमानित गैस = $0.43
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.43
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $72,388,433.69
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #3 ---
+पूल डेटा: uniswap-v3 (WETH-KULT) -> uniswap-v2 (FELLA-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.8537% | अनुमानित गैस = $0.51
+AI डिसीज़न (Flash Loan Size): $358,991.71
+खर्चे (Expenses): फ्लैश लोन फीस = $323.09 + गैस = $0.51
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,740.94
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #4 ---
+पूल डेटा: extra-finance-leverage-farming (WEETH-WETH) -> aerodrome-slipstream (USDC-POD)
+डेटा एनालिसिस: Opportunity Variance = 1332.8672% | अनुमानित गैस = $0.28
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.28
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $22,121,664.52
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #5 ---
+पूल डेटा: aerodrome-slipstream (WETH-W) -> aerodrome-slipstream (WETH-KEYCAT)
+डेटा एनालिसिस: Opportunity Variance = 317.3952% | अनुमानित गैस = $0.97
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.97
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $5,266,686.09
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #6 ---
+पूल डेटा: ether.fi-stake (WEETH) -> uniswap-v3 (MAXI-WETH)
+डेटा एनालिसिस: Opportunity Variance = 2.3909% | अनुमानित गैस = $1.53
+AI डिसीज़न (Flash Loan Size): $1,772,219.16
+खर्चे (Expenses): फ्लैश लोन फीस = $1,595.00 + गैस = $1.53
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $40,776.17
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #7 ---
+पूल डेटा: uniswap-v4 (WETH-MCCLAW) -> yo-protocol (WETH)
+डेटा एनालिसिस: Opportunity Variance = 2.3751% | अनुमानित गैस = $0.37
+AI डिसीज़न (Flash Loan Size): $2,292,609.73
+खर्चे (Expenses): फ्लैश लोन फीस = $2,063.35 + गैस = $0.37
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $52,387.83
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #8 ---
+पूल डेटा: uniswap-v2 (WETH-ICE) -> uniswap-v4 (ALPHA-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.58
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.58
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.58
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #9 ---
+पूल डेटा: uniswap-v4 (ETH-BASEJUICE) -> uniswap-v4 (WETH-CATGOD)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.88
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.88
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.88
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #10 ---
+पूल डेटा: uniswap-v2 (PEEZY-WETH) -> balancer-v3 (SURGEAAVEEURC-GHO)
+डेटा एनालिसिस: Opportunity Variance = 3.2895% | अनुमानित गैस = $0.92
+AI डिसीज़न (Flash Loan Size): $1,556,364.91
+खर्चे (Expenses): फ्लैश लोन फीस = $1,400.73 + गैस = $0.92
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $49,794.51
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #11 ---
+पूल डेटा: uniswap-v4 (ETH-NANITE) -> uniswap-v2 (WETH-NYAN)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.85
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.85
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.85
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #12 ---
+पूल डेटा: uniswap-v2 (WETH-MUTM) -> uniswap-v3 (WETH-CLX)
+डेटा एनालिसिस: Opportunity Variance = 13.0795% | अनुमानित गैस = $0.40
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.40
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $215,601.56
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #13 ---
+पूल डेटा: euler-v2 (WETH) -> fluid-lending (WEETH)
+डेटा एनालिसिस: Opportunity Variance = 0.6865% | अनुमानित गैस = $1.33
+AI डिसीज़न (Flash Loan Size): $312,395.98
+खर्चे (Expenses): फ्लैश लोन फीस = $281.16 + गैस = $1.33
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,862.18
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #14 ---
+पूल डेटा: uniswap-v2 (FOMC-WETH) -> uniswap-v4 (USDC-BRIAN)
+डेटा एनालिसिस: Opportunity Variance = 0.9511% | अनुमानित गैस = $0.47
+AI डिसीज़न (Flash Loan Size): $402,717.54
+खर्चे (Expenses): फ्लैश लोन फीस = $362.45 + गैस = $0.47
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $3,467.25
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #15 ---
+पूल डेटा: uniswap-v2 (WETH-RATS) -> uniswap-v2 (KERMIT-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.14
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.14
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.14
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #16 ---
+पूल डेटा: aave-v3 (WEETH) -> uniswap-v2 (BFX-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0001% | अनुमानित गैस = $0.79
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.79
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.79
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #17 ---
+पूल डेटा: yearn-finance (USDC) -> uniswap-v3 (WETH-OSAK)
+डेटा एनालिसिस: Opportunity Variance = 4.4399% | अनुमानित गैस = $1.10
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.10
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $72,200.12
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #18 ---
+पूल डेटा: uniswap-v4 (WETH-NEOFORM) -> uniswap-v4 (WETH-MOLTH)
+डेटा एनालिसिस: Opportunity Variance = 0.0050% | अनुमानित गैस = $1.14
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.14
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.14
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #19 ---
+पूल डेटा: uniswap-v2 (WETH-▄︻デ══━一) -> uniswap-v3 (UXLM-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.4828% | अनुमानित गैस = $0.63
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.63
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.63
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #20 ---
+पूल डेटा: uniswap-v2 (WETH-EBOLA) -> fluid-lending (WEETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.59
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.59
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.59
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #21 ---
+पूल डेटा: uniswap-v3 (WETH-CHIPS) -> aerodrome-v1 (WETH-DOG)
+डेटा एनालिसिस: Opportunity Variance = 0.4067% | अनुमानित गैस = $0.24
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.24
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.24
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #22 ---
+पूल डेटा: uniswap-v4 (USDC-BASECAT) -> uniswap-v2 (BITBOT-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.3669% | अनुमानित गैस = $1.90
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.90
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.90
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #23 ---
+पूल डेटा: uniswap-v3 (CARLO-WETH) -> aerodrome-slipstream (KRWQ-USDC)
+डेटा एनालिसिस: Opportunity Variance = 65.1892% | अनुमानित गैस = $0.59
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.59
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,080,527.31
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #24 ---
+पूल डेटा: uniswap-v3 (CLANKTARDIO-WETH) -> uniswap-v3 (PRO-WETH)
+डेटा एनालिसिस: Opportunity Variance = 5.7076% | अनुमानित गैस = $0.35
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.35
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $93,241.87
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #25 ---
+पूल डेटा: uniswap-v2 (SPX90K-USDBC) -> aerodrome-slipstream (EURC-USDC)
+डेटा एनालिसिस: Opportunity Variance = 15.8617% | अनुमानित गैस = $1.31
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.31
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $261,780.75
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #26 ---
+पूल डेटा: uniswap-v3 (USDC-SUP) -> uniswap-v4 (WETH-STARKBOT)
+डेटा एनालिसिस: Opportunity Variance = 33.9881% | अनुमानित गैस = $0.94
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.94
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $562,645.40
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #27 ---
+पूल डेटा: uniswap-v2 (WETH-BLSTR) -> uniswap-v2 (WETH-BENTO)
+डेटा एनालिसिस: Opportunity Variance = 0.0819% | अनुमानित गैस = $1.28
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.28
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.28
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #28 ---
+पूल डेटा: aerodrome-v1 (CBBTC-DEUS) -> uniswap-v2 (WETH-MOON)
+डेटा एनालिसिस: Opportunity Variance = 42.1101% | अनुमानित गैस = $0.26
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.26
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $697,457.10
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #29 ---
+पूल डेटा: fusion-by-ipor (USDC) -> uniswap-v4 (WETH-BRAINPRO)
+डेटा एनालिसिस: Opportunity Variance = 4.7296% | अनुमानित गैस = $0.02
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.02
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $77,008.19
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #30 ---
+पूल डेटा: alien-base-v3 (WETH-EURC) -> uniswap-v4 (USDC-BLUECHIP)
+डेटा एनालिसिस: Opportunity Variance = 1803.7454% | अनुमानित गैस = $0.93
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.93
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $29,937,382.03
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #31 ---
+पूल डेटा: aerodrome-v1 (TBTC-USDBC) -> aerodrome-slipstream (USDC-EUSD)
+डेटा एनालिसिस: Opportunity Variance = 1.2718% | अनुमानित गैस = $1.70
+AI डिसीज़न (Flash Loan Size): $1,171,483.57
+खर्चे (Expenses): फ्लैश लोन फीस = $1,054.34 + गैस = $1.70
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $13,842.65
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #32 ---
+पूल डेटा: aerodrome-slipstream (ALIGN-USDC) -> uniswap-v3 (USDC-USDT)
+डेटा एनालिसिस: Opportunity Variance = 305.5795% | अनुमानित गैस = $0.27
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.27
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $5,070,567.42
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #33 ---
+पूल डेटा: uniswap-v2 (WETH-AGENTPUDGY) -> aerodrome-slipstream (OUSDT-CBBTC)
+डेटा एनालिसिस: Opportunity Variance = 33.3761% | अनुमानित गैस = $0.71
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.71
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $552,487.55
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #34 ---
+पूल डेटा: morpho-blue (CBXRP) -> uniswap-v4 (ETH-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.84
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.84
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.84
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #35 ---
+पूल डेटा: uniswap-v2 (WETH-VOY) -> beefy (AVNT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 33.3520% | अनुमानित गैस = $0.06
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.06
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $552,088.18
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #36 ---
+पूल डेटा: uniswap-v3 (WETH-PSC) -> aerodrome-v1 (MSUSD-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.3747% | अनुमानित गैस = $1.63
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.63
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $120,911.57
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #37 ---
+पूल डेटा: uniswap-v3 (USDC-WL1) -> aerodrome-slipstream (KRWQ-USDC)
+डेटा एनालिसिस: Opportunity Variance = 55.3245% | अनुमानित गैस = $0.61
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.61
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $916,791.14
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #38 ---
+पूल डेटा: uniswap-v2 (BSW-WETH) -> uniswap-v4 (WETH-SCOUT)
+डेटा एनालिसिस: Opportunity Variance = 0.0002% | अनुमानित गैस = $1.94
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.94
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.94
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #39 ---
+पूल डेटा: uniswap-v3 (USDC-SUP) -> uniswap-v2 (WETH-CATE)
+डेटा एनालिसिस: Opportunity Variance = 33.9907% | अनुमानित गैस = $0.52
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.52
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $562,689.30
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #40 ---
+पूल डेटा: uniswap-v2 (WETH-TSO) -> spectra-metavaults (USDC)
+डेटा एनालिसिस: Opportunity Variance = 1.9229% | अनुमानित गैस = $0.98
+AI डिसीज़न (Flash Loan Size): $14,140,170.48
+खर्चे (Expenses): फ्लैश लोन फीस = $12,726.15 + गैस = $0.98
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $259,178.45
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #41 ---
+पूल डेटा: uniswap-v3 (USDC-HEU) -> uniswap-v4 (WETH-USDC)
+डेटा एनालिसिस: Opportunity Variance = 1.1201% | अनुमानित गैस = $0.22
+AI डिसीज़न (Flash Loan Size): $686,900.75
+खर्चे (Expenses): फ्लैश लोन फीस = $618.21 + गैस = $0.22
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $7,075.75
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #42 ---
+पूल डेटा: uniswap-v2 (MIRA-WETH) -> uniswap-v2 (ETHCATE-WETH)
+डेटा एनालिसिस: Opportunity Variance = 240.3531% | अनुमानित गैस = $1.95
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.95
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $3,987,926.88
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #43 ---
+पूल डेटा: beefy (CBETH-WETH) -> uniswap-v4 (ZORA-AGENT)
+डेटा एनालिसिस: Opportunity Variance = 0.4619% | अनुमानित गैस = $1.62
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.62
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.62
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #44 ---
+पूल डेटा: uniswap-v4 (USDC-BASECAT) -> morpho-blue (WSTETH)
+डेटा एनालिसिस: Opportunity Variance = 1.7370% | अनुमानित गैस = $0.37
+AI डिसीज़न (Flash Loan Size): $12,834,685.66
+खर्चे (Expenses): फ्लैश लोन फीस = $11,551.22 + गैस = $0.37
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $211,388.19
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #45 ---
+पूल डेटा: uniswap-v4 (VDR-USDC) -> uniswap-v4 (WETH-BASELIFE)
+डेटा एनालिसिस: Opportunity Variance = 19.0343% | अनुमानित गैस = $1.30
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.30
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $314,439.95
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #46 ---
+पूल डेटा: morpho-blue (CSCBUSDC) -> bmx-classic-perps (ETH-CBBTC-USDC)
+डेटा एनालिसिस: Opportunity Variance = 6.0569% | अनुमानित गैस = $0.92
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.92
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $99,039.54
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #47 ---
+पूल डेटा: aerodrome-slipstream (WETH-SIGN) -> mortgagefi (USDC)
+डेटा एनालिसिस: Opportunity Variance = 637.6314% | अनुमानित गैस = $0.51
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.51
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $10,582,021.35
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #48 ---
+पूल डेटा: uniswap-v4 (WETH-MICRODUCK) -> uniswap-v3 (WETH-ELONRWA)
+डेटा एनालिसिस: Opportunity Variance = 64.9522% | अनुमानित गैस = $0.17
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.17
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,076,593.47
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #49 ---
+पूल डेटा: uniswap-v2 (WETH-FUCK) -> uniswap-v3 (WETH-XPRNETWORK)
+डेटा एनालिसिस: Opportunity Variance = 3.0541% | अनुमानित गैस = $1.19
+AI डिसीज़न (Flash Loan Size): $1,500,269.54
+खर्चे (Expenses): फ्लैश लोन फीस = $1,350.24 + गैस = $1.19
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $44,469.05
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #50 ---
+पूल डेटा: aerodrome-slipstream (MAMO-KTA) -> uniswap-v4 (ETH-CATFISH)
+डेटा एनालिसिस: Opportunity Variance = 2.9920% | अनुमानित गैस = $0.92
+AI डिसीज़न (Flash Loan Size): $1,477,846.32
+खर्चे (Expenses): फ्लैश लोन फीस = $1,330.06 + गैस = $0.92
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $42,886.04
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #51 ---
+पूल डेटा: morpho-blue (APVCHF) -> uniswap-v4 (ETH-BRIAN)
+डेटा एनालिसिस: Opportunity Variance = 0.1361% | अनुमानित गैस = $0.48
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.48
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.48
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #52 ---
+पूल डेटा: aerodrome-v1 (CBBTC-EDGE) -> uniswap-v3 (WBTC-WETH)
+डेटा एनालिसिस: Opportunity Variance = 1.5492% | अनुमानित गैस = $0.18
+AI डिसीज़न (Flash Loan Size): $11,054,680.97
+खर्चे (Expenses): फ्लैश लोन फीस = $9,949.21 + गैस = $0.18
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $161,306.41
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #53 ---
+पूल डेटा: uniswap-v3 (WETH-REPPO) -> uniswap-v2 (WETH-RSGP)
+डेटा एनालिसिस: Opportunity Variance = 363.8698% | अनुमानित गैस = $1.73
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.73
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $6,038,078.24
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #54 ---
+पूल डेटा: aerodrome-slipstream (WETH-REI) -> aerodrome-slipstream (WETH-USDC)
+डेटा एनालिसिस: Opportunity Variance = 136.8205% | अनुमानित गैस = $0.02
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.02
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,269,477.21
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #55 ---
+पूल डेटा: morpho-blue (CSETH) -> uniswap-v3 (BLONDE-WETH)
+डेटा एनालिसिस: Opportunity Variance = 2.0568% | अनुमानित गैस = $0.75
+AI डिसीज़न (Flash Loan Size): $14,741,986.37
+खर्चे (Expenses): फ्लैश लोन फीस = $13,267.79 + गैस = $0.75
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $289,946.11
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #56 ---
+पूल डेटा: uniswap-v2 (TOKITO-WETH) -> aerodrome-v1 (CBBTC-EDGE)
+डेटा एनालिसिस: Opportunity Variance = 7.3167% | अनुमानित गैस = $0.93
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.93
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $119,949.75
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #57 ---
+पूल डेटा: uniswap-v2 (WETH-DILIGENT) -> uniswap-v3 (WETH-PENGUINS)
+डेटा एनालिसिस: Opportunity Variance = 18.3519% | अनुमानित गैस = $1.44
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.44
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $303,113.39
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #58 ---
+पूल डेटा: uniswap-v2 (WETH-MERIT) -> peapods-finance (WETH)
+डेटा एनालिसिस: Opportunity Variance = 25.6107% | अनुमानित गैस = $1.25
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.25
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $423,596.05
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #59 ---
+पूल डेटा: uniswap-v3 (MTAUR-WETH) -> uniswap-v2 (WETH-BIRB)
+डेटा एनालिसिस: Opportunity Variance = 12.6961% | अनुमानित गैस = $0.51
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.51
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $209,237.87
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #60 ---
+पूल डेटा: uniswap-v3 (WETH-TOSHI) -> morpho-blue (DESPXA)
+डेटा एनालिसिस: Opportunity Variance = 59.0402% | अनुमानित गैस = $1.50
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.50
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $978,463.74
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #61 ---
+पूल डेटा: uniswap-v2 (WETH-FOLD) -> euler-v2 (AERO)
+डेटा एनालिसिस: Opportunity Variance = 0.0627% | अनुमानित गैस = $0.48
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.48
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.48
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #62 ---
+पूल डेटा: morpho-blue (SOL) -> uniswap-v2 (BAILEY-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.1125% | अनुमानित गैस = $0.65
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.65
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.65
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #63 ---
+पूल डेटा: aerodrome-v1 (WETH-LRDS) -> aerodrome-slipstream (WETH-AERO)
+डेटा एनालिसिस: Opportunity Variance = 72.2151% | अनुमानित गैस = $1.27
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.27
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,197,143.90
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #64 ---
+पूल डेटा: uniswap-v4 (WETH-CEECIL) -> uniswap-v3 (WETH-MUTM)
+डेटा एनालिसिस: Opportunity Variance = 26.7757% | अनुमानित गैस = $1.01
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.01
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $442,932.34
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #65 ---
+पूल डेटा: uniswap-v3 (QR-WETH) -> uniswap-v2 (WETH-PEPETO)
+डेटा एनालिसिस: Opportunity Variance = 5.9402% | अनुमानित गैस = $1.59
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.59
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $97,101.37
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #66 ---
+पूल डेटा: uniswap-v4 (WETH-THINK) -> uniswap-v2 (WETH-TRAI)
+डेटा एनालिसिस: Opportunity Variance = 0.1299% | अनुमानित गैस = $0.44
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.44
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.44
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #67 ---
+पूल डेटा: sushiswap (WETH-NORMIE) -> uniswap-v2 (PEPENODE-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.06
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.06
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.06
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #68 ---
+पूल डेटा: uniswap-v4 (OLQD-USDC) -> uniswap-v4 (WETH-AMBERVIBE)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.35
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.35
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.35
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #69 ---
+पूल डेटा: uniswap-v2 (WETH-EBOLA) -> uniswap-v2 (WETH-DCAI)
+डेटा एनालिसिस: Opportunity Variance = 3.1830% | अनुमानित गैस = $0.35
+AI डिसीज़न (Flash Loan Size): $1,547,307.70
+खर्चे (Expenses): फ्लैश लोन फीस = $1,392.58 + गैस = $0.35
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $47,858.19
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #70 ---
+पूल डेटा: uniswap-v3 (WETH-GCAT) -> uniswap-v2 (WETH-MAXI)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.48
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.48
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.48
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #71 ---
+पूल डेटा: uniswap-v3 (WETH-TICKER) -> uniswap-v2 (WETH-OFAC)
+डेटा एनालिसिस: Opportunity Variance = 0.0029% | अनुमानित गैस = $1.56
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.56
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.56
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #72 ---
+पूल डेटा: aerodrome-v1 (WETH-TAROT) -> uniswap-v3 (WETH-FOGO)
+डेटा एनालिसिस: Opportunity Variance = 25.0883% | अनुमानित गैस = $0.67
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.67
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $414,926.08
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #73 ---
+पूल डेटा: aerodrome-v1 (GENOME-WETH) -> uniswap-v3 (FWOG-WETH)
+डेटा एनालिसिस: Opportunity Variance = 2.6588% | अनुमानित गैस = $1.47
+AI डिसीज़न (Flash Loan Size): $1,485,160.81
+खर्चे (Expenses): फ्लैश लोन फीस = $1,336.64 + गैस = $1.47
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $38,149.49
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #74 ---
+पूल डेटा: uniswap-v3 (TETHERGOLD$XAUT-WETH) -> uniswap-v3 (WETH-ESHARE)
+डेटा एनालिसिस: Opportunity Variance = 34.0228% | अनुमानित गैस = $0.64
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.64
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $563,221.49
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #75 ---
+पूल डेटा: uniswap-v2 (WETH-AETHER) -> aerodrome-slipstream (USDAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 1.9261% | अनुमानित गैस = $0.61
+AI डिसीज़न (Flash Loan Size): $14,140,170.48
+खर्चे (Expenses): फ्लैश लोन फीस = $12,726.15 + गैस = $0.61
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $259,622.82
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #76 ---
+पूल डेटा: uniswap-v4 (ETH-BASEHAT) -> aerodrome-slipstream (WETH-USDC)
+डेटा एनालिसिस: Opportunity Variance = 279.6603% | अनुमानित गैस = $1.74
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.74
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $4,640,354.94
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #77 ---
+पूल डेटा: uniswap-v2 (RTX-WETH) -> uniswap-v4 (ETH-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.13
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.13
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.13
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #78 ---
+पूल डेटा: aerodrome-slipstream (ZRO-ZEN) -> spectra-metavaults (USDC)
+डेटा एनालिसिस: Opportunity Variance = 268.0961% | अनुमानित गैस = $0.44
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.44
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $4,448,410.83
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #79 ---
+पूल डेटा: uniswap-v4 (ETH-USDC) -> uniswap-v4 (WETH-RUNNINGTBA)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.79
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.79
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.79
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #80 ---
+पूल डेटा: uniswap-v3 (PEPI-WETH) -> uniswap-v4 (USDC-NVDAC)
+डेटा एनालिसिस: Opportunity Variance = 110.0575% | अनुमानित गैस = $1.77
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.77
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,825,257.58
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #81 ---
+पूल डेटा: uniswap-v3 (WETH-PEPETO) -> aerodrome-v1 (AERO-MORPHO)
+डेटा एनालिसिस: Opportunity Variance = 4.4660% | अनुमानित गैस = $0.19
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.19
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $72,633.58
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #82 ---
+पूल डेटा: morpho-blue (CBBTC) -> uniswap-v3 (WETH-JPMD)
+डेटा एनालिसिस: Opportunity Variance = 0.6814% | अनुमानित गैस = $0.19
+AI डिसीज़न (Flash Loan Size): $312,395.98
+खर्चे (Expenses): फ्लैश लोन फीस = $281.16 + गैस = $0.19
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,847.38
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #83 ---
+पूल डेटा: aerodrome-v1 (AERO-AUKI) -> uniswap-v3 (GLANKER-WETH)
+डेटा एनालिसिस: Opportunity Variance = 9.2249% | अनुमानित गैस = $1.60
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.60
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $151,621.21
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #84 ---
+पूल डेटा: fusion-by-ipor (USDC) -> uniswap-v4 (WETH-SAIMMY)
+डेटा एनालिसिस: Opportunity Variance = 1.9063% | अनुमानित गैस = $1.37
+AI डिसीज़न (Flash Loan Size): $14,053,803.95
+खर्चे (Expenses): फ्लैश लोन फीस = $12,648.42 + गैस = $1.37
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $255,264.90
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #85 ---
+पूल डेटा: aerodrome-v1 (FLOCK-VVV) -> alien-base-v3 (ALB-AEROBUD)
+डेटा एनालिसिस: Opportunity Variance = 22.5350% | अनुमानित गैस = $0.10
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.10
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $372,546.05
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #86 ---
+पूल डेटा: uniswap-v2 (SKYTOPIA-WETH) -> uniswap-v2 (WETH-AICARTEL)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.96
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.96
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.96
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #87 ---
+पूल डेटा: uniswap-v2 (WETH-TICKLE) -> uniswap-v4 (ETH-STONKS)
+डेटा एनालिसिस: Opportunity Variance = 1.3086% | अनुमानित गैस = $0.15
+AI डिसीज़न (Flash Loan Size): $1,336,382.93
+खर्चे (Expenses): फ्लैश लोन फीस = $1,202.74 + गैस = $0.15
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $16,284.61
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #88 ---
+पूल डेटा: aerodrome-slipstream (USDC-CBBTC) -> uniswap-v2 (DGZ-WETH)
+डेटा एनालिसिस: Opportunity Variance = 439.3918% | अनुमानित गैस = $1.01
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.01
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $7,291,605.14
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #89 ---
+पूल डेटा: moonwell-lending (VVV) -> uniswap-v4 (ETH-HOUSE)
+डेटा एनालिसिस: Opportunity Variance = 0.0313% | अनुमानित गैस = $0.03
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.03
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.03
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #90 ---
+पूल डेटा: aerodrome-slipstream (USDC-CBBTC) -> uniswap-v3 (WETH-KULT)
+डेटा एनालिसिस: Opportunity Variance = 438.8092% | अनुमानित गैस = $1.87
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.87
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $7,281,935.17
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #91 ---
+पूल डेटा: uniswap-v2 (WETH-BROGG) -> uniswap-v2 (SPN-USDC)
+डेटा एनालिसिस: Opportunity Variance = 3.2612% | अनुमानित गैस = $0.29
+AI डिसीज़न (Flash Loan Size): $1,554,770.64
+खर्चे (Expenses): फ्लैश लोन फीस = $1,399.29 + गैस = $0.29
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $49,304.75
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #92 ---
+पूल डेटा: kyberswap-fairflow (ETH-CBBTC) -> uniswap-v2 (AKUMA-WETH)
+डेटा एनालिसिस: Opportunity Variance = 2.4837% | अनुमानित गैस = $0.67
+AI डिसीज़न (Flash Loan Size): $1,485,160.81
+खर्चे (Expenses): फ्लैश लोन फीस = $1,336.64 + गैस = $0.67
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $35,549.77
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #93 ---
+पूल डेटा: uniswap-v2 (WETH-HTRD) -> uniswap-v4 (ETH-KEK)
+डेटा एनालिसिस: Opportunity Variance = 0.8326% | अनुमानित गैस = $0.94
+AI डिसीज़न (Flash Loan Size): $349,186.72
+खर्चे (Expenses): फ्लैश लोन फीस = $314.27 + गैस = $0.94
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,592.16
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #94 ---
+पूल डेटा: uniswap-v2 (WETH-BALDIE) -> uniswap-v4 (PRINTERINKCOIN-NVDAC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.82
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.82
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.82
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #95 ---
+पूल डेटा: uniswap-v4 (HOUSE-WETH) -> sushiswap (WETH-OMNI)
+डेटा एनालिसिस: Opportunity Variance = 70.2807% | अनुमानित गैस = $0.58
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.58
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,165,036.75
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #96 ---
+पूल डेटा: uniswap-v4 (WETH-SMCF) -> aerodrome-slipstream (MAMO-CBXRP)
+डेटा एनालिसिस: Opportunity Variance = 3.5848% | अनुमानित गैस = $1.58
+AI डिसीज़न (Flash Loan Size): $1,602,516.84
+खर्चे (Expenses): फ्लैश लोन फीस = $1,442.27 + गैस = $1.58
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $56,002.69
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #97 ---
+पूल डेटा: uniswap-v2 (WETH-B) -> uniswap-v2 (CONDO-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.67
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.67
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.67
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #98 ---
+पूल डेटा: uniswap-v2 (WETH-BIGD) -> morpho-blue (RETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.99
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.99
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.99
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #99 ---
+पूल डेटा: uniswap-v3 (USDC-SBC) -> uniswap-v3 (RUSSELL-WETH)
+डेटा एनालिसिस: Opportunity Variance = 143.4273% | अनुमानित गैस = $0.69
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.69
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,379,137.18
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #100 ---
+पूल डेटा: morpho-blue (BBQUSDC) -> aerodrome-v1 (YFI-WSTETH)
+डेटा एनालिसिस: Opportunity Variance = 1.6829% | अनुमानित गैस = $0.75
+AI डिसीज़न (Flash Loan Size): $12,136,847.32
+खर्चे (Expenses): फ्लैश लोन फीस = $10,923.16 + गैस = $0.75
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $193,330.74
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+==========================================================
+अंतिम रिपोर्ट (Base | Spatial_Arbitrage):
+कुल टेस्ट रन: 100
+प्रॉफिटेबल मौके मिले: 70
+घाटे वाले ट्रेड्स ब्लॉक किए गए (Zero-Loss Guard): 30
+==========================================================

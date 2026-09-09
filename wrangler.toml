@@ -1,0 +1,12 @@
+name = "phantomx-edge-worker"
+main = "serverless/phantomx_sync_worker.py"
+compatibility_date = "2026-08-31"
+
+# The zero-cost global edge compute layer
+workers_dev = true
+
+# The zero-cost global edge database (SQLite)
+[[d1_databases]]
+binding = "DB"
+database_name = "phantomx-global-knowledge"
+database_id = "xxxx-xxxx-xxxx-xxxx"

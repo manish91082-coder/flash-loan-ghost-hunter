@@ -1,0 +1,11 @@
+# PhantomX .gitignore
+*.zip
+*.rar
+*.tar.gz
+*.pkl
+PhantomX_Block_Stream_Chunk_1_of_5.jsonl
+phantomx_local_vm/
+foundry/
+__pycache__/
+*.pid
+.pytest_cache/

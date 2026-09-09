@@ -1,0 +1,6 @@
+[USDC-WETH] Simulation Failed - Error: {'code': -32603, 'message': 'Internal error'}
+[DAI-WETH] Simulation Failed - Error: {'code': -32603, 'message': 'Internal error'}
+[WBTC-WETH] Simulation Failed - Error: {'code': -32603, 'message': 'Internal error'}
+[WBTC-WETH] Simulation Failed - Error: {'code': -32603, 'message': 'Internal error'}
+[USDC-WETH] Simulation Failed - Error: {'code': -32603, 'message': 'Internal error'}
+[DAI-WETH] Simulation Failed - Error: {'code': -32603, 'message': 'Internal error'}

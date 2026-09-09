@@ -1,0 +1,30 @@
+{
+    "loan_sizing_weights": [
+        2.625382816407438,
+        0.8605247326011429,
+        -0.27026028355749043,
+        0.08626054873443664,
+        1.7004843312035662
+    ],
+    "dynamic_bribe_weights": [
+        0.733952118791124,
+        1.04102902611562,
+        2.8332377863380858,
+        2.5561086230981775,
+        -0.8094474649736161
+    ],
+    "_metadata": {
+        "version": "v3-stress-calibrated",
+        "training_generations": 150,
+        "dataset": "50K_historical + 7.8K_live_stress_scans",
+        "gas_range_gwei": "50-500",
+        "observation": [
+            "spread_pct",
+            "reserves_norm",
+            "gas_norm",
+            "competitor_norm",
+            "pool_depth"
+        ],
+        "timestamp": "2026-09-05T18:37:06Z"
+    }
+}

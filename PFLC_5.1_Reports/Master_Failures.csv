@@ -1,0 +1,1 @@
+timestamp,run_id,opportunity_id,chain,strategy,stage,failure_code,error_message,provider,block,retry_count,fallback_used,final_action

@@ -1,0 +1,5 @@
+Timestamp,L1 Chain,L2 Chain,Pair,Strategy,L1 Price,L2 Price,Price Gap,Bridge Delay (Mins),Bridge Fees (USD),Net Exact Profit
+2026-09-02T16:06:54.462506,Ethereum,Optimism,USDC/WETH,Cross-Chain,0,0,0,5,15.0,-15.0
+2026-09-02T16:06:58.042737,Ethereum,Base,USDC/WETH,Cross-Chain,0,422678601976571913,422678601976571913,5,15.0,1253.0358059297157
+2026-09-02T16:07:02.886195,Ethereum,Arbitrum,USDC/WETH,Cross-Chain,0,0,0,5,15.0,-15.0
+2026-09-02T16:07:09.970725,Ethereum,Polygon,USDC/WETH,Cross-Chain,0,0,0,5,15.0,-15.0

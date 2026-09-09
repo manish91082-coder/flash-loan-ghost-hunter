@@ -1,0 +1,83 @@
+
+===================================================
+PHANTOMX OFFLINE EXECUTION - RAW TABULAR REPORT
+===================================================
+
+1. VERIFIED CHAINS (Sample of 261 total):
+   chain_id                     name short_name native_currency_name native_currency_symbol  is_defi_active           tvl knowledge_status                 last_updated
+0         1         Ethereum Mainnet        eth                Ether                    ETH               1  1.082144e+11         VERIFIED  2026-08-31T18:09:10.641376Z
+1         5                   Goerli        gor         Goerli Ether                    ETH               1  0.000000e+00         VERIFIED  2026-08-31T18:09:10.641376Z
+2         8                c8ntinuum        ctm            c8ntinuum                    CTM               1  0.000000e+00         VERIFIED  2026-08-31T18:09:10.641376Z
+3         9     Quai Network Mainnet       quai                 Quai                   QUAI               1  5.059532e+04         VERIFIED  2026-08-31T18:09:10.641376Z
+4        10               OP Mainnet       oeth                Ether                    ETH               1  8.384355e+08         VERIFIED  2026-08-31T18:09:10.641376Z
+5        19  Songbird Canary-Network        sgb             Songbird                    SGB               1  1.991064e+05         VERIFIED  2026-08-31T18:09:10.641376Z
+6        20      Elastos Smart Chain        esc              Elastos                    ELA               1  1.610212e+03         VERIFIED  2026-08-31T18:09:10.641376Z
+7        25           Cronos Mainnet        cro               Cronos                    CRO               1  3.063842e+08         VERIFIED  2026-08-31T18:09:10.641376Z
+8        30        Rootstock Mainnet        rsk        Smart Bitcoin                   RBTC               1  7.889416e+07         VERIFIED  2026-08-31T18:09:10.641376Z
+9        40        Telos EVM Mainnet   TelosEVM                Telos                   TLOS               1  3.442388e+06         VERIFIED  2026-08-31T18:09:10.641376Z
+
+2. ACTIVE RPCs (Sample of 4048 total):
+   rpc_id  chain_id                                           url  latency_ms  is_active                last_verified
+0       1         1           https://mainnet.gateway.tenderly.co         367          1  2026-08-31T18:14:32.641065Z
+1       2         1                     https://rpc.flashbots.net         717          1  2026-08-31T18:14:32.641065Z
+2       3         1                https://rpc.flashbots.net/fast         698          1  2026-08-31T18:14:32.641065Z
+3       4         8                     https://rpc.c8ntinuum.com         971          1  2026-08-31T18:14:32.641065Z
+4       5         9              https://rpc.quai.network/cyprus1         750          1  2026-08-31T18:14:32.641065Z
+5       6        10                   https://mainnet.optimism.io         848          1  2026-08-31T18:14:32.641065Z
+6       7        10          https://optimism.gateway.tenderly.co         563          1  2026-08-31T18:14:32.641065Z
+7       8        19  https://songbird-api.flare.network/ext/C/rpc        1655          1  2026-08-31T18:14:32.641065Z
+8       9        30                    https://public-node.rsk.co         825          1  2026-08-31T18:14:32.641065Z
+9      10        30                       https://mycrypto.rsk.co         916          1  2026-08-31T18:14:32.641065Z
+
+3. MAPPED DEXs / PROTOCOLS (Sample of 1466 total):
+             protocol_id             name  chain_id
+0      pancakeswap-amm-1  PancakeSwap AMM         1
+1   pancakeswap-amm-8453  PancakeSwap AMM      8453
+2  pancakeswap-amm-42161  PancakeSwap AMM     42161
+3   pancakeswap-amm-4663  PancakeSwap AMM      4663
+4  pancakeswap-amm-59144  PancakeSwap AMM     59144
+5    pancakeswap-amm-143  PancakeSwap AMM       143
+6   pancakeswap-amm-1101  PancakeSwap AMM      1101
+7           uniswap-v3-1       Uniswap V3         1
+8        uniswap-v3-8453       Uniswap V3      8453
+9       uniswap-v3-42161       Uniswap V3     42161
+
+4. LIQUIDITY POOLS (Sample of 6524 total):
+                                pool_id  dex_protocol_id      pool_name          tvl
+0  25171c4c-1877-449a-9f88-45a9f153ee31      curve-dex-1  DAI-USDC-USDT  160480199.0
+1  8ac917c6-12fa-49df-aa0b-ced2ebe54e91     uniswap-v2-1      WISE-WETH  140652631.0
+2  b99bcdf5-1350-4269-981e-0e9b5cccb007  uniswap-v3-8453      WETH-USDC  115195590.0
+3  fc9f488e-8183-416f-a61e-4e5c571d4395     uniswap-v3-1      WETH-USDT  114024593.0
+4  665dc8bc-c79d-4800-97f7-304bf368e547     uniswap-v3-1      USDC-WETH  105763773.0
+5  57d30b9c-fc66-4ac2-b666-69ad5f410cce      curve-dex-1      ETH-STETH  101106102.0
+6  0899ff3d-adc8-4dae-a516-a94998db3332     uniswap-v4-1     PYUSD-USDS  100115735.0
+7  3c4132bf-ef75-5162-8558-70fd4fa91c81     uniswap-v4-1       BMD-USDC   97046250.0
+8  1b6fc394-3f6a-4537-9413-926db5fc10f6      curve-dex-1   CRVUSD-CBBTC   96149620.0
+9  4f715567-420c-400d-9a62-0059331e3940      fluid-dex-1     WSTETH-ETH   87152978.0
+
+5. RESOLVED TOKENS (Sample of 1577 total):
+    token_id symbol  chain_id                            contract_address
+0      DAI-1    DAI         1  0x6b175474e89094c44da98b954eedeac495271d0f
+1     USDC-1   USDC         1  0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48
+2     USDT-1   USDT         1  0xdac17f958d2ee523a2206206994597c13d831ec7
+3     WISE-1   WISE         1  0x66a0f676479cee1d7373f3dc2e2952778bff5bd6
+4     WETH-1   WETH         1  0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2
+5  WETH-8453   WETH      8453  0x4200000000000000000000000000000000000006
+6  USDC-8453   USDC      8453  0x833589fcd6edb6e08f4c7c32d4f71b54bda02913
+7      ETH-1    ETH         1  0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+8    STETH-1  STETH         1  0xae7ab96520de3a18e5e111b5eaab095312d7fe84
+9    PYUSD-1  PYUSD         1  0x6c3ea9036406852006290770bedfcaba0e23a0e8
+
+6. FLASH LOAN PROVIDERS (Sample of 65 total):
+      provider_id     name  chain_id  fee_bps
+0    aave-v3-8453  Aave V3      8453      NaN
+1   aave-v3-42161  Aave V3     42161      NaN
+2     aave-v3-143  Aave V3       143      NaN
+3   aave-v3-43114  Aave V3     43114      NaN
+4     aave-v3-137  Aave V3       137      NaN
+5      aave-v3-10  Aave V3        10      NaN
+6    aave-v3-5000  Aave V3      5000      NaN
+7   aave-v3-59144  Aave V3     59144      NaN
+8  aave-v3-534352  Aave V3    534352      NaN
+9    aave-v3-1868  Aave V3      1868      NaN
+

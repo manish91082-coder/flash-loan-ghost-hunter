@@ -1,0 +1,812 @@
+==========================================================
+PHANTOMX मास्टर टेस्टिंग लॉग | ब्लॉकचेन: Cronos
+स्ट्रेटेजी: Spatial_Arbitrage | 100x Iterations
+समय (UTC): 2026-08-31T21:24:03.695210
+==========================================================
+
+--- इटरेशन #1 ---
+पूल डेटा: vvs-standard (USDT-CDCETH) -> vvs-standard (WCRO-BARA)
+डेटा एनालिसिस: Opportunity Variance = 0.2203% | अनुमानित गैस = $1.30
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.30
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.30
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #2 ---
+पूल डेटा: vvs-standard (WCRO-EMIT) -> vvs-standard (WCRO-BALLZ)
+डेटा एनालिसिस: Opportunity Variance = 0.0008% | अनुमानित गैस = $1.97
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.97
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.97
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #3 ---
+पूल डेटा: vvs-standard (CORGIAI-USDC) -> tectonic (LCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.4113% | अनुमानित गैस = $1.94
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.94
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.94
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #4 ---
+पूल डेटा: vvs-standard (WCRO-PAXG) -> vvs-flawless (WCRO-CAW)
+डेटा एनालिसिस: Opportunity Variance = 0.5023% | अनुमानित गैस = $0.96
+AI डिसीज़न (Flash Loan Size): $6,912,440.97
+खर्चे (Expenses): फ्लैश लोन फीस = $6,221.20 + गैस = $0.96
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $28,499.04
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #5 ---
+पूल डेटा: vvs-flawless (WCRO-WETH) -> vvs-standard (WCRO-BALLZ)
+डेटा एनालिसिस: Opportunity Variance = 2.8583% | अनुमानित गैस = $0.45
+AI डिसीज़न (Flash Loan Size): $1,485,160.81
+खर्चे (Expenses): फ्लैश लोन फीस = $1,336.64 + गैस = $0.45
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $41,113.85
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #6 ---
+पूल डेटा: vvs-standard (WCRO-AGLD) -> vvs-standard (DOGE-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.1436% | अनुमानित गैस = $1.91
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.91
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.91
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #7 ---
+पूल डेटा: vvs-standard (VVS-SHIB) -> vvs-standard (WCRO-CROAK)
+डेटा एनालिसिस: Opportunity Variance = 0.1345% | अनुमानित गैस = $1.76
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.76
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.76
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #8 ---
+पूल डेटा: vvs-standard (WBTC-USDT) -> vvs-standard (USDT-CDCETH)
+डेटा एनालिसिस: Opportunity Variance = 0.1530% | अनुमानित गैस = $1.36
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.36
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.36
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #9 ---
+पूल डेटा: vvs-standard (VVS-FUL) -> ferro (USDC-USDT)
+डेटा एनालिसिस: Opportunity Variance = 1.1505% | अनुमानित गैस = $0.32
+AI डिसीज़न (Flash Loan Size): $712,805.88
+खर्चे (Expenses): फ्लैश लोन फीस = $641.53 + गैस = $0.32
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $7,558.77
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #10 ---
+पूल डेटा: vvs-standard (WCRO-WETH) -> vvs-standard (WCRO-MCGA)
+डेटा एनालिसिस: Opportunity Variance = 1.3101% | अनुमानित गैस = $0.85
+AI डिसीज़न (Flash Loan Size): $1,336,382.93
+खर्चे (Expenses): फ्लैश लोन फीस = $1,202.74 + गैस = $0.85
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $16,304.76
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #11 ---
+पूल डेटा: tectonic (VVS) -> vvs-flawless (WCRO-USDT)
+डेटा एनालिसिस: Opportunity Variance = 1.6093% | अनुमानित गैस = $0.43
+AI डिसीज़न (Flash Loan Size): $12,063,498.09
+खर्चे (Expenses): फ्लैश लोन फीस = $10,857.15 + गैस = $0.43
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $183,277.88
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #12 ---
+पूल डेटा: vvs-standard (WCRO-CROGE) -> vvs-standard (WCRO-BOBZ)
+डेटा एनालिसिस: Opportunity Variance = 0.2729% | अनुमानित गैस = $1.21
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.21
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.21
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #13 ---
+पूल डेटा: vvs-standard (WCRO-ENS) -> vvs-standard (PLATY-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.6206% | अनुमानित गैस = $0.83
+AI डिसीज़न (Flash Loan Size): $307,507.18
+खर्चे (Expenses): फ्लैश लोन फीस = $276.76 + गैस = $0.83
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,630.77
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #14 ---
+पूल डेटा: vvs-standard (VVS-AGENTFUN) -> vvs-standard (WCRO-FROGS)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $2.00
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $2.00
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-2.00
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #15 ---
+पूल डेटा: vvs-standard (MTD-WCRO) -> vvs-flawless (WCRO-BANGER)
+डेटा एनालिसिस: Opportunity Variance = 9.5130% | अनुमानित गैस = $1.63
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.63
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $156,402.12
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #16 ---
+पूल डेटा: vvs-standard (INJ-WCRO) -> vvs-standard (WCRO-ICP)
+डेटा एनालिसिस: Opportunity Variance = 18.0105% | अनुमानित गैस = $0.46
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.46
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $297,446.92
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #17 ---
+पूल डेटा: vvs-standard (DAMOON-WCRO) -> vvs-standard (CDCETH-WETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0001% | अनुमानित गैस = $0.90
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.90
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.90
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #18 ---
+पूल डेटा: vvs-standard (WCRO-ICP) -> vvs-standard (WCRO-CROGE)
+डेटा एनालिसिस: Opportunity Variance = 19.3205% | अनुमानित गैस = $0.67
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.67
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $319,189.98
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #19 ---
+पूल डेटा: vvs-flawless (WCRO-XRP) -> vvs-standard (WCRO-AGLD)
+डेटा एनालिसिस: Opportunity Variance = 1.4712% | अनुमानित गैस = $0.22
+AI डिसीज़न (Flash Loan Size): $4,411,704.48
+खर्चे (Expenses): फ्लैश लोन फीस = $3,970.53 + गैस = $0.22
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $60,935.57
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #20 ---
+पूल डेटा: tectonic (USDT) -> vvs-standard (WCRO-ATOM)
+डेटा एनालिसिस: Opportunity Variance = 40.0977% | अनुमानित गैस = $0.26
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.26
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $664,054.11
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #21 ---
+पूल डेटा: vvs-standard (WCRO-CDCETH) -> vvs-standard (USDC-TONIC)
+डेटा एनालिसिस: Opportunity Variance = 50.0115% | अनुमानित गैस = $1.72
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.72
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $828,603.78
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #22 ---
+पूल डेटा: vvs-standard (VVS-TONIC) -> vvs-standard (WCRO-CORGIAI)
+डेटा एनालिसिस: Opportunity Variance = 13.4198% | अनुमानित गैस = $1.88
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.88
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $221,248.43
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #23 ---
+पूल डेटा: vvs-flawless (USDT-USDC) -> vvs-standard (WCRO-CRBY)
+डेटा एनालिसिस: Opportunity Variance = 2.8207% | अनुमानित गैस = $0.17
+AI डिसीज़न (Flash Loan Size): $1,485,160.81
+खर्चे (Expenses): फ्लैश लोन फीस = $1,336.64 + गैस = $0.17
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $40,555.41
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #24 ---
+पूल डेटा: vvs-flawless (WCRO-USDT) -> tectonic (VVS)
+डेटा एनालिसिस: Opportunity Variance = 1.6093% | अनुमानित गैस = $0.20
+AI डिसीज़न (Flash Loan Size): $12,063,498.09
+खर्चे (Expenses): फ्लैश लोन फीस = $10,857.15 + गैस = $0.20
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $183,278.11
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #25 ---
+पूल डेटा: vvs-standard (INO-WCRO) -> tectonic (ATOM)
+डेटा एनालिसिस: Opportunity Variance = 0.7807% | अनुमानित गैस = $0.73
+AI डिसीज़न (Flash Loan Size): $337,191.83
+खर्चे (Expenses): फ्लैश लोन फीस = $303.47 + गैस = $0.73
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,328.11
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #26 ---
+पूल डेटा: vvs-standard (WCRO-LADYS) -> vvs-standard (WCRO-USDC)
+डेटा एनालिसिस: Opportunity Variance = 28.5943% | अनुमानित गैस = $1.36
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.36
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $473,118.25
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #27 ---
+पूल डेटा: vvs-standard (USDT-CORGIAI) -> vvs-flawless (WCRO-SHIB)
+डेटा एनालिसिस: Opportunity Variance = 0.2126% | अनुमानित गैस = $1.63
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.63
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.63
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #28 ---
+पूल डेटा: vvs-standard (VVS-CORGIAI) -> vvs-standard (VVS-CROID)
+डेटा एनालिसिस: Opportunity Variance = 27.8283% | अनुमानित गैस = $0.08
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.08
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $460,404.18
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #29 ---
+पूल डेटा: vvs-standard (WCRO-ETC) -> vvs-standard (WCRO-AAVE)
+डेटा एनालिसिस: Opportunity Variance = 27.3976% | अनुमानित गैस = $0.62
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.62
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $453,255.46
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #30 ---
+पूल डेटा: vvs-standard (AKT-WCRO) -> vvs-flawless (VVS-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 11.8942% | अनुमानित गैस = $1.20
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.20
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $195,926.45
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #31 ---
+पूल डेटा: vvs-standard (WCRO-VNO) -> vvs-standard (ENA-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.0632% | अनुमानित गैस = $1.73
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.73
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.73
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #32 ---
+पूल डेटा: vvs-standard (ELON-WCRO) -> vvs-standard (WCRO-CRBY)
+डेटा एनालिसिस: Opportunity Variance = 0.5667% | अनुमानित गैस = $1.98
+AI डिसीज़न (Flash Loan Size): $340,600.82
+खर्चे (Expenses): फ्लैश लोन फीस = $306.54 + गैस = $1.98
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,621.53
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #33 ---
+पूल डेटा: vvs-standard (WCRO-CAW) -> vvs-standard (WCRO-AAVE)
+डेटा एनालिसिस: Opportunity Variance = 27.4271% | अनुमानित गैस = $1.23
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.23
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $453,745.33
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #34 ---
+पूल डेटा: vvs-standard (WCRO-ATOM) -> vvs-standard (WCRO-SUI)
+डेटा एनालिसिस: Opportunity Variance = 39.7999% | अनुमानित गैस = $0.07
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.07
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $659,112.36
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #35 ---
+पूल डेटा: tectonic (USDT) -> vvs-standard (WCRO-MEME)
+डेटा एनालिसिस: Opportunity Variance = 0.1486% | अनुमानित गैस = $0.88
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.88
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.88
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #36 ---
+पूल डेटा: vvs-standard (PACK-WCRO) -> vvs-standard (WCRO-LOAF)
+डेटा एनालिसिस: Opportunity Variance = 6.3498% | अनुमानित गैस = $1.97
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.97
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $103,899.93
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #37 ---
+पूल डेटा: vvs-standard (WCRO-SUI) -> crypto.com-liquid-staking (CDCETH)
+डेटा एनालिसिस: Opportunity Variance = 1.4902% | अनुमानित गैस = $0.16
+AI डिसीज़न (Flash Loan Size): $6,514,043.20
+खर्चे (Expenses): फ्लैश लोन फीस = $5,862.64 + गैस = $0.16
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $91,206.22
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #38 ---
+पूल डेटा: tectonic (CDCBTC) -> vvs-flawless (WCRO-USDC)
+डेटा एनालिसिस: Opportunity Variance = 1.4415% | अनुमानित गैस = $1.87
+AI डिसीज़न (Flash Loan Size): $4,297,687.50
+खर्चे (Expenses): फ्लैश लोन फीस = $3,867.92 + गैस = $1.87
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $58,080.09
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #39 ---
+पूल डेटा: vvs-flawless (WBTC-WCRO) -> vvs-standard (ANKR-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.0508% | अनुमानित गैस = $1.29
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.29
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.29
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #40 ---
+पूल डेटा: vvs-standard (USDT-CORGIAI) -> vvs-standard (VVS-TONIC)
+डेटा एनालिसिस: Opportunity Variance = 0.0085% | अनुमानित गैस = $0.49
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.49
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.49
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #41 ---
+पूल डेटा: single-finance (CRO) -> vvs-standard (CDCETH-WETH)
+डेटा एनालिसिस: Opportunity Variance = 16.1832% | अनुमानित गैस = $0.16
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.16
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $267,117.05
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #42 ---
+पूल डेटा: vvs-standard (INJ-WCRO) -> vvs-standard (BAD-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 1.3573% | अनुमानित गैस = $1.71
+AI डिसीज़न (Flash Loan Size): $1,349,018.27
+खर्चे (Expenses): फ्लैश लोन फीस = $1,214.12 + गैस = $1.71
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $17,094.94
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #43 ---
+पूल डेटा: vvs-standard (USDT-CROID) -> vvs-standard (WCRO-STUCK)
+डेटा एनालिसिस: Opportunity Variance = 0.1396% | अनुमानित गैस = $0.21
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.21
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.21
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #44 ---
+पूल डेटा: vvs-flawless (CDCBTC-WCRO) -> vvs-standard (WCRO-PEPE)
+डेटा एनालिसिस: Opportunity Variance = 0.0636% | अनुमानित गैस = $0.49
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.49
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.49
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #45 ---
+पूल डेटा: vvs-standard (WCRO-AR) -> vvs-standard (WCRO-CROID)
+डेटा एनालिसिस: Opportunity Variance = 0.9655% | अनुमानित गैस = $0.65
+AI डिसीज़न (Flash Loan Size): $455,465.53
+खर्चे (Expenses): फ्लैश लोन फीस = $409.92 + गैस = $0.65
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $3,986.90
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #46 ---
+पूल डेटा: vvs-standard (WCRO-CDCETH) -> vvs-standard (WCRO-ETC)
+डेटा एनालिसिस: Opportunity Variance = 50.7315% | अनुमानित गैस = $1.56
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.56
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $840,555.11
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #47 ---
+पूल डेटा: vvs-standard (STX-WCRO) -> vvs-standard (WBTC-USDT)
+डेटा एनालिसिस: Opportunity Variance = 16.8294% | अनुमानित गैस = $0.23
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.23
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $277,844.05
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #48 ---
+पूल डेटा: vvs-flawless (CDCBTC-WCRO) -> ferro (USDC-USDT)
+डेटा एनालिसिस: Opportunity Variance = 0.7946% | अनुमानित गैस = $0.56
+AI डिसीज़न (Flash Loan Size): $340,525.75
+खर्चे (Expenses): फ्लैश लोन फीस = $306.47 + गैस = $0.56
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,398.85
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #49 ---
+पूल डेटा: tectonic (ADA) -> vvs-standard (WCRO-DIP)
+डेटा एनालिसिस: Opportunity Variance = 0.0011% | अनुमानित गैस = $0.33
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.33
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.33
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #50 ---
+पूल डेटा: vvs-standard (WCRO-CROGE) -> vvs-standard (WCRO-XRP)
+डेटा एनालिसिस: Opportunity Variance = 0.8319% | अनुमानित गैस = $0.32
+AI डिसीज़न (Flash Loan Size): $349,186.72
+खर्चे (Expenses): फ्लैश लोन फीस = $314.27 + गैस = $0.32
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,590.15
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #51 ---
+पूल डेटा: tectonic (CDCETH) -> vvs-flawless (USDC-USDC)
+डेटा एनालिसिस: Opportunity Variance = 28.2548% | अनुमानित गैस = $1.46
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.46
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $467,482.08
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #52 ---
+पूल डेटा: vvs-standard (WCRO-XLM) -> vvs-standard (VVS-CORGIAI)
+डेटा एनालिसिस: Opportunity Variance = 8.6852% | अनुमानित गैस = $1.14
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.14
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $142,663.31
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #53 ---
+पूल डेटा: vvs-standard (VVS-USDT) -> tectonic (WBTC)
+डेटा एनालिसिस: Opportunity Variance = 0.5184% | अनुमानित गैस = $1.20
+AI डिसीज़न (Flash Loan Size): $820,374.49
+खर्चे (Expenses): फ्लैश लोन फीस = $738.34 + गैस = $1.20
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $3,513.04
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #54 ---
+पूल डेटा: vvs-standard (VVS-USDC) -> vvs-standard (WCRO-AUT)
+डेटा एनालिसिस: Opportunity Variance = 1.2728% | अनुमानित गैस = $1.02
+AI डिसीज़न (Flash Loan Size): $1,171,483.57
+खर्चे (Expenses): फ्लैश लोन फीस = $1,054.34 + गैस = $1.02
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $13,855.53
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #55 ---
+पूल डेटा: tectonic (USDC) -> vvs-standard (WCRO-ETC)
+डेटा एनालिसिस: Opportunity Variance = 0.1302% | अनुमानित गैस = $0.68
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.68
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.68
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #56 ---
+पूल डेटा: vvs-standard (VVS-FM) -> vvs-flawless (INO-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 1.4195% | अनुमानित गैस = $0.90
+AI डिसीज़न (Flash Loan Size): $2,305,096.59
+खर्चे (Expenses): फ्लैश लोन फीस = $2,074.59 + गैस = $0.90
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $30,645.59
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #57 ---
+पूल डेटा: vvs-standard (WCRO-BOOM) -> tectonic (TONIC)
+डेटा एनालिसिस: Opportunity Variance = 0.4013% | अनुमानित गैस = $1.08
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.08
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.08
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #58 ---
+पूल डेटा: vvs-flawless (PACK-WCRO) -> vvs-standard (WCRO-CAW)
+डेटा एनालिसिस: Opportunity Variance = 9.7807% | अनुमानित गैस = $0.18
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.18
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $160,848.06
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #59 ---
+पूल डेटा: vvs-flawless (INO-WCRO) -> vvs-standard (WCRO-DAI)
+डेटा एनालिसिस: Opportunity Variance = 0.3326% | अनुमानित गैस = $1.90
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.90
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.90
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #60 ---
+पूल डेटा: vvs-standard (PLATY-WCRO) -> vvs-standard (WCRO-FIL)
+डेटा एनालिसिस: Opportunity Variance = 0.1549% | अनुमानित गैस = $0.58
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.58
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.58
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #61 ---
+पूल डेटा: vvs-standard (WIF-WCRO) -> vvs-standard (WBTC-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.0023% | अनुमानित गैस = $1.40
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.40
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.40
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #62 ---
+पूल डेटा: vvs-standard (WCRO-THETA) -> vvs-standard (WCRO-LADYS)
+डेटा एनालिसिस: Opportunity Variance = 32.0167% | अनुमानित गैस = $1.83
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.83
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $529,923.70
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #63 ---
+पूल डेटा: tectonic (CDCETH) -> vvs-flawless (WCRO-USDC)
+डेटा एनालिसिस: Opportunity Variance = 1.4297% | अनुमानित गैस = $1.48
+AI डिसीज़न (Flash Loan Size): $2,798,169.91
+खर्चे (Expenses): फ्लैश लोन फीस = $2,518.35 + गैस = $1.48
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $37,485.60
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #64 ---
+पूल डेटा: vvs-standard (WCRO-HNT) -> vvs-standard (FM-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 36.5406% | अनुमानित गैस = $1.73
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.73
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $605,011.44
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #65 ---
+पूल डेटा: vvs-standard (WCRO-MCGA) -> vvs-standard (LMWR-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.2049% | अनुमानित गैस = $1.27
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.27
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.27
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #66 ---
+पूल डेटा: vvs-standard (WCRO-GAINZ) -> vvs-standard (VVS-CORGIAI)
+डेटा एनालिसिस: Opportunity Variance = 0.4681% | अनुमानित गैस = $1.09
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.09
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.09
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #67 ---
+पूल डेटा: vvs-flawless (WCRO-LCRO) -> vvs-standard (ELON-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 100.2263% | अनुमानित गैस = $1.42
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.42
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,662,077.97
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #68 ---
+पूल डेटा: vvs-standard (WCRO-FROGS) -> vvs-standard (FM-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.0325% | अनुमानित गैस = $1.34
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.34
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.34
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #69 ---
+पूल डेटा: vvs-standard (WCRO-CROGE) -> vvs-standard (WCRO-AGLD)
+डेटा एनालिसिस: Opportunity Variance = 0.7973% | अनुमानित गैस = $0.75
+AI डिसीज़न (Flash Loan Size): $340,525.75
+खर्चे (Expenses): फ्लैश लोन फीस = $306.47 + गैस = $0.75
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,407.93
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #70 ---
+पूल डेटा: vvs-standard (ELON-VVS) -> vvs-standard (VVS-AGENTFUN)
+डेटा एनालिसिस: Opportunity Variance = 0.0503% | अनुमानित गैस = $1.91
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.91
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.91
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #71 ---
+पूल डेटा: vvs-standard (WCRO-IMX) -> vvs-standard (WCRO-CRONUS)
+डेटा एनालिसिस: Opportunity Variance = 0.8159% | अनुमानित गैस = $1.82
+AI डिसीज़न (Flash Loan Size): $344,408.79
+खर्चे (Expenses): फ्लैश लोन फीस = $309.97 + गैस = $1.82
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,498.41
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #72 ---
+पूल डेटा: vvs-standard (WCRO-AUT) -> vvs-flawless (USDC-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 267.8375% | अनुमानित गैस = $0.07
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.07
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $4,444,119.74
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #73 ---
+पूल डेटा: vvs-standard (WCRO-LADYS) -> vvs-standard (WCRO-NEAR)
+डेटा एनालिसिस: Opportunity Variance = 30.8770% | अनुमानित गैस = $0.72
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.72
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $511,007.87
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #74 ---
+पूल डेटा: vvs-flawless (PACK-WCRO) -> vvs-flawless (VVS-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 8.1411% | अनुमानित गैस = $0.72
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.72
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $133,633.33
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #75 ---
+पूल डेटा: vvs-standard (WCRO-AAVE) -> vvs-standard (WCRO-SHIB)
+डेटा एनालिसिस: Opportunity Variance = 27.1702% | अनुमानित गैस = $1.68
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.68
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $449,480.81
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #76 ---
+पूल डेटा: vvs-standard (USDC-VNO) -> vvs-standard (WCRO-PEPE)
+डेटा एनालिसिस: Opportunity Variance = 0.4614% | अनुमानित गैस = $1.76
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.76
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.76
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #77 ---
+पूल डेटा: vvs-standard (XYO-WCRO) -> vvs-standard (FM-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.1512% | अनुमानित गैस = $0.50
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.50
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.50
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #78 ---
+पूल डेटा: vvs-standard (VVS-LADYS) -> vvs-standard (WCRO-DIP)
+डेटा एनालिसिस: Opportunity Variance = 0.9317% | अनुमानित गैस = $0.13
+AI डिसीज़न (Flash Loan Size): $402,717.54
+खर्चे (Expenses): फ्लैश लोन फीस = $362.45 + गैस = $0.13
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $3,389.51
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #79 ---
+पूल डेटा: tectonic (CDCETH) -> vvs-standard (WCRO-STUCK)
+डेटा एनालिसिस: Opportunity Variance = 0.0247% | अनुमानित गैस = $1.50
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.50
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.50
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #80 ---
+पूल डेटा: vvs-flawless (WCRO-LCRO) -> vvs-flawless (USDC-USDC)
+डेटा एनालिसिस: Opportunity Variance = 72.5135% | अनुमानित गैस = $0.62
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.62
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,202,096.62
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #81 ---
+पूल डेटा: vvs-standard (WCRO-EMIT) -> vvs-standard (WCRO-AR)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.35
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.35
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.35
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #82 ---
+पूल डेटा: vvs-standard (VVS-USDC) -> vvs-standard (PACK-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 5.0137% | अनुमानित गैस = $1.16
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.16
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $81,723.26
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #83 ---
+पूल डेटा: vvs-flawless (CORGIAI-USDC) -> vvs-standard (WCRO-XRP)
+डेटा एनालिसिस: Opportunity Variance = 0.8800% | अनुमानित गैस = $1.91
+AI डिसीज़न (Flash Loan Size): $368,879.90
+खर्चे (Expenses): फ्लैश लोन फीस = $331.99 + गैस = $1.91
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,912.32
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #84 ---
+पूल डेटा: vvs-standard (WCRO-LTC) -> tectonic (CDCETH)
+डेटा एनालिसिस: Opportunity Variance = 1.0110% | अनुमानित गैस = $0.47
+AI डिसीज़न (Flash Loan Size): $567,115.37
+खर्चे (Expenses): फ्लैश लोन फीस = $510.40 + गैस = $0.47
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $5,222.60
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #85 ---
+पूल डेटा: vvs-standard (AUTOS-USDC) -> tectonic (ATOM)
+डेटा एनालिसिस: Opportunity Variance = 0.1655% | अनुमानित गैस = $1.69
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.69
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.69
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #86 ---
+पूल डेटा: vvs-standard (KREES-WCRO) -> vvs-standard (RIP-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.0036% | अनुमानित गैस = $1.63
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.63
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.63
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #87 ---
+पूल डेटा: vvs-standard (VIRTUAL-WCRO) -> vvs-standard (ENA-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.2468% | अनुमानित गैस = $1.40
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.40
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.40
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #88 ---
+पूल डेटा: vvs-standard (KREES-WCRO) -> vvs-standard (MERY-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 2.2842% | अनुमानित गैस = $1.19
+AI डिसीज़न (Flash Loan Size): $14,773,690.90
+खर्चे (Expenses): फ्लैश लोन फीस = $13,296.32 + गैस = $1.19
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $324,167.57
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #89 ---
+पूल डेटा: vvs-standard (WCRO-CORGIAI) -> vvs-standard (WCRO-ATOM)
+डेटा एनालिसिस: Opportunity Variance = 26.5132% | अनुमानित गैस = $1.71
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.71
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $438,575.11
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #90 ---
+पूल डेटा: vvs-standard (MTD-VVS) -> vvs-standard (AUTOS-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0326% | अनुमानित गैस = $1.59
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.59
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.59
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #91 ---
+पूल डेटा: vvs-flawless (INO-WCRO) -> vvs-standard (VVS-PEPE)
+डेटा एनालिसिस: Opportunity Variance = 0.2581% | अनुमानित गैस = $1.58
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.58
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.58
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #92 ---
+पूल डेटा: vvs-standard (LION-BARA) -> vvs-standard (WCRO-PUMP)
+डेटा एनालिसिस: Opportunity Variance = 42.0369% | अनुमानित गैस = $0.33
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $0.33
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $696,241.54
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #93 ---
+पूल डेटा: vvs-standard (WCRO-PENGU) -> vvs-standard (WBTC-WCRO)
+डेटा एनालिसिस: Opportunity Variance = 0.5828% | अनुमानित गैस = $0.25
+AI डिसीज़न (Flash Loan Size): $306,557.59
+खर्चे (Expenses): फ्लैश लोन फीस = $275.90 + गैस = $0.25
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,510.43
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #94 ---
+पूल डेटा: vvs-standard (WCRO-CAPY) -> vvs-standard (WCRO-PENGU)
+डेटा एनालिसिस: Opportunity Variance = 0.7397% | अनुमानित गैस = $1.37
+AI डिसीज़न (Flash Loan Size): $337,033.34
+खर्चे (Expenses): फ्लैश लोन फीस = $303.33 + गैस = $1.37
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,188.47
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #95 ---
+पूल डेटा: vvs-standard (WCRO-BOOM) -> vvs-flawless (USDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 2.8207% | अनुमानित गैस = $0.06
+AI डिसीज़न (Flash Loan Size): $1,485,160.81
+खर्चे (Expenses): फ्लैश लोन फीस = $1,336.64 + गैस = $0.06
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $40,555.53
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #96 ---
+पूल डेटा: vvs-standard (WCRO-SOL) -> vvs-flawless (USDC-USDC)
+डेटा एनालिसिस: Opportunity Variance = 21.4314% | अनुमानित गैस = $1.87
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.87
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $354,225.70
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #97 ---
+पूल डेटा: symbiosis (USDC) -> vvs-standard (VVS-USDT)
+डेटा एनालिसिस: Opportunity Variance = 0.1257% | अनुमानित गैस = $0.89
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.89
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.89
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #98 ---
+पूल डेटा: vvs-standard (WCRO-CORGIAI) -> vvs-standard (WCRO-FIL)
+डेटा एनालिसिस: Opportunity Variance = 13.5780% | अनुमानित गैस = $1.94
+AI डिसीज़न (Flash Loan Size): $1,659,817.23
+खर्चे (Expenses): फ्लैश लोन फीस = $1,493.84 + गैस = $1.94
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $223,874.04
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #99 ---
+पूल डेटा: vvs-standard (WIF-WCRO) -> vvs-standard (WCRO-ETC)
+डेटा एनालिसिस: Opportunity Variance = 1.0681% | अनुमानित गैस = $1.34
+AI डिसीज़न (Flash Loan Size): $686,900.75
+खर्चे (Expenses): फ्लैश लोन फीस = $618.21 + गैस = $1.34
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $6,717.17
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #100 ---
+पूल डेटा: tectonic (LCRO) -> vvs-standard (WCRO-THETA)
+डेटा एनालिसिस: Opportunity Variance = 0.3224% | अनुमानित गैस = $0.82
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.82
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.82
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+==========================================================
+अंतिम रिपोर्ट (Cronos | Spatial_Arbitrage):
+कुल टेस्ट रन: 100
+प्रॉफिटेबल मौके मिले: 63
+घाटे वाले ट्रेड्स ब्लॉक किए गए (Zero-Loss Guard): 37
+==========================================================

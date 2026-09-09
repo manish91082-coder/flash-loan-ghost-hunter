@@ -1,0 +1,812 @@
+==========================================================
+PHANTOMX मास्टर टेस्टिंग लॉग | ब्लॉकचेन: Fantom
+स्ट्रेटेजी: Sandwich_MEV_Arbitrage | 100x Iterations
+समय (UTC): 2026-08-31T21:23:23.466745
+==========================================================
+
+--- इटरेशन #1 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 7.0945% | अनुमानित गैस = $4.33
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.33
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $35,018.33
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #2 ---
+पूल डेटा: curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 2.5432% | अनुमानित गैस = $0.65
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.65
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $12,265.23
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #3 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 7.7476% | अनुमानित गैस = $2.25
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.25
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $38,285.59
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #4 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 3.5057% | अनुमानित गैस = $2.71
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.71
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $17,075.83
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #5 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 8.2404% | अनुमानित गैस = $2.16
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.16
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $40,749.89
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #6 ---
+पूल डेटा: frax (FXS-FRAX) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 14.8118% | अनुमानित गैस = $1.47
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.47
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $73,607.68
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #7 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 0.4826% | अनुमानित गैस = $0.85
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.85
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.85
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #8 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 4.4040% | अनुमानित गैस = $1.77
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.77
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $21,568.47
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #9 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.8662% | अनुमानित गैस = $1.23
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.23
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $38,879.69
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #10 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.4035% | अनुमानित गैस = $2.67
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.67
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $36,565.07
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #11 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 10.1837% | अनुमानित गैस = $2.54
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.54
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $50,466.03
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #12 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 11.9391% | अनुमानित गैस = $4.78
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.78
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $59,240.63
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #13 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 11.4107% | अनुमानित गैस = $4.85
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.85
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $56,598.76
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #14 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 12.7474% | अनुमानित गैस = $0.17
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.17
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $63,287.03
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #15 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 1.9600% | अनुमानित गैस = $1.50
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.50
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $9,348.35
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #16 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 4.3892% | अनुमानित गैस = $5.98
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.98
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $21,489.98
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #17 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 0.8415% | अनुमानित गैस = $3.43
+AI डिसीज़न (Flash Loan Size): $358,991.71
+खर्चे (Expenses): फ्लैश लोन फीस = $323.09 + गैस = $3.43
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $2,694.43
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #18 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 2.8704% | अनुमानित गैस = $0.48
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.48
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $13,901.63
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #19 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 10.8088% | अनुमानित गैस = $5.15
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.15
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $53,588.82
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #20 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 11.2079% | अनुमानित गैस = $0.46
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.46
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $55,588.90
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #21 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 13.7141% | अनुमानित गैस = $2.08
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.08
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $68,118.53
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #22 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 11.0078% | अनुमानित गैस = $5.58
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.58
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $54,583.34
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #23 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.0362% | अनुमानित गैस = $3.65
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.65
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $34,727.54
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #24 ---
+पूल डेटा: frax (FXS-FRAX) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 11.5178% | अनुमानित गैस = $5.01
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.01
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $57,133.93
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #25 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 4.2719% | अनुमानित गैस = $0.15
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.15
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $20,909.19
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #26 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 6.8597% | अनुमानित गैस = $1.17
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.17
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $33,847.34
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #27 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 5.8365% | अनुमानित गैस = $3.92
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.92
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $28,728.79
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #28 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 13.8309% | अनुमानित गैस = $3.18
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.18
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $68,701.37
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #29 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 0.9777% | अनुमानित गैस = $3.02
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.02
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $4,435.69
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #30 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 13.9686% | अनुमानित गैस = $1.65
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.65
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $69,391.12
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #31 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 12.2138% | अनुमानित गैस = $5.08
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.08
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $60,613.74
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #32 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 10.4341% | अनुमानित गैस = $2.65
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.65
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $51,718.04
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #33 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 13.2588% | अनुमानित गैस = $3.55
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.55
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $65,840.21
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #34 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.6591% | अनुमानित गैस = $5.85
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.85
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $37,839.51
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #35 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 8.1975% | अनुमानित गैस = $1.66
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.66
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $40,535.98
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #36 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.0553% | अनुमानित गैस = $0.93
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.93
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $34,825.38
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #37 ---
+पूल डेटा: curve-dex (DAI-USDC) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.3625% | अनुमानित गैस = $1.17
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.17
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $36,361.21
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #38 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 11.1916% | अनुमानित गैस = $0.46
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.46
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $55,507.75
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #39 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.2504% | अनुमानित गैस = $2.87
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.87
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $35,799.02
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #40 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 11.9556% | अनुमानित गैस = $5.12
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.12
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $59,323.13
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #41 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 8.3172% | अनुमानित गैस = $5.88
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.88
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $41,130.11
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #42 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.2941% | अनुमानित गैस = $2.36
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $2.36
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-2.36
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #43 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 1.2316% | अनुमानित गैस = $4.25
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.25
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $5,703.78
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #44 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 2.5657% | अनुमानित गैस = $0.39
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.39
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $12,378.35
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #45 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.7531% | अनुमानित गैस = $4.00
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.00
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $38,311.30
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #46 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.1517% | अनुमानित गैस = $4.60
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.60
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $35,304.00
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #47 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 1.4515% | अनुमानित गैस = $2.58
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.58
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $6,804.73
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #48 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 1.7297% | अनुमानित गैस = $5.49
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.49
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $8,192.85
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #49 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 14.3523% | अनुमानित गैस = $3.85
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.85
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $71,307.73
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #50 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 7.5564% | अनुमानित गैस = $2.19
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.19
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $37,329.91
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #51 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 2.6532% | अनुमानित गैस = $4.61
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.61
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $12,811.62
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #52 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 8.5804% | अनुमानित गैस = $1.45
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.45
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $42,450.68
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #53 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 14.0246% | अनुमानित गैस = $2.37
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.37
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $69,670.42
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #54 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 14.7766% | अनुमानित गैस = $3.86
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.86
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $73,429.34
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #55 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 9.8639% | अनुमानित गैस = $2.26
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.26
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $48,867.28
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #56 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 8.8238% | अनुमानित गैस = $0.64
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.64
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $43,668.20
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #57 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 12.2241% | अनुमानित गैस = $1.30
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.30
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $60,669.22
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #58 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 4.9845% | अनुमानित गैस = $0.77
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.77
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $24,471.51
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #59 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 12.4513% | अनुमानित गैस = $5.31
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.31
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $61,801.14
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #60 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 12.2045% | अनुमानित गैस = $2.57
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.57
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $60,570.15
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #61 ---
+पूल डेटा: curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 3.0770% | अनुमानित गैस = $0.03
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.03
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $14,934.76
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #62 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 11.8115% | अनुमानित गैस = $2.10
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.10
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $58,605.28
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #63 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 12.2302% | अनुमानित गैस = $3.78
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.78
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $60,697.12
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #64 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.8662% | अनुमानित गैस = $1.73
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.73
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $38,879.15
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #65 ---
+पूल डेटा: curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 2.1298% | अनुमानित गैस = $1.60
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.60
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $10,197.35
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #66 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 11.9778% | अनुमानित गैस = $1.28
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.28
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $59,437.76
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #67 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 14.3435% | अनुमानित गैस = $5.16
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.16
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $71,262.36
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #68 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 2.0249% | अनुमानित गैस = $0.71
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.71
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $9,673.88
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #69 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 7.8832% | अनुमानित गैस = $1.37
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.37
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $38,964.54
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #70 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 8.7662% | अनुमानित गैस = $5.81
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.81
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $43,375.13
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #71 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 13.4924% | अनुमानित गैस = $3.70
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.70
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $67,008.37
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #72 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 6.3934% | अनुमानित गैस = $1.24
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.24
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $31,515.81
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #73 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 4.8036% | अनुमानित गैस = $3.73
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.73
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $23,564.13
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #74 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 11.0531% | अनुमानित गैस = $0.24
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.24
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $54,815.23
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #75 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 1.1081% | अनुमानित गैस = $1.36
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.36
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $5,089.02
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #76 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 1.6539% | अनुमानित गैस = $4.26
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.26
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $7,815.40
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #77 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 10.5793% | अनुमानित गैस = $4.38
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.38
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $52,442.10
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #78 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 4.8140% | अनुमानित गैस = $4.40
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.40
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $23,615.40
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #79 ---
+पूल डेटा: frax (FXS-FRAX) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 5.9364% | अनुमानित गैस = $0.69
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.69
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $29,231.55
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #80 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 14.5362% | अनुमानित गैस = $2.12
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.12
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $72,228.79
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #81 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 1.5007% | अनुमानित गैस = $2.64
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.64
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $7,050.93
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #82 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 10.0205% | अनुमानित गैस = $1.66
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.66
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $49,650.71
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #83 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 7.0886% | अनुमानित गैस = $4.54
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.54
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $34,988.33
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #84 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 2.4476% | अनुमानित गैस = $4.91
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.91
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $11,783.16
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #85 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 7.9346% | अनुमानित गैस = $5.84
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.84
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $39,217.24
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #86 ---
+पूल डेटा: curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 8.8290% | अनुमानित गैस = $5.29
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.29
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $43,689.53
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #87 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.6941% | अनुमानित गैस = $0.24
+AI डिसीज़न (Flash Loan Size): $315,212.36
+खर्चे (Expenses): फ्लैश लोन फीस = $283.69 + गैस = $0.24
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $1,904.03
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #88 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 9.8037% | अनुमानित गैस = $1.75
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.75
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $48,566.67
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #89 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 5.8298% | अनुमानित गैस = $3.04
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.04
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $28,696.01
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #90 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 3.5425% | अनुमानित गैस = $3.04
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $3.04
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $17,259.23
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #91 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.1857% | अनुमानित गैस = $5.63
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.63
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $35,473.06
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #92 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 10.7927% | अनुमानित गैस = $0.19
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.19
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $53,513.36
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #93 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 7.8601% | अनुमानित गैस = $5.02
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $5.02
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $38,845.62
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #94 ---
+पूल डेटा: curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 1.8682% | अनुमानित गैस = $4.92
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $4.92
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $8,885.83
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #95 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 7.9200% | अनुमानित गैस = $2.54
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.54
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $39,147.35
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #96 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 10.4481% | अनुमानित गैस = $0.50
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.50
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $51,790.14
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #97 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 10.9446% | अनुमानित गैस = $1.69
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $1.69
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $54,271.37
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #98 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 1.3486% | अनुमानित गैस = $0.85
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $0.85
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $6,292.06
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #99 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 2.8278% | अनुमानित गैस = $2.84
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.84
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $13,686.05
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+--- इटरेशन #100 ---
+पूल डेटा: frax (FXS-FRAX) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 8.9544% | अनुमानित गैस = $2.02
+AI डिसीज़न (Flash Loan Size): $500,000.00
+खर्चे (Expenses): फ्लैश लोन फीस = $450.00 + गैस = $2.02
+परिणाम: 🟢 [PROFITABLE] नेट प्रॉफिट = $44,319.95
+एक्शन: ट्रांज़ैक्शन ब्लॉकचेन पर ब्रॉडकास्ट की गई।
+
+==========================================================
+अंतिम रिपोर्ट (Fantom | Sandwich_MEV_Arbitrage):
+कुल टेस्ट रन: 100
+प्रॉफिटेबल मौके मिले: 98
+घाटे वाले ट्रेड्स ब्लॉक किए गए (Zero-Loss Guard): 2
+==========================================================

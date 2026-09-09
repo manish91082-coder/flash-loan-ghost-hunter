@@ -1,0 +1,2535 @@
+[
+    {
+        "timestamp": "2026-09-03T00:31:41.428708",
+        "opportunity_id": "OPP-1-TRIA-1788375701-0",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.437771",
+        "opportunity_id": "OPP-1-TRIA-1788375701-1",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.441734",
+        "opportunity_id": "OPP-1-TRIA-1788375701-2",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.445079",
+        "opportunity_id": "OPP-1-TRIA-1788375701-3",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.449084",
+        "opportunity_id": "OPP-1-TRIA-1788375701-4",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.452081",
+        "opportunity_id": "OPP-1-TRIA-1788375701-5",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.452081",
+        "opportunity_id": "OPP-1-STAT-1788375701-0",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-YIEL-1788375701-0",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-CROS-1788375701-0",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-CROS-1788375701-1",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-MEVS-1788375701-0",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-MEVS-1788375701-1",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-MEVS-1788375701-2",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-MEVS-1788375701-3",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-MEVS-1788375701-4",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-MEVS-1788375701-5",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-MEVS-1788375701-6",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-MEVS-1788375701-7",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.453081",
+        "opportunity_id": "OPP-1-MEVS-1788375701-8",
+        "chain_id": 1,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.457081",
+        "opportunity_id": "OPP-8453-TRIA-1788375701-0",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.461083",
+        "opportunity_id": "OPP-8453-TRIA-1788375701-1",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.465079",
+        "opportunity_id": "OPP-8453-TRIA-1788375701-2",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.467083",
+        "opportunity_id": "OPP-8453-TRIA-1788375701-3",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.470081",
+        "opportunity_id": "OPP-8453-TRIA-1788375701-4",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.471081",
+        "opportunity_id": "OPP-8453-TRIA-1788375701-5",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-STAT-1788375701-0",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-YIEL-1788375701-0",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-CROS-1788375701-0",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-CROS-1788375701-1",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-MEVS-1788375701-0",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-MEVS-1788375701-1",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-MEVS-1788375701-2",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-MEVS-1788375701-3",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-MEVS-1788375701-4",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-MEVS-1788375701-5",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-MEVS-1788375701-6",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-MEVS-1788375701-7",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.472131",
+        "opportunity_id": "OPP-8453-MEVS-1788375701-8",
+        "chain_id": 8453,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.474652",
+        "opportunity_id": "OPP-10-TRIA-1788375701-0",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.475652",
+        "opportunity_id": "OPP-10-TRIA-1788375701-1",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.477653",
+        "opportunity_id": "OPP-10-TRIA-1788375701-2",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.479653",
+        "opportunity_id": "OPP-10-TRIA-1788375701-3",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.481657",
+        "opportunity_id": "OPP-10-TRIA-1788375701-4",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-TRIA-1788375701-5",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-STAT-1788375701-0",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-YIEL-1788375701-0",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-CROS-1788375701-0",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-CROS-1788375701-1",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-MEVS-1788375701-0",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-MEVS-1788375701-1",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-MEVS-1788375701-2",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-MEVS-1788375701-3",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-MEVS-1788375701-4",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-MEVS-1788375701-5",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-MEVS-1788375701-6",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-MEVS-1788375701-7",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.483651",
+        "opportunity_id": "OPP-10-MEVS-1788375701-8",
+        "chain_id": 10,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x4200000000000000000000000000000000000006",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.486654",
+        "opportunity_id": "OPP-42161-TRIA-1788375701-0",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.490654",
+        "opportunity_id": "OPP-42161-TRIA-1788375701-1",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.492657",
+        "opportunity_id": "OPP-42161-TRIA-1788375701-2",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.494655",
+        "opportunity_id": "OPP-42161-TRIA-1788375701-3",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.497654",
+        "opportunity_id": "OPP-42161-TRIA-1788375701-4",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-TRIA-1788375701-5",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-STAT-1788375701-0",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-YIEL-1788375701-0",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-CROS-1788375701-0",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-CROS-1788375701-1",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-MEVS-1788375701-0",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-MEVS-1788375701-1",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-MEVS-1788375701-2",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-MEVS-1788375701-3",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-MEVS-1788375701-4",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-MEVS-1788375701-5",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-MEVS-1788375701-6",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-MEVS-1788375701-7",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.499653",
+        "opportunity_id": "OPP-42161-MEVS-1788375701-8",
+        "chain_id": 42161,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.502655",
+        "opportunity_id": "OPP-137-TRIA-1788375701-0",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.504653",
+        "opportunity_id": "OPP-137-TRIA-1788375701-1",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.506655",
+        "opportunity_id": "OPP-137-TRIA-1788375701-2",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.508654",
+        "opportunity_id": "OPP-137-TRIA-1788375701-3",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.510654",
+        "opportunity_id": "OPP-137-TRIA-1788375701-4",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-TRIA-1788375701-5",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-STAT-1788375701-0",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-YIEL-1788375701-0",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-CROS-1788375701-0",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-CROS-1788375701-1",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-MEVS-1788375701-0",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-MEVS-1788375701-1",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-MEVS-1788375701-2",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-MEVS-1788375701-3",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-MEVS-1788375701-4",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-MEVS-1788375701-5",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-MEVS-1788375701-6",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-MEVS-1788375701-7",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.515652",
+        "opportunity_id": "OPP-137-MEVS-1788375701-8",
+        "chain_id": 137,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.517651",
+        "opportunity_id": "OPP-43114-TRIA-1788375701-0",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518380",
+        "opportunity_id": "OPP-43114-TRIA-1788375701-1",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518380",
+        "opportunity_id": "OPP-43114-TRIA-1788375701-2",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518380",
+        "opportunity_id": "OPP-43114-TRIA-1788375701-3",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518380",
+        "opportunity_id": "OPP-43114-TRIA-1788375701-4",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-TRIA-1788375701-5",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-YIEL-1788375701-0",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-CROS-1788375701-0",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-CROS-1788375701-1",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-MEVS-1788375701-0",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-MEVS-1788375701-1",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-MEVS-1788375701-2",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-MEVS-1788375701-3",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-MEVS-1788375701-4",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-MEVS-1788375701-5",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-MEVS-1788375701-6",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-MEVS-1788375701-7",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.518934",
+        "opportunity_id": "OPP-43114-MEVS-1788375701-8",
+        "chain_id": 43114,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.520844",
+        "opportunity_id": "OPP-250-TRIA-1788375701-0",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.520844",
+        "opportunity_id": "OPP-250-TRIA-1788375701-1",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.520844",
+        "opportunity_id": "OPP-250-TRIA-1788375701-2",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.520844",
+        "opportunity_id": "OPP-250-TRIA-1788375701-3",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-TRIA-1788375701-4",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-TRIA-1788375701-5",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-YIEL-1788375701-0",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-CROS-1788375701-0",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-CROS-1788375701-1",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-MEVS-1788375701-0",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-MEVS-1788375701-1",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-MEVS-1788375701-2",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-MEVS-1788375701-3",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-MEVS-1788375701-4",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-MEVS-1788375701-5",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-MEVS-1788375701-6",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-MEVS-1788375701-7",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.521355",
+        "opportunity_id": "OPP-250-MEVS-1788375701-8",
+        "chain_id": 250,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.525370",
+        "opportunity_id": "OPP-42220-TRIA-1788375701-0",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.527207",
+        "opportunity_id": "OPP-42220-TRIA-1788375701-1",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.528818",
+        "opportunity_id": "OPP-42220-TRIA-1788375701-2",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.531384",
+        "opportunity_id": "OPP-42220-TRIA-1788375701-3",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.532465",
+        "opportunity_id": "OPP-42220-TRIA-1788375701-4",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-TRIA-1788375701-5",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-YIEL-1788375701-0",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-CROS-1788375701-0",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-CROS-1788375701-1",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "UNKNOWN",
+        "token_out": "UNKNOWN",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-MEVS-1788375701-0",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-MEVS-1788375701-1",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-MEVS-1788375701-2",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-MEVS-1788375701-3",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-MEVS-1788375701-4",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-MEVS-1788375701-5",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-MEVS-1788375701-6",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-MEVS-1788375701-7",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    },
+    {
+        "timestamp": "2026-09-03T00:31:41.533984",
+        "opportunity_id": "OPP-42220-MEVS-1788375701-8",
+        "chain_id": 42220,
+        "block_number": "UNKNOWN",
+        "block_hash": "UNKNOWN",
+        "provider": "UNKNOWN",
+        "contract": "UNKNOWN",
+        "token_in": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+        "token_out": "0x471EcE3750Da237f93B8E339c536989b8978a438",
+        "decimals": "UNKNOWN",
+        "fee": "UNKNOWN",
+        "source": "UNKNOWN",
+        "assumptions": [
+            "LIVE_CHAIN"
+        ]
+    }
+]

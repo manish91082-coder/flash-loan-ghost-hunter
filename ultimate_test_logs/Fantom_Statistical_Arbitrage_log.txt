@@ -1,0 +1,812 @@
+==========================================================
+PHANTOMX मास्टर टेस्टिंग लॉग | ब्लॉकचेन: Fantom
+स्ट्रेटेजी: Statistical_Arbitrage | 100x Iterations
+समय (UTC): 2026-08-31T21:23:08.036567
+==========================================================
+
+--- इटरेशन #1 ---
+पूल डेटा: stargate-v1 (USDC) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.87
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.87
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.87
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #2 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.46
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.46
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.46
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #3 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.10
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.10
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.10
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #4 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.18
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.18
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.18
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #5 ---
+पूल डेटा: curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.48
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.48
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.48
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #6 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.18
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.18
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.18
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #7 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.17
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.17
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.17
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #8 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.73
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.73
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.73
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #9 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.77
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.77
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.77
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #10 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.82
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.82
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.82
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #11 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.92
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.92
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.92
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #12 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.45
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.45
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.45
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #13 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.85
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.85
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.85
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #14 ---
+पूल डेटा: curve-dex (XSTABLE) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.71
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.71
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.71
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #15 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.55
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.55
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.55
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #16 ---
+पूल डेटा: curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.13
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.13
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.13
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #17 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.69
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.69
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.69
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #18 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.38
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.38
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.38
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #19 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.26
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.26
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.26
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #20 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.11
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.11
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.11
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #21 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.28
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.28
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.28
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #22 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.15
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.15
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.15
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #23 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.05
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.05
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.05
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #24 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.42
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.42
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.42
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #25 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.96
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.96
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.96
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #26 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.37
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.37
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.37
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #27 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.33
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.33
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.33
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #28 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.19
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.19
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.19
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #29 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.62
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.62
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.62
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #30 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.17
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.17
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.17
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #31 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.19
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.19
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.19
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #32 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.74
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.74
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.74
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #33 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.14
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.14
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.14
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #34 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.21
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.21
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.21
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #35 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.33
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.33
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.33
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #36 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.31
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.31
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.31
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #37 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.61
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.61
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.61
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #38 ---
+पूल डेटा: stargate-v1 (USDC) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.73
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.73
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.73
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #39 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.44
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.44
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.44
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #40 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.88
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.88
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.88
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #41 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.76
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.76
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.76
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #42 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.46
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.46
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.46
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #43 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.22
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.22
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.22
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #44 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.41
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.41
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.41
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #45 ---
+पूल डेटा: curve-dex (CUSD-DAI-USDC) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.37
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.37
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.37
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #46 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.15
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.15
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.15
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #47 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.39
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.39
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.39
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #48 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.93
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.93
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.93
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #49 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.94
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.94
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.94
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #50 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.85
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.85
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.85
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #51 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.58
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.58
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.58
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #52 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.01
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.01
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.01
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #53 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.88
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.88
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.88
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #54 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.39
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.39
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.39
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #55 ---
+पूल डेटा: curve-dex (DAI-USDC) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.01
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.01
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.01
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #56 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.58
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.58
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.58
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #57 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.49
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.49
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.49
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #58 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.23
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.23
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.23
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #59 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.55
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.55
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.55
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #60 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.53
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.53
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.53
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #61 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.63
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.63
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.63
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #62 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.05
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.05
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.05
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #63 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.05
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.05
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.05
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #64 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.23
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.23
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.23
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #65 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.01
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.01
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.01
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #66 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.80
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.80
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.80
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #67 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.57
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.57
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.57
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #68 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.92
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.92
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.92
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #69 ---
+पूल डेटा: curve-dex (DAI-USDC) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.93
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.93
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.93
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #70 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.04
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.04
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.04
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #71 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.37
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.37
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.37
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #72 ---
+पूल डेटा: curve-dex (DAI-USDC) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.61
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.61
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.61
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #73 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.90
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.90
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.90
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #74 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.81
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.81
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.81
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #75 ---
+पूल डेटा: curve-dex (XSTABLE) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.70
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.70
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.70
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #76 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.74
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.74
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.74
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #77 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.74
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.74
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.74
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #78 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.33
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.33
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.33
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #79 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> curve-dex (USDLSTABLECOIN-G3CRV)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.63
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.63
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.63
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #80 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> frax (FXS-FRAX)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.25
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.25
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.25
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #81 ---
+पूल डेटा: stargate-v1 (USDC) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.05
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.05
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.05
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #82 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> curve-dex (FRAX-USDC-UST-FUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.44
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.44
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.44
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #83 ---
+पूल डेटा: curve-dex (FUSDT-BTC-ETH) -> curve-dex (FUSDT-BTC-ETH)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.30
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.30
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.30
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #84 ---
+पूल डेटा: curve-dex (XSTABLE) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.47
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.47
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.47
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #85 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.15
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.15
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.15
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #86 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.94
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.94
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.94
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #87 ---
+पूल डेटा: curve-dex (MIM-FUSDT-USDC) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.15
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.15
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.15
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #88 ---
+पूल डेटा: curve-dex (MAI-FUSDT-USDC) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.06
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.06
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.06
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #89 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (GDAI-GUSDC-GFUSDT)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.07
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.07
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.07
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #90 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (MAI-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.04
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.04
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.04
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #91 ---
+पूल डेटा: curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B) -> curve-dex (CUSD-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.41
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.41
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.41
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #92 ---
+पूल डेटा: frax (FXS-FRAX) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.84
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.84
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.84
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #93 ---
+पूल डेटा: curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B) -> curve-dex (XSTABLE)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.53
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.53
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.53
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #94 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.86
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.86
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.86
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #95 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.04
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.04
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.04
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #96 ---
+पूल डेटा: curve-dex (LAMBDA-DAI-USDC) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.98
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.98
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.98
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #97 ---
+पूल डेटा: curve-dex (FRAX-USDC-UST-FUSDT) -> curve-dex (MIM-FUSDT-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $0.54
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $0.54
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-0.54
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #98 ---
+पूल डेटा: curve-dex (USDLSTABLECOIN-G3CRV) -> curve-dex (LAMBDA-DAI-USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.18
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.18
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.18
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #99 ---
+पूल डेटा: frax (FXS-FRAX) -> curve-dex (SCRVUSDT-E-SCRVUSDT-AR-SCRVUSDT-O-SAV3CRV-AV-SCRVUSDT-P-SCRVUSDT-B)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.58
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.58
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.58
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+--- इटरेशन #100 ---
+पूल डेटा: curve-dex (GDAI-GUSDC-GFUSDT) -> stargate-v1 (USDC)
+डेटा एनालिसिस: Opportunity Variance = 0.0000% | अनुमानित गैस = $1.61
+AI डिसीज़न (Flash Loan Size): $0.00
+खर्चे (Expenses): फ्लैश लोन फीस = $0.00 + गैस = $1.61
+परिणाम: 🔴 [UNPROFITABLE] अनुमानित लॉस = $-1.61
+एक्शन: Zero-Loss Guard ने ट्रांज़ैक्शन को रिजेक्ट कर दिया।
+
+==========================================================
+अंतिम रिपोर्ट (Fantom | Statistical_Arbitrage):
+कुल टेस्ट रन: 100
+प्रॉफिटेबल मौके मिले: 0
+घाटे वाले ट्रेड्स ब्लॉक किए गए (Zero-Loss Guard): 100
+==========================================================

@@ -1,0 +1,34 @@
+[
+  {
+    "hour": 1.0010603777567546,
+    "total_scans": 1155,
+    "avg_gas_gwei": 277.21788055591,
+    "ai_execute": 0,
+    "sim_success": 0,
+    "sim_total": 0,
+    "spike_05pct": 0,
+    "spike_10pct": 0,
+    "best_spreads": {
+      "WETH": 0.26955611594880935,
+      "WMATIC": 0.02852590362070473,
+      "WBTC": 0.1978828495408712
+    },
+    "timestamp": "2026-09-05T16:15:30.091701+00:00"
+  },
+  {
+    "hour": 2.0010963356494904,
+    "total_scans": 1947,
+    "avg_gas_gwei": 277.924192008725,
+    "ai_execute": 0,
+    "sim_success": 0,
+    "sim_total": 0,
+    "spike_05pct": 0,
+    "spike_10pct": 0,
+    "best_spreads": {
+      "WETH": 0.37122802132604893,
+      "WMATIC": 0.029522677033037847,
+      "WBTC": 0.27349419194939134
+    },
+    "timestamp": "2026-09-05T17:15:30.221149+00:00"
+  }
+]

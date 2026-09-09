@@ -1,0 +1,22 @@
+================================================================================
+PHANTOMX LIVE SESSION REAL-TIME DATA FORENSIC AUDIT REPORT
+Audit Timestamp: 2026-09-09 09:11:14 UTC
+================================================================================
+
+--- V2 MVP Direct Engine (phantomx_v2_realtime_transactions.jsonl) ---
+Total Logged Records : 780
+Live Data Percentage  : 100.00% (780/780)
+Simulated Percentage  : 0.00% (0/780)
+Block Range Scanned   : #93,491,045 -> #93,493,358 (780 unique blocks)
+Average Spread (%)    : 0.1237% (Max: 0.3039%)
+Execution Decisions   : EXECUTE: 33 | WAIT: 747
+Cumulative Gross Arb  : $1,641.14 USD
+
+--- V3 Universal Triangular Engine (phantomx_v3_realtime_transactions.jsonl) ---
+Total Logged Records : 780
+Live Data Percentage  : 100.00% (780/780)
+Simulated Percentage  : 0.00% (0/780)
+Block Range Scanned   : #93,491,045 -> #93,493,358 (780 unique blocks)
+Average Spread (%)    : 0.1237% (Max: 0.3039%)
+Execution Decisions   : EXECUTE: 33 | WAIT: 747
+Cumulative Gross Arb  : $1,867.96 USD
