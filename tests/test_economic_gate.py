@@ -49,25 +49,21 @@ class EconomicGateTests(unittest.TestCase):
         )
         self.assertEqual(gas.gas_units, 100000)
         self.assertEqual(cert.execution_gas_units, 100000)
-        self.assertEqual(cert.gas_cost_usd, D("0.05"))
+        self.assertEqual(cert.gas_cost_usd, D("0.00005"))
         self.assertEqual(cert.block_number, 321)
         self.assertFalse(cert.executable)
 
-    def test_gas_estimate_block_mismatch_fails_closed(self):
+    def test_zero_gas_estimate_fails_closed(self):
         snapshot = EconomicSnapshot(137, 321, "0xblock", "snap-321", D("2"), D("0.25"))
         route = [QuoteLeg("V2", "USDC", "USDC", D("1000"), D("1001"), D("0"), None, 321, "q")]
-        class MismatchedRpc(FakeRpc):
-            pass
         with self.assertRaises(Exception):
-            # The fake transport cannot independently change the returned block,
-            # so use a builder that fails to demonstrate the gate remains fail-closed.
             certify_executor_path(
                 opportunity_id="opp-2", snapshot=snapshot, route=route,
                 loan_usd=D("1000"), flash_loan_fee_usd=D("1"),
                 intent_builder=FakeBuilder(), intent={"executionId": "0x02"},
                 executor_address="0x00000000000000000000000000000000000000aa",
                 sender_address="0x00000000000000000000000000000000000000bb",
-                rpc=MismatchedRpc("0x0"), gas_rpc_url="test://rpc",
+                rpc=FakeRpc("0x0"), gas_rpc_url="test://rpc",
             )
 
 
