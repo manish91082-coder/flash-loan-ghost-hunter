@@ -80,7 +80,7 @@ def read_configured_pool(
     }
     try:
         selector = SLOT0_SELECTOR if kind == "v3" else GET_RESERVES_SELECTOR
-        raw = rpc_call(pool, selector, snapshot.block_number)
+        raw = rpc_call_at_block(pool, selector, snapshot.block_number)
         if kind == "v3":
             price = parse_slot0_price_usd(raw, t0d, t1d, token0_is_base)
         else:
