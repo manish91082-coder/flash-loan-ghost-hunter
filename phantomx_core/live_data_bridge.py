@@ -1,7 +1,8 @@
 """PHANTOMX live-data bridge for P0-A.
 
-Creates one block/gas snapshot from a single healthy RPC endpoint, then reads
-all configured pools at that exact block using the same endpoint.
+One selected RPC endpoint provides the snapshot header and gas state. All
+stateful pool reads are then pinned to the captured block on that same
+endpoint. A failed read never becomes a synthetic price.
 """
 from __future__ import annotations
 
@@ -70,11 +71,10 @@ def collect_live_data_snapshot(
                 raise EconomicTruthError("RPC returned no block object")
             if not isinstance(gas_hex, str) or not gas_hex.startswith("0x"):
                 raise EconomicTruthError("RPC returned invalid gas price")
-            gas_wei = int(gas_hex, 16)
             snapshot = build_block_snapshot(
                 chain_id=chain_id,
                 block=block,
-                gas_price_wei=gas_wei,
+                gas_price_wei=int(gas_hex, 16),
                 gas_token_price_usd=gas_token_price_usd,
                 source_rpc=endpoint,
             )
@@ -92,5 +92,4 @@ def collect_live_data_snapshot(
             return LiveDataSnapshot(snapshot=snapshot, pools=pools)
         except Exception as exc:
             last_error = exc
-            continue
     raise EconomicTruthError(f"All RPC endpoints failed for live snapshot: {last_error}")
