@@ -4,7 +4,7 @@ from decimal import Decimal as D
 from phantomx_core.block_snapshot import build_block_snapshot
 from phantomx_core.exact_quote_engine import (
     DECIMALS, FEE, GET_AMOUNTS_OUT, QUOTE_EXACT_INPUT_SINGLE, SYMBOL, TOKEN0, TOKEN1,
-    TokenMeta, quote_cross_venue_roundtrip,
+    QUICKSWAP_V2_ROUTER, UNISWAP_V3_QUOTER_V2, quote_cross_venue_roundtrip,
 )
 
 
@@ -35,10 +35,9 @@ class CrossVenueQuoteTests(unittest.TestCase):
             if data == SYMBOL:
                 symbol = b"USDC" if target == self.usdc else b"WMATIC"
                 return "0x" + (32).to_bytes(32, "big").hex() + len(symbol).to_bytes(32, "big").hex() + symbol.ljust(32, b"\x00").hex()
-        if target == "quoter" and data.startswith(QUOTE_EXACT_INPUT_SINGLE):
+        if target == UNISWAP_V3_QUOTER_V2 and data.startswith(QUOTE_EXACT_INPUT_SINGLE):
             return "0x" + f"{500000000000000000:064x}" + f"{1:064x}" + f"{2:064x}" + f"{125000:064x}"
-        if target == "router" and data.startswith(GET_AMOUNTS_OUT):
-            # Decode the second query's amountIn from the last calldata word pair.
+        if target == QUICKSWAP_V2_ROUTER and data.startswith(GET_AMOUNTS_OUT):
             amount_in_raw = int(data[-64:], 16)
             return "0x" + f"{32:064x}" + f"{2:064x}" + f"{amount_in_raw:064x}" + f"{510000:064x}"
         raise AssertionError((target, data))
@@ -71,7 +70,6 @@ class CrossVenueQuoteTests(unittest.TestCase):
                 v2_pool="v2pool",
                 loan_usd=D("1"),
                 rpc_call_at_block=incompatible,
-                v2_gas_units=90_000,
             )
 
 
