@@ -1,14 +1,15 @@
 """PHANTOMX block-pinned JSON-RPC transport (P0-A).
 
-This adapter intentionally accepts an explicit block number for every stateful
-`eth_call`. It does not silently downgrade to `latest`.
+Stateful calls accept an explicit block number and can be pinned to one RPC
+endpoint so a complete snapshot uses one coherent transport source.
 """
 from __future__ import annotations
 
 import json
+import time
 import urllib.request
 from dataclasses import dataclass
-from typing import Any, Mapping
+from typing import Any
 
 from .economic_truth import EconomicTruthError
 
@@ -28,7 +29,6 @@ class BlockPinnedRpc:
             raise EconomicTruthError("At least one RPC endpoint is required")
         self.endpoints = tuple(endpoints)
         self.timeout = timeout
-        self._cursor = 0
 
     @staticmethod
     def _quantity(value: int) -> str:
@@ -52,7 +52,6 @@ class BlockPinnedRpc:
                 headers={"Content-Type": "application/json", "Accept": "application/json"},
             )
             try:
-                import time
                 started = time.perf_counter()
                 with urllib.request.urlopen(request, timeout=self.timeout) as response:
                     body = json.loads(response.read().decode("utf-8"))
@@ -66,20 +65,23 @@ class BlockPinnedRpc:
                 last_error = exc
         raise EconomicTruthError(f"All RPC endpoints failed: {last_error}")
 
-    def eth_call_at_block(self, to: str, data: str, block_number: int) -> RpcResult:
+    def eth_call_at_block(
+        self, to: str, data: str, block_number: int, *, rpc_url: str | None = None
+    ) -> RpcResult:
         """Perform eth_call at exactly block_number, never `latest`."""
         if not to or not data.startswith("0x"):
             raise EconomicTruthError("eth_call target/data invalid")
         return self.call(
             "eth_call",
             [{"to": to, "data": data}, self._quantity(block_number)],
+            rpc_url=rpc_url,
         )
 
-    def get_block(self, block_tag: str = "latest") -> RpcResult:
-        """Read a block header. Used only for snapshot acquisition."""
+    def get_block(self, block_tag: str = "latest", *, rpc_url: str | None = None) -> RpcResult:
+        """Read a block header. `latest` is permitted only for snapshot acquisition."""
         if block_tag != "latest" and not block_tag.startswith("0x"):
             raise EconomicTruthError("block_tag must be latest or a hex quantity")
-        return self.call("eth_getBlockByNumber", [block_tag, False])
+        return self.call("eth_getBlockByNumber", [block_tag, False], rpc_url=rpc_url)
 
-    def gas_price(self) -> RpcResult:
-        return self.call("eth_gasPrice", [])
+    def gas_price(self, *, rpc_url: str | None = None) -> RpcResult:
+        return self.call("eth_gasPrice", [], rpc_url=rpc_url)
