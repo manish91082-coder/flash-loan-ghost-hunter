@@ -36,6 +36,11 @@ class QuoteLeg:
     quoted_block: int
     quote_id: str
     price_impact_pct: Decimal = ZERO
+    # Raw token quantities are the authoritative continuity invariant for real
+    # routed execution. They are optional only for legacy/test fixtures that
+    # predate this field; production exact quotes populate both values.
+    amount_in_raw: Optional[int] = None
+    amount_out_raw: Optional[int] = None
 
     def validate(self, snapshot_block: int) -> None:
         if not self.venue or not self.token_in or not self.token_out or not self.quote_id:
@@ -46,6 +51,10 @@ class QuoteLeg:
             raise EconomicTruthError("Quote costs/impact cannot be negative")
         if self.gas_units <= 0:
             raise EconomicTruthError("Quote gas_units must be positive")
+        if (self.amount_in_raw is None) != (self.amount_out_raw is None):
+            raise EconomicTruthError("Raw input/output quantities must be supplied together")
+        if self.amount_in_raw is not None and (self.amount_in_raw <= 0 or self.amount_out_raw <= 0):
+            raise EconomicTruthError("Raw quote amounts must be positive")
         if self.quoted_block != snapshot_block:
             raise EconomicTruthError(
                 f"Cross-block quote rejected: quote={self.quoted_block}, snapshot={snapshot_block}"
@@ -131,7 +140,14 @@ def evaluate_route(
             raise EconomicTruthError(
                 f"Broken route continuity: {prev.token_out} -> {nxt.token_in}"
             )
-        if nxt.amount_in_usd != prev.amount_out_usd:
+        # Raw token quantity is the execution-correct invariant. USD equality is
+        # retained only as a compatibility cross-check for legacy fixtures.
+        if prev.amount_out_raw is not None and nxt.amount_in_raw is not None:
+            if nxt.amount_in_raw != prev.amount_out_raw:
+                raise EconomicTruthError(
+                    "Route raw amount continuity violated: next input != previous raw output"
+                )
+        elif nxt.amount_in_usd != prev.amount_out_usd:
             raise EconomicTruthError(
                 "Route amount continuity violated: next input != previous executable output"
             )
