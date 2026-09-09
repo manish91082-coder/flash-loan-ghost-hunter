@@ -17,7 +17,6 @@ getcontext().prec = 60
 D = Decimal
 ZERO = D("0")
 
-# Polygon PoS protocol deployment addresses.
 QUICKSWAP_V2_ROUTER = "0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff"
 UNISWAP_V3_QUOTER_V2 = "0x61fFE014bA17989E743c5F6cB21bF9697530B21e"
 
@@ -155,13 +154,14 @@ def _assert_pair_compatibility(a: tuple[TokenMeta, TokenMeta], b: tuple[TokenMet
 
 def quote_v2_single(*, snapshot: BlockSnapshot, router: str, token_in: TokenMeta, token_out: TokenMeta,
                     amount_in_raw: int, rpc_call_at_block: Callable[[str, str, int], str],
-                    gas_units: int, fee_rate: Decimal = D("0.003")) -> ExactQuote:
+                    gas_units: int, fee_rate: Decimal = D("0.0025")) -> ExactQuote:
     if amount_in_raw <= 0 or gas_units <= 0:
         raise EconomicTruthError("V2 quote amount/gas must be positive")
     path = _encode_address(token_in.address) + _encode_address(token_out.address)
     calldata = GET_AMOUNTS_OUT + _encode_u256(amount_in_raw) + _encode_u256(64) + _encode_u256(2) + path
     raw = rpc_call_at_block(router, calldata, snapshot.block_number)
-    amount_out = _decode_word(raw, 2)
+    # ABI encoding of uint256[]: offset(word0), length(word1), amount0(word2), amount1(word3).
+    amount_out = _decode_word(raw, 3)
     if amount_out <= 0:
         raise EconomicTruthError("V2 quote returned zero output")
     amount_in_usd = D(amount_in_raw) / (D(10) ** token_in.decimals)
@@ -188,11 +188,8 @@ def quote_v3_single(*, snapshot: BlockSnapshot, quoter: str, token_in: TokenMeta
     if amount_in_raw <= 0:
         raise EconomicTruthError("V3 quote amount must be positive")
     encoded_tuple = (
-        _encode_address(token_in.address)
-        + _encode_address(token_out.address)
-        + _encode_u256(amount_in_raw)
-        + _encode_u256(fee)
-        + _encode_u256(0)
+        _encode_address(token_in.address) + _encode_address(token_out.address)
+        + _encode_u256(amount_in_raw) + _encode_u256(fee) + _encode_u256(0)
     )
     raw = rpc_call_at_block(quoter, QUOTE_EXACT_INPUT_SINGLE + encoded_tuple, snapshot.block_number)
     amount_out = _decode_word(raw, 0)
@@ -219,35 +216,27 @@ def quote_v3_single(*, snapshot: BlockSnapshot, quoter: str, token_in: TokenMeta
     )
 
 
-def quote_cross_venue_roundtrip(
-    *, snapshot: BlockSnapshot, v3_pool: str, v2_pool: str, loan_usd: Decimal,
-    rpc_call_at_block: Callable[[str, str, int], str], v2_gas_units: int,
-    stable_symbols: set[str] | None = None, direction: str = "V3_TO_V2",
-) -> tuple[ExactQuote, ExactQuote]:
-    """Quote a true two-venue roundtrip: V3→V2 or V2→V3, using exact raw outputs."""
+def quote_cross_venue_roundtrip(*, snapshot: BlockSnapshot, v3_pool: str, v2_pool: str, loan_usd: Decimal,
+                                 rpc_call_at_block: Callable[[str, str, int], str], v2_gas_units: int,
+                                 stable_symbols: set[str] | None = None,
+                                 direction: str = "V3_TO_V2") -> tuple[ExactQuote, ExactQuote]:
+    """Quote V3→V2 or V2→V3 using raw output chaining at one pinned block."""
     stable_symbols = stable_symbols or {"USDC", "USDC.E", "USDC.EC"}
     v3_pair = discover_v3_pool_meta(snapshot=snapshot, pool=v3_pool, rpc_call_at_block=rpc_call_at_block)
     v2_pair = discover_v2_pair_tokens(snapshot=snapshot, pool=v2_pool, rpc_call_at_block=rpc_call_at_block)
     _assert_pair_compatibility(v3_pair[:2], v2_pair)
     stable, asset = _find_stable_and_asset(v3_pair[:2], stable_symbols)
     amount_in_raw = int((loan_usd * (D(10) ** stable.decimals)).to_integral_exact())
-    if amount_in_raw <= 0:
-        raise EconomicTruthError("Loan is below token raw precision")
-
     if direction == "V2_TO_V3":
-        first = quote_v2_single(snapshot=snapshot, router=QUICKSWAP_V2_ROUTER,
-                                token_in=stable, token_out=asset, amount_in_raw=amount_in_raw,
-                                rpc_call_at_block=rpc_call_at_block, gas_units=v2_gas_units)
-        second = quote_v3_single(snapshot=snapshot, quoter=UNISWAP_V3_QUOTER_V2,
-                                 token_in=asset, token_out=stable, amount_in_raw=first.amount_out_raw,
-                                 fee=v3_pair[2], rpc_call_at_block=rpc_call_at_block)
+        first = quote_v2_single(snapshot=snapshot, router=QUICKSWAP_V2_ROUTER, token_in=stable, token_out=asset,
+                                amount_in_raw=amount_in_raw, rpc_call_at_block=rpc_call_at_block, gas_units=v2_gas_units)
+        second = quote_v3_single(snapshot=snapshot, quoter=UNISWAP_V3_QUOTER_V2, token_in=asset, token_out=stable,
+                                 amount_in_raw=first.amount_out_raw, fee=v3_pair[2], rpc_call_at_block=rpc_call_at_block)
     elif direction == "V3_TO_V2":
-        first = quote_v3_single(snapshot=snapshot, quoter=UNISWAP_V3_QUOTER_V2,
-                                token_in=stable, token_out=asset, amount_in_raw=amount_in_raw,
-                                fee=v3_pair[2], rpc_call_at_block=rpc_call_at_block)
-        second = quote_v2_single(snapshot=snapshot, router=QUICKSWAP_V2_ROUTER,
-                                 token_in=asset, token_out=stable, amount_in_raw=first.amount_out_raw,
-                                 rpc_call_at_block=rpc_call_at_block, gas_units=v2_gas_units)
+        first = quote_v3_single(snapshot=snapshot, quoter=UNISWAP_V3_QUOTER_V2, token_in=stable, token_out=asset,
+                                amount_in_raw=amount_in_raw, fee=v3_pair[2], rpc_call_at_block=rpc_call_at_block)
+        second = quote_v2_single(snapshot=snapshot, router=QUICKSWAP_V2_ROUTER, token_in=asset, token_out=stable,
+                                 amount_in_raw=first.amount_out_raw, rpc_call_at_block=rpc_call_at_block, gas_units=v2_gas_units)
     else:
         raise EconomicTruthError(f"Unknown cross-venue direction: {direction}")
     return first, second
@@ -260,12 +249,10 @@ def quote_v2_roundtrip(*, snapshot: BlockSnapshot, pool: str, loan_usd: Decimal,
     tokens = discover_v2_pair_tokens(snapshot=snapshot, pool=pool, rpc_call_at_block=rpc_call_at_block)
     stable, asset = _find_stable_and_asset(tokens, stable_symbols)
     amount_in_raw = int((loan_usd * (D(10) ** stable.decimals)).to_integral_exact())
-    leg1 = quote_v2_single(snapshot=snapshot, router=QUICKSWAP_V2_ROUTER, token_in=stable,
-                           token_out=asset, amount_in_raw=amount_in_raw,
-                           rpc_call_at_block=rpc_call_at_block, gas_units=gas_units_leg1)
-    leg2 = quote_v2_single(snapshot=snapshot, router=QUICKSWAP_V2_ROUTER, token_in=asset,
-                           token_out=stable, amount_in_raw=leg1.amount_out_raw,
-                           rpc_call_at_block=rpc_call_at_block, gas_units=gas_units_leg2)
+    leg1 = quote_v2_single(snapshot=snapshot, router=QUICKSWAP_V2_ROUTER, token_in=stable, token_out=asset,
+                           amount_in_raw=amount_in_raw, rpc_call_at_block=rpc_call_at_block, gas_units=gas_units_leg1)
+    leg2 = quote_v2_single(snapshot=snapshot, router=QUICKSWAP_V2_ROUTER, token_in=asset, token_out=stable,
+                           amount_in_raw=leg1.amount_out_raw, rpc_call_at_block=rpc_call_at_block, gas_units=gas_units_leg2)
     return leg1, leg2
 
 
