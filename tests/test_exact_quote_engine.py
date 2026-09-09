@@ -11,6 +11,7 @@ from phantomx_core.exact_quote_engine import (
     SYMBOL,
     TOKEN0,
     TOKEN1,
+    TokenMeta,
     discover_token_meta,
     discover_v2_pair_tokens,
     discover_v3_pool_meta,
@@ -81,7 +82,7 @@ class ExactQuoteEngineTests(unittest.TestCase):
         self.assertEqual(token1.address, self.wmatic)
         self.assertEqual(fee, 500)
 
-    def test_v2_quote_decodes_amounts_out(self):
+    def test_v2_quote_decodes_amounts_out_without_invented_gas(self):
         amount_in = 1_000_000
         expected_out = 10**18
 
@@ -89,14 +90,12 @@ class ExactQuoteEngineTests(unittest.TestCase):
             if target == "router":
                 self.assertEqual(block, 100)
                 self.assertTrue(data.startswith(GET_AMOUNTS_OUT))
-                # Return uint256[] [amountIn, amountOut].
                 return "0x" + (
                     f"{32:064x}" + f"{2:064x}" +
                     f"{amount_in:064x}" + f"{expected_out:064x}"
                 )
             raise AssertionError(target)
 
-        from phantomx_core.exact_quote_engine import TokenMeta
         quote = quote_v2_single(
             snapshot=self.snapshot,
             router="router",
@@ -104,18 +103,33 @@ class ExactQuoteEngineTests(unittest.TestCase):
             token_out=TokenMeta(self.wmatic, "WMATIC", 18),
             amount_in_raw=amount_in,
             rpc_call_at_block=rpc,
-            gas_units=90_000,
         )
         self.assertEqual(quote.amount_out_raw, expected_out)
         self.assertEqual(quote.amount_in_usd, D("1"))
         self.assertEqual(quote.amount_out_usd, D("1"))
+        self.assertEqual(quote.gas_units, None)
         self.assertEqual(quote.quoted_block, 100)
 
-    def test_v3_quote_decodes_output_and_gas(self):
-        from phantomx_core.exact_quote_engine import TokenMeta
+    def test_v2_quote_can_carry_explicit_verified_execution_gas(self):
+        def rpc(target, data, block):
+            return "0x" + f"{32:064x}" + f"{2:064x}" + f"{1_000_000:064x}" + f"{10**18:064x}"
+
+        quote = quote_v2_single(
+            snapshot=self.snapshot,
+            router="router",
+            token_in=TokenMeta(self.usdc, "USDC", 6),
+            token_out=TokenMeta(self.wmatic, "WMATIC", 18),
+            amount_in_raw=1_000_000,
+            rpc_call_at_block=rpc,
+            gas_units=90_000,
+        )
+        self.assertEqual(quote.gas_units, 90_000)
+        self.assertEqual(quote.to_quote_leg().gas_units, 90_000)
+
+    def test_v3_quoter_gas_is_not_execution_gas(self):
         amount_in = 1_000_000
         amount_out = 500_000_000_000_000_000
-        gas = 125_000
+        quoter_gas = 125_000
 
         def rpc(target, data, block):
             self.assertEqual(target, "quoter")
@@ -125,7 +139,7 @@ class ExactQuoteEngineTests(unittest.TestCase):
                 f"{amount_out:064x}" +
                 f"{1:064x}" +
                 f"{2:064x}" +
-                f"{gas:064x}"
+                f"{quoter_gas:064x}"
             )
 
         quote = quote_v3_single(
@@ -138,11 +152,12 @@ class ExactQuoteEngineTests(unittest.TestCase):
             rpc_call_at_block=rpc,
         )
         self.assertEqual(quote.amount_out_raw, amount_out)
-        self.assertEqual(quote.gas_units, gas)
+        self.assertIsNone(quote.gas_units)
         self.assertEqual(quote.swap_fee_usd, D("0.0005"))
+        with self.assertRaises(EconomicTruthError):
+            quote.to_quote_leg()
 
     def test_malformed_rpc_result_fails_closed(self):
-        from phantomx_core.exact_quote_engine import TokenMeta
         with self.assertRaises(EconomicTruthError):
             quote_v3_single(
                 snapshot=self.snapshot,
