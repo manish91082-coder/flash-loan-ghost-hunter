@@ -16,6 +16,7 @@ from .economic_truth import EconomicTruthError
 
 DEFAULT_PUBLIC_POLYGON_RPCS = (
     "https://polygon.drpc.org",
+    "https://tenderly.rpc.polygon.community/",
     "https://polygon.publicnode.com",
     "https://polygon-public.nodies.app/",
     "https://1rpc.io/matic",
