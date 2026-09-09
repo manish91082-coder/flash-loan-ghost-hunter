@@ -7,6 +7,7 @@ from phantomx_core.exact_quote_engine import (
     DECIMALS,
     FEE,
     GET_AMOUNTS_OUT,
+    QUOTE_EXACT_INPUT,
     QUOTE_EXACT_INPUT_SINGLE,
     SYMBOL,
     TOKEN0,
@@ -16,6 +17,7 @@ from phantomx_core.exact_quote_engine import (
     discover_v2_pair_tokens,
     discover_v3_pool_meta,
     quote_v2_single,
+    quote_v3_multihop,
     quote_v3_single,
 )
 
@@ -31,6 +33,7 @@ class ExactQuoteEngineTests(unittest.TestCase):
         )
         self.usdc = "0x0000000000000000000000000000000000000001"
         self.wmatic = "0x0000000000000000000000000000000000000002"
+        self.weth = "0x0000000000000000000000000000000000000003"
 
     def rpc(self, target, data, block):
         self.assertEqual(block, 100)
@@ -120,7 +123,7 @@ class ExactQuoteEngineTests(unittest.TestCase):
             token_in=TokenMeta(self.usdc, "USDC", 6),
             token_out=TokenMeta(self.wmatic, "WMATIC", 18),
             amount_in_raw=1_000_000,
-            rpc_call_at_block=rpc,
+            rpc_call_at_block=self.rpc if False else rpc,
             gas_units=90_000,
         )
         self.assertEqual(quote.gas_units, 90_000)
@@ -156,6 +159,50 @@ class ExactQuoteEngineTests(unittest.TestCase):
         self.assertEqual(quote.swap_fee_usd, D("0.0005"))
         with self.assertRaises(EconomicTruthError):
             quote.to_quote_leg()
+
+    def test_v3_multihop_uses_exact_input_path_and_one_snapshot_block(self):
+        amount_in = 1_000_000
+        amount_out = 900_000
+        path = bytes.fromhex(self.usdc[2:]) + (500).to_bytes(3, "big") + bytes.fromhex(self.wmatic[2:]) + (3000).to_bytes(3, "big") + bytes.fromhex(self.weth[2:])
+
+        def rpc(target, data, block):
+            self.assertEqual(target, "quoter")
+            self.assertEqual(block, 100)
+            self.assertTrue(data.startswith(QUOTE_EXACT_INPUT))
+            self.assertEqual(int(data[10:74], 16), 64)
+            self.assertEqual(int(data[74:138], 16), amount_in)
+            self.assertEqual(int(data[138:202], 16), len(path))
+            self.assertEqual(bytes.fromhex(data[202:202 + len(path) * 2]), path)
+            return "0x" + f"{amount_out:064x}" + f"{1:064x}" + f"{2:064x}" + f"{140_000:064x}"
+
+        quote = quote_v3_multihop(
+            snapshot=self.snapshot,
+            quoter="quoter",
+            tokens=(
+                TokenMeta(self.usdc, "USDC", 6),
+                TokenMeta(self.wmatic, "WMATIC", 18),
+                TokenMeta(self.weth, "WETH", 18),
+            ),
+            fees=(500, 3000),
+            amount_in_raw=amount_in,
+            rpc_call_at_block=rpc,
+        )
+        self.assertEqual(quote.amount_out_raw, amount_out)
+        self.assertEqual(quote.token_in.address, self.usdc)
+        self.assertEqual(quote.token_out.address, self.weth)
+        self.assertEqual(quote.quoted_block, 100)
+        self.assertIsNone(quote.gas_units)
+
+    def test_v3_multihop_rejects_invalid_graph_shape(self):
+        with self.assertRaises(EconomicTruthError):
+            quote_v3_multihop(
+                snapshot=self.snapshot,
+                quoter="quoter",
+                tokens=(TokenMeta(self.usdc, "USDC", 6), TokenMeta(self.wmatic, "WMATIC", 18)),
+                fees=(500,),
+                amount_in_raw=1_000_000,
+                rpc_call_at_block=lambda *_: "0x",
+            )
 
     def test_malformed_rpc_result_fails_closed(self):
         with self.assertRaises(EconomicTruthError):
