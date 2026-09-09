@@ -1,8 +1,7 @@
 """PHANTOMX read-only Polygon live quote probe (P0-A).
 
-Purpose: prove that the P0-A block snapshot and exact quote layers can reach
-real Polygon mainnet contracts, read a captured block, and obtain real
-cross-venue quote outputs. This script never signs or broadcasts a transaction.
+This probe is deliberately read-only. It proves connectivity, block-pinned
+state reads and exact cross-venue quotes without signing or broadcasting.
 """
 from __future__ import annotations
 
@@ -10,6 +9,7 @@ import json
 import os
 import sys
 from decimal import Decimal
+from typing import Any
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -18,10 +18,13 @@ from phantomx_core.block_snapshot import build_block_snapshot
 from phantomx_core.exact_quote_engine import quote_cross_venue_roundtrip
 from phantomx_core.live_pool_snapshot import parse_v2_price_usd
 
+# Keep the zero-cost path. Operators can supply a current Polygon RPC with
+# POLYGON_RPC_URL; public endpoints below are treated as candidates only.
 FREE_RPCS = [
     "https://polygon-rpc.com",
     "https://polygon-mainnet.public.blastapi.io",
     "https://polygon.blockpi.network/v1/rpc/public",
+    "https://polygon.drpc.org",
 ]
 
 QUICK_V2_WMATIC_POOL = "0x6e7a5FAFcec6BB1e78bAE2A1F0B612012BF14827"
@@ -29,7 +32,7 @@ UNIV3_WMATIC_POOL = "0xA374094527e1673A86dE625aa59517c5dE346d32"
 GET_RESERVES = "0x0902f1ac"
 
 
-def rpc_result(rpc: BlockPinnedRpc, method: str, params: list, endpoint: str):
+def rpc_result(rpc: BlockPinnedRpc, method: str, params: list[Any], endpoint: str):
     return rpc.call(method, params, rpc_url=endpoint).result
 
 
@@ -42,24 +45,48 @@ def word(result: str, index: int) -> int:
     return int(raw[start:end], 16)
 
 
+def classify_error(exc: Exception) -> str:
+    text = str(exc).lower()
+    if "timed out" in text or "timeout" in text:
+        return "TRANSPORT_TIMEOUT"
+    if "urlopen error" in text or "connection" in text or "name or service" in text:
+        return "TRANSPORT_CONNECTION"
+    if "rpc" in text and ("error" in text or "failed" in text):
+        return "JSON_RPC_ERROR"
+    if "snapshot" in text:
+        return "SNAPSHOT_INVALID"
+    if "short abi" in text or "abi" in text:
+        return "ABI_DECODE_ERROR"
+    return "UNCLASSIFIED"
+
+
 def main() -> int:
-    endpoints = [os.getenv("POLYGON_RPC_URL")] if os.getenv("POLYGON_RPC_URL") else FREE_RPCS
-    endpoints = [x for x in endpoints if x]
+    configured = os.getenv("POLYGON_RPC_URL")
+    endpoints = [configured] if configured else FREE_RPCS
+    endpoints = [x.strip() for x in endpoints if x and x.strip()]
     rpc = BlockPinnedRpc(endpoints, timeout=8.0)
 
+    diagnostics: list[dict[str, Any]] = []
     selected = None
     for endpoint in endpoints:
+        diag: dict[str, Any] = {"endpoint": endpoint, "stage": "bootstrap", "status": "FAILED"}
         try:
             block = rpc_result(rpc, "eth_getBlockByNumber", ["latest", False], endpoint)
+            diag["block_rpc_ok"] = True
             gas = rpc_result(rpc, "eth_gasPrice", [], endpoint)
-            if not isinstance(block, dict) or not isinstance(gas, str) or not gas.startswith("0x"):
-                continue
-            # First capture a real WMATIC/USDC spot state at the same block to price gas in USD.
+            diag["gas_rpc_ok"] = True
+            if not isinstance(block, dict) or not block.get("number") or not block.get("hash"):
+                raise RuntimeError("BLOCK_HEADER_INVALID")
+            if not isinstance(gas, str) or not gas.startswith("0x"):
+                raise RuntimeError("GAS_PRICE_INVALID")
+
+            diag["block_number"] = block["number"]
             reserves = rpc.call(
                 "eth_call",
                 [{"to": QUICK_V2_WMATIC_POOL, "data": GET_RESERVES}, block["number"]],
                 rpc_url=endpoint,
             ).result
+            diag["wmatic_pool_rpc_ok"] = True
             reserve_price = parse_v2_price_usd(reserves, 18, 6, True)
             snapshot = build_block_snapshot(
                 chain_id=137,
@@ -68,25 +95,33 @@ def main() -> int:
                 gas_token_price_usd=reserve_price,
                 source_rpc=endpoint,
             )
+            snapshot.validate()
+            diag.update({"snapshot_valid": True, "status": "SELECTED"})
+            diagnostics.append(diag)
             selected = (endpoint, snapshot)
             break
-        except Exception:
-            continue
+        except Exception as exc:
+            diag["error_class"] = classify_error(exc)
+            diag["error"] = repr(exc)
+            diagnostics.append(diag)
 
     if selected is None:
-        print(json.dumps({"status": "BLOCKED", "reason": "No Polygon RPC produced a valid block+gas+WMATIC snapshot"}))
+        print(json.dumps({
+            "status": "BLOCKED",
+            "reason": "NO_VALID_RPC_SNAPSHOT",
+            "rpc_diagnostics": diagnostics,
+            "transactions_broadcast": False,
+        }, indent=2))
         return 2
 
     endpoint, snapshot = selected
 
     def pinned_call(target: str, data: str, block_number: int) -> str:
         if block_number != snapshot.block_number:
-            raise RuntimeError("cross-block call attempted")
+            raise RuntimeError("CROSS_BLOCK_CALL_ATTEMPTED")
         return rpc.eth_call_at_block(target, data, block_number, rpc_url=endpoint).result
 
-    # Read-only quote probe. V2 gas is deliberately a diagnostic constant here;
-    # production economics still requires transaction-path gas estimation.
-    results = {}
+    results: dict[str, dict[str, Any]] = {}
     for direction in ("V3_TO_V2", "V2_TO_V3"):
         try:
             legs = quote_cross_venue_roundtrip(
@@ -106,11 +141,15 @@ def main() -> int:
                 "venue_path": [legs[0].venue, legs[1].venue],
             }
         except Exception as exc:
-            results[direction] = {"error": str(exc)}
+            results[direction] = {
+                "error_class": classify_error(exc),
+                "error": repr(exc),
+            }
 
     passed = any("final_out_usd" in x for x in results.values())
+    status = "LIVE_QUOTE_READ_PASS" if passed else "LIVE_QUOTE_READ_BLOCKED"
     print(json.dumps({
-        "status": "LIVE_QUOTE_READ_PASS" if passed else "LIVE_QUOTE_READ_BLOCKED",
+        "status": status,
         "chain_id": snapshot.chain_id,
         "block_number": snapshot.block_number,
         "block_hash": snapshot.block_hash,
@@ -118,6 +157,7 @@ def main() -> int:
         "source_rpc": endpoint,
         "gas_price_gwei": str(snapshot.gas_price_gwei),
         "wmatic_usd_reference": str(snapshot.gas_token_price_usd),
+        "rpc_diagnostics": diagnostics,
         "quotes": results,
         "transactions_broadcast": False,
     }, indent=2))
