@@ -1,0 +1,30 @@
+name: PHANTOMX P0-B Executor Compile
+
+on:
+  push:
+    branches:
+      - mission/p0-a-economic-truth-engine
+  pull_request:
+    branches:
+      - main
+      - mission/p0-a-economic-truth-engine
+
+jobs:
+  compile-executor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pinned solc
+        run: npm install --no-save solc@0.8.19
+
+      - name: Compile production executor
+        run: npx solcjs --bin --abi contracts/PhantomX_Production_Executor.sol -o /tmp/phantomx-solc
