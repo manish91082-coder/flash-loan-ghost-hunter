@@ -65,6 +65,8 @@ class ExactQuote:
             quoted_block=self.quoted_block,
             quote_id=self.quote_id,
             price_impact_pct=self.price_impact_pct or ZERO,
+            amount_in_raw=self.amount_in_raw,
+            amount_out_raw=self.amount_out_raw,
         )
 
 
