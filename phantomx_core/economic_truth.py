@@ -2,7 +2,7 @@
 
 This module refuses to price an opportunity from spot spread alone.
 A candidate is executable only when every required route-leg quote is present
-for one coherent, block-pinned snapshot.
+for one coherent, block-pinned snapshot and exact transaction-path gas is known.
 
 Quote convention: amount_out_usd is the executable post-fee, post-price-impact
 output returned by the quote source. swap_fee_usd is retained for the audit
@@ -32,13 +32,10 @@ class QuoteLeg:
     amount_in_usd: Decimal
     amount_out_usd: Decimal
     swap_fee_usd: Decimal
-    gas_units: int
+    gas_units: Optional[int]
     quoted_block: int
     quote_id: str
     price_impact_pct: Decimal = ZERO
-    # Raw token quantities are the authoritative continuity invariant for real
-    # routed execution. They are optional only for legacy/test fixtures that
-    # predate this field; production exact quotes populate both values.
     amount_in_raw: Optional[int] = None
     amount_out_raw: Optional[int] = None
 
@@ -49,8 +46,8 @@ class QuoteLeg:
             raise EconomicTruthError("Quote amounts must be positive")
         if self.swap_fee_usd < ZERO or self.price_impact_pct < ZERO:
             raise EconomicTruthError("Quote costs/impact cannot be negative")
-        if self.gas_units <= 0:
-            raise EconomicTruthError("Quote gas_units must be positive")
+        if self.gas_units is not None and self.gas_units <= 0:
+            raise EconomicTruthError("Quote gas_units must be positive when supplied")
         if (self.amount_in_raw is None) != (self.amount_out_raw is None):
             raise EconomicTruthError("Raw input/output quantities must be supplied together")
         if self.amount_in_raw is not None and (self.amount_in_raw <= 0 or self.amount_out_raw <= 0):
@@ -92,6 +89,7 @@ class ProfitCertificate:
     swap_fees_usd: Decimal
     flash_loan_fee_usd: Decimal
     gas_cost_usd: Decimal
+    execution_gas_units: int
     mev_buffer_usd: Decimal
     other_costs_usd: Decimal
     conservative_net_profit_usd: Decimal
@@ -110,11 +108,12 @@ def evaluate_route(
     route: Sequence[QuoteLeg],
     loan_usd: Decimal,
     flash_loan_fee_usd: Decimal,
+    execution_gas_units: int,
     mev_buffer_usd: Decimal = ZERO,
     other_costs_usd: Decimal = ZERO,
     min_profit_usd: Decimal = MIN_REQUIRED_PROFIT_USD,
 ) -> ProfitCertificate:
-    """Evaluate a complete executable route. Missing/invalid data fails closed."""
+    """Evaluate a route using exact executor transaction gas, never quote gas."""
     snapshot.validate()
     loan_usd = _as_decimal(loan_usd)
     flash_loan_fee_usd = _as_decimal(flash_loan_fee_usd)
@@ -126,6 +125,8 @@ def evaluate_route(
         raise EconomicTruthError("Opportunity and route are required")
     if loan_usd <= ZERO:
         raise EconomicTruthError("Loan must be positive")
+    if execution_gas_units <= 0:
+        raise EconomicTruthError("Exact executor transaction gas is required")
     if flash_loan_fee_usd < ZERO or mev_buffer_usd < ZERO or other_costs_usd < ZERO:
         raise EconomicTruthError("Costs cannot be negative")
     if min_profit_usd < ZERO:
@@ -140,8 +141,6 @@ def evaluate_route(
             raise EconomicTruthError(
                 f"Broken route continuity: {prev.token_out} -> {nxt.token_in}"
             )
-        # Raw token quantity is the execution-correct invariant. USD equality is
-        # retained only as a compatibility cross-check for legacy fixtures.
         if prev.amount_out_raw is not None and nxt.amount_in_raw is not None:
             if nxt.amount_in_raw != prev.amount_out_raw:
                 raise EconomicTruthError(
@@ -161,14 +160,12 @@ def evaluate_route(
 
     gross_profit = final.amount_out_usd - loan_usd
     swap_fees = sum((leg.swap_fee_usd for leg in validated), ZERO)
-    gas_units = sum(leg.gas_units for leg in validated)
     gas_cost = (
         snapshot.gas_price_gwei
         * D("1e-9")
-        * D(gas_units)
+        * D(execution_gas_units)
         * snapshot.gas_token_price_usd
     )
-    # amount_out_usd already includes the executable DEX fee/impact.
     conservative_net = (
         gross_profit
         - flash_loan_fee_usd
@@ -195,6 +192,7 @@ def evaluate_route(
         swap_fees_usd=swap_fees,
         flash_loan_fee_usd=flash_loan_fee_usd,
         gas_cost_usd=gas_cost,
+        execution_gas_units=execution_gas_units,
         mev_buffer_usd=mev_buffer_usd,
         other_costs_usd=other_costs_usd,
         conservative_net_profit_usd=conservative_net,
@@ -206,15 +204,16 @@ def evaluate_route(
 def select_best_loan(
     *,
     snapshot: EconomicSnapshot,
-    quote_sampler: Iterable[tuple[Decimal, Sequence[QuoteLeg], Decimal]],
+    quote_sampler: Iterable[tuple[Decimal, Sequence[QuoteLeg], Decimal, int]],
     min_profit_usd: Decimal = MIN_REQUIRED_PROFIT_USD,
 ) -> Optional[ProfitCertificate]:
     """Return the best verified sampled loan that clears the profit floor.
 
-    No spot-spread extrapolation is performed.
+    Each sample must include exact executor transaction gas. No spot-spread
+    extrapolation and no quote-layer gas substitution is performed.
     """
     candidates: list[ProfitCertificate] = []
-    for idx, (loan_usd, route, flash_fee_usd) in enumerate(quote_sampler):
+    for idx, (loan_usd, route, flash_fee_usd, execution_gas_units) in enumerate(quote_sampler):
         try:
             cert = evaluate_route(
                 opportunity_id=f"sample-{snapshot.block_number}-{idx}",
@@ -222,6 +221,7 @@ def select_best_loan(
                 route=route,
                 loan_usd=loan_usd,
                 flash_loan_fee_usd=flash_fee_usd,
+                execution_gas_units=execution_gas_units,
                 min_profit_usd=min_profit_usd,
             )
         except EconomicTruthError:
