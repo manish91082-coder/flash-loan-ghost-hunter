@@ -11,7 +11,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from decimal import Decimal, getcontext
-from typing import Callable
+from typing import Callable, Sequence
 
 from .block_snapshot import BlockSnapshot
 from .economic_truth import EconomicTruthError, QuoteLeg
@@ -30,6 +30,7 @@ SYMBOL = "0x95d89b41"
 FEE = "0xddca3f43"
 GET_AMOUNTS_OUT = "0xd06ca61f"
 QUOTE_EXACT_INPUT_SINGLE = "0xc6a5026a"
+QUOTE_EXACT_INPUT = "0xcdca1753"
 
 
 @dataclass(frozen=True)
@@ -138,6 +139,27 @@ def _encode_address(address: str) -> str:
     return address[2:].lower().rjust(64, "0")
 
 
+def _encode_bytes_arg(data: bytes) -> str:
+    padded = data.hex().ljust(((len(data) + 31) // 32) * 64, "0")
+    return _encode_u256(len(data)) + padded
+
+
+def _build_v3_path(tokens: Sequence[str], fees: Sequence[int]) -> bytes:
+    if len(tokens) != len(fees) + 1 or len(tokens) < 2:
+        raise EconomicTruthError("V3 path requires N tokens and N-1 fee tiers")
+    parts: list[bytes] = []
+    for index, token in enumerate(tokens):
+        if not isinstance(token, str) or not token.startswith("0x") or len(token) != 42:
+            raise EconomicTruthError(f"Invalid V3 path token: {token}")
+        parts.append(bytes.fromhex(token[2:]))
+        if index < len(fees):
+            fee = int(fees[index])
+            if fee <= 0 or fee >= 1_000_000:
+                raise EconomicTruthError(f"Invalid V3 path fee tier: {fee}")
+            parts.append(fee.to_bytes(3, "big"))
+    return b"".join(parts)
+
+
 def discover_token_meta(*, snapshot: BlockSnapshot, token_address: str,
                         rpc_call_at_block: Callable[[str, str, int], str]) -> TokenMeta:
     decimals = _decode_word(rpc_call_at_block(token_address, DECIMALS, snapshot.block_number))
@@ -202,19 +224,13 @@ def quote_v2_single(*, snapshot: BlockSnapshot, router: str, token_in: TokenMeta
     amount_in_usd = D(amount_in_raw) / (D(10) ** token_in.decimals)
     amount_out_usd = D(amount_out) / (D(10) ** token_out.decimals)
     return ExactQuote(
-        venue="QuickSwapV2",
-        token_in=token_in,
-        token_out=token_out,
-        amount_in_raw=amount_in_raw,
-        amount_out_raw=amount_out,
-        amount_in_usd=amount_in_usd,
-        amount_out_usd=amount_out_usd,
-        swap_fee_usd=amount_in_usd * fee_rate,
-        gas_units=gas_units,
+        venue="QuickSwapV2", token_in=token_in, token_out=token_out,
+        amount_in_raw=amount_in_raw, amount_out_raw=amount_out,
+        amount_in_usd=amount_in_usd, amount_out_usd=amount_out_usd,
+        swap_fee_usd=amount_in_usd * fee_rate, gas_units=gas_units,
         quoted_block=snapshot.block_number,
         quote_id=f"qs-v2-{snapshot.block_number}-{token_in.address}-{token_out.address}-{amount_in_raw}",
-        pool=None,
-        fee_bps=fee_rate * D(10_000),
+        pool=None, fee_bps=fee_rate * D(10_000),
     )
 
 
@@ -222,10 +238,8 @@ def quote_v3_single(*, snapshot: BlockSnapshot, quoter: str, token_in: TokenMeta
                     amount_in_raw: int, fee: int, rpc_call_at_block: Callable[[str, str, int], str]) -> ExactQuote:
     if amount_in_raw <= 0:
         raise EconomicTruthError("V3 quote amount must be positive")
-    encoded_tuple = (
-        _encode_address(token_in.address) + _encode_address(token_out.address)
-        + _encode_u256(amount_in_raw) + _encode_u256(fee) + _encode_u256(0)
-    )
+    encoded_tuple = (_encode_address(token_in.address) + _encode_address(token_out.address)
+                     + _encode_u256(amount_in_raw) + _encode_u256(fee) + _encode_u256(0))
     raw = rpc_call_at_block(quoter, QUOTE_EXACT_INPUT_SINGLE + encoded_tuple, snapshot.block_number)
     amount_out = _decode_word(raw, 0)
     quoter_gas_estimate = _decode_word(raw, 3)
@@ -235,19 +249,43 @@ def quote_v3_single(*, snapshot: BlockSnapshot, quoter: str, token_in: TokenMeta
     amount_out_usd = D(amount_out) / (D(10) ** token_out.decimals)
     fee_usd = amount_in_usd * D(fee) / D(1_000_000)
     return ExactQuote(
-        venue="UniswapV3",
-        token_in=token_in,
-        token_out=token_out,
-        amount_in_raw=amount_in_raw,
-        amount_out_raw=amount_out,
-        amount_in_usd=amount_in_usd,
-        amount_out_usd=amount_out_usd,
-        swap_fee_usd=fee_usd,
-        gas_units=None,
-        quoted_block=snapshot.block_number,
+        venue="UniswapV3", token_in=token_in, token_out=token_out,
+        amount_in_raw=amount_in_raw, amount_out_raw=amount_out,
+        amount_in_usd=amount_in_usd, amount_out_usd=amount_out_usd,
+        swap_fee_usd=fee_usd, gas_units=None, quoted_block=snapshot.block_number,
         quote_id=f"uni-v3-{snapshot.block_number}-{token_in.address}-{token_out.address}-{fee}-{amount_in_raw}",
-        pool=None,
-        fee_bps=D(fee) / D(100),
+        pool=None, fee_bps=D(fee) / D(100),
+    )
+
+
+def quote_v3_multihop(*, snapshot: BlockSnapshot, quoter: str, tokens: Sequence[TokenMeta],
+                      fees: Sequence[int], amount_in_raw: int,
+                      rpc_call_at_block: Callable[[str, str, int], str]) -> ExactQuote:
+    """Quote a genuine Uniswap V3 N-hop exact-input path at one pinned block."""
+    if len(tokens) != len(fees) + 1 or len(tokens) < 3:
+        raise EconomicTruthError("V3 multihop requires at least three tokens and two fee tiers")
+    if amount_in_raw <= 0:
+        raise EconomicTruthError("V3 multihop amount must be positive")
+    path = _build_v3_path([token.address for token in tokens], fees)
+    calldata = QUOTE_EXACT_INPUT + _encode_u256(64) + _encode_u256(amount_in_raw) + _encode_bytes_arg(path)
+    raw = rpc_call_at_block(quoter, calldata, snapshot.block_number)
+    amount_out = _decode_word(raw, 0)
+    quoter_gas_estimate = _decode_word(raw, 3)
+    if amount_out <= 0 or quoter_gas_estimate <= 0:
+        raise EconomicTruthError("V3 multihop quote returned invalid output/gas")
+    amount_in_usd = D(amount_in_raw) / (D(10) ** tokens[0].decimals)
+    amount_out_usd = D(amount_out) / (D(10) ** tokens[-1].decimals)
+    total_fee_usd = ZERO
+    for index, fee in enumerate(fees):
+        total_fee_usd += amount_in_usd * D(fee) / D(1_000_000)
+    return ExactQuote(
+        venue="UniswapV3MultiHop", token_in=tokens[0], token_out=tokens[-1],
+        amount_in_raw=amount_in_raw, amount_out_raw=amount_out,
+        amount_in_usd=amount_in_usd, amount_out_usd=amount_out_usd,
+        swap_fee_usd=total_fee_usd, gas_units=None,
+        quoted_block=snapshot.block_number,
+        quote_id=f"uni-v3-multihop-{snapshot.block_number}-{amount_in_raw}-{path.hex()}",
+        pool=None, fee_bps=None,
     )
 
 
