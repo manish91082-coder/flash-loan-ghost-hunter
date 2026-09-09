@@ -25,6 +25,12 @@ class BlockSnapshot:
     source_rpc: str
     snapshot_id: str
 
+    def validate(self) -> None:
+        """Validate the immutable snapshot before economic evaluation."""
+        self.as_economic_snapshot().validate()
+        if self.gas_price_wei <= 0 or not self.source_rpc:
+            raise EconomicTruthError("Block snapshot gas/source state is invalid")
+
     def as_economic_snapshot(self) -> EconomicSnapshot:
         return EconomicSnapshot(
             chain_id=self.chain_id,
