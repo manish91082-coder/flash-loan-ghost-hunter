@@ -3,6 +3,9 @@
 Quotes are produced from protocol contracts at an explicit block. No spot-price
 spread is used to infer output. For direct spatial arbitrage, each leg is quoted
 against its real venue and the second leg consumes the first leg's raw output.
+
+Execution gas is intentionally NOT inferred from a quote. Transaction-path gas
+must come from the exact PhantomX executor calldata through eth_estimateGas.
 """
 from __future__ import annotations
 
@@ -46,7 +49,7 @@ class ExactQuote:
     amount_in_usd: Decimal
     amount_out_usd: Decimal
     swap_fee_usd: Decimal
-    gas_units: int
+    gas_units: int | None
     quoted_block: int
     quote_id: str
     price_impact_pct: Decimal | None = None
@@ -54,6 +57,11 @@ class ExactQuote:
     fee_bps: Decimal | None = None
 
     def to_quote_leg(self) -> QuoteLeg:
+        """Convert only when verified execution-path gas is available."""
+        if self.gas_units is None or self.gas_units <= 0:
+            raise EconomicTruthError(
+                "Execution gas is unavailable; quote-layer gas cannot certify economics"
+            )
         return QuoteLeg(
             venue=self.venue,
             token_in=self.token_in.address,
@@ -90,8 +98,6 @@ def _decode_symbol(result: str) -> str:
     if len(raw) < 32:
         raise EconomicTruthError("ABI symbol response too short")
 
-    # ERC-20 symbol() implementations commonly return either dynamic string
-    # ABI (offset, length, data) or bytes32. Detect dynamic ABI first.
     offset = int.from_bytes(raw[:32], "big")
     if offset % 32 == 0 and 0 < offset <= len(raw) - 32:
         length_pos = offset
@@ -104,7 +110,6 @@ def _decode_symbol(result: str) -> str:
             except UnicodeDecodeError:
                 pass
 
-    # bytes32/string-style fixed response, right-trim padding.
     candidate = raw[:32].rstrip(b"\x00")
     if candidate:
         try:
@@ -112,7 +117,6 @@ def _decode_symbol(result: str) -> str:
         except UnicodeDecodeError:
             pass
 
-    # Some mocks encode bytes32 in the final 32-byte word.
     candidate = raw[-32:].rstrip(b"\x00")
     if candidate:
         try:
@@ -184,9 +188,11 @@ def _assert_pair_compatibility(a: tuple[TokenMeta, TokenMeta], b: tuple[TokenMet
 
 def quote_v2_single(*, snapshot: BlockSnapshot, router: str, token_in: TokenMeta, token_out: TokenMeta,
                     amount_in_raw: int, rpc_call_at_block: Callable[[str, str, int], str],
-                    gas_units: int, fee_rate: Decimal = D("0.003")) -> ExactQuote:
-    if amount_in_raw <= 0 or gas_units <= 0:
-        raise EconomicTruthError("V2 quote amount/gas must be positive")
+                    gas_units: int | None = None, fee_rate: Decimal = D("0.003")) -> ExactQuote:
+    if amount_in_raw <= 0:
+        raise EconomicTruthError("V2 quote amount must be positive")
+    if gas_units is not None and gas_units <= 0:
+        raise EconomicTruthError("V2 execution gas must be positive when supplied")
     path = _encode_address(token_in.address) + _encode_address(token_out.address)
     calldata = GET_AMOUNTS_OUT + _encode_u256(amount_in_raw) + _encode_u256(64) + _encode_u256(2) + path
     raw = rpc_call_at_block(router, calldata, snapshot.block_number)
@@ -222,8 +228,8 @@ def quote_v3_single(*, snapshot: BlockSnapshot, quoter: str, token_in: TokenMeta
     )
     raw = rpc_call_at_block(quoter, QUOTE_EXACT_INPUT_SINGLE + encoded_tuple, snapshot.block_number)
     amount_out = _decode_word(raw, 0)
-    gas_estimate = _decode_word(raw, 3)
-    if amount_out <= 0 or gas_estimate <= 0:
+    quoter_gas_estimate = _decode_word(raw, 3)
+    if amount_out <= 0 or quoter_gas_estimate <= 0:
         raise EconomicTruthError("V3 quote returned invalid output/gas")
     amount_in_usd = D(amount_in_raw) / (D(10) ** token_in.decimals)
     amount_out_usd = D(amount_out) / (D(10) ** token_out.decimals)
@@ -237,7 +243,7 @@ def quote_v3_single(*, snapshot: BlockSnapshot, quoter: str, token_in: TokenMeta
         amount_in_usd=amount_in_usd,
         amount_out_usd=amount_out_usd,
         swap_fee_usd=fee_usd,
-        gas_units=gas_estimate,
+        gas_units=None,
         quoted_block=snapshot.block_number,
         quote_id=f"uni-v3-{snapshot.block_number}-{token_in.address}-{token_out.address}-{fee}-{amount_in_raw}",
         pool=None,
@@ -246,10 +252,15 @@ def quote_v3_single(*, snapshot: BlockSnapshot, quoter: str, token_in: TokenMeta
 
 
 def quote_cross_venue_roundtrip(*, snapshot: BlockSnapshot, v3_pool: str, v2_pool: str, loan_usd: Decimal,
-                                 rpc_call_at_block: Callable[[str, str, int], str], v2_gas_units: int,
+                                 rpc_call_at_block: Callable[[str, str, int], str],
+                                 v2_gas_units: int | None = None,
                                  stable_symbols: set[str] | None = None,
                                  direction: str = "V3_TO_V2") -> tuple[ExactQuote, ExactQuote]:
-    """Quote V3→V2 or V2→V3 using raw output chaining at one pinned block."""
+    """Quote V3→V2 or V2→V3 using raw output chaining at one pinned block.
+
+    ``v2_gas_units`` is accepted only for verified execution-path gas supplied
+    by a caller. No default or quote-derived gas is invented here.
+    """
     stable_symbols = stable_symbols or {"USDC", "USDC.E", "USDC.EC"}
     v3_pair = discover_v3_pool_meta(snapshot=snapshot, pool=v3_pool, rpc_call_at_block=rpc_call_at_block)
     v2_pair = discover_v2_pair_tokens(snapshot=snapshot, pool=v2_pool, rpc_call_at_block=rpc_call_at_block)
@@ -274,8 +285,9 @@ def quote_cross_venue_roundtrip(*, snapshot: BlockSnapshot, v3_pool: str, v2_poo
 
 
 def quote_v2_roundtrip(*, snapshot: BlockSnapshot, pool: str, loan_usd: Decimal,
-                       rpc_call_at_block: Callable[[str, str, int], str], gas_units_leg1: int,
-                       gas_units_leg2: int, stable_symbols: set[str] | None = None) -> tuple[ExactQuote, ExactQuote]:
+                       rpc_call_at_block: Callable[[str, str, int], str], gas_units_leg1: int | None = None,
+                       gas_units_leg2: int | None = None,
+                       stable_symbols: set[str] | None = None) -> tuple[ExactQuote, ExactQuote]:
     stable_symbols = stable_symbols or {"USDC", "USDC.E", "USDC.EC"}
     tokens = discover_v2_pair_tokens(snapshot=snapshot, pool=pool, rpc_call_at_block=rpc_call_at_block)
     stable, asset = _find_stable_and_asset(tokens, stable_symbols)
