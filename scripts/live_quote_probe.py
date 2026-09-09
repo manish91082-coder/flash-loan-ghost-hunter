@@ -1,7 +1,8 @@
 """PHANTOMX read-only Polygon live quote probe (P0-A).
 
-This probe is deliberately read-only. It proves connectivity, block-pinned
-state reads and exact cross-venue quotes without signing or broadcasting.
+The probe proves connectivity, block-pinned state reads and exact cross-venue
+quotes without signing or broadcasting. RPC selection is adaptive and uses a
+zero-cost-first candidate pool; no single provider is an architectural dependency.
 """
 from __future__ import annotations
 
@@ -18,15 +19,6 @@ from phantomx_core.block_snapshot import build_block_snapshot
 from phantomx_core.exact_quote_engine import quote_cross_venue_roundtrip
 from phantomx_core.live_pool_snapshot import parse_v2_price_usd
 
-# Keep the zero-cost path. Operators can supply a current Polygon RPC with
-# POLYGON_RPC_URL; public endpoints below are treated as candidates only.
-FREE_RPCS = [
-    "https://polygon-rpc.com",
-    "https://polygon-mainnet.public.blastapi.io",
-    "https://polygon.blockpi.network/v1/rpc/public",
-    "https://polygon.drpc.org",
-]
-
 QUICK_V2_WMATIC_POOL = "0x6e7a5FAFcec6BB1e78bAE2A1F0B612012BF14827"
 UNIV3_WMATIC_POOL = "0xA374094527e1673A86dE625aa59517c5dE346d32"
 GET_RESERVES = "0x0902f1ac"
@@ -34,15 +26,6 @@ GET_RESERVES = "0x0902f1ac"
 
 def rpc_result(rpc: BlockPinnedRpc, method: str, params: list[Any], endpoint: str):
     return rpc.call(method, params, rpc_url=endpoint).result
-
-
-def word(result: str, index: int) -> int:
-    raw = result[2:] if result.startswith("0x") else result
-    start = index * 64
-    end = start + 64
-    if len(raw) < end:
-        raise RuntimeError("short ABI response")
-    return int(raw[start:end], 16)
 
 
 def classify_error(exc: Exception) -> str:
@@ -53,7 +36,7 @@ def classify_error(exc: Exception) -> str:
         return "TRANSPORT_CONNECTION"
     if "rpc" in text and ("error" in text or "failed" in text):
         return "JSON_RPC_ERROR"
-    if "snapshot" in text:
+    if "snapshot" in text or "block_header" in text:
         return "SNAPSHOT_INVALID"
     if "short abi" in text or "abi" in text:
         return "ABI_DECODE_ERROR"
@@ -61,26 +44,23 @@ def classify_error(exc: Exception) -> str:
 
 
 def main() -> int:
-    configured = os.getenv("POLYGON_RPC_URL")
-    endpoints = [configured] if configured else FREE_RPCS
-    endpoints = [x.strip() for x in endpoints if x and x.strip()]
-    rpc = BlockPinnedRpc(endpoints, timeout=8.0)
-
+    # Environment override is supported by AdaptiveRpcPool through PHANTOMX_RPC_URLS.
+    rpc = BlockPinnedRpc(timeout=8.0)
     diagnostics: list[dict[str, Any]] = []
     selected = None
-    for endpoint in endpoints:
-        diag: dict[str, Any] = {"endpoint": endpoint, "stage": "bootstrap", "status": "FAILED"}
+
+    # A complete snapshot must come from one endpoint so block and gas state are coherent.
+    for endpoint in rpc.candidate_endpoints():
+        diag: dict[str, Any] = {"endpoint": endpoint, "stage": "snapshot", "status": "FAILED"}
         try:
             block = rpc_result(rpc, "eth_getBlockByNumber", ["latest", False], endpoint)
-            diag["block_rpc_ok"] = True
             gas = rpc_result(rpc, "eth_gasPrice", [], endpoint)
-            diag["gas_rpc_ok"] = True
             if not isinstance(block, dict) or not block.get("number") or not block.get("hash"):
                 raise RuntimeError("BLOCK_HEADER_INVALID")
             if not isinstance(gas, str) or not gas.startswith("0x"):
                 raise RuntimeError("GAS_PRICE_INVALID")
+            diag.update({"block_rpc_ok": True, "gas_rpc_ok": True, "block_number": block["number"]})
 
-            diag["block_number"] = block["number"]
             reserves = rpc.call(
                 "eth_call",
                 [{"to": QUICK_V2_WMATIC_POOL, "data": GET_RESERVES}, block["number"]],
@@ -99,17 +79,20 @@ def main() -> int:
             diag.update({"snapshot_valid": True, "status": "SELECTED"})
             diagnostics.append(diag)
             selected = (endpoint, snapshot)
+            rpc.pool.record_success(endpoint)
             break
         except Exception as exc:
             diag["error_class"] = classify_error(exc)
             diag["error"] = repr(exc)
             diagnostics.append(diag)
+            rpc.pool.record_failure(endpoint, exc)
 
     if selected is None:
         print(json.dumps({
             "status": "BLOCKED",
             "reason": "NO_VALID_RPC_SNAPSHOT",
             "rpc_diagnostics": diagnostics,
+            "rpc_health": rpc.health_snapshot(),
             "transactions_broadcast": False,
         }, indent=2))
         return 2
@@ -141,10 +124,7 @@ def main() -> int:
                 "venue_path": [legs[0].venue, legs[1].venue],
             }
         except Exception as exc:
-            results[direction] = {
-                "error_class": classify_error(exc),
-                "error": repr(exc),
-            }
+            results[direction] = {"error_class": classify_error(exc), "error": repr(exc)}
 
     passed = any("final_out_usd" in x for x in results.values())
     status = "LIVE_QUOTE_READ_PASS" if passed else "LIVE_QUOTE_READ_BLOCKED"
@@ -155,6 +135,8 @@ def main() -> int:
         "block_hash": snapshot.block_hash,
         "snapshot_id": snapshot.snapshot_id,
         "source_rpc": endpoint,
+        "rpc_candidate_count": len(rpc.endpoints),
+        "rpc_health": rpc.health_snapshot(),
         "gas_price_gwei": str(snapshot.gas_price_gwei),
         "wmatic_usd_reference": str(snapshot.gas_token_price_usd),
         "rpc_diagnostics": diagnostics,
