@@ -1,0 +1,26 @@
+name: PHANTOMX P0-A Live Polygon Quote Probe
+
+on:
+  push:
+    branches:
+      - 'mission/p0-a-economic-truth-engine'
+      - main
+  workflow_dispatch:
+
+jobs:
+  live-read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run read-only Polygon probe
+        run: python scripts/live_quote_probe.py
