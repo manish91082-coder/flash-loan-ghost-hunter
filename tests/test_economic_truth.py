@@ -22,7 +22,7 @@ class EconomicTruthTests(unittest.TestCase):
         )
 
     def leg(self, venue, tin, tout, amount_in, amount_out, fee, block=100,
-            amount_in_raw=None, amount_out_raw=None):
+            amount_in_raw=None, amount_out_raw=None, gas_units=None):
         return QuoteLeg(
             venue=venue,
             token_in=tin,
@@ -30,15 +30,18 @@ class EconomicTruthTests(unittest.TestCase):
             amount_in_usd=D(str(amount_in)),
             amount_out_usd=D(str(amount_out)),
             swap_fee_usd=D(str(fee)),
-            gas_units=100_000,
+            gas_units=gas_units,
             quoted_block=block,
             quote_id=f"{venue}-{tin}-{tout}-{amount_in}",
             amount_in_raw=amount_in_raw,
             amount_out_raw=amount_out_raw,
         )
 
+    def evaluate(self, **kwargs):
+        return evaluate_route(execution_gas_units=200_000, **kwargs)
+
     def test_profit_floor_must_be_exceeded(self):
-        cert = evaluate_route(
+        cert = self.evaluate(
             opportunity_id="ok-1",
             snapshot=self.snapshot,
             route=[
@@ -52,10 +55,36 @@ class EconomicTruthTests(unittest.TestCase):
         self.assertTrue(cert.executable)
         self.assertGreater(cert.conservative_net_profit_usd, D("0.50"))
         self.assertEqual(cert.swap_fees_usd, D("1.0"))
+        self.assertEqual(cert.execution_gas_units, 200_000)
+
+    def test_quote_gas_is_not_used_for_transaction_cost(self):
+        cert = self.evaluate(
+            opportunity_id="gas-separation",
+            snapshot=self.snapshot,
+            route=[
+                self.leg("DEX-A", "USDC", "WETH", 1000, 1003, 0.1, gas_units=1),
+                self.leg("DEX-B", "WETH", "USDC", 1003, 1004, 0.1, gas_units=9_999_999),
+            ],
+            loan_usd=D("1000"),
+            flash_loan_fee_usd=D("0.05"),
+        )
+        expected_gas = D("30") * D("1e-9") * D("200000") * D("0.25")
+        self.assertEqual(cert.gas_cost_usd, expected_gas)
+
+    def test_missing_executor_gas_fails_closed(self):
+        with self.assertRaises(EconomicTruthError):
+            evaluate_route(
+                opportunity_id="missing-gas",
+                snapshot=self.snapshot,
+                route=[self.leg("DEX-A", "USDC", "WETH", 1000, 1003, 0.1)],
+                loan_usd=D("1000"),
+                flash_loan_fee_usd=D("0.05"),
+                execution_gas_units=0,
+            )
 
     def test_cross_block_quote_fails_closed(self):
         with self.assertRaises(EconomicTruthError):
-            evaluate_route(
+            self.evaluate(
                 opportunity_id="bad-block",
                 snapshot=self.snapshot,
                 route=[self.leg("DEX-A", "USDC", "WETH", 1000, 1003, 0.1, block=101)],
@@ -65,7 +94,7 @@ class EconomicTruthTests(unittest.TestCase):
 
     def test_broken_route_fails_closed(self):
         with self.assertRaises(EconomicTruthError):
-            evaluate_route(
+            self.evaluate(
                 opportunity_id="bad-route",
                 snapshot=self.snapshot,
                 route=[
@@ -78,7 +107,7 @@ class EconomicTruthTests(unittest.TestCase):
 
     def test_amount_continuity_fails_closed(self):
         with self.assertRaises(EconomicTruthError):
-            evaluate_route(
+            self.evaluate(
                 opportunity_id="bad-amounts",
                 snapshot=self.snapshot,
                 route=[
@@ -91,14 +120,12 @@ class EconomicTruthTests(unittest.TestCase):
 
     def test_raw_amount_continuity_is_authoritative(self):
         with self.assertRaises(EconomicTruthError):
-            evaluate_route(
+            self.evaluate(
                 opportunity_id="bad-raw-amounts",
                 snapshot=self.snapshot,
                 route=[
                     self.leg("DEX-A", "USDC", "WETH", 1000, 1003, 0.1,
                              amount_in_raw=1_000_000, amount_out_raw=2_000_000),
-                    # USD is intentionally equal to the previous leg, but the
-                    # actual WETH quantity is not what the next swap receives.
                     self.leg("DEX-B", "WETH", "USDC", 1003, 1005, 0.1,
                              amount_in_raw=1_999_999, amount_out_raw=1_005_000),
                 ],
@@ -107,7 +134,7 @@ class EconomicTruthTests(unittest.TestCase):
             )
 
     def test_profit_below_floor_blocks(self):
-        cert = evaluate_route(
+        cert = self.evaluate(
             opportunity_id="wait-1",
             snapshot=self.snapshot,
             route=[
@@ -121,20 +148,20 @@ class EconomicTruthTests(unittest.TestCase):
         self.assertFalse(cert.executable)
         self.assertLessEqual(cert.conservative_net_profit_usd, D("0.50"))
 
-    def test_best_loan_uses_verified_quotes_only(self):
+    def test_best_loan_uses_verified_quotes_and_executor_gas(self):
         def samples():
             yield D("1000"), [
                 self.leg("A", "USDC", "WETH", 1000, 1002.5, 0.1),
                 self.leg("B", "WETH", "USDC", 1002.5, 1004, 0.1),
-            ], D("0.05")
+            ], D("0.05"), 200_000
             yield D("2000"), [
                 self.leg("A", "USDC", "WETH", 2000, 2004.5, 0.2),
                 self.leg("B", "WETH", "USDC", 2004.5, 2008, 0.2),
-            ], D("0.10")
+            ], D("0.10"), 200_000
             yield D("3000"), [
                 self.leg("A", "USDC", "WETH", 3000, 3005, 0.3, block=99),
                 self.leg("B", "WETH", "USDC", 3005, 3010, 0.3, block=99),
-            ], D("0.15")
+            ], D("0.15"), 200_000
 
         cert = select_best_loan(snapshot=self.snapshot, quote_sampler=samples())
         self.assertIsNotNone(cert)
