@@ -3,6 +3,9 @@
 Stateful reads require an explicit block number. Snapshot acquisition may use
 ``latest`` only for the block header itself. All later pool/quoter calls must
 use ``eth_call_at_block`` with the captured block number.
+
+When no endpoint is explicitly supplied, calls use the adaptive multi-RPC pool:
+failing endpoints are cooled down and healthy/low-latency endpoints are rotated.
 """
 from __future__ import annotations
 
@@ -13,6 +16,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from .economic_truth import EconomicTruthError
+from .rpc_pool import AdaptiveRpcPool
 
 
 @dataclass(frozen=True)
@@ -23,12 +27,16 @@ class RpcResult:
 
 
 class BlockPinnedRpc:
-    """Dependency-free JSON-RPC adapter with explicit endpoint selection."""
+    """Dependency-free JSON-RPC adapter with adaptive endpoint selection."""
 
-    def __init__(self, endpoints: list[str], timeout: float = 5.0):
-        if not endpoints:
-            raise EconomicTruthError("At least one RPC endpoint is required")
-        self.endpoints = tuple(endpoints)
+    def __init__(
+        self,
+        endpoints: list[str] | None = None,
+        timeout: float = 5.0,
+        rpc_pool: AdaptiveRpcPool | None = None,
+    ):
+        self.pool = rpc_pool or AdaptiveRpcPool(endpoints)
+        self.endpoints = self.pool.endpoints
         self.timeout = timeout
 
     @staticmethod
@@ -37,9 +45,26 @@ class BlockPinnedRpc:
             raise EconomicTruthError("block number must be positive")
         return hex(value)
 
+    def candidate_endpoints(self) -> tuple[str, ...]:
+        """Return currently preferred endpoints in adaptive order."""
+        return tuple(self.pool.ordered())
+
+    def health_snapshot(self) -> dict[str, dict[str, object]]:
+        """Expose transport health for telemetry/forensics without secrets."""
+        return {
+            url: {
+                "failures": state.failures,
+                "successes": state.successes,
+                "last_latency_ms": state.last_latency_ms,
+                "unhealthy_until": state.unhealthy_until,
+                "last_error": state.last_error,
+            }
+            for url, state in self.pool.health.items()
+        }
+
     def call(self, method: str, params: list[Any], *, rpc_url: str | None = None) -> RpcResult:
-        urls = (rpc_url,) if rpc_url else self.endpoints
-        last_error: Exception | None = None
+        urls = [rpc_url] if rpc_url else self.pool.ordered()
+        last_errors: list[str] = []
         for url in urls:
             payload = json.dumps({
                 "jsonrpc": "2.0",
@@ -61,10 +86,15 @@ class BlockPinnedRpc:
                     raise EconomicTruthError(str(body["error"]))
                 if "result" not in body:
                     raise EconomicTruthError("RPC response missing result")
+                self.pool.record_success(url, elapsed)
                 return RpcResult(body["result"], url, round(elapsed, 2))
             except Exception as exc:
-                last_error = exc
-        raise EconomicTruthError(f"All RPC endpoints failed: {last_error}")
+                last_errors.append(f"{url}: {exc!r}")
+                if rpc_url is None:
+                    self.pool.record_failure(url, exc)
+                    continue
+                raise EconomicTruthError(f"RPC endpoint failed: {url}: {exc}") from exc
+        raise EconomicTruthError("All RPC endpoints failed: " + " | ".join(last_errors))
 
     def eth_call_at_block(self, to: str, data: str, block_number: int, *, rpc_url: str | None = None) -> RpcResult:
         """Perform eth_call against exactly ``block_number``."""
