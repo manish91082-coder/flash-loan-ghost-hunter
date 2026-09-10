@@ -17,6 +17,7 @@ contract PhantomXExecutorSemanticHarness is PhantomX_Production_Executor {
 contract PhantomXExecutorSemanticHardeningTest {
     VmSemantic internal constant vm = VmSemantic(address(uint160(uint256(keccak256("hevm cheat code")))));
     uint256 internal constant PRIVATE_KEY = 0x0123456789012345678901234567890123456789012345678901234567890123;
+    uint256 internal constant SECP256K1_N = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141;
     address internal ownerAddress;
     PhantomXExecutorSemanticHarness internal executor;
 
@@ -53,7 +54,7 @@ contract PhantomXExecutorSemanticHardeningTest {
     function test_rejects_high_s_signature() public {
         PhantomX_Production_Executor.ExecutionIntent memory intent = _intent();
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(PRIVATE_KEY, _digest(intent));
-        bytes32 malleableS = bytes32(type(uint256).max - uint256(s) + 1);
+        bytes32 malleableS = bytes32(SECP256K1_N - uint256(s));
         uint8 malleableV = v == 27 ? 28 : 27;
         intent.signature = abi.encodePacked(r, malleableS, malleableV);
         vm.expectRevert();
@@ -62,8 +63,8 @@ contract PhantomXExecutorSemanticHardeningTest {
 
     function test_rejects_invalid_signature_v() public {
         PhantomX_Production_Executor.ExecutionIntent memory intent = _intent();
-        (uint8 unusedV, bytes32 r, bytes32 s) = vm.sign(PRIVATE_KEY, _digest(intent));
-        unusedV;
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(PRIVATE_KEY, _digest(intent));
+        v;
         intent.signature = abi.encodePacked(r, s, uint8(0));
         vm.expectRevert();
         executor.verify(intent);
