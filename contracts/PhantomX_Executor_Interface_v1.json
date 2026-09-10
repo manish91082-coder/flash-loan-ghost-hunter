@@ -1,0 +1,62 @@
+{
+  "version": "1",
+  "contract": "PhantomX_Production_Executor",
+  "entrypoint": "executeOpportunity",
+  "intent": {
+    "fields": [
+      ["executionId", "bytes32"],
+      ["providerType", "uint8"],
+      ["providerAddress", "address"],
+      ["tokenBorrow", "address"],
+      ["amountBorrow", "uint256"],
+      ["swap1Type", "uint8"],
+      ["routerA", "address"],
+      ["pathA", "bytes"],
+      ["minAmountOut1", "uint256"],
+      ["swap2Type", "uint8"],
+      ["routerB", "address"],
+      ["pathB", "bytes"],
+      ["minAmountOutFinal", "uint256"],
+      ["minimumOnChainSurplus", "uint256"],
+      ["maximumGasLimit", "uint256"],
+      ["deadline", "uint256"],
+      ["signature", "bytes"]
+    ],
+    "eip712FieldsExclude": ["signature"]
+  },
+  "providerType": {"AAVE": 0, "UNISWAP_V3_FLASH": 1, "BALANCER": 2},
+  "swapType": {"V2": 0, "V3": 1},
+  "eip712": {
+    "name": "PhantomX Executor",
+    "version": "1",
+    "primaryType": "ExecutionIntent"
+  },
+  "route": {
+    "legs": 2,
+    "v2Encoding": "abi.encode(address[])",
+    "v3Encoding": "token(20 bytes)|fee(3 bytes)|token(20 bytes)[|fee|token...]",
+    "leg1Input": "tokenBorrow",
+    "leg2Output": "tokenBorrow",
+    "continuity": "leg1.output == leg2.input"
+  },
+  "economicBoundary": {
+    "offchainAuthority": "phantomx_core.economic_truth.evaluate_route",
+    "gasAuthority": "execution.economic_gate.certify_executor_path",
+    "minimumConservativeNetProfitUsd": ">0.50",
+    "onchainSurplusIsTokenDenominated": true
+  },
+  "capabilities": {
+    "dynamicRouteSelection": true,
+    "dynamicLoanAmount": true,
+    "dynamicMinOut": true,
+    "dynamicGasLimit": true,
+    "dynamicProvider": true,
+    "dynamicV3FeeTiers": true,
+    "hardcodedMarketEconomics": false
+  },
+  "callbacks": [
+    "executeOperation(address,uint256,uint256,address,bytes)",
+    "receiveFlashLoan(address[],uint256[],uint256[],bytes)",
+    "uniswapV3FlashCallback(uint256,uint256,bytes)"
+  ]
+}
