@@ -1,0 +1,27 @@
+name: PHANTOMX P0-B Executor Security
+
+on:
+  push:
+    branches:
+      - mission/p0-a-economic-truth-engine
+  pull_request:
+    branches:
+      - main
+      - mission/p0-a-economic-truth-engine
+
+jobs:
+  security-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Run executor adversarial tests
+        run: forge test --match-path test/PhantomXExecutorSecurity.t.sol -vv
