@@ -26,6 +26,15 @@ contract MockSemanticERC20 is IERC20 {
         return true;
     }
     function approve(address spender, uint256 amount) external override returns (bool) { allowances[msg.sender][spender] = amount; return true; }
+    function mint(address recipient, uint256 amount) external { balances[recipient] += amount; }
+}
+
+contract MockSemanticV2Router is IUniswapV2Router {
+    function swapExactTokensForTokens(uint amountIn, uint, address[] calldata, address, uint) external pure override returns (uint[] memory amounts) {
+        amounts = new uint[](2);
+        amounts[0] = amountIn;
+        amounts[1] = amountIn;
+    }
 }
 
 contract MaliciousAavePool is IPool {
@@ -38,6 +47,15 @@ contract MaliciousAavePool is IPool {
 
 contract SilentAavePool is IPool {
     function flashLoanSimple(address receiverAddress, address asset, uint256 amount, bytes calldata params, uint16) external override {
+        IExecutorCallbackTarget(receiverAddress).executeOperation(asset, amount, 0, receiverAddress, params);
+    }
+}
+
+contract DoubleAavePool is IPool {
+    function flashLoanSimple(address receiverAddress, address asset, uint256 amount, bytes calldata params, uint16) external override {
+        PhantomX_Production_Executor.ExecutionIntent memory intent = abi.decode(params, (PhantomX_Production_Executor.ExecutionIntent));
+        MockSemanticERC20(asset).mint(receiverAddress, amount);
+        require(IExecutorCallbackTarget(receiverAddress).executeOperation(asset, amount, 0, receiverAddress, params), "first callback failed");
         IExecutorCallbackTarget(receiverAddress).executeOperation(asset, amount, 0, receiverAddress, params);
     }
 }
@@ -95,6 +113,8 @@ contract PhantomXExecutorSemanticHarness is PhantomX_Production_Executor {
     function allowAave(address p) external { isAavePool[p] = true; }
     function allowBalancer(address p) external { isBalancerVault[p] = true; }
     function allowUniswapV3(address p) external { isUniswapV3Pool[p] = true; }
+    function allowRouter(address r) external { allowedRouters[r] = true; }
+    function allowToken(address t) external { allowedTokens[t] = true; }
 }
 
 contract PhantomXExecutorSemanticHardeningTest {
@@ -121,6 +141,31 @@ contract PhantomXExecutorSemanticHardeningTest {
         intent.pathB = hex"1234";
         intent.minAmountOutFinal = 125000000;
         intent.minimumOnChainSurplus = 500000;
+        intent.maximumGasLimit = 5000000;
+        intent.deadline = 2000000000;
+    }
+
+    function _executableAaveIntent(address provider, address token, address routerA, address routerB) internal view returns (PhantomX_Production_Executor.ExecutionIntent memory intent) {
+        intent.executionId = keccak256(abi.encode("double-callback", provider));
+        intent.providerType = PhantomX_Production_Executor.FlashProviderType.AAVE;
+        intent.providerAddress = provider;
+        intent.tokenBorrow = token;
+        intent.amountBorrow = 123456789;
+        intent.swap1Type = PhantomX_Production_Executor.SwapType.V2;
+        intent.routerA = routerA;
+        address[] memory pathA = new address[](2);
+        pathA[0] = token;
+        pathA[1] = address(0x7777777777777777777777777777777777777777);
+        intent.pathA = abi.encode(pathA);
+        intent.minAmountOut1 = intent.amountBorrow;
+        intent.swap2Type = PhantomX_Production_Executor.SwapType.V2;
+        intent.routerB = routerB;
+        address[] memory pathB = new address[](2);
+        pathB[0] = pathA[1];
+        pathB[1] = token;
+        intent.pathB = abi.encode(pathB);
+        intent.minAmountOutFinal = intent.amountBorrow;
+        intent.minimumOnChainSurplus = 0;
         intent.maximumGasLimit = 5000000;
         intent.deadline = 2000000000;
     }
@@ -213,6 +258,21 @@ contract PhantomXExecutorSemanticHardeningTest {
         PhantomX_Production_Executor.ExecutionIntent memory intent = _signedIntent(_intent(PhantomX_Production_Executor.FlashProviderType.UNISWAP_V3, address(provider)));
         intent.tokenBorrow = address(token);
         intent = _signedIntent(intent);
+        vm.expectRevert();
+        executor.executeOpportunity(intent);
+    }
+
+    function test_aave_callback_rejects_second_callback_in_same_execution() public {
+        MockSemanticERC20 token = new MockSemanticERC20();
+        MockSemanticV2Router routerA = new MockSemanticV2Router();
+        MockSemanticV2Router routerB = new MockSemanticV2Router();
+        DoubleAavePool provider = new DoubleAavePool();
+        executor.allowAave(address(provider));
+        executor.allowToken(address(token));
+        executor.allowToken(address(0x7777777777777777777777777777777777777777));
+        executor.allowRouter(address(routerA));
+        executor.allowRouter(address(routerB));
+        PhantomX_Production_Executor.ExecutionIntent memory intent = _signedIntent(_executableAaveIntent(address(provider), address(token), address(routerA), address(routerB)));
         vm.expectRevert();
         executor.executeOpportunity(intent);
     }
