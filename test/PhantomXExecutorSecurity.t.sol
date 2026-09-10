@@ -69,6 +69,16 @@ contract PhantomXExecutorSecurityTest {
         );
     }
 
+    function _validV2Params() internal view returns (bytes memory) {
+        address[] memory leg1 = new address[](2);
+        leg1[0] = BORROW;
+        leg1[1] = MID;
+        address[] memory leg2 = new address[](2);
+        leg2[0] = MID;
+        leg2[1] = BORROW;
+        return _params(abi.encode(leg1), abi.encode(leg2), 0);
+    }
+
     function test_v2_intermediate_token_must_be_allowlisted() public {
         address[] memory leg1 = new address[](3);
         leg1[0] = BORROW;
@@ -113,5 +123,103 @@ contract PhantomXExecutorSecurityTest {
             address(executor),
             ""
         );
+    }
+
+    function test_callback_rejects_wrong_initiator() public {
+        vm.expectRevert();
+        provider.callAaveCallback(
+            executor,
+            BORROW,
+            1e6,
+            0,
+            address(0xDEAD),
+            _validV2Params()
+        );
+    }
+
+    function test_callback_rejects_wrong_asset() public {
+        vm.expectRevert();
+        provider.callAaveCallback(
+            executor,
+            BAD,
+            1e6,
+            0,
+            address(executor),
+            _validV2Params()
+        );
+    }
+
+    function test_callback_rejects_wrong_amount() public {
+        vm.expectRevert();
+        provider.callAaveCallback(
+            executor,
+            BORROW,
+            2e6,
+            0,
+            address(executor),
+            _validV2Params()
+        );
+    }
+
+    function test_callback_rejects_wrong_provider_type() public {
+        bytes memory params = abi.encode(
+            executionId,
+            uint8(2),
+            address(provider),
+            BORROW,
+            uint256(1e6),
+            uint8(0),
+            ROUTER_A,
+            _validV2Path(BORROW, MID),
+            uint256(1),
+            uint8(0),
+            ROUTER_B,
+            _validV2Path(MID, BORROW),
+            uint256(1),
+            uint256(0),
+            uint256(5_000_000),
+            block.timestamp + 1_000,
+            bytes("")
+        );
+        vm.expectRevert();
+        provider.callAaveCallback(executor, BORROW, 1e6, 0, address(executor), params);
+    }
+
+    function test_callback_rejects_stale_execution_id() public {
+        bytes32 staleId = keccak256("stale-execution");
+        address[] memory leg1 = new address[](2);
+        leg1[0] = BORROW;
+        leg1[1] = MID;
+        address[] memory leg2 = new address[](2);
+        leg2[0] = MID;
+        leg2[1] = BORROW;
+        bytes memory params = abi.encode(
+            staleId,
+            uint8(0),
+            address(provider),
+            BORROW,
+            uint256(1e6),
+            uint8(0),
+            ROUTER_A,
+            abi.encode(leg1),
+            uint256(1),
+            uint8(0),
+            ROUTER_B,
+            abi.encode(leg2),
+            uint256(1),
+            uint256(0),
+            uint256(5_000_000),
+            block.timestamp + 1_000,
+            bytes("")
+        );
+        vm.expectRevert();
+        provider.callAaveCallback(executor, BORROW, 1e6, 0, address(executor), params);
+    }
+
+    function _validV2Path(address tokenIn, address tokenOut) internal pure returns (bytes memory) {
+        address[] memory path = new address[](2);
+        path[0] = tokenIn;
+        path[1] = tokenOut;
+        return abi.encode(path);
     }
 }
