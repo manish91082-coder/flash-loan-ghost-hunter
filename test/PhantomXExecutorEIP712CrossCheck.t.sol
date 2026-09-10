@@ -11,7 +11,7 @@ interface VmEIP712 {
 
 contract PhantomXExecutorEIP712Harness is PhantomX_Production_Executor {
     constructor(address signer) {
-        transferOwnership(signer);
+        owner = signer;
     }
 
     function verify(ExecutionIntent memory intent) external view returns (bool) {
