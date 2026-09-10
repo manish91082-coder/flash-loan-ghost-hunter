@@ -96,12 +96,13 @@ class ExecutionIntentEIP712Tests(unittest.TestCase):
         calldata = self.builder.build_calldata(signed)
         self.assertIn(signed["signature"], calldata)
 
-    def test_mutated_intent_with_old_signature_is_not_resigned(self):
+    def test_mutated_intent_with_old_signature_is_rejected(self):
         signed = self.builder.sign_intent(self.intent)
         mutated = dict(signed)
         mutated["amountBorrow"] += 1
-        calldata = self.builder.build_calldata(mutated)
-        self.assertIn(signed["signature"], calldata)
+        with self.assertRaises(ValueError):
+            self.builder.build_calldata(mutated)
+
         resigned = self.builder.sign_intent({k: v for k, v in mutated.items() if k != "signature"})
         self.assertNotEqual(resigned["signature"], signed["signature"])
 
