@@ -9,9 +9,7 @@ class ExecutionIntentBuilder:
         self.chain_id = chain_id
         
     def build_typed_data(self, intent_dict):
-        """
-        Builds the EIP-712 typed data payload matching the Solidity struct.
-        """
+        """Build the EIP-712 typed data payload matching the Solidity struct."""
         return {
             "types": {
                 "EIP712Domain": [
@@ -57,12 +55,10 @@ class ExecutionIntentBuilder:
         return result
         
     def build_calldata(self, intent_dict):
-        """
-        Builds exact ABI calldata from an already-signed intent.
+        """Build exact ABI calldata from an already-signed intent.
 
-        If ``intent_dict`` does not contain a signature, it is signed once here.
-        If a signature is already present, it is treated as immutable execution
-        material and is never regenerated.
+        Calldata construction is signing-free. The signature is immutable
+        execution material and must be supplied by the caller.
         """
         EXECUTOR_ABI = [{
             "inputs": [{
@@ -97,7 +93,7 @@ class ExecutionIntentBuilder:
 
         signed = dict(intent_dict)
         if not signed.get("signature"):
-            signed = self.sign_intent(signed)
+            raise ValueError("Signed intent required for calldata construction")
         
         contract = self.w3.eth.contract(
             address=self.w3.to_checksum_address(self.verifying_contract),
