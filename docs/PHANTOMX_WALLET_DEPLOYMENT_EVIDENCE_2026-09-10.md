@@ -61,7 +61,19 @@ They are NOT sufficient by themselves to establish:
 
 The screenshots do establish a consistent creator/deployment relationship between the supplied public wallet address and deployed executor address.
 
-## 5. Critical historical contradiction recorded for investigation
+## 5. Screenshot integrity fingerprints
+
+SHA-256 of the five uploaded screenshot files as received in this session:
+
+1. `9801866c-cfbf-487b-aaa0-212955ac864e.png` — `8ab638a24cb935c5975c0c4369aa2f26faf65ff4fc26aa66c49d0be1bf908360`
+2. `cf39eb79-e292-47e4-9d31-02eff455789f.png` — `19379cf04151ccc9bef9c16e748ee4a8930058038d42cad1fa4ac78ef982a433`
+3. `294e336f-70fd-42f8-9dda-5a492caef7b5.png` — `ae12b2387033f1eeb40d82880964f581dd8826e73380393ea255a723fb6855c2`
+4. `e1ff187f-83ed-40d8-b200-aaf2834e2d1c.png` — `667d0be7e92f509082c452898ec57ab48e80a836a649a64c6b123b7c6eb4d85e`
+5. `9a2ebb32-f886-4cf3-bceb-75485247b64a.png` — `108f204f5f36dcfbc508ca0b59768f095a7ef8c5a4aad34480afd1e84f990e5f`
+
+The hashes identify the exact uploaded files used for this evidence extraction. The image files themselves remain in the conversation artifacts; this Git record stores their fingerprints and extracted evidence rather than copying binary images into the public repository.
+
+## 6. Critical historical contradiction recorded for investigation
 
 Older repository documentation contains a different deployed contract address beginning:
 `0x36623Fbc...91987ED59`
@@ -71,11 +83,11 @@ The current user-supplied PolygonScan contract screenshot and the current deploy
 
 Therefore deployment lineage must be resolved from on-chain transaction/runtime evidence before any execution authority is inferred from historical documents.
 
-## 6. Secret-hygiene rule
+## 7. Secret-hygiene rule
 
 No private key, seed phrase, signing credential, authentication token, or secret environment value is included in this record. Only public addresses and user-visible UI evidence are retained.
 
-## 7. Required next verification
+## 8. Required next verification
 
 Use the deployed executor address and the exact Polygon state to obtain:
 1. `eth_chainId`
