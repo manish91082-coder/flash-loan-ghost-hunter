@@ -24,4 +24,6 @@ jobs:
           version: stable
 
       - name: Run executor adversarial tests
-        run: forge test --match-path 'test/PhantomXExecutor*Security.t.sol' --match-path 'test/PhantomXExecutorCallbackMatrix.t.sol' -vv
+        run: |
+          forge test --match-path test/PhantomXExecutorSecurity.t.sol -vv
+          forge test --match-path test/PhantomXExecutorCallbackMatrix.t.sol -vv
