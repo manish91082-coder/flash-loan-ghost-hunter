@@ -12,10 +12,8 @@ class ExecutionIntentBuilder:
         return {
             "types": {
                 "EIP712Domain": [
-                    {"name": "name", "type": "string"},
-                    {"name": "version", "type": "string"},
-                    {"name": "chainId", "type": "uint256"},
-                    {"name": "verifyingContract", "type": "address"}
+                    {"name": "name", "type": "string"}, {"name": "version", "type": "string"},
+                    {"name": "chainId", "type": "uint256"}, {"name": "verifyingContract", "type": "address"}
                 ],
                 "ExecutionIntent": [
                     {"name": "executionId", "type": "bytes32"}, {"name": "providerType", "type": "uint8"},
@@ -34,8 +32,7 @@ class ExecutionIntentBuilder:
         }
 
     def sign_intent(self, intent_dict):
-        typed_data = self.build_typed_data(intent_dict)
-        signed_message = self.account.sign_typed_data(full_message=typed_data)
+        signed_message = self.account.sign_typed_data(full_message=self.build_typed_data(intent_dict))
         result = dict(intent_dict)
         result['signature'] = signed_message.signature
         return result
@@ -67,7 +64,10 @@ class ExecutionIntentBuilder:
             self.w3.to_checksum_address(s["routerB"]), s["pathB"], s["minAmountOutFinal"],
             s["minimumOnChainSurplus"], s["maximumGasLimit"], s["deadline"], s["signature"]
         )
-        return bytes(contract.functions.executeOpportunity(intent_tuple)._encode_transaction_data())
+        encoded = contract.functions.executeOpportunity(intent_tuple)._encode_transaction_data()
+        if not isinstance(encoded, str) or not encoded.startswith("0x"):
+            raise ValueError("Executor calldata encoder returned invalid data")
+        return bytes.fromhex(encoded[2:])
 
 class PathEncoder:
     @staticmethod
