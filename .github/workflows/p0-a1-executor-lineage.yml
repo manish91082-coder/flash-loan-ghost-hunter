@@ -1,0 +1,121 @@
+name: PHANTOMX P0-A.1 Executor Lineage
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  reproduce-historical-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install historical compiler
+        run: npm install --no-save solc@0.8.20
+
+      - name: Reproduce recorded py-solc-x build configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/phantomx-lineage
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          source = pathlib.Path("flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol")
+          payload = {
+              "language": "Solidity",
+              "sources": {str(source): {"content": source.read_text()}},
+              "settings": {
+                  "optimizer": {"enabled": False, "runs": 200},
+                  "viaIR": False,
+                  "outputSelection": {
+                      "*": {"*": ["abi", "evm.bytecode.object", "evm.deployedBytecode.object"]}
+                  },
+              },
+          }
+          result = subprocess.run(
+              ["npx", "solcjs", "--standard-json"],
+              input=json.dumps(payload),
+              text=True,
+              capture_output=True,
+              check=False,
+          )
+          raw = result.stdout
+          start = raw.find("{")
+          if start < 0:
+              raise SystemExit(result.stderr or "No JSON compiler output")
+          report = json.loads(raw[start:])
+          errors = [e for e in report.get("errors", []) if e.get("severity") == "error"]
+          if errors:
+              raise SystemExit("\n".join(e.get("formattedMessage", str(e)) for e in errors))
+
+          contracts = report["contracts"][str(source)]
+          artifact = contracts["PhantomXMVP"]
+          runtime = artifact["evm"]["deployedBytecode"]["object"]
+          creation = artifact["evm"]["bytecode"]["object"]
+          pathlib.Path("/tmp/phantomx-lineage/runtime.hex").write_text(runtime)
+          pathlib.Path("/tmp/phantomx-lineage/creation.hex").write_text(creation)
+          pathlib.Path("/tmp/phantomx-lineage/abi.json").write_text(json.dumps(artifact["abi"], indent=2))
+          print(f"compiler=0.8.20")
+          print(f"optimizer.enabled=False")
+          print(f"optimizer.runs=200")
+          print(f"viaIR=False")
+          print(f"runtime_bytes={len(runtime)//2}")
+          print(f"creation_bytes={len(creation)//2}")
+          PY
+
+      - name: Hash reproduced runtime and compare deployed identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from Crypto.Hash import keccak
+
+          runtime_hex = Path("/tmp/phantomx-lineage/runtime.hex").read_text().strip()
+          k = keccak.new(digest_bits=256)
+          k.update(bytes.fromhex(runtime_hex))
+          observed = k.hexdigest()
+          deployed = "84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb"
+          print(f"reproduced_runtime_keccak=0x{observed}")
+          print(f"deployed_runtime_keccak=0x{deployed}")
+          print(f"exact_match={observed == deployed}")
+          Path("/tmp/phantomx-lineage/result.txt").write_text(
+              f"compiler=0.8.20\noptimizer.enabled=False\noptimizer.runs=200\nviaIR=False\n"
+              f"runtime_bytes={len(runtime_hex)//2}\nreproduced_runtime_keccak=0x{observed}\n"
+              f"deployed_runtime_keccak=0x{deployed}\nexact_match={observed == deployed}\n"
+          )
+          PY
+
+      - name: Enumerate compact selector fingerprint
+        run: |
+          node - <<'JS'
+          const fs = require('fs');
+          const crypto = require('crypto');
+          const abi = JSON.parse(fs.readFileSync('/tmp/phantomx-lineage/abi.json', 'utf8'));
+          function selector(sig) { return crypto.createHash('sha256').update(sig).digest('hex').slice(0,8); }
+          // Kept as a provenance fingerprint only. Solidity selectors are Keccak-derived;
+          // this list is supplemental to the actual bytecode comparison, not authoritative.
+          const functions = abi.filter(x => x.type === 'function').map(x => x.name).sort();
+          fs.writeFileSync('/tmp/phantomx-lineage/selectors.txt', functions.join('\n') + '\n');
+          console.log(functions.join('\n'));
+          JS
+
+      - name: Upload lineage evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: phantomx-p0a1-executor-lineage
+          path: /tmp/phantomx-lineage/
+          if-no-files-found: error
