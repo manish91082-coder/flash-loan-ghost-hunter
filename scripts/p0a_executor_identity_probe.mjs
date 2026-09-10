@@ -5,14 +5,14 @@ const EXECUTOR = '0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286';
 const DEPLOYER = '0x6c32820FC0fEd00E9CF28b67425ba1Ca753bd69e';
 const DEPLOY_TX = '0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a';
 const RPCS = [
-  'https://polygon.drpc.org',
-  'https://tenderly.rpc.polygon.community/',
-  'https://polygon.publicnode.com',
-  'https://polygon-public.nodies.app/',
-  'https://1rpc.io/matic',
-  'https://polygon.api.onfinality.io/public',
-  'https://polygon-mainnet.gateway.tatum.io/',
   'https://rpc-mainnet.matic.quiknode.pro',
+  'https://matic-mainnet.chainstacklabs.com',
+  'https://polygon-mainnet.public.blastapi.io',
+  'https://polygon-rpc.com',
+  'https://polygon.blockpi.network/v1/rpc/public',
+  'https://polygon.drpc.org',
+  'https://polygon.publicnode.com',
+  'https://1rpc.io/matic',
 ];
 
 async function rpc(url, method, params) {
@@ -39,6 +39,15 @@ function required(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+async function safeCall(url, method, params) {
+  try {
+    const result = await rpc(url, method, params);
+    return { ok: true, result: result.result, latency_ms: result.latency_ms };
+  } catch (error) {
+    return { ok: false, error: String(error) };
+  }
+}
+
 async function main() {
   const source = await fs.readFile('contracts/PhantomX_Production_Executor.sol', 'utf8');
   const compiler = (await import('solc')).default;
@@ -60,91 +69,99 @@ async function main() {
 
   const attempts = [];
   for (const url of RPCS) {
-    try {
-      const chain = await rpc(url, 'eth_chainId', []);
-      required(Number.parseInt(chain.result, 16) === 137, `WRONG_CHAIN_${chain.result}`);
-      const block = await rpc(url, 'eth_blockNumber', []);
-      const code = await rpc(url, 'eth_getCode', [EXECUTOR, 'latest']);
-      const ownerRaw = await rpc(url, 'eth_call', [{ to: EXECUTOR, data: '0x8da5cb5b' }, 'latest']);
-      const domain = await rpc(url, 'eth_call', [{ to: EXECUTOR, data: '0x3644e515' }, 'latest']);
-      const pausedRaw = await rpc(url, 'eth_call', [{ to: EXECUTOR, data: '0x5c975abb' }, 'latest']);
-      const tx = await rpc(url, 'eth_getTransactionByHash', [DEPLOY_TX]);
-      const receipt = await rpc(url, 'eth_getTransactionReceipt', [DEPLOY_TX]);
-      required(tx.result && receipt.result, 'DEPLOYMENT_RECORD_NOT_FOUND');
-      const deployBlock = receipt.result.blockNumber;
-      required(deployBlock, 'DEPLOYMENT_BLOCK_MISSING');
-      const creationCode = await rpc(url, 'eth_getCode', [EXECUTOR, deployBlock]);
-      const owner = '0x' + ownerRaw.result.slice(-40);
-      attempts.push({
-        rpc: url,
-        status: 'SUCCESS',
-        latency_ms_total: Number((chain.latency_ms + block.latency_ms + code.latency_ms + ownerRaw.latency_ms + domain.latency_ms + pausedRaw.latency_ms + tx.latency_ms + receipt.latency_ms + creationCode.latency_ms).toFixed(3)),
-        checks: {
-          chain_id: Number.parseInt(chain.result, 16),
-          latest_block: Number.parseInt(block.result, 16),
-          executor: EXECUTOR,
-          deployed_runtime_bytes: (code.result.length - 2) / 2,
-          deployed_runtime_hash: keccak256(code.result),
-          compiled_runtime_bytes: compiled.length / 2,
-          compiled_runtime_hash: compiledHash,
-          runtime_hash_match: keccak256(code.result).toLowerCase() === compiledHash,
-          owner,
-          domain_separator: domain.result,
-          paused: pausedRaw.result.toLowerCase() === '0x' + '0'.repeat(63) + '1',
-          deployment: {
-            tx: DEPLOY_TX,
-            from: tx.result.from,
-            to: tx.result.to,
-            status: receipt.result.status,
-            contract_address: receipt.result.contractAddress,
-            block: Number.parseInt(deployBlock, 16),
-            runtime_hash_at_creation: keccak256(creationCode.result),
-            runtime_match_at_creation: keccak256(creationCode.result).toLowerCase() === keccak256(code.result).toLowerCase(),
-          },
-        },
-      });
-    } catch (error) {
-      attempts.push({ rpc: url, status: 'FAILED', error: String(error) });
+    const a = { rpc: url };
+    const chain = await safeCall(url, 'eth_chainId', []);
+    a.chain_id = chain.ok ? Number.parseInt(chain.result, 16) : null;
+    if (!chain.ok || a.chain_id !== 137) {
+      a.status = 'FAILED_CHAIN';
+      a.error = chain.ok ? `WRONG_CHAIN_${a.chain_id}` : chain.error;
+      attempts.push(a);
+      continue;
     }
+    const block = await safeCall(url, 'eth_blockNumber', []);
+    const code = await safeCall(url, 'eth_getCode', [EXECUTOR, 'latest']);
+    const owner = await safeCall(url, 'eth_call', [{ to: EXECUTOR, data: '0x8da5cb5b' }, 'latest']);
+    const domain = await safeCall(url, 'eth_call', [{ to: EXECUTOR, data: '0x3644e515' }, 'latest']);
+    const paused = await safeCall(url, 'eth_call', [{ to: EXECUTOR, data: '0x5c975abb' }, 'latest']);
+    const tx = await safeCall(url, 'eth_getTransactionByHash', [DEPLOY_TX]);
+    const receipt = await safeCall(url, 'eth_getTransactionReceipt', [DEPLOY_TX]);
+
+    a.status = 'PARTIAL';
+    a.latest_block = block.ok ? Number.parseInt(block.result, 16) : null;
+    a.executor_code = code.ok ? code.result : null;
+    a.executor_code_bytes = code.ok ? Math.max(0, (code.result.length - 2) / 2) : null;
+    a.executor_code_hash = code.ok ? keccak256(code.result) : null;
+    a.owner = owner.ok && owner.result.length === 66 ? '0x' + owner.result.slice(-40) : null;
+    a.domain_separator = domain.ok ? domain.result : null;
+    a.paused = paused.ok ? paused.result : null;
+    a.deployment_tx_found = !!tx.ok && !!tx.result;
+    a.deployment = {
+      from: tx.ok && tx.result ? tx.result.from : null,
+      to: tx.ok && tx.result ? tx.result.to : null,
+      status: receipt.ok && receipt.result ? receipt.result.status : null,
+      contract_address: receipt.ok && receipt.result ? receipt.result.contractAddress : null,
+      block: receipt.ok && receipt.result?.blockNumber ? Number.parseInt(receipt.result.blockNumber, 16) : null,
+    };
+    a.stage_errors = {
+      block: block.ok ? null : block.error,
+      code: code.ok ? null : code.error,
+      owner: owner.ok ? null : owner.error,
+      domain: domain.ok ? null : domain.error,
+      paused: paused.ok ? null : paused.error,
+      tx: tx.ok ? null : tx.error,
+      receipt: receipt.ok ? null : receipt.error,
+    };
+    a.core_ready = Boolean(code.ok && code.result !== '0x' && owner.ok && domain.ok && tx.ok && receipt.ok);
+    a.compiled_runtime_hash = compiledHash;
+    a.runtime_hash_match = a.executor_code_hash ? a.executor_code_hash.toLowerCase() === compiledHash : false;
+    a.owner_match = a.owner ? a.owner.toLowerCase() === DEPLOYER.toLowerCase() : false;
+    a.deployment_sender_match = a.deployment.from ? a.deployment.from.toLowerCase() === DEPLOYER.toLowerCase() : false;
+    a.deployment_contract_match = a.deployment.contract_address ? a.deployment.contract_address.toLowerCase() === EXECUTOR.toLowerCase() : false;
+    a.deployment_receipt_success = a.deployment.status === '0x1';
+    a.domain_valid = typeof a.domain_separator === 'string' && /^0x[0-9a-fA-F]{64}$/.test(a.domain_separator);
+    a.latency_ms = [block, code, owner, domain, paused, tx, receipt].filter(x => x.ok).reduce((s, x) => s + x.latency_ms, 0);
+    attempts.push(a);
   }
 
-  const successes = attempts.filter((x) => x.status === 'SUCCESS');
+  const successfulCore = attempts.filter(a => a.status === 'PARTIAL' && a.core_ready);
   const evidence = {
-    status: successes.length >= 2 ? 'PROBED' : 'BLOCKED',
+    status: 'BLOCKED',
     timestamp_utc: new Date().toISOString(),
     executor: EXECUTOR,
     deployer: DEPLOYER,
     deployment_tx: DEPLOY_TX,
     required_rpc_consensus: 2,
+    compiled_runtime_hash: compiledHash,
+    compiled_runtime_bytes: compiled.length / 2,
     attempts,
     broadcasts: 0,
   };
 
-  if (successes.length >= 2) {
-    successes.sort((a, b) => a.latency_ms_total - b.latency_ms_total);
-    const primary = successes[0].checks;
-    const peer = successes[1].checks;
+  if (successfulCore.length >= 2) {
+    successfulCore.sort((x, y) => x.latency_ms - y.latency_ms);
+    const primary = successfulCore[0];
+    const peer = successfulCore[1];
     required(primary.chain_id === 137 && peer.chain_id === 137, 'CHAIN_ID_MISMATCH');
-    required(primary.deployed_runtime_hash.toLowerCase() === peer.deployed_runtime_hash.toLowerCase(), 'RPC_RUNTIME_HASH_DIVERGENCE');
-    required(primary.compiled_runtime_hash === peer.compiled_runtime_hash, 'COMPILED_HASH_DIVERGENCE');
+    required(primary.executor_code_hash.toLowerCase() === peer.executor_code_hash.toLowerCase(), 'RPC_RUNTIME_HASH_DIVERGENCE');
     required(primary.owner.toLowerCase() === peer.owner.toLowerCase(), 'RPC_OWNER_DIVERGENCE');
     required(primary.domain_separator.toLowerCase() === peer.domain_separator.toLowerCase(), 'RPC_DOMAIN_DIVERGENCE');
-    required(primary.deployment.contract_address.toLowerCase() === EXECUTOR.toLowerCase(), 'CREATED_CONTRACT_MISMATCH');
-    required(primary.deployment.from.toLowerCase() === DEPLOYER.toLowerCase(), 'DEPLOYER_MISMATCH');
-    required(primary.deployment.status === '0x1', 'DEPLOYMENT_RECEIPT_FAILED');
-    required(primary.owner.toLowerCase() === DEPLOYER.toLowerCase(), 'OWNER_MISMATCH');
-    required(primary.compiled_runtime_hash === primary.deployed_runtime_hash.toLowerCase(), 'RUNTIME_HASH_MISMATCH');
-    required(primary.domain_separator.startsWith('0x') && primary.domain_separator.length === 66, 'DOMAIN_SEPARATOR_INVALID');
-    required(primary.deployed_runtime_bytes > 0, 'NO_DEPLOYED_RUNTIME');
+    required(primary.runtime_hash_match && peer.runtime_hash_match, 'RUNTIME_HASH_MISMATCH');
+    required(primary.owner_match && peer.owner_match, 'OWNER_MISMATCH');
+    required(primary.deployment_sender_match && primary.deployment_contract_match && primary.deployment_receipt_success, 'DEPLOYMENT_LINEAGE_MISMATCH');
+    required(primary.domain_valid, 'DOMAIN_SEPARATOR_INVALID');
+    evidence.status = 'PASS';
     evidence.selected = primary;
     evidence.peer = peer;
+    evidence.consensus_count = successfulCore.length;
+  } else {
+    evidence.consensus_count = successfulCore.length;
+    evidence.block_reason = 'INSUFFICIENT_CORE_RPC_CONSENSUS';
   }
 
   await fs.mkdir('evidence', { recursive: true });
   await fs.writeFile('evidence/p0a-runtime-identity.json', JSON.stringify(evidence, null, 2) + '\n');
   console.log(JSON.stringify(evidence, null, 2));
-
-  required(successes.length >= 2, 'INSUFFICIENT_RPC_CONSENSUS');
+  required(evidence.status === 'PASS', evidence.block_reason || 'RUNTIME_IDENTITY_FAILED');
   console.log('P0-A executor runtime identity: PASS');
   console.log('No transaction was signed or broadcast.');
 }
