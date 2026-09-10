@@ -1,3 +1,4 @@
+from eth_account import Account
 from eth_account.messages import encode_typed_data
 from web3 import Web3
 
@@ -38,9 +39,20 @@ class ExecutionIntentBuilder:
         return result
 
     def build_calldata(self, intent_dict):
-        """Build exact ABI calldata from an already-signed intent, without signing."""
-        if not intent_dict.get("signature"):
+        """Build exact ABI calldata only from a signature valid for this exact intent."""
+        signature = intent_dict.get("signature")
+        if not signature:
             raise ValueError("Signed intent required for calldata construction")
+
+        unsigned = {key: value for key, value in intent_dict.items() if key != "signature"}
+        try:
+            typed = encode_typed_data(full_message=self.build_typed_data(unsigned))
+            recovered = Account.recover_message(typed, signature=signature)
+        except Exception as exc:
+            raise ValueError("Invalid execution intent signature") from exc
+        if recovered.lower() != self.account.address.lower():
+            raise ValueError("Execution intent signature does not match builder signer")
+
         executor_abi = [{
             "inputs": [{"components": [
                 {"internalType":"bytes32","name":"executionId","type":"bytes32"}, {"internalType":"uint8","name":"providerType","type":"uint8"},
@@ -62,7 +74,7 @@ class ExecutionIntentBuilder:
             self.w3.to_checksum_address(s["tokenBorrow"]), s["amountBorrow"], s["swap1Type"],
             self.w3.to_checksum_address(s["routerA"]), s["pathA"], s["minAmountOut1"], s["swap2Type"],
             self.w3.to_checksum_address(s["routerB"]), s["pathB"], s["minAmountOutFinal"],
-            s["minimumOnChainSurplus"], s["maximumGasLimit"], s["deadline"], s["signature"]
+            s["minimumOnChainSurplus"], s["maximumGasLimit"], s["deadline"], signature
         )
         encoded = contract.functions.executeOpportunity(intent_tuple)._encode_transaction_data()
         if not isinstance(encoded, str) or not encoded.startswith("0x"):
