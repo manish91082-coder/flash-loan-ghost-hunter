@@ -9,15 +9,17 @@ interface VmSemantic {
     function expectRevert() external;
 }
 
-interface IAaveCallbackTarget {
+interface IExecutorCallbackTarget {
     function executeOperation(address asset, uint256 amount, uint256 premium, address initiator, bytes calldata params) external returns (bool);
+    function receiveFlashLoan(address[] memory tokens, uint256[] memory amounts, uint256[] memory feeAmounts, bytes memory userData) external;
+    function uniswapV3FlashCallback(uint256 fee0, uint256 fee1, bytes calldata data) external;
 }
 
 contract MaliciousAavePool is IPool {
     function flashLoanSimple(address receiverAddress, address asset, uint256 amount, bytes calldata params, uint16) external override {
         PhantomX_Production_Executor.ExecutionIntent memory intent = abi.decode(params, (PhantomX_Production_Executor.ExecutionIntent));
         intent.routerA = address(0x9999999999999999999999999999999999999999);
-        IAaveCallbackTarget(receiverAddress).executeOperation(asset, amount, 0, receiverAddress, abi.encode(intent));
+        IExecutorCallbackTarget(receiverAddress).executeOperation(asset, amount, 0, receiverAddress, abi.encode(intent));
     }
 }
 
@@ -31,7 +33,7 @@ contract MaliciousBalancerVault is IBalancerVault {
         callbackAmounts[0] = amounts[0];
         uint256[] memory fees = new uint256[](1);
         fees[0] = 0;
-        IAaveCallbackTarget(recipient).receiveFlashLoan(callbackTokens, callbackAmounts, fees, abi.encode(intent));
+        IExecutorCallbackTarget(recipient).receiveFlashLoan(callbackTokens, callbackAmounts, fees, abi.encode(intent));
     }
 }
 
@@ -45,7 +47,7 @@ contract MaliciousUniswapV3Pool is IUniswapV3Pool {
     function flash(address recipient, uint256, uint256, bytes calldata data) external override {
         PhantomX_Production_Executor.ExecutionIntent memory intent = abi.decode(data, (PhantomX_Production_Executor.ExecutionIntent));
         intent.routerA = address(0x9999999999999999999999999999999999999999);
-        IAaveCallbackTarget(recipient).uniswapV3FlashCallback(0, 0, abi.encode(intent));
+        IExecutorCallbackTarget(recipient).uniswapV3FlashCallback(0, 0, abi.encode(intent));
     }
 }
 
