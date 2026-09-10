@@ -15,11 +15,30 @@ interface IExecutorCallbackTarget {
     function uniswapV3FlashCallback(uint256 fee0, uint256 fee1, bytes calldata data) external;
 }
 
+contract MockSemanticERC20 is IERC20 {
+    mapping(address => uint256) internal balances;
+    mapping(address => mapping(address => uint256)) internal allowances;
+    function balanceOf(address account) external view override returns (uint256) { return balances[account]; }
+    function transfer(address recipient, uint256 amount) external override returns (bool) {
+        require(balances[msg.sender] >= amount, "balance");
+        balances[msg.sender] -= amount;
+        balances[recipient] += amount;
+        return true;
+    }
+    function approve(address spender, uint256 amount) external override returns (bool) { allowances[msg.sender][spender] = amount; return true; }
+}
+
 contract MaliciousAavePool is IPool {
     function flashLoanSimple(address receiverAddress, address asset, uint256 amount, bytes calldata params, uint16) external override {
         PhantomX_Production_Executor.ExecutionIntent memory intent = abi.decode(params, (PhantomX_Production_Executor.ExecutionIntent));
         intent.routerA = address(0x9999999999999999999999999999999999999999);
         IExecutorCallbackTarget(receiverAddress).executeOperation(asset, amount, 0, receiverAddress, abi.encode(intent));
+    }
+}
+
+contract SilentAavePool is IPool {
+    function flashLoanSimple(address receiverAddress, address asset, uint256 amount, bytes calldata params, uint16) external override {
+        IExecutorCallbackTarget(receiverAddress).executeOperation(asset, amount, 0, receiverAddress, params);
     }
 }
 
@@ -37,6 +56,13 @@ contract MaliciousBalancerVault is IBalancerVault {
     }
 }
 
+contract SilentBalancerVault is IBalancerVault {
+    function flashLoan(address recipient, address[] memory tokens, uint256[] memory amounts, bytes memory userData) external override {
+        uint256[] memory fees = new uint256[](tokens.length);
+        IExecutorCallbackTarget(recipient).receiveFlashLoan(tokens, amounts, fees, userData);
+    }
+}
+
 contract MaliciousUniswapV3Pool is IUniswapV3Pool {
     address public token0Address;
     address public token1Address;
@@ -48,6 +74,18 @@ contract MaliciousUniswapV3Pool is IUniswapV3Pool {
         PhantomX_Production_Executor.ExecutionIntent memory intent = abi.decode(data, (PhantomX_Production_Executor.ExecutionIntent));
         intent.routerA = address(0x9999999999999999999999999999999999999999);
         IExecutorCallbackTarget(recipient).uniswapV3FlashCallback(0, 0, abi.encode(intent));
+    }
+}
+
+contract SilentUniswapV3Pool is IUniswapV3Pool {
+    address public token0Address;
+    address public token1Address;
+
+    constructor(address token0_, address token1_) { token0Address = token0_; token1Address = token1_; }
+    function token0() external view override returns (address) { return token0Address; }
+    function token1() external view override returns (address) { return token1Address; }
+    function flash(address recipient, uint256, uint256, bytes calldata data) external override {
+        IExecutorCallbackTarget(recipient).uniswapV3FlashCallback(0, 0, data);
     }
 }
 
@@ -142,6 +180,39 @@ contract PhantomXExecutorSemanticHardeningTest {
         MaliciousUniswapV3Pool provider = new MaliciousUniswapV3Pool(borrowToken, address(0x6666666666666666666666666666666666666666));
         executor.allowUniswapV3(address(provider));
         PhantomX_Production_Executor.ExecutionIntent memory intent = _signedIntent(_intent(PhantomX_Production_Executor.FlashProviderType.UNISWAP_V3, address(provider)));
+        vm.expectRevert();
+        executor.executeOpportunity(intent);
+    }
+
+    function test_aave_callback_rejects_missing_flash_transfer() public {
+        MockSemanticERC20 token = new MockSemanticERC20();
+        SilentAavePool provider = new SilentAavePool();
+        executor.allowAave(address(provider));
+        PhantomX_Production_Executor.ExecutionIntent memory intent = _signedIntent(_intent(PhantomX_Production_Executor.FlashProviderType.AAVE, address(provider)));
+        intent.tokenBorrow = address(token);
+        intent = _signedIntent(intent);
+        vm.expectRevert();
+        executor.executeOpportunity(intent);
+    }
+
+    function test_balancer_callback_rejects_missing_flash_transfer() public {
+        MockSemanticERC20 token = new MockSemanticERC20();
+        SilentBalancerVault provider = new SilentBalancerVault();
+        executor.allowBalancer(address(provider));
+        PhantomX_Production_Executor.ExecutionIntent memory intent = _signedIntent(_intent(PhantomX_Production_Executor.FlashProviderType.BALANCER, address(provider)));
+        intent.tokenBorrow = address(token);
+        intent = _signedIntent(intent);
+        vm.expectRevert();
+        executor.executeOpportunity(intent);
+    }
+
+    function test_uniswap_v3_callback_rejects_missing_flash_transfer() public {
+        MockSemanticERC20 token = new MockSemanticERC20();
+        SilentUniswapV3Pool provider = new SilentUniswapV3Pool(address(token), address(0x6666666666666666666666666666666666666666));
+        executor.allowUniswapV3(address(provider));
+        PhantomX_Production_Executor.ExecutionIntent memory intent = _signedIntent(_intent(PhantomX_Production_Executor.FlashProviderType.UNISWAP_V3, address(provider)));
+        intent.tokenBorrow = address(token);
+        intent = _signedIntent(intent);
         vm.expectRevert();
         executor.executeOpportunity(intent);
     }
