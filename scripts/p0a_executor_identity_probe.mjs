@@ -38,28 +38,32 @@ async function safeCall(url, method, params) {
   catch (error) { return { ok:false, error:String(error) }; }
 }
 
-async function compileRuntime(path, contractName, compiler, settings) {
+async function compileRuntime(path, contractName, compiler, settings, sourceKey=path) {
   const source = await fs.readFile(path, 'utf8');
   const input = {
     language: 'Solidity',
-    sources: { [path]: { content: source } },
-    settings: { ...settings, outputSelection: { '*': { '*': ['evm.deployedBytecode.object','abi'] } } },
+    sources: { [sourceKey]: { content: source } },
+    settings: { ...settings, outputSelection: { '*': { '*': ['evm.deployedBytecode.object'] } } },
   };
   const output = JSON.parse(compiler.compile(JSON.stringify(input)));
   const errors = (output.errors ?? []).filter((e) => e.severity === 'error');
-  required(errors.length === 0, `SOLC_ERRORS_${path}:\n${errors.map(e=>e.formattedMessage).join('\n')}`);
-  const artifact = output.contracts[path]?.[contractName];
-  required(artifact, `NO_CONTRACT_${contractName}`);
+  required(errors.length === 0, `SOLC_ERRORS_${path}_${sourceKey}:\n${errors.map(e=>e.formattedMessage).join('\n')}`);
+  const artifact = output.contracts[sourceKey]?.[contractName];
+  required(artifact, `NO_CONTRACT_${contractName}_${sourceKey}`);
   const runtime = artifact.evm?.deployedBytecode?.object;
-  required(typeof runtime === 'string' && runtime.length > 0, `EMPTY_RUNTIME_${contractName}`);
-  return { contract:contractName, compiler_version:compiler.version(), optimizer:settings.optimizer ?? {enabled:false}, viaIR:settings.viaIR ?? false, bytes:runtime.length/2, hash:keccak256('0x'+runtime), runtime };
+  required(typeof runtime === 'string' && runtime.length > 0, `EMPTY_RUNTIME_${contractName}_${sourceKey}`);
+  return { contract:contractName, source_key:sourceKey, compiler_version:compiler.version(), optimizer:settings.optimizer ?? {enabled:false}, viaIR:settings.viaIR ?? false, bytes:runtime.length/2, hash:keccak256('0x'+runtime) };
 }
 
 async function main() {
-  const compiler119 = (await import('solc')).default;
-  const compiler120 = (await import('solc0820')).default;
-  const hardened = await compileRuntime('contracts/PhantomX_Production_Executor.sol','PhantomX_Production_Executor',compiler119,{optimizer:{enabled:true,runs:200},viaIR:true});
-  const historical = await compileRuntime('flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol','PhantomXMVP',compiler120,{optimizer:{enabled:false,runs:200},viaIR:false});
+  const compiler119=(await import('solc')).default;
+  const compiler120=(await import('solc0820')).default;
+  const hardened=await compileRuntime('contracts/PhantomX_Production_Executor.sol','PhantomX_Production_Executor',compiler119,{optimizer:{enabled:true,runs:200},viaIR:true},'contracts/PhantomX_Production_Executor.sol');
+  const historicalVariants=[];
+  const historicalSettings={optimizer:{enabled:false,runs:200},viaIR:false};
+  for (const key of ['<stdin>','PhantomXMVP.sol','contracts/src/PhantomXMVP.sol','flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol']) {
+    historicalVariants.push(await compileRuntime('flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol','PhantomXMVP',compiler120,historicalSettings,key));
+  }
 
   const attempts=[];
   for (const url of RPCS) {
@@ -76,7 +80,6 @@ async function main() {
     const receipt=await safeCall(url,'eth_getTransactionReceipt',[DEPLOY_TX]);
     a.status='PARTIAL';
     a.latest_block=block.ok?Number.parseInt(block.result,16):null;
-    a.executor_code=code.ok?code.result:null;
     a.executor_code_bytes=code.ok?Math.max(0,(code.result.length-2)/2):null;
     a.executor_code_hash=code.ok?keccak256(code.result):null;
     a.owner=owner.ok&&owner.result.length===66?'0x'+owner.result.slice(-40):null;
@@ -91,21 +94,22 @@ async function main() {
     a.deployment_receipt_success=a.deployment.status==='0x1';
     a.domain_valid=typeof a.domain_separator==='string' && /^0x[0-9a-fA-F]{64}$/.test(a.domain_separator);
     a.hardened_source_hash_match=a.executor_code_hash?a.executor_code_hash.toLowerCase()===hardened.hash.toLowerCase():false;
-    a.historical_exact_deploy_hash_match=a.executor_code_hash?a.executor_code_hash.toLowerCase()===historical.hash.toLowerCase():false;
+    a.historical_variant_matches=historicalVariants.filter(v=>a.executor_code_hash&&a.executor_code_hash.toLowerCase()===v.hash.toLowerCase()).map(v=>v.source_key);
     attempts.push(a);
   }
 
   const core=attempts.filter(a=>a.core_ready);
-  const evidence={status:'BLOCKED',timestamp_utc:new Date().toISOString(),executor:EXECUTOR,deployer:DEPLOYER,deployment_tx:DEPLOY_TX,required_rpc_consensus:2,artifact_candidates:{current_hardened:hardened,historical_phantomxmvp_exact_deployer:historical},attempts,broadcasts:0};
+  const evidence={status:'BLOCKED',timestamp_utc:new Date().toISOString(),executor:EXECUTOR,deployer:DEPLOYER,deployment_tx:DEPLOY_TX,required_rpc_consensus:2,artifact_candidates:{current_hardened:hardened,historical_phantomxmvp_variants:historicalVariants},attempts,broadcasts:0};
   if (core.length>=2) {
     core.sort((x,y)=>(x.latest_block??0)-(y.latest_block??0));
     const primary=core[core.length-1]; const peer=core[core.length-2];
     required(primary.executor_code_hash.toLowerCase()===peer.executor_code_hash.toLowerCase(),'RPC_RUNTIME_HASH_DIVERGENCE');
     required(primary.owner.toLowerCase()===peer.owner.toLowerCase(),'RPC_OWNER_DIVERGENCE');
-    required(primary.owner_match,'OWNER_MISMATCH');
+    required(primary.owner_match&&peer.owner_match,'OWNER_MISMATCH');
     required(primary.deployment_sender_match&&primary.deployment_contract_match&&primary.deployment_receipt_success,'DEPLOYMENT_LINEAGE_MISMATCH');
     evidence.status='IDENTITY_PROBED'; evidence.consensus_count=core.length; evidence.selected=primary; evidence.peer=peer;
-    evidence.identity_conclusion=primary.hardened_source_hash_match?'MATCH_CURRENT_HARDENED_ARTIFACT':primary.historical_exact_deploy_hash_match?'MATCH_EXACT_HISTORICAL_DEPLOYER_CONFIGURATION':'MATCH_NEITHER_TESTED_ARTIFACT';
+    evidence.identity_conclusion=primary.hardened_source_hash_match?'MATCH_CURRENT_HARDENED_ARTIFACT':primary.historical_variant_matches.length?`MATCH_HISTORICAL_SOURCE_KEY:${primary.historical_variant_matches.join(',')}`:'MATCH_NEITHER_TESTED_ARTIFACT';
+    evidence.deployed_runtime_summary={bytes:primary.executor_code_bytes,hash:primary.executor_code_hash};
   } else { evidence.consensus_count=core.length; evidence.block_reason='INSUFFICIENT_CORE_RPC_CONSENSUS'; }
   await fs.mkdir('evidence',{recursive:true});
   await fs.writeFile('evidence/p0a-runtime-identity.json',JSON.stringify(evidence,null,2)+'\n');
