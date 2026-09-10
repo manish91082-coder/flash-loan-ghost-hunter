@@ -1,11 +1,42 @@
 # PhantomX .gitignore
+# Secrets / credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+credentials.json
+secrets.json
+service-account*.json
+
+# Private operational material
+logs/
+*.log
+*.jsonl
+*.sqlite
+*.db
+
+# Large / private model artifacts
 *.zip
 *.rar
 *.tar.gz
 *.pkl
+*.pt
+*.pth
+*.onnx
+*.h5
+*.keras
+*.safetensors
 PhantomX_Block_Stream_Chunk_1_of_5.jsonl
 phantomx_local_vm/
+
+# Local build / runtime artifacts
 foundry/
 __pycache__/
 *.pid
 .pytest_cache/
+.venv/
+venv/
