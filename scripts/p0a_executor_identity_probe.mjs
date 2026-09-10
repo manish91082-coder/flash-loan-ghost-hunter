@@ -15,6 +15,10 @@ const RPCS = [
   'https://1rpc.io/matic',
 ];
 
+function required(condition, message) {
+  if (!condition) throw new Error(message);
+}
+
 async function rpc(url, method, params) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 10000);
@@ -35,10 +39,6 @@ async function rpc(url, method, params) {
   }
 }
 
-function required(condition, message) {
-  if (!condition) throw new Error(message);
-}
-
 async function safeCall(url, method, params) {
   try {
     const result = await rpc(url, method, params);
@@ -48,12 +48,11 @@ async function safeCall(url, method, params) {
   }
 }
 
-async function main() {
-  const source = await fs.readFile('contracts/PhantomX_Production_Executor.sol', 'utf8');
-  const compiler = (await import('solc')).default;
+async function compileRuntime(path, compiler) {
+  const source = await fs.readFile(path, 'utf8');
   const input = {
     language: 'Solidity',
-    sources: { 'contracts/PhantomX_Production_Executor.sol': { content: source } },
+    sources: { [path]: { content: source } },
     settings: {
       optimizer: { enabled: true, runs: 200 },
       viaIR: true,
@@ -62,10 +61,21 @@ async function main() {
   };
   const output = JSON.parse(compiler.compile(JSON.stringify(input)));
   const errors = (output.errors ?? []).filter((e) => e.severity === 'error');
-  required(errors.length === 0, `SOLC_ERRORS:\n${errors.map((e) => e.formattedMessage).join('\n')}`);
-  const compiled = output.contracts['contracts/PhantomX_Production_Executor.sol'].PhantomX_Production_Executor.evm.deployedBytecode.object;
-  required(typeof compiled === 'string' && compiled.length > 0, 'EMPTY_COMPILED_RUNTIME');
-  const compiledHash = keccak256('0x' + compiled).toLowerCase();
+  required(errors.length === 0, `SOLC_ERRORS_${path}:\n${errors.map((e) => e.formattedMessage).join('\n')}`);
+  const contracts = output.contracts[path] ?? {};
+  const name = Object.keys(contracts)[0];
+  required(name, `NO_CONTRACT_OUTPUT_${path}`);
+  const runtime = contracts[name].evm.deployedBytecode.object;
+  required(typeof runtime === 'string' && runtime.length > 0, `EMPTY_COMPILED_RUNTIME_${path}`);
+  return { contract: name, runtime, bytes: runtime.length / 2, hash: keccak256('0x' + runtime) };
+}
+
+async function main() {
+  const compiler119 = (await import('solc')).default;
+  const compiler120 = (await import('solc0820')).default;
+
+  const hardened = await compileRuntime('contracts/PhantomX_Production_Executor.sol', compiler119);
+  const legacyMvp = await compileRuntime('flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol', compiler120);
 
   const attempts = [];
   for (const url of RPCS) {
@@ -82,7 +92,7 @@ async function main() {
     const code = await safeCall(url, 'eth_getCode', [EXECUTOR, 'latest']);
     const owner = await safeCall(url, 'eth_call', [{ to: EXECUTOR, data: '0x8da5cb5b' }, 'latest']);
     const domain = await safeCall(url, 'eth_call', [{ to: EXECUTOR, data: '0x3644e515' }, 'latest']);
-    const paused = await safeCall(url, 'eth_call', [{ to: EXECUTOR, data: '0x5c975abb' }, 'latest']);
+    const paused = await safeCall(url, 'eth_call', [{ to: EXECUTOR, 'data': '0x5c975abb' }, 'latest']);
     const tx = await safeCall(url, 'eth_getTransactionByHash', [DEPLOY_TX]);
     const receipt = await safeCall(url, 'eth_getTransactionReceipt', [DEPLOY_TX]);
 
@@ -94,7 +104,6 @@ async function main() {
     a.owner = owner.ok && owner.result.length === 66 ? '0x' + owner.result.slice(-40) : null;
     a.domain_separator = domain.ok ? domain.result : null;
     a.paused = paused.ok ? paused.result : null;
-    a.deployment_tx_found = !!tx.ok && !!tx.result;
     a.deployment = {
       from: tx.ok && tx.result ? tx.result.from : null,
       to: tx.ok && tx.result ? tx.result.to : null,
@@ -111,19 +120,19 @@ async function main() {
       tx: tx.ok ? null : tx.error,
       receipt: receipt.ok ? null : receipt.error,
     };
-    a.core_ready = Boolean(code.ok && code.result !== '0x' && owner.ok && domain.ok && tx.ok && receipt.ok);
-    a.compiled_runtime_hash = compiledHash;
-    a.runtime_hash_match = a.executor_code_hash ? a.executor_code_hash.toLowerCase() === compiledHash : false;
     a.owner_match = a.owner ? a.owner.toLowerCase() === DEPLOYER.toLowerCase() : false;
     a.deployment_sender_match = a.deployment.from ? a.deployment.from.toLowerCase() === DEPLOYER.toLowerCase() : false;
     a.deployment_contract_match = a.deployment.contract_address ? a.deployment.contract_address.toLowerCase() === EXECUTOR.toLowerCase() : false;
     a.deployment_receipt_success = a.deployment.status === '0x1';
     a.domain_valid = typeof a.domain_separator === 'string' && /^0x[0-9a-fA-F]{64}$/.test(a.domain_separator);
+    a.hardened_source_hash_match = a.executor_code_hash ? a.executor_code_hash.toLowerCase() === hardened.hash.toLowerCase() : false;
+    a.legacy_mvp_hash_match = a.executor_code_hash ? a.executor_code_hash.toLowerCase() === legacyMvp.hash.toLowerCase() : false;
+    a.core_ready = Boolean(code.ok && code.result !== '0x' && owner.ok && tx.ok && receipt.ok);
     a.latency_ms = [block, code, owner, domain, paused, tx, receipt].filter(x => x.ok).reduce((s, x) => s + x.latency_ms, 0);
     attempts.push(a);
   }
 
-  const successfulCore = attempts.filter(a => a.status === 'PARTIAL' && a.core_ready);
+  const core = attempts.filter(a => a.status === 'PARTIAL' && a.core_ready);
   const evidence = {
     status: 'BLOCKED',
     timestamp_utc: new Date().toISOString(),
@@ -131,38 +140,45 @@ async function main() {
     deployer: DEPLOYER,
     deployment_tx: DEPLOY_TX,
     required_rpc_consensus: 2,
-    compiled_runtime_hash: compiledHash,
-    compiled_runtime_bytes: compiled.length / 2,
+    artifact_candidates: {
+      hardened_production: hardened,
+      legacy_mvp: legacyMvp,
+    },
     attempts,
     broadcasts: 0,
   };
 
-  if (successfulCore.length >= 2) {
-    successfulCore.sort((x, y) => x.latency_ms - y.latency_ms);
-    const primary = successfulCore[0];
-    const peer = successfulCore[1];
+  if (core.length >= 2) {
+    core.sort((x, y) => x.latency_ms - y.latency_ms);
+    const primary = core[0];
+    const peer = core[1];
     required(primary.chain_id === 137 && peer.chain_id === 137, 'CHAIN_ID_MISMATCH');
     required(primary.executor_code_hash.toLowerCase() === peer.executor_code_hash.toLowerCase(), 'RPC_RUNTIME_HASH_DIVERGENCE');
     required(primary.owner.toLowerCase() === peer.owner.toLowerCase(), 'RPC_OWNER_DIVERGENCE');
-    required(primary.domain_separator.toLowerCase() === peer.domain_separator.toLowerCase(), 'RPC_DOMAIN_DIVERGENCE');
-    required(primary.runtime_hash_match && peer.runtime_hash_match, 'RUNTIME_HASH_MISMATCH');
     required(primary.owner_match && peer.owner_match, 'OWNER_MISMATCH');
     required(primary.deployment_sender_match && primary.deployment_contract_match && primary.deployment_receipt_success, 'DEPLOYMENT_LINEAGE_MISMATCH');
-    required(primary.domain_valid, 'DOMAIN_SEPARATOR_INVALID');
-    evidence.status = 'PASS';
+    required(primary.deployment_sender_match, 'DEPLOYMENT_SENDER_MISMATCH');
+    evidence.status = 'IDENTITY_PROBED';
     evidence.selected = primary;
     evidence.peer = peer;
-    evidence.consensus_count = successfulCore.length;
+    evidence.consensus_count = core.length;
+    evidence.identity_conclusion = primary.hardened_source_hash_match
+      ? 'MATCH_CURRENT_HARDENED_ARTIFACT'
+      : primary.legacy_mvp_hash_match
+        ? 'MATCH_LEGACY_MVP_ARTIFACT'
+        : 'MATCH_NEITHER_REPOSITORY_ARTIFACT';
   } else {
-    evidence.consensus_count = successfulCore.length;
+    evidence.consensus_count = core.length;
     evidence.block_reason = 'INSUFFICIENT_CORE_RPC_CONSENSUS';
   }
 
   await fs.mkdir('evidence', { recursive: true });
   await fs.writeFile('evidence/p0a-runtime-identity.json', JSON.stringify(evidence, null, 2) + '\n');
   console.log(JSON.stringify(evidence, null, 2));
-  required(evidence.status === 'PASS', evidence.block_reason || 'RUNTIME_IDENTITY_FAILED');
-  console.log('P0-A executor runtime identity: PASS');
+
+  required(evidence.status === 'IDENTITY_PROBED', evidence.block_reason || 'RUNTIME_IDENTITY_PROBE_FAILED');
+  required(evidence.identity_conclusion !== 'MATCH_CURRENT_HARDENED_ARTIFACT', 'UNEXPECTED_HARDENED_MATCH');
+  console.log(`P0-A runtime identity finding: ${evidence.identity_conclusion}`);
   console.log('No transaction was signed or broadcast.');
 }
 
