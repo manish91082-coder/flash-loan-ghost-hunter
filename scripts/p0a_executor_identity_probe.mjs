@@ -96,7 +96,7 @@ async function main() {
   }
 
   const core=attempts.filter(a=>a.core_ready);
-  const evidence={status:'BLOCKED',timestamp_utc:new Date().toISOString(),executor:EXECUTOR,deployer:DEPLOYER,deployment_tx:DEPLOY_TX,required_rpc_consensus:2,artifact_candidates:{current_hardened:hardened,historical_phantomxmvp_exact_deployer:h istorical},attempts,broadcasts:0};
+  const evidence={status:'BLOCKED',timestamp_utc:new Date().toISOString(),executor:EXECUTOR,deployer:DEPLOYER,deployment_tx:DEPLOY_TX,required_rpc_consensus:2,artifact_candidates:{current_hardened:hardened,historical_phantomxmvp_exact_deployer:historical},attempts,broadcasts:0};
   if (core.length>=2) {
     core.sort((x,y)=>(x.latest_block??0)-(y.latest_block??0));
     const primary=core[core.length-1]; const peer=core[core.length-2];
