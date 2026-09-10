@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.4
+Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.5
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-10
 
@@ -35,7 +35,7 @@ AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity qua
 ## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA at this lock update is recorded by Git immediately after this commit.
+Current main SHA after the latest checkpoint commit is `c9aecbe84d918516d0dcd446ca96f1d8e163309e`.
 
 ## CURRENT P0-A FINDING
 The deployed executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` on Polygon chain ID 137 was probed through multiple public RPCs in the read-only CI workflow.
@@ -56,20 +56,37 @@ Ground evidence from decisive run `34505796013` recorded:
 
 Therefore the deployed runtime is NOT yet accepted as the current hardened production executor.
 
-A historical `PhantomXMVP.sol` source candidate is known to have been deployed by `live_mainnet_deployer.py` using `solcx.compile_source(source, output_values=['abi','bin'], solc_version='0.8.20')`. The exact compiler/package/build metadata still requires reproduction and comparison to the deployed runtime.
+Historical source evidence recovered:
+- `flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol` exists in the historical repository.
+- `live_mainnet_deployer.py` records `solcx.compile_source(source, output_values=['abi','bin'], solc_version='0.8.20')` for this source.
+- The historical `04_compile_and_dry_run.py` also records compiler `0.8.20` for the same source.
+
+## P0-A.1 EXECUTION CHECKPOINT
+Added `.github/workflows/p0-a1-executor-lineage.yml` to reproduce the historical build path and calculate the Ethereum Keccak-256 runtime hash.
+
+Workflow commit: `a61dff30144a6defc8c785570c88cbe5c0d9e2f6`.
+Append-only execution evidence: `docs/PHANTOMX_P0A1_LINEAGE_EXECUTION_2026-09-10.md`.
+
+The workflow's first reproduction configuration is:
+- solc `0.8.20`
+- optimizer disabled, matching the historical `compile_source` call's absence of optimizer settings
+- `viaIR=false`
+- Standard JSON output of deployed runtime, creation bytecode and ABI
+- Ethereum Keccak-256 comparison to deployed runtime hash
+
+At checkpoint time, the new commit's GitHub combined commit status was still `pending` with zero status contexts. Therefore NO compiler-match conclusion has been claimed yet.
 
 ## CURRENT ACTIVE TASK
 `P0-A.1 — Resolve deployed-executor build lineage and exact artifact identity.`
 
 Required evidence:
-1. recover exact historical compiler/package/version/settings used by the deployment;
-2. reproduce the historical compile path exactly, including source-key behavior where relevant;
-3. compute Ethereum Keccak-256 of runtime bytecode, not NIST SHA3-256, for every candidate;
-4. enumerate historical executor source candidates and configurations;
-5. compare candidate runtime hashes against deployed `0x84d804...`;
-6. inspect deployed runtime selectors/interfaces for family identification;
-7. determine whether deployed executor is salvageable for the current goal or whether a new verified executor artifact must later replace it;
-8. preserve append-only evidence and keep live execution blocked until resolved.
+1. observe the historical 0.8.20 reproduction result;
+2. if mismatch, broaden historically plausible compiler/build configurations;
+3. enumerate historical executor source candidates and configurations;
+4. inspect deployed runtime selectors/interfaces for family identification;
+5. determine whether the deployed executor can satisfy the current mission or whether a separately verified replacement artifact is required;
+6. preserve append-only evidence;
+7. keep live execution blocked until identity and capability are resolved.
 
 ## DOWNSTREAM PHASES
 After executor identity is resolved: live chain/RPC/data truth -> V2 convergence -> V3 graph/executor convergence -> unified economic authority -> dynamic loan optimization -> final requote/MEV -> AI/tuner integration -> adversarial/simulation -> autonomous orchestration -> serverless/24x7 -> controlled live execution -> receipt/balance/PnL -> final regression/certification.
