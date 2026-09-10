@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.7
+Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.8
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-10
 
@@ -35,7 +35,8 @@ AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity qua
 ## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA for this checkpoint is `f7f4b24428eb51b8d3ff7e87e4d4bccabcfd905c`.
+Checkpoint parent main SHA: `0c1798fc51307769252357fa1234cc6ebf3e65e6`
+State-lock update creates the next checkpoint commit from that parent.
 
 ## P0-A DEPLOYED RUNTIME FINDING
 The deployed Polygon executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` was compared through read-only multi-RPC evidence.
@@ -90,7 +91,7 @@ The deployed runtime is exactly the historical `PhantomXMVP` lineage, but that a
 Therefore unrestricted live execution remains blocked.
 
 ## P0-A.2 — INTERFACE FREEZE CHECKPOINT
-Canonical executor interface is now frozen before semantic implementation changes.
+Canonical executor interface is frozen before semantic implementation changes.
 
 Frozen entry point:
 `executeOpportunity(ExecutionIntent intent)`
@@ -122,10 +123,10 @@ Frozen authority boundary:
 - conservative authorization floor = strictly `> $0.50`
 - `minimumOnChainSurplus` remains a token-denominated atomic invariant and does not replace USD gas/MEV certification.
 
-Machine-readable manifest added:
+Machine-readable manifest:
 `contracts/PhantomX_Executor_Interface_v1.json`
 
-Conformance tests added:
+Conformance tests:
 `tests/test_p0a2_executor_interface.py`
 
 Interface freeze evidence:
@@ -134,22 +135,33 @@ Interface freeze evidence:
 Continuity checkpoint:
 `docs/chat_continuity/2026-09-10-p0a2-interface-freeze.md`
 
-IMPORTANT: this is an interface freeze, not a production certification. The contract implementation has not yet passed the required conformance/security/integration verification against this manifest.
+## P0-A.2.1 — ACTIVE: EXECUTOR ABI CONFORMANCE
+Implementation added:
+- `scripts/p0a21_executor_conformance.py` reproducibly compiles `PhantomX_Production_Executor.sol` with solcjs `0.8.19`, optimizer enabled, runs 200, viaIR false, then compares the generated ABI against the frozen field order/types and callback signatures.
+- `.github/workflows/p0-a21-executor-conformance.yml` runs the compile/ABI probe and canonical interface tests on main/PR.
 
-## CURRENT ACTIVE TASK
-`P0-A.2.1 — Compile and prove production executor conformance to the frozen v1 interface.`
+Parent commit containing these changes:
+`0c1798fc51307769252357fa1234cc6ebf3e65e6`
 
-Required next evidence:
-1. compile `contracts/PhantomX_Production_Executor.sol` reproducibly;
-2. generate ABI and compare exact `ExecutionIntent` field order/types/enums and callback surface against the v1 manifest;
-3. run the new interface conformance tests in CI;
-4. run existing executor compile/security gates and inspect their exact results;
-5. identify and fix any semantic/ABI/security mismatch before moving to deployment or live integration.
+Current CI observation at checkpoint creation:
+- run `34509320620` (`PHANTOMX P0-A.2.1 Executor Conformance`) was in progress.
+- job `102979219389` had completed checkout and was still in `Set up Node`.
+- no green/failed conclusion had been established at checkpoint time.
+
+Required completion evidence remains:
+1. fresh successful compile/ABI conformance result;
+2. successful canonical interface tests;
+3. successful existing P0-B compile gate;
+4. successful existing P0-B executor security/callback/EIP712 gates;
+5. review of actual logs for any semantic/security mismatch;
+6. fix, retest and state update before leaving P0-A.2.1.
+
+No deployment or live-capital authorization is permitted from this checkpoint.
 
 ## NEXT PHASES
 After P0-A.2.1: executor semantic hardening -> exact V2/V3 route integration -> unified economic authority -> dynamic loan optimization -> final requote/MEV -> AI/tuner integration -> adversarial/simulation -> autonomous orchestration -> serverless/24x7 -> controlled live execution -> receipt/balance/PnL -> final regression/certification.
 
 ## CONTINUITY
-On reconnect: load this state lock -> verify current main SHA -> inspect `docs/PHANTOMX_P0A2_EXECUTOR_INTERFACE_FREEZE_2026-09-10.md` and `docs/chat_continuity/2026-09-10-p0a2-interface-freeze.md` -> recheck active CI -> resume P0-A.2.1. Never restart the project.
+On reconnect: load this state lock -> verify current main SHA -> inspect `scripts/p0a21_executor_conformance.py` and `.github/workflows/p0-a21-executor-conformance.yml` -> recheck active CI -> resume P0-A.2.1. Never restart the project.
 
 END STATE LOCK
