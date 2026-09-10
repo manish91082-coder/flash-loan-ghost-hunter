@@ -28,19 +28,30 @@ def fake_keccak(data: bytes) -> bytes:
     return bytes.fromhex("33" * 32)
 
 
-def test_identity_preflight_proves_chain_code_owner_and_domain():
+def test_identity_preflight_proves_chain_code_owner_and_domain_at_pinned_block():
     rpc = FakeRpc()
     result = verify_deployed_executor(
         rpc=rpc,
         rpc_url="https://rpc.example",
         address="0x" + "aa" * 20,
+        block_number=321,
+        expected_owner="0x" + "11" * 20,
+        expected_domain_separator="0x" + "22" * 32,
         keccak=fake_keccak,
     )
     assert result.chain_id == 137
+    assert result.block_number == 321
     assert result.code_size == 6
     assert result.code_hash == "0x" + "33" * 32
     assert result.owner == "0x" + "11" * 20
     assert result.domain_separator == "0x" + "22" * 32
+    assert rpc.calls[1] == (
+        "eth_getCode",
+        ["0x" + "aa" * 20, "0x141"],
+        "https://rpc.example",
+    )
+    assert rpc.calls[2][1][1] == "0x141"
+    assert rpc.calls[3][1][1] == "0x141"
 
 
 def test_identity_preflight_rejects_wrong_chain():
@@ -50,6 +61,7 @@ def test_identity_preflight_rejects_wrong_chain():
             rpc=rpc,
             rpc_url="https://rpc.example",
             address="0x" + "aa" * 20,
+            block_number=321,
             keccak=fake_keccak,
         )
     except ValueError as exc:
@@ -65,6 +77,7 @@ def test_identity_preflight_rejects_missing_code():
             rpc=rpc,
             rpc_url="https://rpc.example",
             address="0x" + "aa" * 20,
+            block_number=321,
             keccak=fake_keccak,
         )
     except ValueError as exc:
@@ -80,6 +93,7 @@ def test_identity_preflight_rejects_code_hash_mismatch():
             rpc=rpc,
             rpc_url="https://rpc.example",
             address="0x" + "aa" * 20,
+            block_number=321,
             expected_code_hash="0x" + "44" * 32,
             keccak=fake_keccak,
         )
@@ -87,3 +101,37 @@ def test_identity_preflight_rejects_code_hash_mismatch():
         assert "bytecode hash" in str(exc)
     else:
         raise AssertionError("wrong bytecode hash accepted")
+
+
+def test_identity_preflight_rejects_owner_mismatch():
+    rpc = FakeRpc()
+    try:
+        verify_deployed_executor(
+            rpc=rpc,
+            rpc_url="https://rpc.example",
+            address="0x" + "aa" * 20,
+            block_number=321,
+            expected_owner="0x" + "44" * 20,
+            keccak=fake_keccak,
+        )
+    except ValueError as exc:
+        assert "owner" in str(exc)
+    else:
+        raise AssertionError("wrong owner accepted")
+
+
+def test_identity_preflight_rejects_domain_mismatch():
+    rpc = FakeRpc()
+    try:
+        verify_deployed_executor(
+            rpc=rpc,
+            rpc_url="https://rpc.example",
+            address="0x" + "aa" * 20,
+            block_number=321,
+            expected_domain_separator="0x" + "44" * 32,
+            keccak=fake_keccak,
+        )
+    except ValueError as exc:
+        assert "domain separator" in str(exc)
+    else:
+        raise AssertionError("wrong domain separator accepted")
