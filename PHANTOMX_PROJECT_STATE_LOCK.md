@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.8
+Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.9
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-10
 
@@ -35,8 +35,7 @@ AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity qua
 ## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Checkpoint parent main SHA: `0c1798fc51307769252357fa1234cc6ebf3e65e6`
-State-lock update creates the next checkpoint commit from that parent.
+Current main SHA at checkpoint creation: `0bc1ab745318d92159320122aaede9254caca26f`
 
 ## P0-A DEPLOYED RUNTIME FINDING
 The deployed Polygon executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` was compared through read-only multi-RPC evidence.
@@ -135,33 +134,59 @@ Interface freeze evidence:
 Continuity checkpoint:
 `docs/chat_continuity/2026-09-10-p0a2-interface-freeze.md`
 
-## P0-A.2.1 — ACTIVE: EXECUTOR ABI CONFORMANCE
-Implementation added:
-- `scripts/p0a21_executor_conformance.py` reproducibly compiles `PhantomX_Production_Executor.sol` with solcjs `0.8.19`, optimizer enabled, runs 200, viaIR false, then compares the generated ABI against the frozen field order/types and callback signatures.
-- `.github/workflows/p0-a21-executor-conformance.yml` runs the compile/ABI probe and canonical interface tests on main/PR.
+## P0-A.2.1 — EXECUTOR ABI CONFORMANCE: GREEN
+The frozen v1 executor ABI has been compiled and checked in CI.
 
-Parent commit containing these changes:
-`0c1798fc51307769252357fa1234cc6ebf3e65e6`
+Implementation/evidence:
+- `scripts/p0a21_executor_conformance.py` reproducibly compiles `PhantomX_Production_Executor.sol` with solcjs `0.8.19`, optimizer enabled, runs `200`, viaIR false.
+- `.github/workflows/p0-a21-executor-conformance.yml` runs the ABI probe and canonical interface tests.
+- First gate attempt `34509320620` failed only because pytest was not installed. The executor conformance probe itself had already passed. The CI harness was corrected by switching the interface tests to Python stdlib `unittest`.
 
-Current CI observation at checkpoint creation:
-- run `34509320620` (`PHANTOMX P0-A.2.1 Executor Conformance`) was in progress.
-- job `102979219389` had completed checkout and was still in `Set up Node`.
-- no green/failed conclusion had been established at checkpoint time.
+Green evidence on main `0bc1ab745318d92159320122aaede9254caca26f`:
+- workflow `PHANTOMX P0-A.2.1 Executor Conformance`
+- run `34509430528`
+- job `102979590876`
+- conclusion `success`
+- runtime bytecode: `15875` bytes
+- `ExecutionIntent ABI`: PASS
+- provider enum mapping: PASS
+- swap enum mapping: PASS
+- callback surface: PASS
+- canonical Python interface tests: PASS
 
-Required completion evidence remains:
-1. fresh successful compile/ABI conformance result;
-2. successful canonical interface tests;
-3. successful existing P0-B compile gate;
-4. successful existing P0-B executor security/callback/EIP712 gates;
-5. review of actual logs for any semantic/security mismatch;
-6. fix, retest and state update before leaving P0-A.2.1.
+## P0-B COMPILE GATE: GREEN
+- workflow `PHANTOMX P0-B Executor Compile`
+- run `34509430445`
+- job `102979591052`
+- conclusion `success`
+- optimized runtime bytecode: `15875` bytes
+- EIP-170 limit: `24576` bytes
+- EIP-170 runtime gate: PASS
 
-No deployment or live-capital authorization is permitted from this checkpoint.
+## P0-B SECURITY GATE: GREEN
+- workflow `PHANTOMX P0-B Executor Security`
+- run `34509430375`
+- job `102979590565`
+- conclusion `success`
+- Solidity compiler: `0.8.19`
+- `PhantomXExecutorSecurity.t.sol`: 8 passed, 0 failed, 0 skipped
+- `PhantomXExecutorCallbackMatrix.t.sol`: 9 passed, 0 failed, 0 skipped
+- `PhantomXExecutorEIP712CrossCheck.t.sol`: 2 passed, 0 failed, 0 skipped
+- all three required forge suites executed successfully.
+- Compiler emitted only warnings about unused parameters/locals in unrelated legacy/mock executor files; no compiler error or test failure occurred.
+
+## P0-A.2.1 DECISION
+P0-A.2.1 required evidence gates are GREEN: reproducible ABI conformance, optimized compile/EIP-170, and executor security/callback/EIP712 suites. This does NOT authorize deployment because semantic execution-path review and exact V2/V3 integration remain unresolved.
+
+The old deployed `PhantomXMVP` remains archival. Live capital execution remains BLOCKED.
+
+## NEXT ACTIVE TASK
+`P0-A.2.2 — Executor semantic hardening review: prove the frozen interface is implemented with correct route, flash-provider, callback, gas-limit, repayment, surplus, signature, replay, allowlist and atomicity semantics before any deployment decision.`
 
 ## NEXT PHASES
-After P0-A.2.1: executor semantic hardening -> exact V2/V3 route integration -> unified economic authority -> dynamic loan optimization -> final requote/MEV -> AI/tuner integration -> adversarial/simulation -> autonomous orchestration -> serverless/24x7 -> controlled live execution -> receipt/balance/PnL -> final regression/certification.
+After P0-A.2.2: exact V2/V3 route integration -> unified economic authority -> dynamic loan optimization -> final requote/MEV -> AI/tuner integration -> adversarial/simulation -> autonomous orchestration -> serverless/24x7 -> controlled live execution -> receipt/balance/PnL -> final regression/certification.
 
 ## CONTINUITY
-On reconnect: load this state lock -> verify current main SHA -> inspect `scripts/p0a21_executor_conformance.py` and `.github/workflows/p0-a21-executor-conformance.yml` -> recheck active CI -> resume P0-A.2.1. Never restart the project.
+On reconnect: load this state lock -> verify current main SHA -> inspect `contracts/PhantomX_Production_Executor.sol`, `scripts/p0a21_executor_conformance.py`, `.github/workflows/p0-a21-executor-conformance.yml` -> recheck P0-A.2.1 evidence -> resume P0-A.2.2. Never restart the project.
 
 END STATE LOCK
