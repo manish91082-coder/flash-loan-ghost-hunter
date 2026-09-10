@@ -43,12 +43,12 @@ class ExecutionIntentCalldataImmutabilityTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.builder.build_calldata(self.intent)
 
-    def test_mutated_intent_keeps_old_signature(self):
+    def test_mutated_intent_with_old_signature_fails_closed(self):
         signed = self.builder.sign_intent(self.intent)
         mutated = dict(signed)
         mutated["amountBorrow"] += 1
-        calldata = self.builder.build_calldata(mutated)
-        self.assertTrue(calldata)
+        with self.assertRaises(ValueError):
+            self.builder.build_calldata(mutated)
         self.assertEqual(mutated["signature"], signed["signature"])
 
 
