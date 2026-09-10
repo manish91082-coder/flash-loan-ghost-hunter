@@ -1,10 +1,10 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.2
+Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.3
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-10
 
 ## 0. Purpose
-This file is the recovery and continuity anchor for the PHANTOMX Flash Loan Ghost Hunter project. It records the authoritative mission goal, operating doctrine, verified repository state, known implementation gaps, and execution path. It prevents goal drift, state loss, and accidental restart after runtime/thread disconnection.
+This file is the recovery and continuity anchor for the PHANTOMX Flash Loan Ghost Hunter project. It records the authoritative mission goal, operating doctrine, verified repository state, known implementation gaps, execution path, active task and latest ground evidence. It prevents goal drift, state loss, and accidental restart after runtime/thread disconnection.
 
 ## 1. MASTER GOAL
 Final success criterion:
@@ -54,7 +54,7 @@ Both use the same zero-trust economic/security authority, but may be redesigned 
 ## 3. GOAL-FIRST CHANGE RULE
 Legacy documents are evidence and design history, NOT immutable specifications.
 
-Rule: GOAL > SAFETY > REALITY/EVIDENCE > MATHEMATICAL CORRECTNESS > CURRENT ARCHITECTURE > HISTORICAL DOCUMENTATION.
+Rule: GOAL > SAFETY > REALITY/EVIDENCE > MATHEMATICAL CORRECTNESS > CURRENT CODE > HISTORICAL DOCUMENTATION.
 
 Any module may be redesigned, replaced, split, merged, or removed when evidence shows it blocks the master goal or violates safety. Preserve useful prior work as evidence/history before destructive change.
 
@@ -125,7 +125,7 @@ Prefer batched reads, multicall, persistent/pre-warmed state where safe, paralle
 Measure p50/p95/p99 decision, quote, simulation, signing, and submission latency. Never substitute a target for evidence.
 
 ## 9. SERVERLESS / ZERO-COST TARGET
-Target production architecture is distributed/serverless, not a permanently running local server.
+Target production architecture is distributed/serverless, not a permanently running paid server.
 
 Must tolerate cold starts, time limits, stateless workers, public-RPC rate limits, retries, duplicate events, and ephemeral storage.
 
@@ -138,16 +138,19 @@ Telegram is observability, not the execution control plane.
 ## 11. VERIFIED REPOSITORY BASELINE
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA before this state-lock commit: 2368728adcf838bd1dea914ffb76890bce2d2f58
-Previous state-lock commit: e0595bfd660f1278d196dc8bbaa8bbd141333d91
+Current main SHA at this lock update: 0c653e34b19e7205f53aad60ed5213c863a09525
+Previous state-lock SHA: 62616acfe62cf09ad8c5dc541d898e4c09858c28
 
-New durable evidence/state files added in this continuation:
+New durable evidence/state files added or updated in this continuation:
 - docs/PHANTOMX_MASTER_OPERATING_DOCTRINE.md
 - docs/PHANTOMX_CHAT_CONTINUITY_PROTOCOL.md
 - docs/PHANTOMX_CURRENT_STATE_2026-09-10.md
 - docs/PHANTOMX_FORENSIC_REPOSITORY_AND_GOAL_MAP_2026-09-10.md
 - docs/PHANTOMX_WALLET_DEPLOYMENT_EVIDENCE_2026-09-10.md
 - docs/chat_continuity/2026-09-10-goal-and-forensic-scan-session.md
+- docs/PHANTOMX_LATEST_STATE_OVERLAY_2026-09-10.md
+- docs/PHANTOMX_P0A_RUNTIME_IDENTITY_RESULT_2026-09-10.md
+- docs/chat_continuity/2026-09-10-p0a-runtime-identity.md
 
 Relevant verified components:
 - phantomx_core/block_snapshot.py
@@ -201,27 +204,53 @@ Partial / not production-complete:
 - Spatial strategy still contains first-two-venue selection, fixed 1-token candidate sizing, 0.5% hardcoded slippage, and rough token-decimal threshold logic.
 - execution/pipeline.py still has an older self-contained flow and does not yet use economic_gate as the sole certification authority.
 - final requote/state locking is required but not yet proven end-to-end through the current strategy path.
-- deployed executor runtime identity is not yet fully proven against the hardened artifact.
 - realized live PnL has not been proven.
-- latest-state CI evidence is not yet declared green because the GitHub combined-status endpoint exposed no status entries for the prior state-lock commit; fresh critical workflow results must be observed for the current state.
+- current CI is not treated as globally green merely because individual workflows passed; each critical current-state result must be observed and recorded.
 
-## 13. CURRENT EVIDENCE ADDED
-The 2026-09-10 user-supplied PolygonScan/MetaMask screenshots are preserved in the evidence record `docs/PHANTOMX_WALLET_DEPLOYMENT_EVIDENCE_2026-09-10.md`.
+## 13. CURRENT GROUND EVIDENCE — P0-A RUNTIME IDENTITY
+Decisive read-only CI probe:
+- Workflow: `PHANTOMX P0-A Live Polygon Quote Probe`
+- Run ID: `34505796013`
+- Head commit of decisive run: `ecb3637b9f465e1170f405cda706c1e0310ffbbd`
+- Uploaded evidence artifact ID: `10163773306`
 
-They evidence at capture time:
-- public wallet `0x6c32820FC0fEd00E9CF28b67425ba1Ca753bd69e`
-- displayed PolygonScan POL balance `68.647911091455766246 POL`
-- deployed executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286`
-- creator relationship between that executor and the public wallet
-- deployment transaction `0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a`
-- MetaMask portfolio snapshot approximately `$7.38`, with approximately `68.648 POL` and approximately `0.00133 BNB` visible.
+Observed deployed executor:
+`0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286`
 
-These screenshots are not current live-chain balance proof, bytecode-equivalence proof, or realized-PnL proof.
+Observed deployment transaction:
+`0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a`
+
+Observed deployment block:
+`93519165`
+
+Observed deployed runtime:
+- bytes: `6528`
+- Keccak-256: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
+
+Current hardened production artifact:
+- compiled with Solidity `0.8.19+commit.7dd6d404` under the repository's configured optimizer/IR settings used by the probe
+- runtime bytes: `14665`
+- Keccak-256: `0xef0fa19dd4ae8b810b873485137372c45c50a4ac3ed68311e95ed8c747de2660`
+
+Result: **NO BYTECODE MATCH**.
+
+Additional deployed-runtime probes:
+- chain ID = `137`
+- owner() matched the recorded deployer
+- deployment sender matched the recorded deployer
+- deployment receipt contract address matched the executor address
+- deployment receipt status = success
+- `DOMAIN_SEPARATOR()` reverted
+- `paused()` reverted
+- more than one RPC endpoint reached the deployed runtime before identity conclusion
+- no transaction was signed or broadcast
+
+Historical `PhantomXMVP` candidate compiled under the recorded Solidity 0.8.20 family also did not equal the deployed runtime hash in the tested configuration.
 
 ## 14. CRITICAL CONTRADICTION REGISTER
 Historical MVP documentation contains executor address `0x36623Fbc...91987ED59`, while current deployment evidence identifies `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286`.
 
-This contradiction is now a formal P0 investigation item. Runtime identity and deployment lineage must be resolved from live on-chain evidence before any historical execution claim is reused.
+Current deployed runtime is not the current hardened production artifact. Exact historical deployment artifact/configuration is unresolved.
 
 Other historical contradictions:
 - old 0.44% combined-fee barrier vs current exact live-fee requirement;
@@ -231,31 +260,26 @@ Other historical contradictions:
 - historical “100% complete” statements vs newer forensic evidence showing open blockers.
 
 ## 15. EXACT LAST KNOWN RESUME POINT
-The active technical gate remains deployed-executor identity verification.
+Active task is now:
+`P0-A.1 — Resolve deployed-executor build lineage and exact artifact identity.`
 
 Required gate:
-1. eth_chainId
-2. eth_getCode
-3. exact runtime bytecode hash
-4. owner()
-5. DOMAIN_SEPARATOR()
-6. required executor interface probes
-7. compare deployed identity with hardened artifact
-8. only after identity passes, construct exact signed calldata
-9. pinned eth_estimateGas
-10. ProfitCertificate
+1. enumerate historical executor source candidates;
+2. recover deployment compiler/version and optimizer/IR settings;
+3. compile each candidate under exact configurations;
+4. compare runtime bytecode hashes against the deployed runtime;
+5. inspect deployed selectors/interfaces;
+6. determine whether the deployed runtime can satisfy the current mission or whether a separately verified replacement is required;
+7. preserve all findings as append-only evidence;
+8. keep unrestricted live execution blocked until identity is resolved and the selected executor is fully re-verified.
 
-Recorded deployed executor: 0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286
-Polygon PoS / chain ID 137
-Deployment tx: 0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a
-
-Do not treat explorer screenshots alone as bytecode-equivalence proof.
+Do not guess a deployment artifact. Do not reuse a historical completion claim as authority.
 
 ## 16. MISSION PHASE POLICY
 Current phase: GLOBAL FORENSIC INTEGRATION / GOAL-FIRST RE-ARCHITECTURE.
 
 Order:
-A. chain/runtime truth
+A. runtime/executor truth
 B. data/chain/RPC truth
 C. V2 exact economics and execution
 D. V3 genuine graph routing and execution
@@ -306,14 +330,17 @@ REAL LIVE POSITIVE NET PROFIT ABOVE $0.50 PER ACCEPTED TRADE, with complete safe
 
 If a feature does not materially improve this path, it is lower priority.
 
-## 23. CURRENT DECISION
-Project is NOT complete.
-Project is NOT authorized for unrestricted live mainnet execution.
-The forensic repository/goal map and wallet/deployment evidence have now been durably recorded.
-Immediate next technical gate remains deployed executor identity verification.
-After that, converge V2/V3 onto one exact economic certification and execution truth path, remove legacy fixed assumptions from the execution hot path, and build the measured autonomous loop.
+## 23. P0-A.0 RESULT
+Task `P0-A — deployed executor on-chain identity verification` reached a decisive ground-evidence conclusion on 2026-09-10: **the deployed runtime does not match the current hardened artifact**. The task is therefore not a production-authorizing pass. It is closed only as an evidence-producing investigation step.
 
-## 24. CONTINUITY ACKNOWLEDGEMENT
+Evidence record: `docs/PHANTOMX_P0A_RUNTIME_IDENTITY_RESULT_2026-09-10.md`.
+
+## 24. ACTIVE TASK NOW
+`P0-A.1 — Resolve deployed-executor build lineage and exact artifact identity.`
+
+This remains the only active task.
+
+## 25. CONTINUITY ACKNOWLEDGEMENT
 When this file is loaded after disconnect, treat the project as the same continuous mission, not a new project.
 
 PRIMARY INSTRUCTION: CONTINUE THE MISSION. DO NOT RESTART IT.
