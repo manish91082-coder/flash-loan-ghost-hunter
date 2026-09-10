@@ -1,16 +1,22 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.0
+Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.1
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-10
 
 ## 0. Purpose
-This file is the recovery and continuity anchor for the PHANTOMX Flash Loan Ghost Hunter project. It records the authoritative mission goal, operating doctrine, verified repository state, known implementation gaps, and execution path. It is intended to prevent goal drift, state loss, and accidental restart after runtime/thread disconnection.
+This file is the recovery and continuity anchor for the PHANTOMX Flash Loan Ghost Hunter project. It records the authoritative mission goal, operating doctrine, verified repository state, known implementation gaps, and execution path. It prevents goal drift, state loss, and accidental restart after runtime/thread disconnection.
 
 ## 1. MASTER GOAL
 Final success criterion:
 LIVE MARKET -> EXECUTABLE OPPORTUNITY -> ALL COSTS SUBTRACTED -> CONSERVATIVE NET PROFIT > $0.50 -> SAFE ATOMIC EXECUTION -> RECEIPT -> BALANCE RECONCILIATION -> REALIZED PROFIT PROOF.
 
 The system is successful only when it produces real positive net profit in the live market under the verified safety envelope. Continuous running, model predictions, simulations, logs, or expected PnL alone are NOT success.
+
+Hard economic objectives:
+- O1: conservative fully-costed net profit must be strictly greater than $0.50 for every accepted trade.
+- O2: never knowingly execute a negative-conservative-economics trade; reject uncertainty and fail closed rather than gambling on it.
+
+"No opportunity missed" is an optimization objective subordinate to safety and O1. It must never be used to bypass a hard gate.
 
 Target operating behavior:
 - Fully autonomous, with no routine manual decision-making.
@@ -21,14 +27,14 @@ Target operating behavior:
 - Dynamically size flash loans and optimize trade size.
 - Dynamically price gas and include exact transaction gas in economics.
 - Dynamically account for swap fees, flash-loan fees, slippage, price impact, MEV risk/buffer, and other execution costs.
-- Execute only when conservative net profit clears the $0.50 minimum execution floor and all safety gates are green.
-- Seek low-latency decisions and execution, with millisecond/fractional-second decision architecture where infrastructure permits. Do not claim latency targets are achieved until measured.
+- Execute only when conservative net profit clears the $0.50 execution floor and all safety gates are green.
+- Seek low-latency decisions and execution, with millisecond/fractional-second architecture where infrastructure permits. Do not claim latency targets are achieved until measured.
 - Preserve zero-cost architecture: no mandatory paid always-on server and no permanent dependence on the user's desktop as the production host.
 - Use multiple free/public RPCs with health scoring, rolling failover, and per-request selection.
 - Automated Telegram/mobile reporting.
 - AI brains and online tuner continuously improve from live outcomes, but learned output never overrides hard safety gates.
 
-Mathematical interpretation of "zero loss": it means the system must not knowingly execute a trade whose conservative, fully-costed economics are negative. Absolute zero realized loss cannot be guaranteed against every external blockchain failure, so the system must fail closed whenever safety, identity, quote freshness, gas, or execution conditions are uncertain.
+Mathematical interpretation of "zero loss": the engineering requirement is that PHANTOMX does not knowingly authorize a transaction whose conservative, fully-costed economics are non-positive. Absolute zero realized loss against arbitrary external blockchain failures cannot be guaranteed, so the system must fail closed whenever safety, identity, quote freshness, gas, or execution conditions are uncertain.
 
 ## 2. V2 / V3 ROLE SEPARATION
 V2 and V3 remain distinct execution architectures.
@@ -131,7 +137,14 @@ Telegram is observability, not the execution control plane.
 
 ## 11. VERIFIED REPOSITORY BASELINE
 Repository: manish91082-coder/flash-loan-ghost-hunter
-Current main SHA: 475f2e4697238fde2220197f4191faf4109cbbf7
+Visibility: public
+Current main SHA before this state-lock commit: d635257d63d654a7f95cfe581579ace010c9bdd7
+Latest prior goal-lock commit: 3ba9032c5f7a2c3b0474d984a34a1ab6ff36f84e
+
+New durable doctrine/state files added in this continuation:
+- docs/PHANTOMX_MASTER_OPERATING_DOCTRINE.md
+- docs/PHANTOMX_CHAT_CONTINUITY_PROTOCOL.md
+- docs/PHANTOMX_CURRENT_STATE_2026-09-10.md
 
 Relevant verified components:
 - phantomx_core/economic_truth.py
@@ -158,6 +171,7 @@ Strong foundation:
 - live V3 harvesting infrastructure
 - V3 checkpointing, metrics and online tuner infrastructure
 - multiple RPC failover foundations
+- durable goal/continuity doctrine now committed to Git
 
 Partial / not production-complete:
 - V2 legacy strategy economics is not fully integrated with the canonical economic-truth gate.
@@ -168,11 +182,12 @@ Partial / not production-complete:
 - final requote/state locking is required but not yet proven end-to-end through the current strategy path.
 - deployed executor runtime identity is not yet fully proven against the hardened artifact.
 - realized live PnL has not been proven.
+- Latest GitHub combined-status endpoint currently exposes no status entries for the goal-lock commit. A recent workflow-run query showed the failure-alert workflow skipped. Fresh critical workflow evidence must be observed before CI is declared green for the latest state.
 
 ## 13. EXACT LAST KNOWN RESUME POINT
-Paused after adding fail-closed deployed-executor identity preflight and before real on-chain runtime identity verification.
+The active technical gate remains deployed-executor identity verification.
 
-Next gate:
+Required gate:
 1. eth_chainId
 2. eth_getCode
 3. exact runtime bytecode hash
@@ -186,6 +201,7 @@ Next gate:
 
 Recorded deployed executor: 0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286
 Polygon PoS / chain ID 137
+Deployment tx: 0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a
 
 Do not treat explorer screenshots alone as bytecode-equivalence proof.
 
