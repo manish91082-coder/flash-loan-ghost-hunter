@@ -39,17 +39,6 @@ jobs:
           import subprocess
 
           source = pathlib.Path("contracts/PhantomX_Production_Executor.sol")
-          output = pathlib.Path("/tmp/phantomx-solc/PhantomX_Production_Executor.bin")
-          if not output.exists():
-              raise SystemExit(f"Missing compiler output: {output}")
-
-          creation_hex = output.read_text().strip()
-          if not creation_hex or any(c not in "0123456789abcdefABCDEF" for c in creation_hex):
-              raise SystemExit("Invalid creation bytecode")
-
-          # solcjs --bin emits creation bytecode. Obtain runtime bytecode from
-          # solc's standard JSON output so constructor/metadata bytes are not
-          # mistaken for deployed runtime code.
           payload = {
               "language": "Solidity",
               "sources": {str(source): {"content": source.read_text()}},
@@ -82,6 +71,8 @@ jobs:
           if not artifact:
               raise SystemExit("Executor artifact missing from compiler output")
           runtime_hex = artifact.get("evm", {}).get("deployedBytecode", {}).get("object", "")
+          if not runtime_hex:
+              raise SystemExit("Optimized runtime bytecode missing")
           runtime_bytes = len(runtime_hex) // 2
           limit = 24_576
           print(f"Executor runtime bytecode: {runtime_bytes} bytes")
