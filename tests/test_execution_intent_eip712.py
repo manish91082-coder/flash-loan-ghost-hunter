@@ -91,6 +91,28 @@ class ExecutionIntentEIP712Tests(unittest.TestCase):
         recovered = Account.recover_message(signable, signature=signed["signature"])
         self.assertEqual(recovered.lower(), self.builder.account.address.lower())
 
+    def test_build_calldata_preserves_existing_signature(self):
+        signed = self.builder.sign_intent(self.intent)
+        calldata = self.builder.build_calldata(signed)
+        self.assertTrue(calldata.startswith(bytes.fromhex("6b" + "")))
+        self.assertIn(signed["signature"], calldata)
+
+    def test_mutated_intent_with_old_signature_is_not_resigned(self):
+        signed = self.builder.sign_intent(self.intent)
+        mutated = dict(signed)
+        mutated["amountBorrow"] += 1
+        calldata = self.builder.build_calldata(mutated)
+        self.assertIn(signed["signature"], calldata)
+        self.assertNotEqual(
+            self.builder.sign_intent({k: v for k, v in mutated.items() if k != "signature"})["signature"],
+            signed["signature"],
+        )
+
+    def test_unsigned_intent_fails_closed(self):
+        unsigned = dict(self.intent)
+        with self.assertRaises(ValueError):
+            self.builder.build_calldata(unsigned)
+
 
 if __name__ == "__main__":
     unittest.main()
