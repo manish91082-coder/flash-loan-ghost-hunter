@@ -3,6 +3,7 @@ name: PHANTOMX P0-B Executor Compile
 on:
   push:
     branches:
+      - main
       - mission/p0-a-economic-truth-engine
   pull_request:
     branches:
@@ -38,46 +39,13 @@ jobs:
           import pathlib
           import subprocess
 
-          source = pathlib.Path("contracts/PhantomX_Production_Executor.sol")
-          payload = {
-              "language": "Solidity",
-              "sources": {str(source): {"content": source.read_text()}},
-              "settings": {
-                  "optimizer": {"enabled": True, "runs": 200},
-                  "outputSelection": {"*": {"*": ["evm.deployedBytecode.object", "evm.bytecode.object"]}},
-              },
-          }
-          result = subprocess.run(
-              ["npx", "solcjs", "--standard-json"],
-              input=json.dumps(payload),
-              text=True,
-              capture_output=True,
-              check=False,
-          )
-          if result.returncode != 0:
-              raise SystemExit(result.stderr or "solc standard-json failed")
-
-          raw = result.stdout
-          start = raw.find("{")
-          if start < 0:
-              raise SystemExit("No JSON compiler output found")
-          report = json.loads(raw[start:])
-          errors = [e for e in report.get("errors", []) if e.get("severity") == "error"]
-          if errors:
-              raise SystemExit("\n".join(e.get("formattedMessage", str(e)) for e in errors))
-
-          contracts = report.get("contracts", {}).get(str(source), {})
-          artifact = contracts.get("PhantomX_Production_Executor")
-          if not artifact:
-              raise SystemExit("Executor artifact missing from compiler output")
-          runtime_hex = artifact.get("evm", {}).get("deployedBytecode", {}).get("object", "")
-          if not runtime_hex:
-              raise SystemExit("Optimized runtime bytecode missing")
-          runtime_bytes = len(runtime_hex) // 2
-          limit = 24_576
-          print(f"Executor runtime bytecode: {runtime_bytes} bytes")
-          print(f"EIP-170 limit: {limit} bytes")
-          if runtime_bytes > limit:
-              raise SystemExit(f"EIP-170 violation: runtime bytecode {runtime_bytes} > {limit}")
-          print("EIP-170 runtime bytecode gate: PASS")
+          root = pathlib.Path('/tmp/phantomx-solc')
+          bins = list(root.glob('*.bin'))
+          if not bins:
+              raise SystemExit('No solc runtime bytecode artifact produced')
+          for path in bins:
+              size = len(path.read_text().strip()) // 2
+              print(f'{path.name}: {size} bytes')
+              if size > 24576:
+                  raise SystemExit(f'EIP-170 violation: {path.name} is {size} bytes')
           PY
