@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.5
+Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.6
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-10
 
@@ -35,63 +35,81 @@ AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity qua
 ## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA after the latest checkpoint commit is `c9aecbe84d918516d0dcd446ca96f1d8e163309e`.
+Current main SHA for this checkpoint will be the commit created by this state update.
 
-## CURRENT P0-A FINDING
-The deployed executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` on Polygon chain ID 137 was probed through multiple public RPCs in the read-only CI workflow.
+## P0-A DEPLOYED RUNTIME FINDING
+The deployed Polygon executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` was compared through read-only multi-RPC evidence.
 
-Ground evidence from decisive run `34505796013` recorded:
-- deployment tx: `0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a`
-- deployment block: `93519165`
+Deployment:
+- tx: `0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a`
+- block: `93519165`
+- chain ID: `137`
+
+Decisive P0-A evidence:
 - deployed runtime: `6528` bytes
-- deployed runtime hash: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
-- current hardened `PhantomX_Production_Executor` runtime: `14665` bytes
-- current hardened runtime hash: `0xef0fa19dd4ae8b810b873485137372c45c50a4ac3ed68311e95ed8c747de2660`
-- runtime mismatch
-- owner matched recorded deployer
-- deployment sender and created contract matched recorded evidence
+- deployed runtime Keccak-256: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
+- current hardened `PhantomX_Production_Executor`: `14665` bytes
+- current hardened runtime Keccak-256: `0xef0fa19dd4ae8b810b873485137372c45c50a4ac3ed68311e95ed8c747de2660`
+- runtime mismatch with hardened artifact
+- deployed owner matches recorded deployer
+- deployment sender and created address match recorded evidence
 - deployment receipt succeeded
-- `DOMAIN_SEPARATOR()` and `paused()` reverted on the deployed runtime
-- no transaction was signed or broadcast
+- `DOMAIN_SEPARATOR()` and `paused()` revert on deployed legacy runtime
+- no transaction was signed or broadcast during identity work
 
-Therefore the deployed runtime is NOT yet accepted as the current hardened production executor.
+## P0-A.1 LINEAGE RESOLUTION — COMPLETE
+Historical source/build path was reproduced with ground evidence.
 
-Historical source evidence recovered:
-- `flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol` exists in the historical repository.
-- `live_mainnet_deployer.py` records `solcx.compile_source(source, output_values=['abi','bin'], solc_version='0.8.20')` for this source.
-- The historical `04_compile_and_dry_run.py` also records compiler `0.8.20` for the same source.
+Source:
+`flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol`
 
-## P0-A.1 EXECUTION CHECKPOINT
-Added `.github/workflows/p0-a1-executor-lineage.yml` to reproduce the historical build path and calculate the Ethereum Keccak-256 runtime hash.
+Historical deployer path:
+`live_mainnet_deployer.py` -> `solcx.compile_source(source, output_values=['abi','bin'], solc_version='0.8.20')` with no explicit optimizer setting.
 
-Workflow commit: `a61dff30144a6defc8c785570c88cbe5c0d9e2f6`.
-Append-only execution evidence: `docs/PHANTOMX_P0A1_LINEAGE_EXECUTION_2026-09-10.md`.
+Observed exact reproduction:
+- GitHub Actions workflow: `PHANTOMX P0-A.1 Executor Lineage`
+- run: `34507813800`
+- job: `reproduce-historical-build`
+- job ID: `102974218167`
+- conclusion: `success`
+- head commit: `71e4891b19c282c41e808277b3574e4752d3e482`
+- py-solc-x: `2.0.5`
+- solc binary: `0.8.20`
+- compile API: `py-solc-x compile_source`
+- optimizer explicitly configured: `false`
+- viaIR explicitly configured: `false`
+- reproduced runtime: `6528` bytes
+- reproduced creation bytecode: `8233` bytes
+- reproduced runtime Keccak: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
+- deployed runtime Keccak: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
+- exact runtime match: `true`
+- evidence artifact: `10164530653`
 
-The workflow's first reproduction configuration is:
-- solc `0.8.20`
-- optimizer disabled, matching the historical `compile_source` call's absence of optimizer settings
-- `viaIR=false`
-- Standard JSON output of deployed runtime, creation bytecode and ABI
-- Ethereum Keccak-256 comparison to deployed runtime hash
+ABI-derived selector evidence also aligned with the deployed legacy family, including:
+- `executeArbitrage(address,address,uint256,bool,uint256,uint256)` -> `0x275565c7`
+- `executeOperation(address,uint256,uint256,address,bytes)` -> `0x1b11d0ff`
+- `owner()` -> `0x8da5cb5b`
+- `withdrawTokens(address)` -> `0x49df728c`
 
-At checkpoint time, the new commit's GitHub combined commit status was still `pending` with zero status contexts. Therefore NO compiler-match conclusion has been claimed yet.
+## CAPABILITY DECISION
+Lineage is resolved as the historical `PhantomXMVP` artifact, but the deployed artifact is NOT accepted as the production executor for the master mission.
+
+The historical artifact contains fixed Aave/QuickSwap/Uniswap/token assumptions, fixed Uniswap V3 fee `500`, a narrow two-venue execution structure, and does not provide the current hardened EIP-712/allowlist/route-validation/dynamic execution model required by the master goal.
+
+Therefore:
+- historical artifact = archival/evidence only
+- current deployed executor = NOT production-authorized
+- unrestricted live execution = BLOCKED
 
 ## CURRENT ACTIVE TASK
-`P0-A.1 — Resolve deployed-executor build lineage and exact artifact identity.`
+`P0-A.2 — Define and implement the verified replacement executor artifact against the canonical V2/V3 intent and economic model.`
 
-Required evidence:
-1. observe the historical 0.8.20 reproduction result;
-2. if mismatch, broaden historically plausible compiler/build configurations;
-3. enumerate historical executor source candidates and configurations;
-4. inspect deployed runtime selectors/interfaces for family identification;
-5. determine whether the deployed executor can satisfy the current mission or whether a separately verified replacement artifact is required;
-6. preserve append-only evidence;
-7. keep live execution blocked until identity and capability are resolved.
+P0-A.2 must first freeze the executor interface contract for the final mission, then implement it, compile it reproducibly, prove source/runtime identity, run security/adversarial tests, and only later consider deployment. It must support the canonical V2/V3 routes without embedding dynamic market/economic values that should come from live state.
 
-## DOWNSTREAM PHASES
-After executor identity is resolved: live chain/RPC/data truth -> V2 convergence -> V3 graph/executor convergence -> unified economic authority -> dynamic loan optimization -> final requote/MEV -> AI/tuner integration -> adversarial/simulation -> autonomous orchestration -> serverless/24x7 -> controlled live execution -> receipt/balance/PnL -> final regression/certification.
+## NEXT PHASES
+After P0-A.2: live chain/RPC/data truth -> V2 convergence -> V3 graph/executor convergence -> unified economic authority -> dynamic loan optimization -> final requote/MEV -> AI/tuner integration -> adversarial/simulation -> autonomous orchestration -> serverless/24x7 -> controlled live execution -> receipt/balance/PnL -> final regression/certification.
 
 ## CONTINUITY
-On reconnect: load this state lock -> verify current main SHA -> inspect latest P0-A.1 evidence -> recheck critical CI -> resume P0-A.1. Never restart the project.
+On reconnect: load this state lock -> verify current main SHA -> inspect `docs/PHANTOMX_P0A1_LINEAGE_EXECUTION_2026-09-10.md` and `docs/chat_continuity/2026-09-10-p0a1-lineage-resolution.md` -> recheck critical CI -> resume P0-A.2. Never restart the project.
 
 END STATE LOCK
