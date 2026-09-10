@@ -48,7 +48,7 @@ async function safeCall(url, method, params) {
   }
 }
 
-async function compileRuntime(path, compiler) {
+async function compileRuntime(path, contractName, compiler) {
   const source = await fs.readFile(path, 'utf8');
   const input = {
     language: 'Solidity',
@@ -62,20 +62,18 @@ async function compileRuntime(path, compiler) {
   const output = JSON.parse(compiler.compile(JSON.stringify(input)));
   const errors = (output.errors ?? []).filter((e) => e.severity === 'error');
   required(errors.length === 0, `SOLC_ERRORS_${path}:\n${errors.map((e) => e.formattedMessage).join('\n')}`);
-  const contracts = output.contracts[path] ?? {};
-  const name = Object.keys(contracts)[0];
-  required(name, `NO_CONTRACT_OUTPUT_${path}`);
-  const runtime = contracts[name].evm.deployedBytecode.object;
-  required(typeof runtime === 'string' && runtime.length > 0, `EMPTY_COMPILED_RUNTIME_${path}`);
-  return { contract: name, runtime, bytes: runtime.length / 2, hash: keccak256('0x' + runtime) };
+  const artifact = output.contracts[path]?.[contractName];
+  required(artifact, `NO_CONTRACT_${contractName}_${path}`);
+  const runtime = artifact.evm?.deployedBytecode?.object;
+  required(typeof runtime === 'string' && runtime.length > 0, `EMPTY_COMPILED_RUNTIME_${contractName}`);
+  return { contract: contractName, compiler_version: compiler.version(), runtime, bytes: runtime.length / 2, hash: keccak256('0x' + runtime) };
 }
 
 async function main() {
   const compiler119 = (await import('solc')).default;
   const compiler120 = (await import('solc0820')).default;
-
-  const hardened = await compileRuntime('contracts/PhantomX_Production_Executor.sol', compiler119);
-  const legacyMvp = await compileRuntime('flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol', compiler120);
+  const hardened = await compileRuntime('contracts/PhantomX_Production_Executor.sol', 'PhantomX_Production_Executor', compiler119);
+  const legacyMvp = await compileRuntime('flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol', 'PhantomXMVP', compiler120);
 
   const attempts = [];
   for (const url of RPCS) {
@@ -92,10 +90,9 @@ async function main() {
     const code = await safeCall(url, 'eth_getCode', [EXECUTOR, 'latest']);
     const owner = await safeCall(url, 'eth_call', [{ to: EXECUTOR, data: '0x8da5cb5b' }, 'latest']);
     const domain = await safeCall(url, 'eth_call', [{ to: EXECUTOR, data: '0x3644e515' }, 'latest']);
-    const paused = await safeCall(url, 'eth_call', [{ to: EXECUTOR, 'data': '0x5c975abb' }, 'latest']);
+    const paused = await safeCall(url, 'eth_call', [{ to: EXECUTOR, data: '0x5c975abb' }, 'latest']);
     const tx = await safeCall(url, 'eth_getTransactionByHash', [DEPLOY_TX]);
     const receipt = await safeCall(url, 'eth_getTransactionReceipt', [DEPLOY_TX]);
-
     a.status = 'PARTIAL';
     a.latest_block = block.ok ? Number.parseInt(block.result, 16) : null;
     a.executor_code = code.ok ? code.result : null;
@@ -140,10 +137,7 @@ async function main() {
     deployer: DEPLOYER,
     deployment_tx: DEPLOY_TX,
     required_rpc_consensus: 2,
-    artifact_candidates: {
-      hardened_production: hardened,
-      legacy_mvp: legacyMvp,
-    },
+    artifact_candidates: { hardened_production: hardened, legacy_mvp: legacyMvp },
     attempts,
     broadcasts: 0,
   };
@@ -157,7 +151,6 @@ async function main() {
     required(primary.owner.toLowerCase() === peer.owner.toLowerCase(), 'RPC_OWNER_DIVERGENCE');
     required(primary.owner_match && peer.owner_match, 'OWNER_MISMATCH');
     required(primary.deployment_sender_match && primary.deployment_contract_match && primary.deployment_receipt_success, 'DEPLOYMENT_LINEAGE_MISMATCH');
-    required(primary.deployment_sender_match, 'DEPLOYMENT_SENDER_MISMATCH');
     evidence.status = 'IDENTITY_PROBED';
     evidence.selected = primary;
     evidence.peer = peer;
@@ -175,10 +168,9 @@ async function main() {
   await fs.mkdir('evidence', { recursive: true });
   await fs.writeFile('evidence/p0a-runtime-identity.json', JSON.stringify(evidence, null, 2) + '\n');
   console.log(JSON.stringify(evidence, null, 2));
-
   required(evidence.status === 'IDENTITY_PROBED', evidence.block_reason || 'RUNTIME_IDENTITY_PROBE_FAILED');
-  required(evidence.identity_conclusion !== 'MATCH_CURRENT_HARDENED_ARTIFACT', 'UNEXPECTED_HARDENED_MATCH');
-  console.log(`P0-A runtime identity finding: ${evidence.identity_conclusion}`);
+  required(evidence.identity_conclusion === 'MATCH_CURRENT_HARDENED_ARTIFACT', `DEPLOYED_IDENTITY_IS_${evidence.identity_conclusion}`);
+  console.log('P0-A executor runtime identity: PASS');
   console.log('No transaction was signed or broadcast.');
 }
 
