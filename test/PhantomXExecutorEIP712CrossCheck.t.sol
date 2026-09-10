@@ -6,7 +6,6 @@ import "../contracts/PhantomX_Production_Executor.sol";
 interface VmEIP712 {
     function addr(uint256 privateKey) external returns (address);
     function sign(uint256 privateKey, bytes32 digest) external returns (uint8 v, bytes32 r, bytes32 s);
-    function expectRevert() external;
 }
 
 contract PhantomXExecutorEIP712Harness is PhantomX_Production_Executor {
@@ -96,7 +95,6 @@ contract PhantomXExecutorEIP712CrossCheckTest {
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(PRIVATE_KEY, digest);
         intent.signature = abi.encodePacked(r, s, v);
         intent.amountBorrow += 1;
-        vm.expectRevert();
-        executor.verify(intent);
+        require(!executor.verify(intent), "mutated intent accepted");
     }
 }
