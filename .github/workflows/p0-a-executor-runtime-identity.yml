@@ -1,0 +1,158 @@
+name: PHANTOMX P0-A Executor Runtime Identity
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  runtime-identity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pinned compiler and ethers
+        run: npm install --no-save solc@0.8.19 ethers@6
+
+      - name: Run fail-closed runtime identity preflight
+        shell: bash
+        env:
+          EXECUTOR: 0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286
+          DEPLOYER: 0x6c32820FC0fEd00E9CF28b67425ba1Ca753bd69e
+          DEPLOY_TX: 0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a
+          EXPECTED_CHAIN: 137
+        run: |
+          set -euo pipefail
+          mkdir -p evidence
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          source = pathlib.Path('contracts/PhantomX_Production_Executor.sol')
+          payload = {
+              'language': 'Solidity',
+              'sources': {str(source): {'content': source.read_text()}},
+              'settings': {
+                  'optimizer': {'enabled': True, 'runs': 200},
+                  'viaIR': True,
+                  'outputSelection': {'*': {'*': ['evm.deployedBytecode.object']}},
+              },
+          }
+          result = subprocess.run(
+              ['npx', 'solcjs', '--standard-json'],
+              input=json.dumps(payload), text=True, capture_output=True, check=False,
+          )
+          if result.returncode != 0:
+              raise SystemExit(result.stderr or 'solc failed')
+          raw = result.stdout
+          start = raw.find('{')
+          if start < 0:
+              raise SystemExit('compiler returned no JSON')
+          report = json.loads(raw[start:])
+          errors = [e for e in report.get('errors', []) if e.get('severity') == 'error']
+          if errors:
+              raise SystemExit('\n'.join(e.get('formattedMessage', str(e)) for e in errors))
+          artifact = report['contracts'][str(source)]['PhantomX_Production_Executor']
+          runtime = artifact['evm']['deployedBytecode']['object']
+          if not runtime:
+              raise SystemExit('empty runtime bytecode')
+          pathlib.Path('evidence/compiled_runtime.hex').write_text(runtime + '\n')
+          print(f'Compiled runtime bytes: {len(runtime)//2}')
+          PY
+
+          cat > /tmp/probe.py <<'PY'
+          import json, os, subprocess, sys, time
+          from pathlib import Path
+
+          RPCS = [
+              'https://polygon-bor.publicnode.com',
+              'https://polygon-rpc.com',
+              'https://rpc-mainnet.maticvigil.com',
+              'https://1rpc.io/matic',
+          ]
+          executor = os.environ['EXECUTOR']
+          deployer = os.environ['DEPLOYER'].lower()
+          deploy_tx = os.environ['DEPLOY_TX']
+
+          def rpc(url, method, params):
+              payload = json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params})
+              for _ in range(2):
+                  try:
+                      p = subprocess.run(['curl','-sS','--max-time','10','-H','content-type: application/json','--data',payload,url],capture_output=True,text=True,check=False)
+                      if p.returncode == 0:
+                          body=json.loads(p.stdout)
+                          if 'error' in body:
+                              raise RuntimeError(body['error'])
+                          return body['result']
+                  except Exception as e:
+                      last=e
+                      time.sleep(0.5)
+              raise RuntimeError(str(last))
+
+          rows=[]
+          selected=None
+          for url in RPCS:
+              row={'rpc':url}
+              try:
+                  cid=rpc(url,'eth_chainId',[])
+                  block=rpc(url,'eth_blockNumber',[])
+                  code=rpc(url,'eth_getCode',[executor,'latest'])
+                  owner=rpc(url,'eth_call',[{'to':executor,'data':'0x8da5cb5b'},'latest'])
+                  domain=rpc(url,'eth_call',[{'to':executor,'data':'0x3644e515'},'latest'])
+                  paused=rpc(url,'eth_call',[{'to':executor,'data':'0x5c975abb'},'latest'])
+                  tx=rpc(url,'eth_getTransactionByHash',[deploy_tx])
+                  receipt=rpc(url,'eth_getTransactionReceipt',[deploy_tx])
+                  row.update(chain_id=int(cid,16),block=int(block,16),code_bytes=(len(code)-2)//2,owner='0x'+owner[-40:],domain=domain,paused=paused,tx_from=tx.get('from') if tx else None,tx_to=tx.get('to') if tx else None,receipt_contract=receipt.get('contractAddress') if receipt else None,receipt_status=receipt.get('status') if receipt else None)
+                  selected=row
+                  rows.append(row)
+                  break
+              except Exception as e:
+                  row['error']=repr(e); rows.append(row)
+
+          if selected is None:
+              Path('evidence/runtime_identity.json').write_text(json.dumps({'status':'BLOCKED','rpcs':rows},indent=2))
+              raise SystemExit('NO_VALID_RPC')
+
+          Path('evidence/runtime_identity.json').write_text(json.dumps({'status':'PROBED','selected':selected,'rpcs':rows},indent=2))
+          if selected['chain_id'] != 137: raise SystemExit('wrong chain')
+          if not selected['code_bytes'] > 0: raise SystemExit('no deployed bytecode')
+          if selected['receipt_contract'] and selected['receipt_contract'].lower() != executor.lower(): raise SystemExit('deployment receipt contract mismatch')
+          if selected['tx_from'].lower() != deployer: raise SystemExit('deployment sender mismatch')
+          if selected['receipt_status'] not in ('0x1','0x01','0x01'): raise SystemExit('deployment receipt not successful')
+          if selected['owner'].lower() != deployer: raise SystemExit('owner mismatch')
+          if len(selected['domain']) != 66 or not selected['domain'].startswith('0x'): raise SystemExit('domain separator malformed')
+          print(json.dumps(selected,indent=2))
+          PY
+          python /tmp/probe.py
+
+          node - <<'JS'
+          const fs=require('fs'); const {keccak256}=require('ethers');
+          const compiled=fs.readFileSync('evidence/compiled_runtime.hex','utf8').trim();
+          const onchain=JSON.parse(fs.readFileSync('evidence/runtime_identity.json','utf8')).selected;
+          if (!compiled.startsWith('0x')) {
+            const c='0x'+compiled;
+            fs.writeFileSync('evidence/runtime_hashes.json', JSON.stringify({compiled_runtime_hash:keccak256(c), onchain_runtime_hash:'NOT_CAPTURED_BY_HASH_IN_PROBE', compiled_bytes:(compiled.length/2)},null,2));
+          } else {
+            fs.writeFileSync('evidence/runtime_hashes.json', JSON.stringify({compiled_runtime_hash:keccak256(compiled)},null,2));
+          }
+          console.log(fs.readFileSync('evidence/runtime_hashes.json','utf8'));
+          JS
+
+          echo 'Identity preflight completed read-only; no transaction was broadcast.'
+
+      - name: Upload immutable probe evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: phantomx-p0a-runtime-identity
+          path: evidence/
