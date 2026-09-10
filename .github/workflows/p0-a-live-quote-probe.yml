@@ -10,7 +10,7 @@ on:
 jobs:
   live-read:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,5 +22,23 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Run read-only Polygon probe
+      - name: Run read-only Polygon quote probe
         run: python scripts/live_quote_probe.py
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install pinned runtime-identity dependencies
+        run: npm install --no-save solc@0.8.19 ethers@6
+
+      - name: Run read-only executor runtime identity probe
+        run: node scripts/p0a_executor_identity_probe.mjs
+
+      - name: Upload P0-A ground evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phantomx-p0a-ground-evidence-${{ github.sha }}
+          path: evidence/
