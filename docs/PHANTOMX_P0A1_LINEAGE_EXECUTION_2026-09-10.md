@@ -1,6 +1,6 @@
 # PHANTOMX P0-A.1 LINEAGE EXECUTION — 2026-09-10
 
-Status: IN PROGRESS / LIVE EXECUTION BLOCKED
+Status: RESOLVED AS HISTORICAL LEGACY LINEAGE / CURRENT PRODUCTION BLOCKED
 
 ## Objective
 Resolve the exact build lineage of the deployed Polygon executor at `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` by reproducing historical compiler/build behavior and comparing Ethereum Keccak-256 of deployed runtime bytecode.
@@ -18,32 +18,54 @@ The decisive P0-A read-only probe recorded deployed runtime size 6528 bytes and 
 
 The historical `04_compile_and_dry_run.py` also uses `solcx` compiler `0.8.20` for the same `PhantomXMVP.sol` source.
 
-## P0-A.1 action executed
-Added CI workflow:
+## P0-A.1 exact reproduction
+Workflow:
 `.github/workflows/p0-a1-executor-lineage.yml`
 
-The workflow:
-1. installs `solc@0.8.20`;
-2. compiles `flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol` using Standard JSON with optimizer disabled, `viaIR=false`, matching the default historical compiler intent;
-3. extracts deployed runtime bytecode;
-4. computes Ethereum Keccak-256;
-5. compares against deployed runtime hash `0x84d804...`;
-6. preserves runtime, creation bytecode, ABI and result text as a workflow artifact.
+Reproducer:
+`scripts/p0a1_reproduce_historical_py_solcx.py`
 
-The workflow is triggered on `main` pushes and can also be manually dispatched.
+Observed GitHub Actions run:
+- Run ID: `34507813800`
+- Head commit: `71e4891b19c282c41e808277b3574e4752d3e482`
+- Job: `reproduce-historical-build`
+- Job ID: `102974218167`
+- Conclusion: `success`
+- Artifact ID: `10164530653`
 
-## Current evidence boundary
-Commit containing the lineage workflow:
-`a61dff30144a6defc8c785570c88cbe5c0d9e2f6`
+Ground compilation result:
+- py-solc-x: `2.0.5`
+- solc binary: `0.8.20`
+- exact historical API: `compile_source`
+- optimizer explicitly configured: `false`
+- viaIR explicitly configured: `false`
+- reproduced runtime: `6528` bytes
+- reproduced creation bytecode: `8233` bytes
+- reproduced runtime Keccak-256: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
+- deployed runtime Keccak-256: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
+- exact runtime match: `true`
 
-As of this log entry, GitHub commit status for this new commit is still pending with no completed status contexts observed. Therefore the reproduced compiler result is NOT yet claimed as verified.
+The ABI-derived Ethereum selectors also match the deployed selector fingerprint recorded in the preceding P0-A runtime evidence, including:
+- `executeArbitrage(address,address,uint256,bool,uint256,uint256)` -> `0x275565c7`
+- `executeOperation(address,uint256,uint256,address,bytes)` -> `0x1b11d0ff`
+- `owner()` -> `0x8da5cb5b`
+- `withdrawTokens(address)` -> `0x49df728c`
 
-## Decision
-- Live capital execution: BLOCKED.
-- Deployed executor: NOT accepted as current hardened production executor.
-- P0-A.1 remains active until the CI reproduction result is observed and compared.
+This establishes that the deployed contract is exactly the historical `PhantomXMVP` lineage, not the current hardened `PhantomX_Production_Executor` lineage.
 
-## Next deterministic step
-Observe the P0-A.1 workflow result. If the exact hash matches, identify the historical source/build as the deployed artifact and assess capability gap versus current mission. If it does not match, broaden the matrix across historically plausible compiler/build settings and inspect deployed selector/interface fingerprints before selecting a replacement path.
+## Capability conclusion
+The lineage is now resolved, but the deployed legacy artifact is NOT acceptable for the current master mission. Its source contains fixed Polygon/Aave/QuickSwap/Uniswap/token assumptions, fixed Uniswap V3 fee `500`, fixed two-venue execution structure, a simple only-owner entry point, and lacks the current hardened executor's EIP-712 identity, generalized allowlists, route validation and current dynamic execution architecture.
+
+The historical source therefore has archival/evidence value only. It must not be promoted as the production executor for the current goal.
+
+## Safety decision
+- Exact historical lineage: RESOLVED.
+- Current hardened runtime equivalence: FALSE.
+- Deployed contract accepted for production: NO.
+- Unrestricted live execution: BLOCKED.
+- No live transaction signed or broadcast during this task.
+
+## Next deterministic task
+`P0-A.2 — Define and implement the replacement executor artifact contract against the canonical V2/V3 intent/economic model, then prove its compile/runtime identity and integration surface before any deployment.`
 
 END
