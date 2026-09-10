@@ -27,3 +27,4 @@ jobs:
         run: |
           forge test --match-path test/PhantomXExecutorSecurity.t.sol -vv
           forge test --match-path test/PhantomXExecutorCallbackMatrix.t.sol -vv
+          forge test --match-path test/PhantomXExecutorEIP712CrossCheck.t.sol -vv
