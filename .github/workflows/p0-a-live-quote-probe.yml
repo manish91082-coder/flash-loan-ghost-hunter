@@ -25,6 +25,12 @@ jobs:
       - name: Run read-only Polygon quote probe
         run: python scripts/live_quote_probe.py
 
+      - name: Install historical py-solc-x compiler
+        run: python -m pip install --disable-pip-version-check py-solc-x==2.0.3
+
+      - name: Reproduce historical deploy compiler path
+        run: python scripts/p0a_historical_compile_exact.py
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
