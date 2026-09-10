@@ -9,9 +9,52 @@ interface VmSemantic {
     function expectRevert() external;
 }
 
+interface IAaveCallbackTarget {
+    function executeOperation(address asset, uint256 amount, uint256 premium, address initiator, bytes calldata params) external returns (bool);
+}
+
+contract MaliciousAavePool is IPool {
+    function flashLoanSimple(address receiverAddress, address asset, uint256 amount, bytes calldata params, uint16) external override {
+        PhantomX_Production_Executor.ExecutionIntent memory intent = abi.decode(params, (PhantomX_Production_Executor.ExecutionIntent));
+        intent.routerA = address(0x9999999999999999999999999999999999999999);
+        IAaveCallbackTarget(receiverAddress).executeOperation(asset, amount, 0, receiverAddress, abi.encode(intent));
+    }
+}
+
+contract MaliciousBalancerVault is IBalancerVault {
+    function flashLoan(address recipient, address[] memory tokens, uint256[] memory amounts, bytes memory userData) external override {
+        PhantomX_Production_Executor.ExecutionIntent memory intent = abi.decode(userData, (PhantomX_Production_Executor.ExecutionIntent));
+        intent.routerA = address(0x9999999999999999999999999999999999999999);
+        address[] memory callbackTokens = new address[](1);
+        callbackTokens[0] = tokens[0];
+        uint256[] memory callbackAmounts = new uint256[](1);
+        callbackAmounts[0] = amounts[0];
+        uint256[] memory fees = new uint256[](1);
+        fees[0] = 0;
+        IAaveCallbackTarget(recipient).receiveFlashLoan(callbackTokens, callbackAmounts, fees, abi.encode(intent));
+    }
+}
+
+contract MaliciousUniswapV3Pool is IUniswapV3Pool {
+    address public token0Address;
+    address public token1Address;
+
+    constructor(address token0_, address token1_) { token0Address = token0_; token1Address = token1_; }
+    function token0() external view override returns (address) { return token0Address; }
+    function token1() external view override returns (address) { return token1Address; }
+    function flash(address recipient, uint256, uint256, bytes calldata data) external override {
+        PhantomX_Production_Executor.ExecutionIntent memory intent = abi.decode(data, (PhantomX_Production_Executor.ExecutionIntent));
+        intent.routerA = address(0x9999999999999999999999999999999999999999);
+        IAaveCallbackTarget(recipient).uniswapV3FlashCallback(0, 0, abi.encode(intent));
+    }
+}
+
 contract PhantomXExecutorSemanticHarness is PhantomX_Production_Executor {
     constructor(address signer) { owner = signer; }
     function verify(ExecutionIntent memory intent) external view returns (bool) { return _verifyIntentSignature(intent); }
+    function allowAave(address p) external { isAavePool[p] = true; }
+    function allowBalancer(address p) external { isBalancerVault[p] = true; }
+    function allowUniswapV3(address p) external { isUniswapV3Pool[p] = true; }
 }
 
 contract PhantomXExecutorSemanticHardeningTest {
@@ -23,10 +66,10 @@ contract PhantomXExecutorSemanticHardeningTest {
 
     function setUp() public { ownerAddress = vm.addr(PRIVATE_KEY); executor = new PhantomXExecutorSemanticHarness(ownerAddress); }
 
-    function _intent() internal view returns (PhantomX_Production_Executor.ExecutionIntent memory intent) {
-        intent.executionId = keccak256("semantic-hardening");
-        intent.providerType = PhantomX_Production_Executor.FlashProviderType.AAVE;
-        intent.providerAddress = address(0x2222222222222222222222222222222222222222);
+    function _intent(PhantomX_Production_Executor.FlashProviderType provider, address providerAddress) internal view returns (PhantomX_Production_Executor.ExecutionIntent memory intent) {
+        intent.executionId = keccak256(abi.encode("semantic-hardening", providerAddress));
+        intent.providerType = provider;
+        intent.providerAddress = providerAddress;
         intent.tokenBorrow = address(0x3333333333333333333333333333333333333333);
         intent.amountBorrow = 123456789;
         intent.swap1Type = PhantomX_Production_Executor.SwapType.V2;
@@ -38,7 +81,7 @@ contract PhantomXExecutorSemanticHardeningTest {
         intent.pathB = hex"1234";
         intent.minAmountOutFinal = 125000000;
         intent.minimumOnChainSurplus = 500000;
-        intent.maximumGasLimit = 500000;
+        intent.maximumGasLimit = 5000000;
         intent.deadline = 2000000000;
     }
 
@@ -51,8 +94,14 @@ contract PhantomXExecutorSemanticHardeningTest {
 
     function _digest(PhantomX_Production_Executor.ExecutionIntent memory intent) internal view returns (bytes32) { return keccak256(abi.encodePacked(bytes2(0x1901), executor.DOMAIN_SEPARATOR(), _structHash(intent))); }
 
+    function _signedIntent(PhantomX_Production_Executor.ExecutionIntent memory intent) internal returns (PhantomX_Production_Executor.ExecutionIntent memory) {
+        (uint8 v, bytes32 r, bytes32 s) = vm.sign(PRIVATE_KEY, _digest(intent));
+        intent.signature = abi.encodePacked(r, s, v);
+        return intent;
+    }
+
     function test_rejects_high_s_signature() public {
-        PhantomX_Production_Executor.ExecutionIntent memory intent = _intent();
+        PhantomX_Production_Executor.ExecutionIntent memory intent = _intent(PhantomX_Production_Executor.FlashProviderType.AAVE, address(0x2222222222222222222222222222222222222222));
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(PRIVATE_KEY, _digest(intent));
         bytes32 malleableS = bytes32(SECP256K1_N - uint256(s));
         uint8 malleableV = v == 27 ? 28 : 27;
@@ -62,11 +111,36 @@ contract PhantomXExecutorSemanticHardeningTest {
     }
 
     function test_rejects_invalid_signature_v() public {
-        PhantomX_Production_Executor.ExecutionIntent memory intent = _intent();
+        PhantomX_Production_Executor.ExecutionIntent memory intent = _intent(PhantomX_Production_Executor.FlashProviderType.AAVE, address(0x2222222222222222222222222222222222222222));
         (uint8 v, bytes32 r, bytes32 s) = vm.sign(PRIVATE_KEY, _digest(intent));
         v;
         intent.signature = abi.encodePacked(r, s, uint8(0));
         vm.expectRevert();
         executor.verify(intent);
+    }
+
+    function test_aave_callback_rejects_mutated_signed_intent() public {
+        MaliciousAavePool provider = new MaliciousAavePool();
+        executor.allowAave(address(provider));
+        PhantomX_Production_Executor.ExecutionIntent memory intent = _signedIntent(_intent(PhantomX_Production_Executor.FlashProviderType.AAVE, address(provider)));
+        vm.expectRevert();
+        executor.executeOpportunity(intent);
+    }
+
+    function test_balancer_callback_rejects_mutated_signed_intent() public {
+        MaliciousBalancerVault provider = new MaliciousBalancerVault();
+        executor.allowBalancer(address(provider));
+        PhantomX_Production_Executor.ExecutionIntent memory intent = _signedIntent(_intent(PhantomX_Production_Executor.FlashProviderType.BALANCER, address(provider)));
+        vm.expectRevert();
+        executor.executeOpportunity(intent);
+    }
+
+    function test_uniswap_v3_callback_rejects_mutated_signed_intent() public {
+        address borrowToken = address(0x3333333333333333333333333333333333333333);
+        MaliciousUniswapV3Pool provider = new MaliciousUniswapV3Pool(borrowToken, address(0x6666666666666666666666666666666666666666));
+        executor.allowUniswapV3(address(provider));
+        PhantomX_Production_Executor.ExecutionIntent memory intent = _signedIntent(_intent(PhantomX_Production_Executor.FlashProviderType.UNISWAP_V3, address(provider)));
+        vm.expectRevert();
+        executor.executeOpportunity(intent);
     }
 }
