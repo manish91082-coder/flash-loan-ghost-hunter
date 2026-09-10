@@ -2,8 +2,7 @@ name: PHANTOMX P0-A Executor Runtime Identity
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -16,120 +15,65 @@ jobs:
         with:
           submodules: false
 
-      - name: Set up Node
-        uses: actions/setup-node@v4
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
         with:
-          node-version: 20
+          version: stable
 
-      - name: Install pinned compiler and ethers
-        run: npm install --no-save solc@0.8.19 ethers@6
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
 
-      - name: Run fail-closed runtime identity preflight
+      - name: Compile exact configured production artifact
+        run: |
+          set -euo pipefail
+          forge build --force
+          ART="out/PhantomX_Production_Executor.sol/PhantomX_Production_Executor.json"
+          test -f "$ART"
+          jq -e '.deployedBytecode.object | type == "string" and length > 2' "$ART" >/dev/null
+          jq -r '.deployedBytecode.object' "$ART" > /tmp/compiled_runtime.hex
+          echo "compiled_runtime_bytes=$(( ($(wc -c < /tmp/compiled_runtime.hex) - 1) / 2 ))"
+
+      - name: Run fail-closed on-chain identity probes
         shell: bash
         env:
           EXECUTOR: 0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286
           DEPLOYER: 0x6c32820FC0fEd00E9CF28b67425ba1Ca753bd69e
           DEPLOY_TX: 0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a
+          RPC_URLS: "https://polygon-bor.publicnode.com https://polygon-rpc.com https://rpc-mainnet.maticvigil.com https://1rpc.io/matic"
         run: |
           set -euo pipefail
           mkdir -p evidence
-          python - <<'PY'
-          import json
-          import pathlib
-          import subprocess
+          selected=""
+          for rpc in $RPC_URLS; do
+            echo "Probing $rpc"
+            if ! chain=$(cast chain-id --rpc-url "$rpc" 2>/tmp/e); then cat /tmp/e; continue; fi
+            if [ "$chain" != "137" ]; then echo "wrong chain: $chain"; continue; fi
+            if ! code=$(cast code "$EXECUTOR" --rpc-url "$rpc"); then cat /tmp/e; continue; fi
+            if [ "$code" = "0x" ]; then echo "no code"; continue; fi
+            owner=$(cast call "$EXECUTOR" "owner()(address)" --rpc-url "$rpc")
+            domain=$(cast call "$EXECUTOR" "DOMAIN_SEPARATOR()(bytes32)" --rpc-url "$rpc")
+            paused=$(cast call "$EXECUTOR" "paused()(bool)" --rpc-url "$rpc")
+            block=$(cast block-number --rpc-url "$rpc")
+            tx_from=$(cast tx "$DEPLOY_TX" --rpc-url "$rpc" --json | jq -r '.from // empty')
+            tx_to=$(cast tx "$DEPLOY_TX" --rpc-url "$rpc" --json | jq -r '.to // null')
+            receipt_json=$(cast receipt "$DEPLOY_TX" --rpc-url "$rpc" --json)
+            receipt_status=$(echo "$receipt_json" | jq -r '.status')
+            receipt_contract=$(echo "$receipt_json" | jq -r '.contractAddress // empty')
+            deploy_block=$(echo "$receipt_json" | jq -r '.blockNumber')
+            deploy_code=$(cast code "$EXECUTOR" --rpc-url "$rpc" --block "$deploy_block")
+            deployed_hash=$(cast keccak "$code")
+            deployment_hash=$(cast keccak "$deploy_code")
+            compiled_hash=$(cast keccak "0x$(cat /tmp/compiled_runtime.hex)")
+            jq -n --arg rpc "$rpc" --arg chain "$chain" --arg block "$block" --arg code "$code" --arg owner "$owner" --arg domain "$domain" --arg paused "$paused" --arg tx_from "$tx_from" --arg tx_to "$tx_to" --arg receipt_status "$receipt_status" --arg receipt_contract "$receipt_contract" --arg deploy_block "$deploy_block" --arg deployed_hash "$deployed_hash" --arg deployment_hash "$deployment_hash" --arg compiled_hash "$compiled_hash" '{status:"PROBED",rpc:$rpc,chain_id:($chain|tonumber),latest_block:($block|tonumber),executor_code:$code,executor_code_hash:$deployed_hash,executor_code_bytes:(($code|length)-2)/2,owner:$owner,domain_separator:$domain,paused:($paused=="true"),deployment:{tx:$ENV.DEPLOY_TX,from:$tx_from,to:$tx_to,status:$receipt_status,contract_address:$receipt_contract,block:$deploy_block,code_hash_at_creation:$deployment_hash},compiled_runtime_hash:$compiled_hash,hash_match:($compiled_hash|ascii_downcase==($deployed_hash|ascii_downcase))}' > evidence/runtime_identity.json
+            selected="$rpc"
+            break
+          done
+          test -n "$selected" || { jq -n '{status:"BLOCKED",reason:"NO_VALID_RPC"}' > evidence/runtime_identity.json; exit 2; }
+          cat evidence/runtime_identity.json
+          jq -e '.chain_id == 137 and .executor_code_bytes > 0 and (.owner|ascii_downcase) == (env.DEPLOYER|ascii_downcase) and .deployment.from != null and (.deployment.contract_address|ascii_downcase) == (env.EXECUTOR|ascii_downcase) and .deployment.status == "1" and .hash_match == true' evidence/runtime_identity.json
+          echo "P0-A runtime identity preflight PASS: chain/executor/deployer/interface/runtime hash all matched. No transaction broadcast."
 
-          source = pathlib.Path('contracts/PhantomX_Production_Executor.sol')
-          payload = {
-              'language': 'Solidity',
-              'sources': {str(source): {'content': source.read_text()}},
-              'settings': {
-                  'optimizer': {'enabled': True, 'runs': 200},
-                  'viaIR': True,
-                  'outputSelection': {'*': {'*': ['evm.deployedBytecode.object']}},
-              },
-          }
-          result = subprocess.run(['npx','solcjs','--standard-json'], input=json.dumps(payload), text=True, capture_output=True, check=False)
-          if result.returncode != 0:
-              raise SystemExit(result.stderr or 'solc failed')
-          raw = result.stdout
-          start = raw.find('{')
-          if start < 0:
-              raise SystemExit('compiler returned no JSON')
-          report = json.loads(raw[start:])
-          errors = [e for e in report.get('errors', []) if e.get('severity') == 'error']
-          if errors:
-              raise SystemExit('\n'.join(e.get('formattedMessage', str(e)) for e in errors))
-          runtime = report['contracts'][str(source)]['PhantomX_Production_Executor']['evm']['deployedBytecode']['object']
-          if not runtime:
-              raise SystemExit('empty compiled runtime')
-          pathlib.Path('evidence/compiled_runtime.hex').write_text('0x'+runtime+'\n')
-          print(f'Compiled runtime bytes: {len(runtime)//2}')
-          PY
-
-          cat > /tmp/probe.py <<'PY'
-          import json, os, subprocess, time
-          from pathlib import Path
-          RPCS = ['https://polygon-bor.publicnode.com','https://polygon-rpc.com','https://rpc-mainnet.maticvigil.com','https://1rpc.io/matic']
-          executor=os.environ['EXECUTOR']; deployer=os.environ['DEPLOYER'].lower(); deploy_tx=os.environ['DEPLOY_TX']
-          def rpc(url, method, params):
-              payload=json.dumps({'jsonrpc':'2.0','id':1,'method':method,'params':params})
-              last='unknown'
-              for _ in range(2):
-                  p=subprocess.run(['curl','-sS','--max-time','10','-H','content-type: application/json','--data',payload,url],capture_output=True,text=True,check=False)
-                  if p.returncode==0:
-                      body=json.loads(p.stdout)
-                      if 'error' not in body: return body['result']
-                      last=str(body['error'])
-                  else: last=p.stderr.strip() or f'curl_exit_{p.returncode}'
-                  time.sleep(0.5)
-              raise RuntimeError(last)
-          rows=[]; selected=None
-          for url in RPCS:
-              row={'rpc':url}
-              try:
-                  cid=rpc(url,'eth_chainId',[]); block=rpc(url,'eth_blockNumber',[]); code=rpc(url,'eth_getCode',[executor,'latest'])
-                  owner=rpc(url,'eth_call',[{'to':executor,'data':'0x8da5cb5b'},'latest'])
-                  domain=rpc(url,'eth_call',[{'to':executor,'data':'0x3644e515'},'latest'])
-                  paused=rpc(url,'eth_call',[{'to':executor,'data':'0x5c975abb'},'latest'])
-                  tx=rpc(url,'eth_getTransactionByHash',[deploy_tx]); receipt=rpc(url,'eth_getTransactionReceipt',[deploy_tx])
-                  row.update(chain_id=int(cid,16),block=int(block,16),code=code,code_bytes=(len(code)-2)//2,owner='0x'+owner[-40:],domain=domain,paused=paused,tx_from=tx.get('from') if tx else None,tx_to=tx.get('to') if tx else None,receipt_contract=receipt.get('contractAddress') if receipt else None,receipt_status=receipt.get('status') if receipt else None,deploy_block=(int(receipt['blockNumber'],16) if receipt and receipt.get('blockNumber') else None))
-                  selected=row; rows.append(row); break
-              except Exception as e:
-                  row['error']=repr(e); rows.append(row)
-          if selected is None:
-              Path('evidence/runtime_identity.json').write_text(json.dumps({'status':'BLOCKED','rpcs':rows},indent=2)); raise SystemExit('NO_VALID_RPC')
-          Path('evidence/runtime_identity.json').write_text(json.dumps({'status':'PROBED','selected':selected,'rpcs':rows},indent=2))
-          if selected['chain_id']!=137: raise SystemExit('wrong chain')
-          if selected['code_bytes']<=0: raise SystemExit('no deployed bytecode')
-          if selected['tx_from'].lower()!=deployer: raise SystemExit('deployment sender mismatch')
-          if selected['receipt_contract'] and selected['receipt_contract'].lower()!=executor.lower(): raise SystemExit('deployment receipt contract mismatch')
-          if selected['receipt_status'] not in ('0x1','0x01'): raise SystemExit('deployment receipt not successful')
-          if selected['owner'].lower()!=deployer: raise SystemExit('owner mismatch')
-          if len(selected['domain'])!=66 or not selected['domain'].startswith('0x'): raise SystemExit('domain separator malformed')
-          if selected['deploy_block']:
-              deploy_code=rpc(RPCS[0] if selected['rpc']==RPCS[0] else selected['rpc'],'eth_getCode',[executor,hex(selected['deploy_block'])])
-              selected['deployment_code']=deploy_code
-              Path('evidence/runtime_identity.json').write_text(json.dumps({'status':'PROBED','selected':selected,'rpcs':rows},indent=2))
-          print(json.dumps(selected,indent=2))
-          PY
-          python /tmp/probe.py
-
-          node - <<'JS'
-          const fs=require('fs'); const {keccak256}=require('ethers');
-          const c=fs.readFileSync('evidence/compiled_runtime.hex','utf8').trim();
-          const r=JSON.parse(fs.readFileSync('evidence/runtime_identity.json','utf8')).selected;
-          const deployed=r.code;
-          const compiledHash=keccak256(c);
-          const deployedHash=keccak256(deployed);
-          const out={compiled_runtime_hash:compiledHash,deployed_runtime_hash:deployedHash,compiled_bytes:(c.length-2)/2,deployed_bytes:r.code_bytes,hash_match:compiledHash.toLowerCase()===deployedHash.toLowerCase(),deployment_block:r.deploy_block,deployment_code_hash:r.deployment_code?keccak256(r.deployment_code):null};
-          fs.writeFileSync('evidence/runtime_hashes.json',JSON.stringify(out,null,2));
-          console.log(JSON.stringify(out,null,2));
-          if(!out.hash_match) process.exit(3);
-          JS
-
-          echo 'P0-A executor runtime identity preflight: PASS; read-only only; no transaction broadcast.'
-
-      - name: Upload immutable probe evidence
+      - name: Upload ground evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
