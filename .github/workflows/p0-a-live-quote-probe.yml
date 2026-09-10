@@ -10,7 +10,7 @@ on:
 jobs:
   live-read:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
           node-version: 20
 
       - name: Install pinned runtime-identity dependencies
-        run: npm install --no-save solc@0.8.19 ethers@6
+        run: npm install --no-save solc@0.8.19 solc0820@npm:solc@0.8.20 ethers@6
 
       - name: Run read-only executor runtime identity probe
         run: node scripts/p0a_executor_identity_probe.mjs
