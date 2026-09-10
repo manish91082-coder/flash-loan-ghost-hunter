@@ -10,6 +10,10 @@ interface VmEIP712 {
 }
 
 contract PhantomXExecutorEIP712Harness is PhantomX_Production_Executor {
+    constructor(address signer) {
+        transferOwnership(signer);
+    }
+
     function verify(ExecutionIntent memory intent) external view returns (bool) {
         return _verifyIntentSignature(intent);
     }
@@ -24,22 +28,13 @@ contract PhantomXExecutorEIP712CrossCheckTest {
 
     function setUp() public {
         ownerAddress = vm.addr(PRIVATE_KEY);
-        vm.expectRevert();
-        // Silence interface-only linting without relying on a real failure path.
-        this._unusedRevertProbe();
-    }
-
-    function _unusedRevertProbe() external pure {
-        revert();
     }
 
     function _deploy() internal returns (PhantomXExecutorEIP712Harness deployed) {
-        // Constructor ownership is msg.sender, so this test contract cannot make the
-        // deterministic private-key owner the executor owner without a constructor hook.
-        deployed = new PhantomXExecutorEIP712Harness();
+        deployed = new PhantomXExecutorEIP712Harness(ownerAddress);
     }
 
-    function _intent() internal view returns (PhantomX_Production_Executor.ExecutionIntent memory intent) {
+    function _intent() internal pure returns (PhantomX_Production_Executor.ExecutionIntent memory intent) {
         intent.executionId = keccak256("eip712-cross-check");
         intent.providerType = PhantomX_Production_Executor.FlashProviderType.AAVE;
         intent.providerAddress = address(0x2222222222222222222222222222222222222222);
