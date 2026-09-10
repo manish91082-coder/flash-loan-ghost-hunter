@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.9
+Version: PFLC-STATE-2026-09-10-GOAL-LOCK-2.0
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-10
 
@@ -35,7 +35,7 @@ AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity qua
 ## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA at checkpoint creation: `0bc1ab745318d92159320122aaede9254caca26f`
+Current main SHA at this checkpoint: `97f6f61ca75905a25662253658e36b396819e4ea`
 
 ## P0-A DEPLOYED RUNTIME FINDING
 The deployed Polygon executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` was compared through read-only multi-RPC evidence.
@@ -48,9 +48,7 @@ Deployment:
 Decisive P0-A evidence:
 - deployed runtime: `6528` bytes
 - deployed runtime Keccak-256: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
-- current hardened `PhantomX_Production_Executor` previously measured: `14665` bytes
-- current hardened runtime Keccak previously recorded: `0xef0fa19dd4ae8b810b873485137372c45c50a4ac3ed68311e95ed8c747de2660`
-- runtime mismatch with legacy deployed artifact
+- current hardened executor is a separate source/runtime lineage and is not this deployed legacy artifact
 - deployed owner matches recorded deployer
 - deployment sender and created address match recorded evidence
 - deployment receipt succeeded
@@ -60,133 +58,41 @@ Decisive P0-A evidence:
 ## P0-A.1 LINEAGE RESOLUTION — COMPLETE
 Historical source/build path was reproduced with ground evidence.
 
-Source:
-`flash loan ghost hunter antigravity MVP/contracts/src/PhantomXMVP.sol`
+## P0-A.2 — INTERFACE FREEZE — COMPLETE
+Canonical executor interface remains frozen as previously established.
 
-Historical deployer path:
-`live_mainnet_deployer.py` -> `solcx.compile_source(source, output_values=['abi','bin'], solc_version='0.8.20')` with no explicit optimizer setting.
+## P0-A.2.1 — EXECUTOR ABI CONFORMANCE — GREEN
+Frozen v1 executor ABI was compiled and checked in CI; optimized compile/EIP-170 and prior executor security/callback/EIP712 evidence were green before semantic hardening.
 
-Observed exact reproduction:
-- workflow: `PHANTOMX P0-A.1 Executor Lineage`
-- run: `34507813800`
-- job: `reproduce-historical-build`
-- job ID: `102974218167`
-- conclusion: `success`
-- py-solc-x: `2.0.5`
-- solc binary: `0.8.20`
-- compile API: `py-solc-x compile_source`
-- optimizer explicitly configured: `false`
-- viaIR explicitly configured: `false`
-- reproduced runtime: `6528` bytes
-- reproduced creation bytecode: `8233` bytes
-- reproduced runtime Keccak: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
-- deployed runtime Keccak: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
-- exact runtime match: `true`
-- evidence artifact: `10164530653`
+## P0-A.2.2 SEMANTIC HARDENING — IN PROGRESS
+### P0-A.2.2.1 CALLBACK INTENT INTEGRITY BINDING — GREEN
+Finding resolved: callbacks previously bound only to `activeExecutionId`, allowing a theoretical same-ID mutated callback payload. The hardened executor now stores `activeIntentHash = _intentStructHash(intent)` alongside `activeExecutionId` and requires full 16-field intent-hash equality in Aave, Balancer and Uniswap V3 callbacks. Signature is excluded from the struct hash exactly as required by the frozen EIP-712 schema. Active bindings are cleared after the provider call on successful completion.
 
-## CAPABILITY DECISION
-The deployed runtime is exactly the historical `PhantomXMVP` lineage, but that artifact is archival/evidence only and is not production-authorized for the master mission because it contains fixed market/provider/token assumptions and lacks the required generalized hardened execution model.
+Regression evidence:
+- `test/PhantomXExecutorSemanticHardening.t.sol` includes malicious Aave, Balancer and Uniswap V3 mocks that mutate `routerA` while retaining the original executionId/provider.
+- First test attempt failed because the mock interface omitted Balancer/V3 callback declarations. This was a test-harness defect, not executor logic failure.
+- Fix commit: `b499250cce95cae5cb565d78f9ec03502f108650`.
+- Fresh P0-B security run: `34513582843`.
+- Head SHA: `b499250cce95cae5cb565d78f9ec03502f108650`.
+- Final job: `102993406909`.
+- Conclusion: `success`.
+- All required suites, including the new semantic-hardening suite, executed successfully.
 
-Therefore unrestricted live execution remains blocked.
+CI observability finding also resolved:
+- Earlier `ci-failure-alert` failure was caused by `gh` being invoked without explicit repository targeting outside a git checkout.
+- Commit `e3acd863eaab6db97a5e6ac33a22df15714b4c95` supplied explicit `--repo ${GITHUB_REPOSITORY}` targeting.
 
-## P0-A.2 — INTERFACE FREEZE CHECKPOINT
-Canonical executor interface is frozen before semantic implementation changes.
+Live market probe evidence remains separate from this semantic gate. A prior read-only Polygon quote probe succeeded at block `93572001`, while its historical compiler-install substep failed because the runner could not resolve `solc-bin.ethereum.org`. No transaction was broadcast.
 
-Frozen entry point:
-`executeOpportunity(ExecutionIntent intent)`
+### NEXT ACTIVE TASK
+`P0-A.2.2.2 — Flash-provider callback semantic audit: prove provider authenticity, callback initiator/recipient semantics, UniV3 single-asset flash/fee accounting, Balancer callback shape/repayment semantics, Aave callback binding, active-intent lifecycle, and nested/reentrancy behavior.`
 
-Frozen ordered intent fields:
-`executionId, providerType, providerAddress, tokenBorrow, amountBorrow, swap1Type, routerA, pathA, minAmountOut1, swap2Type, routerB, pathB, minAmountOutFinal, minimumOnChainSurplus, maximumGasLimit, deadline, signature`
+This task must finish with implementation changes/tests/evidence as required before any V2/V3 route-integration authorization.
 
-Frozen provider enums:
-`AAVE=0, UNISWAP_V3_FLASH=1, BALANCER=2`
-
-Frozen swap enums:
-`V2=0, V3=1`
-
-Frozen route model:
-- two authorization legs;
-- each leg may be multi-hop;
-- V2 path = ABI encoded `address[]`;
-- V3 path = packed `token|fee|token...`;
-- leg 1 starts with `tokenBorrow`;
-- leg 2 ends with `tokenBorrow`;
-- leg 1 output equals leg 2 input.
-
-Frozen EIP-712 domain:
-`PhantomX Executor / 1 / chainId / verifyingContract`
-
-Frozen authority boundary:
-- USD economic truth = `phantomx_core.economic_truth.evaluate_route`
-- exact executor gas gate = `execution.economic_gate.certify_executor_path`
-- conservative authorization floor = strictly `> $0.50`
-- `minimumOnChainSurplus` remains a token-denominated atomic invariant and does not replace USD gas/MEV certification.
-
-Machine-readable manifest:
-`contracts/PhantomX_Executor_Interface_v1.json`
-
-Conformance tests:
-`tests/test_p0a2_executor_interface.py`
-
-Interface freeze evidence:
-`docs/PHANTOMX_P0A2_EXECUTOR_INTERFACE_FREEZE_2026-09-10.md`
-
-Continuity checkpoint:
-`docs/chat_continuity/2026-09-10-p0a2-interface-freeze.md`
-
-## P0-A.2.1 — EXECUTOR ABI CONFORMANCE: GREEN
-The frozen v1 executor ABI has been compiled and checked in CI.
-
-Implementation/evidence:
-- `scripts/p0a21_executor_conformance.py` reproducibly compiles `PhantomX_Production_Executor.sol` with solcjs `0.8.19`, optimizer enabled, runs `200`, viaIR false.
-- `.github/workflows/p0-a21-executor-conformance.yml` runs the ABI probe and canonical interface tests.
-- First gate attempt `34509320620` failed only because pytest was not installed. The executor conformance probe itself had already passed. The CI harness was corrected by switching the interface tests to Python stdlib `unittest`.
-
-Green evidence on main `0bc1ab745318d92159320122aaede9254caca26f`:
-- workflow `PHANTOMX P0-A.2.1 Executor Conformance`
-- run `34509430528`
-- job `102979590876`
-- conclusion `success`
-- runtime bytecode: `15875` bytes
-- `ExecutionIntent ABI`: PASS
-- provider enum mapping: PASS
-- swap enum mapping: PASS
-- callback surface: PASS
-- canonical Python interface tests: PASS
-
-## P0-B COMPILE GATE: GREEN
-- workflow `PHANTOMX P0-B Executor Compile`
-- run `34509430445`
-- job `102979591052`
-- conclusion `success`
-- optimized runtime bytecode: `15875` bytes
-- EIP-170 limit: `24576` bytes
-- EIP-170 runtime gate: PASS
-
-## P0-B SECURITY GATE: GREEN
-- workflow `PHANTOMX P0-B Executor Security`
-- run `34509430375`
-- job `102979590565`
-- conclusion `success`
-- Solidity compiler: `0.8.19`
-- `PhantomXExecutorSecurity.t.sol`: 8 passed, 0 failed, 0 skipped
-- `PhantomXExecutorCallbackMatrix.t.sol`: 9 passed, 0 failed, 0 skipped
-- `PhantomXExecutorEIP712CrossCheck.t.sol`: 2 passed, 0 failed, 0 skipped
-- all three required forge suites executed successfully.
-- Compiler emitted only warnings about unused parameters/locals in unrelated legacy/mock executor files; no compiler error or test failure occurred.
-
-## P0-A.2.1 DECISION
-P0-A.2.1 required evidence gates are GREEN: reproducible ABI conformance, optimized compile/EIP-170, and executor security/callback/EIP712 suites. This does NOT authorize deployment because semantic execution-path review and exact V2/V3 integration remain unresolved.
-
-The old deployed `PhantomXMVP` remains archival. Live capital execution remains BLOCKED.
-
-## NEXT ACTIVE TASK
-`P0-A.2.2 — Executor semantic hardening review: prove the frozen interface is implemented with correct route, flash-provider, callback, gas-limit, repayment, surplus, signature, replay, allowlist and atomicity semantics before any deployment decision.`
-
-## NEXT PHASES
-After P0-A.2.2: exact V2/V3 route integration -> unified economic authority -> dynamic loan optimization -> final requote/MEV -> AI/tuner integration -> adversarial/simulation -> autonomous orchestration -> serverless/24x7 -> controlled live execution -> receipt/balance/PnL -> final regression/certification.
+## DEPLOYMENT / CAPITAL GATE
+Live deployment and live capital execution remain BLOCKED.
 
 ## CONTINUITY
-On reconnect: load this state lock -> verify current main SHA -> inspect `contracts/PhantomX_Production_Executor.sol`, `scripts/p0a21_executor_conformance.py`, `.github/workflows/p0-a21-executor-conformance.yml` -> recheck P0-A.2.1 evidence -> resume P0-A.2.2. Never restart the project.
+On reconnect: load this state lock -> verify current main SHA -> inspect the frozen interface, production executor and active semantic tests -> resume exactly at P0-A.2.2.2. Never restart the project.
 
 END STATE LOCK
