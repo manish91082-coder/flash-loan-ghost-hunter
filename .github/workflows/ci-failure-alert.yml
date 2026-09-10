@@ -24,6 +24,7 @@ jobs:
       - name: Create or update a single CI failure alert
         env:
           GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
           RUN_NAME: ${{ github.event.workflow_run.name || 'Manual CI health check' }}
           RUN_ID: ${{ github.event.workflow_run.id || 'manual' }}
           RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion || 'manual' }}
@@ -45,9 +46,9 @@ jobs:
           EOF
           )
 
-          existing=$(gh issue list --state open --search "${title} in:title" --json number --jq '.[0].number // empty')
+          existing=$(gh issue list --repo "${REPOSITORY}" --state open --search "${title} in:title" --json number --jq '.[0].number // empty')
           if [ -n "${existing}" ]; then
-            gh issue comment "${existing}" --body "${body}"
+            gh issue comment "${existing}" --repo "${REPOSITORY}" --body "${body}"
           else
-            gh issue create --title "${title}" --body "${body}"
+            gh issue create --repo "${REPOSITORY}" --title "${title}" --body "${body}"
           fi
