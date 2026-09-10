@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.1
+Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.2
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-10
 
@@ -138,53 +138,99 @@ Telegram is observability, not the execution control plane.
 ## 11. VERIFIED REPOSITORY BASELINE
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA before this state-lock commit: d635257d63d654a7f95cfe581579ace010c9bdd7
-Latest prior goal-lock commit: 3ba9032c5f7a2c3b0474d984a34a1ab6ff36f84e
+Current main SHA before this state-lock commit: 2368728adcf838bd1dea914ffb76890bce2d2f58
+Previous state-lock commit: e0595bfd660f1278d196dc8bbaa8bbd141333d91
 
-New durable doctrine/state files added in this continuation:
+New durable evidence/state files added in this continuation:
 - docs/PHANTOMX_MASTER_OPERATING_DOCTRINE.md
 - docs/PHANTOMX_CHAT_CONTINUITY_PROTOCOL.md
 - docs/PHANTOMX_CURRENT_STATE_2026-09-10.md
+- docs/PHANTOMX_FORENSIC_REPOSITORY_AND_GOAL_MAP_2026-09-10.md
+- docs/PHANTOMX_WALLET_DEPLOYMENT_EVIDENCE_2026-09-10.md
+- docs/chat_continuity/2026-09-10-goal-and-forensic-scan-session.md
 
 Relevant verified components:
+- phantomx_core/block_snapshot.py
 - phantomx_core/economic_truth.py
-- phantomx_core/transaction_gas.py
+- phantomx_core/exact_quote_engine.py
 - phantomx_core/executor_identity.py
+- phantomx_core/loan_optimizer.py
+- phantomx_core/rpc_pool.py
+- phantomx_core/transaction_gas.py
 - execution/economic_gate.py
 - execution/intent.py
 - execution/lifecycle.py
 - execution/pipeline.py
+- execution/state_machine.py
 - strategies/spatial.py
 - strategies/triangular.py
+- strategies/statistical.py
+- strategies/yield_strat.py
+- strategies/crosschain.py
+- strategies/mev.py
 - quote_engine/adapters.py
+- quote_engine/market_model.py
+- quote_engine/rpc_fetcher.py
+- contracts/PhantomX_Production_Executor.sol
 - phantomx_v3_universal_engine/live_real_rpc_harvester_v3.py
 - phantomx_v3_universal_engine/live_stream_runner_v3.py
-- phantomx_v3_universal_engine/ai_engines/universal_ai_brain.py
-- relevant unit/adversarial tests and CI workflows
+- phantomx_v3_universal_engine/ai_engines/*
+- tests/* and tests/adversarial/*
+- .github/workflows/*
 
 ## 12. CURRENT VERIFIED STATE
 Strong foundation:
 - economic truth types and fail-closed validation
 - exact transaction-path gas primitive
+- executable quote foundation
+- quote-driven dynamic loan optimization
 - EIP-712 intent signing and recovery
 - hardened executor protections
+- executor identity preflight code
 - live V3 harvesting infrastructure
 - V3 checkpointing, metrics and online tuner infrastructure
 - multiple RPC failover foundations
-- durable goal/continuity doctrine now committed to Git
+- strict opportunity state-machine scaffolding
+- durable goal/continuity doctrine and forensic map committed to Git
 
 Partial / not production-complete:
 - V2 legacy strategy economics is not fully integrated with the canonical economic-truth gate.
 - V3 triangular strategy interface is not fully reconciled with the hardened executor ABI; current strategy can place the triangular route in pathA while leaving routerB/pathB empty, conflicting with current two-leg executor validation expectations.
 - V3 AI brain still has fixed prototype assumptions, including fixed 320,000 gas and synthetic triangular multipliers. These cannot remain in final execution economics.
-- Spatial strategy still contains legacy first-two-venue selection, fixed 1-token candidate sizing, 0.5% hardcoded slippage, and rough token-decimal threshold logic.
+- V3 live harvester still has fallback gas behavior and synthetic triangular-price construction in the current source path.
+- Spatial strategy still contains first-two-venue selection, fixed 1-token candidate sizing, 0.5% hardcoded slippage, and rough token-decimal threshold logic.
 - execution/pipeline.py still has an older self-contained flow and does not yet use economic_gate as the sole certification authority.
 - final requote/state locking is required but not yet proven end-to-end through the current strategy path.
 - deployed executor runtime identity is not yet fully proven against the hardened artifact.
 - realized live PnL has not been proven.
-- Latest GitHub combined-status endpoint currently exposes no status entries for the goal-lock commit. A recent workflow-run query showed the failure-alert workflow skipped. Fresh critical workflow evidence must be observed before CI is declared green for the latest state.
+- latest-state CI evidence is not yet declared green because the GitHub combined-status endpoint exposed no status entries for the prior state-lock commit; fresh critical workflow results must be observed for the current state.
 
-## 13. EXACT LAST KNOWN RESUME POINT
+## 13. CURRENT EVIDENCE ADDED
+The 2026-09-10 user-supplied PolygonScan/MetaMask screenshots are preserved in the evidence record `docs/PHANTOMX_WALLET_DEPLOYMENT_EVIDENCE_2026-09-10.md`.
+
+They evidence at capture time:
+- public wallet `0x6c32820FC0fEd00E9CF28b67425ba1Ca753bd69e`
+- displayed PolygonScan POL balance `68.647911091455766246 POL`
+- deployed executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286`
+- creator relationship between that executor and the public wallet
+- deployment transaction `0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a`
+- MetaMask portfolio snapshot approximately `$7.38`, with approximately `68.648 POL` and approximately `0.00133 BNB` visible.
+
+These screenshots are not current live-chain balance proof, bytecode-equivalence proof, or realized-PnL proof.
+
+## 14. CRITICAL CONTRADICTION REGISTER
+Historical MVP documentation contains executor address `0x36623Fbc...91987ED59`, while current deployment evidence identifies `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286`.
+
+This contradiction is now a formal P0 investigation item. Runtime identity and deployment lineage must be resolved from live on-chain evidence before any historical execution claim is reused.
+
+Other historical contradictions:
+- old 0.44% combined-fee barrier vs current exact live-fee requirement;
+- old $2 minimum vs current strict $0.50 conservative-net floor;
+- old fixed 50 bps slippage vs current dynamic/bounded slippage requirement;
+- old fixed gas estimates vs current exact transaction-path gas requirement;
+- historical “100% complete” statements vs newer forensic evidence showing open blockers.
+
+## 15. EXACT LAST KNOWN RESUME POINT
 The active technical gate remains deployed-executor identity verification.
 
 Required gate:
@@ -205,12 +251,12 @@ Deployment tx: 0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595
 
 Do not treat explorer screenshots alone as bytecode-equivalence proof.
 
-## 14. MISSION PHASE POLICY
+## 16. MISSION PHASE POLICY
 Current phase: GLOBAL FORENSIC INTEGRATION / GOAL-FIRST RE-ARCHITECTURE.
 
 Order:
 A. chain/runtime truth
-B. data/quote truth
+B. data/chain/RPC truth
 C. V2 exact economics and execution
 D. V3 genuine graph routing and execution
 E. AI brain integration as bounded intelligence
@@ -225,17 +271,17 @@ M. regression and production certification
 
 Do not move to the next major stage while the active stage has unverified blockers.
 
-## 15. SATURATION / COMPLETION RULE
+## 17. SATURATION / COMPLETION RULE
 A phase is complete only when implementation, tests, ground-level execution, adversarial failures, evidence, no known P0 blocker, rollback, and V2/V3/shared-core impact are all addressed.
 
 Saturation coverage must include source, runtime, chain, data, RPC, quotes, liquidity, V2, V3, economics, gas, loan sizing, slippage, MEV, security, AI, tuner, simulation, execution, receipt, balance deltas, realized PnL, telemetry, serverless resilience, recovery, and regression.
 
 A numeric saturation score can track progress but can never override an open truth/safety blocker.
 
-## 16. CHANGE CONTROL
+## 18. CHANGE CONTROL
 Every material change records Change ID, reason, files/modules, previous behavior, new behavior, risk, tests, evidence, rollback, V2 impact, V3 impact, and shared-core impact.
 
-## 17. RECOVERY / PERSISTENCE
+## 19. RECOVERY / PERSISTENCE
 On every material event update current phase, current task, verified facts, open gaps, last tested commit, test evidence, next task, rollback point, and timestamp.
 
 Recovery rule:
@@ -243,16 +289,16 @@ LOAD THIS STATE -> VERIFY CURRENT GIT SHA -> RECHECK CRITICAL RUNTIME/CI STATUS 
 
 Never restart from zero after a conversation or runtime disconnect.
 
-## 18. NEXT-TASK SELECTION
+## 20. NEXT-TASK SELECTION
 Select one highest-value unresolved task using:
 Priority = safety impact + truth uncertainty + dependency centrality + evidence value + V2/V3 shared impact + goal proximity.
 
 Depth-first rule: do not start another task while the active task has unresolved verification blockers.
 
-## 19. SAFETY STOP CONDITIONS
+## 21. SAFETY STOP CONDITIONS
 STOP immediately on uncertain chain/token/pool identity, stale/inconsistent quote, unknown deployed runtime identity, missing exact gas, missing slippage/minOut, unbounded MEV exposure, route discontinuity, signer/caller uncertainty, conservative economics <= $0.50, unresolved P0 security, or unverified live-execution assumptions.
 
-## 20. NON-DRIFT COMMANDMENT
+## 22. NON-DRIFT COMMANDMENT
 Never optimize for more code, more documents, more AI, more complexity, or more reports by themselves.
 
 Optimize only for the master goal:
@@ -260,13 +306,14 @@ REAL LIVE POSITIVE NET PROFIT ABOVE $0.50 PER ACCEPTED TRADE, with complete safe
 
 If a feature does not materially improve this path, it is lower priority.
 
-## 21. CURRENT DECISION
+## 23. CURRENT DECISION
 Project is NOT complete.
 Project is NOT authorized for unrestricted live mainnet execution.
-Immediate resume gate remains deployed executor identity verification.
+The forensic repository/goal map and wallet/deployment evidence have now been durably recorded.
+Immediate next technical gate remains deployed executor identity verification.
 After that, converge V2/V3 onto one exact economic certification and execution truth path, remove legacy fixed assumptions from the execution hot path, and build the measured autonomous loop.
 
-## 22. CONTINUITY ACKNOWLEDGEMENT
+## 24. CONTINUITY ACKNOWLEDGEMENT
 When this file is loaded after disconnect, treat the project as the same continuous mission, not a new project.
 
 PRIMARY INSTRUCTION: CONTINUE THE MISSION. DO NOT RESTART IT.
