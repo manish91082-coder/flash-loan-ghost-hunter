@@ -1,6 +1,7 @@
 import unittest
 
 from eth_account import Account
+from eth_account.messages import encode_typed_data
 
 from execution.intent import ExecutionIntentBuilder
 
@@ -34,14 +35,21 @@ class ExecutionIntentCalldataImmutabilityTests(unittest.TestCase):
         calldata_a = self.builder.build_calldata(signed)
         calldata_b = self.builder.build_calldata(signed)
         self.assertEqual(calldata_a, calldata_b)
-
         signature = signed["signature"]
-        self.assertEqual(len(signature), 65)
-        self.assertEqual(Account.recover_message(self.builder.build_typed_data(self.intent), signature=signature).lower(), self.builder.account.address.lower())
+        typed = encode_typed_data(full_message=self.builder.build_typed_data(self.intent))
+        self.assertEqual(Account.recover_message(typed, signature=signature).lower(), self.builder.account.address.lower())
 
-    def test_build_calldata_accepts_unsigned_intent_and_signs_once(self):
-        calldata = self.builder.build_calldata(self.intent)
+    def test_build_calldata_requires_existing_signature(self):
+        with self.assertRaises(ValueError):
+            self.builder.build_calldata(self.intent)
+
+    def test_mutated_intent_keeps_old_signature(self):
+        signed = self.builder.sign_intent(self.intent)
+        mutated = dict(signed)
+        mutated["amountBorrow"] += 1
+        calldata = self.builder.build_calldata(mutated)
         self.assertTrue(calldata)
+        self.assertEqual(mutated["signature"], signed["signature"])
 
 
 if __name__ == "__main__":
