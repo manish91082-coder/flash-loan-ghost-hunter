@@ -1,348 +1,80 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.3
+Version: PFLC-STATE-2026-09-10-GOAL-LOCK-1.4
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-10
 
-## 0. Purpose
-This file is the recovery and continuity anchor for the PHANTOMX Flash Loan Ghost Hunter project. It records the authoritative mission goal, operating doctrine, verified repository state, known implementation gaps, execution path, active task and latest ground evidence. It prevents goal drift, state loss, and accidental restart after runtime/thread disconnection.
+## MASTER GOAL
+LIVE MARKET -> EXECUTABLE V2/V3 OPPORTUNITY -> ALL KNOWN/CONSERVATIVELY BOUNDED COSTS -> CONSERVATIVE NET PROFIT > $0.50 -> SAFE ATOMIC EXECUTION -> RECEIPT -> INDEPENDENT WALLET BALANCE RECONCILIATION -> REALIZED POSITIVE NET PnL.
 
-## 1. MASTER GOAL
-Final success criterion:
-LIVE MARKET -> EXECUTABLE OPPORTUNITY -> ALL COSTS SUBTRACTED -> CONSERVATIVE NET PROFIT > $0.50 -> SAFE ATOMIC EXECUTION -> RECEIPT -> BALANCE RECONCILIATION -> REALIZED PROFIT PROOF.
+Project completion is not established by continuous running, AI prediction, simulation, expected PnL, tests alone, or generated calldata. The final success criterion is live realized positive net PnL under the verified safety envelope.
 
-The system is successful only when it produces real positive net profit in the live market under the verified safety envelope. Continuous running, model predictions, simulations, logs, or expected PnL alone are NOT success.
+## HARD RULES
+- One active task at a time.
+- Depth first.
+- Evidence before confidence.
+- Verification before integration.
+- Integration before optimization.
+- Simulation before execution.
+- Receipt/balance evidence before realized-PnL claims.
+- GOAL > SAFETY > GROUND EVIDENCE > MATHEMATICAL CORRECTNESS > CURRENT CODE > HISTORICAL DOCUMENTATION.
+- Never knowingly authorize conservative non-positive economics.
+- Never use opportunity pressure to bypass a hard gate.
+- No secrets/private keys/seeds in the public repository.
+- Every material change must have tests, evidence, rollback reference and state update.
 
-Hard economic objectives:
-- O1: conservative fully-costed net profit must be strictly greater than $0.50 for every accepted trade.
-- O2: never knowingly execute a negative-conservative-economics trade; reject uncertainty and fail closed rather than gambling on it.
+## DYNAMIC-ONLY HOT PATH
+No unjustified fixed economic assumption may survive in the final authorization path where live state or exact on-chain calculation can provide the value. This includes fixed loan size, fixed economic gas, fixed slippage, synthetic spread/multipliers, stale pool universes, first-two-venue shortcuts and generic fallback gas used as truth.
 
-"No opportunity missed" is an optimization objective subordinate to safety and O1. It must never be used to bypass a hard gate.
+## CANONICAL HOT PATH
+DISCOVER -> PIN SNAPSHOT -> VERIFY CHAIN/RPC -> VERIFY TOKENS/POOLS/VENUES -> ENUMERATE V2/V3 ROUTES -> EXECUTABLE QUOTES -> LIQUIDITY/PRICE IMPACT -> DYNAMIC LOAN SIZE -> EXACT INTENT -> EXACT GAS -> ALL COSTS -> MEV/RISK -> PROFIT CERTIFICATE (> $0.50) -> FINAL REQUOTE/STATE LOCK -> EXECUTOR IDENTITY/SECURITY -> ATOMIC EXECUTION -> RECEIPT -> BALANCE/PnL RECONCILIATION -> LEARNING -> CHECKPOINT -> LOOP.
 
-Target operating behavior:
-- Fully autonomous, with no routine manual decision-making.
-- 24/7 operation.
-- Real-time live blockchain market data.
-- Dynamic runtime calculation; no fixed economic assumptions where values can be discovered/calculated from current state.
-- Dynamically choose V2 or V3 strategy and route according to current market conditions.
-- Dynamically size flash loans and optimize trade size.
-- Dynamically price gas and include exact transaction gas in economics.
-- Dynamically account for swap fees, flash-loan fees, slippage, price impact, MEV risk/buffer, and other execution costs.
-- Execute only when conservative net profit clears the $0.50 execution floor and all safety gates are green.
-- Seek low-latency decisions and execution, with millisecond/fractional-second architecture where infrastructure permits. Do not claim latency targets are achieved until measured.
-- Preserve zero-cost architecture: no mandatory paid always-on server and no permanent dependence on the user's desktop as the production host.
-- Use multiple free/public RPCs with health scoring, rolling failover, and per-request selection.
-- Automated Telegram/mobile reporting.
-- AI brains and online tuner continuously improve from live outcomes, but learned output never overrides hard safety gates.
+## AI AUTHORITY
+AI proposes. Deterministic verification decides. Executor executes.
+AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity quality, liquidity/price impact, short-horizon forecast, MEV-risk probability, RPC quality and learning parameters. AI cannot override identity, route validity, exact gas, repayment, minOut/slippage, allowlists, signer/authentication, safety caps or final authorization.
 
-Mathematical interpretation of "zero loss": the engineering requirement is that PHANTOMX does not knowingly authorize a transaction whose conservative, fully-costed economics are non-positive. Absolute zero realized loss against arbitrary external blockchain failures cannot be guaranteed, so the system must fail closed whenever safety, identity, quote freshness, gas, or execution conditions are uncertain.
-
-## 2. V2 / V3 ROLE SEPARATION
-V2 and V3 remain distinct execution architectures.
-
-V2:
-- Direct/spatial arbitrage across distinct venues.
-- Same base asset returns after two venue legs.
-- Genuine live executable quotes and liquidity only.
-
-V3:
-- Multi-hop / graph / triangular routing.
-- Genuine path continuity and actual executable liquidity only.
-- Multi-hop paths must match executor ABI and validation exactly.
-
-Both use the same zero-trust economic/security authority, but may be redesigned beyond legacy documentation when the master goal requires it.
-
-## 3. GOAL-FIRST CHANGE RULE
-Legacy documents are evidence and design history, NOT immutable specifications.
-
-Rule: GOAL > SAFETY > REALITY/EVIDENCE > MATHEMATICAL CORRECTNESS > CURRENT CODE > HISTORICAL DOCUMENTATION.
-
-Any module may be redesigned, replaced, split, merged, or removed when evidence shows it blocks the master goal or violates safety. Preserve useful prior work as evidence/history before destructive change.
-
-Eliminate from the final execution path any unjustified fixed loan size, fee, gas, slippage, synthetic spread, synthetic triangular multiplier, stale token/pool set, first-two-venue shortcut, or generic fallback gas assumption.
-
-## 4. CANONICAL EXECUTION PIPELINE
-WORLD/CHAIN/RPC DISCOVERY
- -> LIVE SNAPSHOT
- -> POOL/VENUE/ROUTE DISCOVERY
- -> V2/V3 ROUTE ENUMERATION
- -> EXECUTABLE QUOTES
- -> LIQUIDITY / PRICE-IMPACT MODEL
- -> DYNAMIC FLASH-LOAN SIZING
- -> EXACT EXECUTOR INTENT
- -> EXACT TRANSACTION GAS ESTIMATE AT PINNED BLOCK
- -> FEES + GAS + SLIPPAGE + MEV + RISK
- -> CONSERVATIVE PROFIT CERTIFICATE
- -> FINAL REQUOTE / STATE RECHECK
- -> EXECUTOR IDENTITY + SECURITY GATE
- -> ATOMIC EXECUTION
- -> RECEIPT
- -> BALANCE DELTA / REALIZED PnL RECONCILIATION
- -> ONLINE LEARNING / TUNING
- -> AUDIT LOG / CHECKPOINT
- -> CONTINUOUS LOOP
-
-Failure at any hard gate => STOP / NO TRADE.
-
-## 5. AI ARCHITECTURE
-AI is a decision-intelligence layer, not the final security authority.
-
-Responsibilities include market regime detection, V2/V3 strategy ranking, route ranking, dynamic loan-size optimization, timing, gas-aware optimization, liquidity/price-impact estimation, short-horizon forecasting, anomaly detection, RPC health prediction, MEV-risk prediction, parameter tuning, post-trade learning, and model evaluation.
-
-Hard deterministic controls remain authoritative for executor identity, provider/router/token allowlists, quote freshness, route continuity, exact gas, minOut/slippage, repayment, minimum surplus, deadline, signer/authentication, and balance reconciliation.
-
-Online learning path:
-outcome -> error attribution -> candidate update -> validation -> bounded promotion -> rollback capability.
-
-Unvalidated tuner output MUST NOT directly loosen safety constraints.
-
-## 6. DYNAMIC ECONOMIC MODEL
-For every candidate, use one coherent market snapshot.
-
-NET = FINAL_EXECUTABLE_VALUE - INITIAL_BORROW_VALUE - FLASH_LOAN_COST - SWAP_COSTS - GAS_COST - MEV_BUFFER - OTHER_COSTS.
-
-Execute only when CONSERVATIVE_NET > $0.50 and every safety gate is green.
-
-Trade-size optimizer target: find L* that maximizes executable net profit subject to liquidity, price impact, route capacity, flash-loan availability, fees, exact gas, slippage bounds, MEV risk, executor limits, and safety ceilings.
-
-## 7. RPC / DATA PLANE
-RPC availability is assumed unreliable.
-
-Required behavior:
-- maintain many free/public RPC endpoints per supported chain where usable
-- health-check and score latency, error rate, freshness, rate limits, and consistency
-- rolling failover and automatic recovery
-- pin economically related reads to a coherent block/snapshot
-- detect divergent responses
-- reject stale/inconsistent state
-- isolate failing providers
-
-RPCs are infrastructure, not truth. Cross-RPC consistency and pinned-block evidence determine truth.
-
-## 8. LOW-LATENCY TARGET
-Minimize RPC round trips, duplicate reads, process handoffs, unnecessary model calls, stale recomputation, and transaction construction overhead.
-Prefer batched reads, multicall, persistent/pre-warmed state where safe, parallel quote collection, fast route pruning, and deterministic hot paths.
-
-Measure p50/p95/p99 decision, quote, simulation, signing, and submission latency. Never substitute a target for evidence.
-
-## 9. SERVERLESS / ZERO-COST TARGET
-Target production architecture is distributed/serverless, not a permanently running paid server.
-
-Must tolerate cold starts, time limits, stateless workers, public-RPC rate limits, retries, duplicate events, and ephemeral storage.
-
-Use durable low-cost/free state and append-only evidence/checkpoints where possible. Production readiness requires measured 24/7 survivability, wake/retry semantics, duplicate suppression, persistent state, and fault recovery.
-
-## 10. TELEGRAM OPERATIONS
-Automated mobile reporting must include system health, chain/RPC health, evaluated opportunities, accept/reject decisions and reasons, predicted vs realized PnL, gas paid, latency, errors/incidents, recovery events, and rolling summaries.
-Telegram is observability, not the execution control plane.
-
-## 11. VERIFIED REPOSITORY BASELINE
+## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA at this lock update: 0c653e34b19e7205f53aad60ed5213c863a09525
-Previous state-lock SHA: 62616acfe62cf09ad8c5dc541d898e4c09858c28
+Current main SHA at this lock update is recorded by Git immediately after this commit.
 
-New durable evidence/state files added or updated in this continuation:
-- docs/PHANTOMX_MASTER_OPERATING_DOCTRINE.md
-- docs/PHANTOMX_CHAT_CONTINUITY_PROTOCOL.md
-- docs/PHANTOMX_CURRENT_STATE_2026-09-10.md
-- docs/PHANTOMX_FORENSIC_REPOSITORY_AND_GOAL_MAP_2026-09-10.md
-- docs/PHANTOMX_WALLET_DEPLOYMENT_EVIDENCE_2026-09-10.md
-- docs/chat_continuity/2026-09-10-goal-and-forensic-scan-session.md
-- docs/PHANTOMX_LATEST_STATE_OVERLAY_2026-09-10.md
-- docs/PHANTOMX_P0A_RUNTIME_IDENTITY_RESULT_2026-09-10.md
-- docs/chat_continuity/2026-09-10-p0a-runtime-identity.md
+## CURRENT P0-A FINDING
+The deployed executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` on Polygon chain ID 137 was probed through multiple public RPCs in the read-only CI workflow.
 
-Relevant verified components:
-- phantomx_core/block_snapshot.py
-- phantomx_core/economic_truth.py
-- phantomx_core/exact_quote_engine.py
-- phantomx_core/executor_identity.py
-- phantomx_core/loan_optimizer.py
-- phantomx_core/rpc_pool.py
-- phantomx_core/transaction_gas.py
-- execution/economic_gate.py
-- execution/intent.py
-- execution/lifecycle.py
-- execution/pipeline.py
-- execution/state_machine.py
-- strategies/spatial.py
-- strategies/triangular.py
-- strategies/statistical.py
-- strategies/yield_strat.py
-- strategies/crosschain.py
-- strategies/mev.py
-- quote_engine/adapters.py
-- quote_engine/market_model.py
-- quote_engine/rpc_fetcher.py
-- contracts/PhantomX_Production_Executor.sol
-- phantomx_v3_universal_engine/live_real_rpc_harvester_v3.py
-- phantomx_v3_universal_engine/live_stream_runner_v3.py
-- phantomx_v3_universal_engine/ai_engines/*
-- tests/* and tests/adversarial/*
-- .github/workflows/*
-
-## 12. CURRENT VERIFIED STATE
-Strong foundation:
-- economic truth types and fail-closed validation
-- exact transaction-path gas primitive
-- executable quote foundation
-- quote-driven dynamic loan optimization
-- EIP-712 intent signing and recovery
-- hardened executor protections
-- executor identity preflight code
-- live V3 harvesting infrastructure
-- V3 checkpointing, metrics and online tuner infrastructure
-- multiple RPC failover foundations
-- strict opportunity state-machine scaffolding
-- durable goal/continuity doctrine and forensic map committed to Git
-
-Partial / not production-complete:
-- V2 legacy strategy economics is not fully integrated with the canonical economic-truth gate.
-- V3 triangular strategy interface is not fully reconciled with the hardened executor ABI; current strategy can place the triangular route in pathA while leaving routerB/pathB empty, conflicting with current two-leg executor validation expectations.
-- V3 AI brain still has fixed prototype assumptions, including fixed 320,000 gas and synthetic triangular multipliers. These cannot remain in final execution economics.
-- V3 live harvester still has fallback gas behavior and synthetic triangular-price construction in the current source path.
-- Spatial strategy still contains first-two-venue selection, fixed 1-token candidate sizing, 0.5% hardcoded slippage, and rough token-decimal threshold logic.
-- execution/pipeline.py still has an older self-contained flow and does not yet use economic_gate as the sole certification authority.
-- final requote/state locking is required but not yet proven end-to-end through the current strategy path.
-- realized live PnL has not been proven.
-- current CI is not treated as globally green merely because individual workflows passed; each critical current-state result must be observed and recorded.
-
-## 13. CURRENT GROUND EVIDENCE — P0-A RUNTIME IDENTITY
-Decisive read-only CI probe:
-- Workflow: `PHANTOMX P0-A Live Polygon Quote Probe`
-- Run ID: `34505796013`
-- Head commit of decisive run: `ecb3637b9f465e1170f405cda706c1e0310ffbbd`
-- Uploaded evidence artifact ID: `10163773306`
-
-Observed deployed executor:
-`0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286`
-
-Observed deployment transaction:
-`0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a`
-
-Observed deployment block:
-`93519165`
-
-Observed deployed runtime:
-- bytes: `6528`
-- Keccak-256: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
-
-Current hardened production artifact:
-- compiled with Solidity `0.8.19+commit.7dd6d404` under the repository's configured optimizer/IR settings used by the probe
-- runtime bytes: `14665`
-- Keccak-256: `0xef0fa19dd4ae8b810b873485137372c45c50a4ac3ed68311e95ed8c747de2660`
-
-Result: **NO BYTECODE MATCH**.
-
-Additional deployed-runtime probes:
-- chain ID = `137`
-- owner() matched the recorded deployer
-- deployment sender matched the recorded deployer
-- deployment receipt contract address matched the executor address
-- deployment receipt status = success
-- `DOMAIN_SEPARATOR()` reverted
-- `paused()` reverted
-- more than one RPC endpoint reached the deployed runtime before identity conclusion
+Ground evidence from decisive run `34505796013` recorded:
+- deployment tx: `0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a`
+- deployment block: `93519165`
+- deployed runtime: `6528` bytes
+- deployed runtime hash: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
+- current hardened `PhantomX_Production_Executor` runtime: `14665` bytes
+- current hardened runtime hash: `0xef0fa19dd4ae8b810b873485137372c45c50a4ac3ed68311e95ed8c747de2660`
+- runtime mismatch
+- owner matched recorded deployer
+- deployment sender and created contract matched recorded evidence
+- deployment receipt succeeded
+- `DOMAIN_SEPARATOR()` and `paused()` reverted on the deployed runtime
 - no transaction was signed or broadcast
 
-Historical `PhantomXMVP` candidate compiled under the recorded Solidity 0.8.20 family also did not equal the deployed runtime hash in the tested configuration.
+Therefore the deployed runtime is NOT yet accepted as the current hardened production executor.
 
-## 14. CRITICAL CONTRADICTION REGISTER
-Historical MVP documentation contains executor address `0x36623Fbc...91987ED59`, while current deployment evidence identifies `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286`.
+A historical `PhantomXMVP.sol` source candidate is known to have been deployed by `live_mainnet_deployer.py` using `solcx.compile_source(source, output_values=['abi','bin'], solc_version='0.8.20')`. The exact compiler/package/build metadata still requires reproduction and comparison to the deployed runtime.
 
-Current deployed runtime is not the current hardened production artifact. Exact historical deployment artifact/configuration is unresolved.
-
-Other historical contradictions:
-- old 0.44% combined-fee barrier vs current exact live-fee requirement;
-- old $2 minimum vs current strict $0.50 conservative-net floor;
-- old fixed 50 bps slippage vs current dynamic/bounded slippage requirement;
-- old fixed gas estimates vs current exact transaction-path gas requirement;
-- historical “100% complete” statements vs newer forensic evidence showing open blockers.
-
-## 15. EXACT LAST KNOWN RESUME POINT
-Active task is now:
+## CURRENT ACTIVE TASK
 `P0-A.1 — Resolve deployed-executor build lineage and exact artifact identity.`
 
-Required gate:
-1. enumerate historical executor source candidates;
-2. recover deployment compiler/version and optimizer/IR settings;
-3. compile each candidate under exact configurations;
-4. compare runtime bytecode hashes against the deployed runtime;
-5. inspect deployed selectors/interfaces;
-6. determine whether the deployed runtime can satisfy the current mission or whether a separately verified replacement is required;
-7. preserve all findings as append-only evidence;
-8. keep unrestricted live execution blocked until identity is resolved and the selected executor is fully re-verified.
+Required evidence:
+1. recover exact historical compiler/package/version/settings used by the deployment;
+2. reproduce the historical compile path exactly, including source-key behavior where relevant;
+3. compute Ethereum Keccak-256 of runtime bytecode, not NIST SHA3-256, for every candidate;
+4. enumerate historical executor source candidates and configurations;
+5. compare candidate runtime hashes against deployed `0x84d804...`;
+6. inspect deployed runtime selectors/interfaces for family identification;
+7. determine whether deployed executor is salvageable for the current goal or whether a new verified executor artifact must later replace it;
+8. preserve append-only evidence and keep live execution blocked until resolved.
 
-Do not guess a deployment artifact. Do not reuse a historical completion claim as authority.
+## DOWNSTREAM PHASES
+After executor identity is resolved: live chain/RPC/data truth -> V2 convergence -> V3 graph/executor convergence -> unified economic authority -> dynamic loan optimization -> final requote/MEV -> AI/tuner integration -> adversarial/simulation -> autonomous orchestration -> serverless/24x7 -> controlled live execution -> receipt/balance/PnL -> final regression/certification.
 
-## 16. MISSION PHASE POLICY
-Current phase: GLOBAL FORENSIC INTEGRATION / GOAL-FIRST RE-ARCHITECTURE.
+## CONTINUITY
+On reconnect: load this state lock -> verify current main SHA -> inspect latest P0-A.1 evidence -> recheck critical CI -> resume P0-A.1. Never restart the project.
 
-Order:
-A. runtime/executor truth
-B. data/chain/RPC truth
-C. V2 exact economics and execution
-D. V3 genuine graph routing and execution
-E. AI brain integration as bounded intelligence
-F. dynamic tuner verification
-G. contract/security verification
-H. simulation/adversarial testing
-I. complete autonomous loop
-J. serverless/24x7 endurance and failover
-K. controlled live execution
-L. receipt/balance/realized-PnL proof
-M. regression and production certification
-
-Do not move to the next major stage while the active stage has unverified blockers.
-
-## 17. SATURATION / COMPLETION RULE
-A phase is complete only when implementation, tests, ground-level execution, adversarial failures, evidence, no known P0 blocker, rollback, and V2/V3/shared-core impact are all addressed.
-
-Saturation coverage must include source, runtime, chain, data, RPC, quotes, liquidity, V2, V3, economics, gas, loan sizing, slippage, MEV, security, AI, tuner, simulation, execution, receipt, balance deltas, realized PnL, telemetry, serverless resilience, recovery, and regression.
-
-A numeric saturation score can track progress but can never override an open truth/safety blocker.
-
-## 18. CHANGE CONTROL
-Every material change records Change ID, reason, files/modules, previous behavior, new behavior, risk, tests, evidence, rollback, V2 impact, V3 impact, and shared-core impact.
-
-## 19. RECOVERY / PERSISTENCE
-On every material event update current phase, current task, verified facts, open gaps, last tested commit, test evidence, next task, rollback point, and timestamp.
-
-Recovery rule:
-LOAD THIS STATE -> VERIFY CURRENT GIT SHA -> RECHECK CRITICAL RUNTIME/CI STATUS -> RECONCILE NEW CHANGES -> RESUME CURRENT TASK.
-
-Never restart from zero after a conversation or runtime disconnect.
-
-## 20. NEXT-TASK SELECTION
-Select one highest-value unresolved task using:
-Priority = safety impact + truth uncertainty + dependency centrality + evidence value + V2/V3 shared impact + goal proximity.
-
-Depth-first rule: do not start another task while the active task has unresolved verification blockers.
-
-## 21. SAFETY STOP CONDITIONS
-STOP immediately on uncertain chain/token/pool identity, stale/inconsistent quote, unknown deployed runtime identity, missing exact gas, missing slippage/minOut, unbounded MEV exposure, route discontinuity, signer/caller uncertainty, conservative economics <= $0.50, unresolved P0 security, or unverified live-execution assumptions.
-
-## 22. NON-DRIFT COMMANDMENT
-Never optimize for more code, more documents, more AI, more complexity, or more reports by themselves.
-
-Optimize only for the master goal:
-REAL LIVE POSITIVE NET PROFIT ABOVE $0.50 PER ACCEPTED TRADE, with complete safety/evidence, autonomous operation, dynamic economics, and no routine manual decision-making.
-
-If a feature does not materially improve this path, it is lower priority.
-
-## 23. P0-A.0 RESULT
-Task `P0-A — deployed executor on-chain identity verification` reached a decisive ground-evidence conclusion on 2026-09-10: **the deployed runtime does not match the current hardened artifact**. The task is therefore not a production-authorizing pass. It is closed only as an evidence-producing investigation step.
-
-Evidence record: `docs/PHANTOMX_P0A_RUNTIME_IDENTITY_RESULT_2026-09-10.md`.
-
-## 24. ACTIVE TASK NOW
-`P0-A.1 — Resolve deployed-executor build lineage and exact artifact identity.`
-
-This remains the only active task.
-
-## 25. CONTINUITY ACKNOWLEDGEMENT
-When this file is loaded after disconnect, treat the project as the same continuous mission, not a new project.
-
-PRIMARY INSTRUCTION: CONTINUE THE MISSION. DO NOT RESTART IT.
-
-END OF STATE LOCK
+END STATE LOCK
