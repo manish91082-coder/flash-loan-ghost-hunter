@@ -26,5 +26,67 @@ jobs:
       - name: Install pinned solc
         run: npm install --no-save solc@0.8.19
 
-      - name: Compile production executor
-        run: npx solcjs --bin --abi contracts/PhantomX_Production_Executor.sol -o /tmp/phantomx-solc
+      - name: Compile production executor with optimizer
+        run: |
+          mkdir -p /tmp/phantomx-solc
+          npx solcjs --bin --abi --optimize --optimize-runs 200 contracts/PhantomX_Production_Executor.sol -o /tmp/phantomx-solc
+
+      - name: Enforce EIP-170 runtime bytecode limit
+        run: |
+          python - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+
+          source = pathlib.Path("contracts/PhantomX_Production_Executor.sol")
+          output = pathlib.Path("/tmp/phantomx-solc/PhantomX_Production_Executor.bin")
+          if not output.exists():
+              raise SystemExit(f"Missing compiler output: {output}")
+
+          creation_hex = output.read_text().strip()
+          if not creation_hex or any(c not in "0123456789abcdefABCDEF" for c in creation_hex):
+              raise SystemExit("Invalid creation bytecode")
+
+          # solcjs --bin emits creation bytecode. Obtain runtime bytecode from
+          # solc's standard JSON output so constructor/metadata bytes are not
+          # mistaken for deployed runtime code.
+          payload = {
+              "language": "Solidity",
+              "sources": {str(source): {"content": source.read_text()}},
+              "settings": {
+                  "optimizer": {"enabled": True, "runs": 200},
+                  "outputSelection": {"*": {"*": ["evm.deployedBytecode.object", "evm.bytecode.object"]}},
+              },
+          }
+          result = subprocess.run(
+              ["npx", "solcjs", "--standard-json"],
+              input=json.dumps(payload),
+              text=True,
+              capture_output=True,
+              check=False,
+          )
+          if result.returncode != 0:
+              raise SystemExit(result.stderr or "solc standard-json failed")
+
+          raw = result.stdout
+          start = raw.find("{")
+          if start < 0:
+              raise SystemExit("No JSON compiler output found")
+          report = json.loads(raw[start:])
+          errors = [e for e in report.get("errors", []) if e.get("severity") == "error"]
+          if errors:
+              raise SystemExit("\n".join(e.get("formattedMessage", str(e)) for e in errors))
+
+          contracts = report.get("contracts", {}).get(str(source), {})
+          artifact = contracts.get("PhantomX_Production_Executor")
+          if not artifact:
+              raise SystemExit("Executor artifact missing from compiler output")
+          runtime_hex = artifact.get("evm", {}).get("deployedBytecode", {}).get("object", "")
+          runtime_bytes = len(runtime_hex) // 2
+          limit = 24_576
+          print(f"Executor runtime bytecode: {runtime_bytes} bytes")
+          print(f"EIP-170 limit: {limit} bytes")
+          if runtime_bytes > limit:
+              raise SystemExit(f"EIP-170 violation: runtime bytecode {runtime_bytes} > {limit}")
+          print("EIP-170 runtime bytecode gate: PASS")
+          PY
