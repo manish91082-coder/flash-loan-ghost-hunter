@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-11-GOAL-LOCK-2.6
+Version: PFLC-STATE-2026-09-11-GOAL-LOCK-2.7
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-11
 
@@ -35,7 +35,8 @@ AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity qua
 ## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA at this checkpoint: `e7329c0893172b295db7f3c76f474e4aefbb8aac`
+State-lock parent checkpoint SHA: `7e92c9f37b794b8312f3083637128509487019d1`
+State-lock commit is the canonical checkpoint tip; the parent SHA above is the exact repository state audited immediately before this lock update.
 
 ## P0-A DEPLOYED RUNTIME FINDING
 The deployed Polygon executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` was compared through read-only multi-RPC evidence.
@@ -105,11 +106,12 @@ Implemented as a fail-closed, non-capital orchestration layer:
 - `.github/copilot-instructions.md`
 - `docs/automation/P0-AUTO-0.1-CHECKPOINT.md`
 - `docs/automation/AGENT_HANDOFF_PROTOCOL.md`
+- `docs/automation/P0-AUTO-0.1-AGENT-TASK.md`
 
 The control plane enforces one atomic task, bounded repair attempts, explicit dependencies, evidence requirements, fail-closed behavior, and a hard prohibition on live capital authorization. Its CI workflow uses minimal read-only repository permissions.
 
 Current automation checkpoint:
-- exact latest automation/state checkpoint head: `e7329c0893172b295db7f3c76f474e4aefbb8aac`
+- audited automation base: `7e92c9f37b794b8312f3083637128509487019d1`
 - status: VERIFYING
 - reason: exact-head GitHub Actions success evidence has not yet been observed through the connected GitHub status surface
 - no claim of GREEN is made until that evidence exists
@@ -124,6 +126,6 @@ The underlying semantic mission remains active. No live deployment/capital work 
 Live deployment and live capital execution remain BLOCKED.
 
 ## CONTINUITY
-On reconnect: load this state lock -> verify exact main SHA -> load `automation/PHANTOMX_AUTOMATION_STATE.json` and `automation/phantomx_control_plane.json` -> verify the control-plane workflow evidence -> resume the single active task. Never restart the project and never replay completed work.
+On reconnect: load this state lock -> verify the state-lock parent checkpoint and current lock tip -> load `automation/PHANTOMX_AUTOMATION_STATE.json` and `automation/phantomx_control_plane.json` -> verify the control-plane workflow evidence -> resume the single active task. Never restart the project and never replay completed work.
 
 END STATE LOCK
