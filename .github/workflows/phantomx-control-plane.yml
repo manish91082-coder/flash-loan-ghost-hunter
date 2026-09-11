@@ -1,0 +1,43 @@
+name: PHANTOMX Autonomous Control Plane
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/**'
+      - 'docs/automation/**'
+      - 'PHANTOMX_PROJECT_STATE_LOCK.md'
+      - '.github/workflows/phantomx-control-plane.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'automation/**'
+      - 'docs/automation/**'
+      - 'PHANTOMX_PROJECT_STATE_LOCK.md'
+      - '.github/workflows/phantomx-control-plane.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phantomx-control-plane-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate fail-closed control plane
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact revision
+        uses: actions/checkout@v4
+
+      - name: Validate control-plane state machine
+        run: python3 automation/validate_control_plane.py | tee control-plane-report.txt
+
+      - name: Publish evidence artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: phantomx-control-plane-${{ github.sha }}
+          path: control-plane-report.txt
+          if-no-files-found: error
