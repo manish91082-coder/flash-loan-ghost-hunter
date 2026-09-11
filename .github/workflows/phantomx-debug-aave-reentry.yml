@@ -1,0 +1,20 @@
+name: PHANTOMX Debug Aave Reentry
+
+on:
+  push:
+    branches:
+      - phantomx/p0-a-2-2-3-a-short-pull-rejection
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - name: Trace failing Aave reentrancy test
+        run: forge test --match-path test/PhantomXExecutorCallbackInvocation.t.sol --match-test test_aave_provider_reentrant_executeOpportunity_is_rejected -vvvv
