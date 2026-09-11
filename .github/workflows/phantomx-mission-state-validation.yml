@@ -1,0 +1,48 @@
+name: PHANTOMX Mission State Validation
+
+on:
+  pull_request:
+    paths:
+      - 'automation/PHANTOMX_AUTOMATION_STATE.json'
+      - 'automation/phantomx_control_plane.json'
+      - 'automation/validate_mission_state.py'
+      - 'PHANTOMX_PROJECT_STATE_LOCK.md'
+      - 'automation/phantomx_status_collector.py'
+      - '.github/workflows/**'
+  push:
+    branches: [main]
+    paths:
+      - 'automation/PHANTOMX_AUTOMATION_STATE.json'
+      - 'automation/phantomx_control_plane.json'
+      - 'automation/validate_mission_state.py'
+      - 'PHANTOMX_PROJECT_STATE_LOCK.md'
+      - 'automation/phantomx_status_collector.py'
+      - '.github/workflows/**'
+  workflow_dispatch:
+  schedule:
+    - cron: '*/10 * * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phantomx-mission-state-validation-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate canonical mission state
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact HEAD
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Validate state machine and capital gate
+        run: python3 automation/validate_mission_state.py
