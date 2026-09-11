@@ -7,62 +7,14 @@
   "current": {
     "phase": "0",
     "gate": "P0-A.2.2.3",
-    "task_id": "P0-A.2.2.3-A",
+    "task_id": "P0-A.2.2.3-B",
     "status": "IN_PROGRESS"
   },
   "tasks": [
-    {
-      "task_id": "P0-AUTO-0.1",
-      "phase": "0",
-      "gate": "P0-AUTO",
-      "title": "Establish autonomous engineering control plane",
-      "objective": "Create a machine-readable, evidence-gated orchestration layer that can resume from exact state and select one atomic next task.",
-      "prerequisites": ["P0-A.2.2.2"],
-      "required_checks": ["control_plane_schema", "state_lock_consistency", "no_secret_material", "workflow_syntax"],
-      "acceptance": ["state machine is explicit", "master goal is explicit", "live capital remains blocked", "repair budget is bounded", "evidence schema is explicit"],
-      "status": "GREEN"
-    },
-    {
-      "task_id": "P0-AUTO-0.2",
-      "phase": "0",
-      "gate": "P0-AUTO",
-      "title": "Reconcile autonomous state and head-aware health reporting",
-      "objective": "Remove stale runtime SHA pins and workflow-name drift, prevent historical failures from contaminating current-head verdicts, and make state consistency a deterministic gate before autonomous progression.",
-      "prerequisites": ["P0-AUTO-0.1"],
-      "required_checks": ["state_schema_v1_1", "head_derived_state", "workflow_name_accuracy", "historical_failure_isolation", "capital_fail_closed", "mission_state_validation"],
-      "acceptance": ["current HEAD is runtime-derived", "historical failures are separated from current-head failures", "workflow drift is explicit", "state inconsistency fails closed", "live capital remains blocked", "validation workflow passes on exact HEAD"],
-      "status": "GREEN"
-    },
-    {
-      "task_id": "P0-A.2.2.3-A",
-      "phase": "0",
-      "gate": "P0-A.2.2.3",
-      "title": "Aave repayment lifecycle",
-      "objective": "Prove provider binding, callback binding, exact repayment approval/pull lifecycle, allowance cleanup, successful active-state cleanup, and executor behavior against a noncompliant provider.",
-      "prerequisites": ["P0-AUTO-0.2", "P0-A.2.2.2"],
-      "required_checks": ["aave_callback_binding", "repayment_pull", "allowance_cleanup", "active_state_cleanup", "short_pull_rejection", "reentrancy"],
-      "acceptance": ["realistic repayment path succeeds", "stale Aave allowance is zero after provider return", "active execution state is cleared", "a malicious/noncompliant provider cannot complete an under-repayment lifecycle", "all adversarial checks pass"],
-      "status": "IN_PROGRESS"
-    },
-    {
-      "task_id": "P0-A.2.2.3-B",
-      "phase": "0",
-      "gate": "P0-A.2.2.3",
-      "title": "Balancer repayment semantics",
-      "objective": "Prove exact Balancer callback shape, sender/asset/amount/fee binding, repayment transfer, balance invariant, and state cleanup.",
-      "prerequisites": ["P0-A.2.2.3-A"],
-      "required_checks": ["balancer_callback_binding", "repayment_transfer", "balance_invariant", "state_cleanup", "reentrancy"],
-      "status": "BLOCKED_BY_PREREQUISITE"
-    },
-    {
-      "task_id": "P0-A.2.2.3-C",
-      "phase": "0",
-      "gate": "P0-A.2.2.3",
-      "title": "Uniswap V3 flash repayment semantics",
-      "objective": "Prove canonical factory provenance, single-asset flash selection, fee-side binding, repayment transfer, and state cleanup.",
-      "prerequisites": ["P0-A.2.2.3-B"],
-      "required_checks": ["factory_provenance", "single_asset_selection", "fee_side_binding", "repayment_transfer", "state_cleanup", "reentrancy"],
-      "status": "BLOCKED_BY_PREREQUISITE"
-    }
+    {"task_id":"P0-AUTO-0.1","phase":"0","gate":"P0-AUTO","title":"Establish autonomous engineering control plane","objective":"Create a machine-readable, evidence-gated orchestration layer that can resume from exact state and select one atomic next task.","prerequisites":["P0-A.2.2.2"],"required_checks":["control_plane_schema","state_lock_consistency","no_secret_material","workflow_syntax"],"acceptance":["state machine is explicit","master goal is explicit","live capital remains blocked","repair budget is bounded","evidence schema is explicit"],"status":"GREEN"},
+    {"task_id":"P0-AUTO-0.2","phase":"0","gate":"P0-AUTO","title":"Reconcile autonomous state and head-aware health reporting","objective":"Remove stale runtime SHA pins and workflow-name drift, prevent historical failures from contaminating current-head verdicts, and make state consistency a deterministic gate before autonomous progression.","prerequisites":["P0-AUTO-0.1"],"required_checks":["state_schema_v1_1","head_derived_state","workflow_name_accuracy","historical_failure_isolation","capital_fail_closed","mission_state_validation"],"acceptance":["current HEAD is runtime-derived","historical failures are separated from current-head failures","workflow drift is explicit","state inconsistency fails closed","live capital remains blocked","validation workflow passes on exact HEAD"],"status":"GREEN"},
+    {"task_id":"P0-A.2.2.3-A","phase":"0","gate":"P0-A.2.2.3","title":"Aave repayment lifecycle","objective":"Prove provider binding, callback binding, exact repayment approval/pull lifecycle, allowance cleanup, successful active-state cleanup, and executor behavior against a noncompliant provider.","prerequisites":["P0-AUTO-0.2","P0-A.2.2.2"],"required_checks":["aave_callback_binding","repayment_pull","allowance_cleanup","active_state_cleanup","short_pull_rejection","reentrancy"],"acceptance":["realistic repayment path succeeds","stale Aave allowance is zero after provider return","active execution state is cleared","a malicious/noncompliant provider cannot complete an under-repayment lifecycle","all adversarial checks pass"],"status":"GREEN"},
+    {"task_id":"P0-A.2.2.3-B","phase":"0","gate":"P0-A.2.2.3","title":"Balancer repayment semantics","objective":"Prove exact Balancer callback shape, sender/asset/amount/fee binding, repayment transfer, balance invariant, and state cleanup.","prerequisites":["P0-A.2.2.3-A"],"required_checks":["balancer_callback_binding","repayment_transfer","balance_invariant","state_cleanup","reentrancy"],"acceptance":["realistic Balancer repayment path succeeds","exact repayment transfer is proven","balance invariant is enforced","active execution state is cleared","adversarial callback and reentrancy checks pass"],"status":"IN_PROGRESS"},
+    {"task_id":"P0-A.2.2.3-C","phase":"0","gate":"P0-A.2.2.3","title":"Uniswap V3 flash repayment semantics","objective":"Prove canonical factory provenance, single-asset flash selection, fee-side binding, repayment transfer, and state cleanup.","prerequisites":["P0-A.2.2.3-B"],"required_checks":["factory_provenance","single_asset_selection","fee_side_binding","repayment_transfer","state_cleanup","reentrancy"],"status":"BLOCKED_BY_PREREQUISITE"}
   ]
 }
