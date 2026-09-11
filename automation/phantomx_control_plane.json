@@ -1,0 +1,53 @@
+{
+  "schema_version": "AEC-1.0",
+  "mission": "LIVE MARKET -> EXECUTABLE V2/V3 OPPORTUNITY -> ALL KNOWN/CONSERVATIVELY BOUNDED COSTS -> CONSERVATIVE NET PROFIT > $0.50 -> SAFE ATOMIC EXECUTION -> RECEIPT -> INDEPENDENT WALLET BALANCE RECONCILIATION -> REALIZED POSITIVE NET PnL",
+  "mode": "fail_closed",
+  "max_auto_repair_attempts": 3,
+  "live_capital_authorized": false,
+  "current": {
+    "phase": "0",
+    "gate": "P0-A.2.2.3",
+    "task_id": "P0-AUTO-0.1",
+    "status": "IN_PROGRESS"
+  },
+  "tasks": [
+    {
+      "task_id": "P0-AUTO-0.1",
+      "phase": "0",
+      "gate": "P0-AUTO",
+      "title": "Establish autonomous engineering control plane",
+      "objective": "Create a machine-readable, evidence-gated orchestration layer that can resume from exact state and select one atomic next task.",
+      "prerequisites": ["P0-A.2.2.2"],
+      "required_checks": ["control_plane_schema", "state_lock_consistency", "no_secret_material", "workflow_syntax"],
+      "acceptance": ["state machine is explicit", "master goal is explicit", "live capital remains blocked", "repair budget is bounded", "evidence schema is explicit"]
+    },
+    {
+      "task_id": "P0-A.2.2.3-A",
+      "phase": "0",
+      "gate": "P0-A.2.2.3",
+      "title": "Aave repayment lifecycle",
+      "objective": "Prove provider binding, callback binding, exact repayment approval/pull lifecycle, allowance cleanup, and successful active-state cleanup.",
+      "prerequisites": ["P0-AUTO-0.1", "P0-A.2.2.2"],
+      "required_checks": ["aave_callback_binding", "repayment_pull", "allowance_cleanup", "active_state_cleanup", "reentrancy"],
+      "acceptance": ["realistic repayment path succeeds", "stale Aave allowance is zero after provider return", "active execution state is cleared", "all adversarial checks pass"]
+    },
+    {
+      "task_id": "P0-A.2.2.3-B",
+      "phase": "0",
+      "gate": "P0-A.2.2.3",
+      "title": "Balancer repayment semantics",
+      "objective": "Prove exact Balancer callback shape, sender/asset/amount/fee binding, repayment transfer, balance invariant, and state cleanup.",
+      "prerequisites": ["P0-A.2.2.3-A"],
+      "required_checks": ["balancer_callback_binding", "repayment_transfer", "balance_invariant", "state_cleanup", "reentrancy"]
+    },
+    {
+      "task_id": "P0-A.2.2.3-C",
+      "phase": "0",
+      "gate": "P0-A.2.2.3",
+      "title": "Uniswap V3 flash repayment semantics",
+      "objective": "Prove canonical factory provenance, single-asset flash selection, fee-side binding, repayment transfer, and state cleanup.",
+      "prerequisites": ["P0-A.2.2.3-B"],
+      "required_checks": ["factory_provenance", "single_asset_selection", "fee_side_binding", "repayment_transfer", "state_cleanup", "reentrancy"]
+    }
+  ]
+}
