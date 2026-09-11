@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-12-AUTONOMY-1.0
+Version: PFLC-STATE-2026-09-12-AUTONOMY-1.1
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-12
 
@@ -37,11 +37,11 @@ Do not pin the current repository HEAD inside this policy lock. A pinned SHA her
 If state files and current HEAD disagree on authoritative task state, automation must fail closed and mark the state STALE until reconciled.
 
 ## CURRENT ENGINEERING GATE
-- Current task: `P0-A.2.2.3-A — Aave repayment lifecycle`
-- Gate: `P0-A.2.2.3`
+- Current task: `P0-AUTO-0.2 — Reconcile autonomous state and head-aware health reporting`
+- Gate: `P0-AUTO`
 - Controller: `IN_PROGRESS`
 - Live capital: `BLOCKED`
-- Next dependency after GREEN: `P0-A.2.2.3-B`
+- Next dependency after GREEN: `P0-A.2.2.3-A`
 - Automatic repair budget: 3 evidence-driven attempts per atomic task
 
 ## P0-A.2.2 SEMANTIC HARDENING
@@ -51,8 +51,8 @@ Executor stores and verifies the full frozen 16-field intent hash across Aave, B
 ### P0-A.2.2.2 CALLBACK INVOCATION COMPLETENESS — GREEN ON CERTIFIED EVIDENCE
 Executor requires the selected flash provider to invoke its expected callback, rejects callback reuse, and clears active callback state after completion.
 
-## P0-A.2.2.3-A AAVE REPAYMENT LIFECYCLE — IN PROGRESS
-Required evidence:
+## P0-A.2.2.3-A AAVE REPAYMENT LIFECYCLE — BLOCKED BY P0-AUTO-0.2
+Required evidence remains:
 - Aave callback/provider binding
 - borrowed asset receipt
 - exact repayment amount `amount + premium`
@@ -63,14 +63,23 @@ Required evidence:
 - adversarial reentrancy
 - relevant P0-B regression
 
-PR #8 currently provides the realistic successful lifecycle test. It is not itself sufficient to prove the executor rejects a noncompliant provider that attempts an under-pull.
+PR #8 currently provides the realistic successful lifecycle test. It is not sufficient to prove executor rejection of a noncompliant provider under-pulling repayment.
 
 ## LIVE MARKET / ECONOMIC PROOF
 Block-pinned live reads exist, but executable opportunity certification, exact executor-path gas, conservative all-cost profit certification, receipt evidence, independent wallet reconciliation, and realized positive PnL remain unproven.
 
 ## AUTOMATION BASELINE
-Operational components include the deterministic control plane, live-status collection, workflow compilation validation, Copilot auth smoke testing, issue/artifact reporting, and event-driven/scheduled status triggers.
+Operational components include deterministic control-plane validation, live-status collection, workflow compilation validation, Copilot auth smoke testing, issue/artifact reporting, and event-driven/scheduled status triggers.
 The Mission Driver source exists as an agentic-workflow definition but must have a verified compiled operational workflow before it is treated as an autonomous worker.
+
+## P0-AUTO-0.2 OBJECTIVE
+Make automation truth deterministic before allowing the engineering task graph to advance:
+- runtime-derived HEAD instead of stale hard-coded head pins;
+- exact workflow-name mapping with drift surfaced explicitly;
+- current-head failures separated from historical failures;
+- state inconsistency treated as fail-closed;
+- canonical issue/artifact report suitable for supervisory polling;
+- live capital remains blocked throughout.
 
 ## CONTINUITY / RESUME PROTOCOL
 On reconnect:
