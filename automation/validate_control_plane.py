@@ -61,7 +61,8 @@ def main() -> None:
         fail("state lock lost current semantic gate")
     if "AI proposes. Deterministic verification decides. Executor executes." not in state_text:
         fail("AI authority rule missing from state lock")
-    if "live capital" not in spec_text.lower() or "fail closed" not in spec_text.lower():
+    normalized_spec = spec_text.lower().replace("-", " ")
+    if "live capital" not in normalized_spec or "fail closed" not in normalized_spec:
         fail("automation safety boundary missing")
 
     # Secret-material tripwire. This is intentionally conservative.
