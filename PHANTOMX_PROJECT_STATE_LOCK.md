@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-12-AUTONOMY-1.2
+Version: PFLC-STATE-2026-09-12-AUTONOMY-1.3
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-12
 
@@ -37,38 +37,32 @@ Do not pin the current repository HEAD inside this policy lock. A pinned SHA her
 If state files and current HEAD disagree on authoritative task state, automation must fail closed and mark the state STALE until reconciled.
 
 ## CURRENT ENGINEERING GATE
-- Current task: `P0-A.2.2.3-A — Aave repayment lifecycle`
+- Current task: `P0-A.2.2.3-B — Balancer repayment semantics`
 - Gate: `P0-A.2.2.3`
 - Controller: `IN_PROGRESS`
 - Live capital: `BLOCKED`
-- Next dependency after GREEN: `P0-A.2.2.3-B`
+- Next dependency after GREEN: `P0-A.2.2.3-C`
 - Automatic repair budget: 3 evidence-driven attempts per atomic task
 
-## P0-A.2.2 SEMANTIC HARDENING
-### P0-A.2.2.1 CALLBACK INTENT INTEGRITY BINDING — GREEN ON CERTIFIED EVIDENCE
-Executor stores and verifies the full frozen 16-field intent hash across Aave, Balancer, and Uniswap V3 callbacks. Signature is excluded from the intent struct hash.
+## VERIFIED PRIOR GATE
+### P0-A.2.2.3-A AAVE REPAYMENT LIFECYCLE — GREEN
+PR #11 was merged to `main` as `98fd53a362911c1900602a001c1adda27df68a1a` after current-head verification showed successful P0-B Security, P0-B Compile, P0-A.2.1 Conformance, and Mission State Validation. Acceptance covered exact repayment approval/pull, allowance cleanup, post-provider balance reconciliation, short-pull rejection, and adversarial reentrancy.
 
-### P0-A.2.2.2 CALLBACK INVOCATION COMPLETENESS — GREEN ON CERTIFIED EVIDENCE
-Executor requires the selected flash provider to invoke its expected callback, rejects callback reuse, and clears active callback state after completion.
+### P0-A.2.2 SEMANTIC HARDENING
+P0-A.2.2.1 callback intent integrity binding is GREEN on certified evidence.
+P0-A.2.2.2 callback invocation completeness is GREEN on certified evidence.
 
-## P0-AUTO-0.2 — GREEN / MERGED
-P0-AUTO-0.2 was validated on exact PR head `18fc2f77e1e74eccb1bfab3b62164c584fbe9067` with successful Autonomous Control Plane, Mission State Validation, P0-B Compile, P0-A.2.1 Conformance, and P0-B Security workflow runs. PR #9 was merged to `main` as `fa3355d34cc39cfb49561d6f2349d36739f32de8`.
-
-The automation task graph is now allowed to resume the next dependency. This does not authorize live capital and does not imply Aave repayment is proven.
-
-## P0-A.2.2.3-A AAVE REPAYMENT LIFECYCLE — ACTIVE
+## P0-A.2.2.3-B BALANCER REPAYMENT SEMANTICS — ACTIVE
 Required evidence:
-- Aave callback/provider binding
+- Balancer callback/provider binding
+- exact callback shape and one-asset binding
 - borrowed asset receipt
-- exact repayment amount `amount + premium`
-- exact provider repayment pull
-- temporary allowance cleanup after provider return
+- exact repayment transfer
+- balance invariant before repayment
 - active execution cleanup
-- adversarial short-pull/noncompliant-provider semantics
+- adversarial malformed callback semantics
 - adversarial reentrancy
 - relevant P0-B regression
-
-PR #8 currently provides the realistic successful lifecycle test and has passing compile, conformance, and P0-B security workflows on its head. It remains open because executor rejection of a noncompliant provider under-pulling repayment is not yet proven by the test boundary.
 
 ## LIVE MARKET / ECONOMIC PROOF
 Block-pinned live reads exist, but executable opportunity certification, exact executor-path gas, conservative all-cost profit certification, receipt evidence, independent wallet reconciliation, and realized positive PnL remain unproven.
