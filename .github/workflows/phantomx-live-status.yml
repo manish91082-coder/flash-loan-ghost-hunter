@@ -57,7 +57,7 @@ jobs:
       - name: Checkout exact main state
         uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ github.sha }}
           fetch-depth: 1
 
       - name: Set up Python
@@ -112,10 +112,7 @@ jobs:
         run: |
           set -euo pipefail
           marker='<!-- PHANTOMX-LIVE-STATUS -->'
-          body="${marker}
-$(cat PHANTOMX_STATUS.md)
-
-_Status issue maintained automatically by PHANTOMX._"
+          body="$marker"$'\n'"$(cat PHANTOMX_STATUS.md)"$'\n\n_Status issue maintained automatically by PHANTOMX._'
           comments=$(gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${STATUS_ISSUE_NUMBER}/comments?per_page=100")
           comment_id=$(printf '%s' "$comments" | jq -r --arg marker "$marker" '.[] | select(.body | contains($marker)) | .id' | head -n 1)
           if [ -n "${comment_id:-}" ] && [ "$comment_id" != "null" ]; then
