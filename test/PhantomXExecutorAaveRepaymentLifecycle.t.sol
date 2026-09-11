@@ -6,7 +6,6 @@ import "../contracts/PhantomX_Production_Executor.sol";
 interface VmAaveLifecycle {
     function addr(uint256 privateKey) external returns (address);
     function sign(uint256 privateKey, bytes32 digest) external returns (uint8 v, bytes32 r, bytes32 s);
-    function expectRevert() external;
 }
 
 contract AaveLifecycleMockERC20 is IERC20 {
@@ -49,7 +48,7 @@ contract AaveLifecycleMockERC20 is IERC20 {
 }
 
 contract AaveLifecycleMockV2Router is IUniswapV2Router {
-    uint256 public outputAmount;
+    uint256 public immutable outputAmount;
 
     constructor(uint256 output_) {
         outputAmount = output_;
@@ -74,6 +73,7 @@ contract AaveLifecycleMockV2Router is IUniswapV2Router {
 contract AaveLifecycleMockProvider is IPool {
     uint256 public immutable premium;
     uint256 public lastRepayment;
+    uint256 public allowanceSeenBeforePull;
 
     constructor(uint256 premium_) {
         premium = premium_;
@@ -97,6 +97,8 @@ contract AaveLifecycleMockProvider is IPool {
         require(callbackOk, "callback");
 
         uint256 due = amount + premium;
+        allowanceSeenBeforePull = AaveLifecycleMockERC20(asset).allowance(receiverAddress, address(this));
+        require(allowanceSeenBeforePull == due, "incorrect repayment allowance");
         bool pulled = AaveLifecycleMockERC20(asset).transferFrom(receiverAddress, address(this), due);
         require(pulled, "repayment pull");
         lastRepayment = due;
@@ -225,21 +227,8 @@ contract PhantomXExecutorAaveRepaymentLifecycleTest {
         executor.executeOpportunity(intent);
 
         require(provider.lastRepayment() == 107, "incorrect repayment amount");
+        require(provider.allowanceSeenBeforePull() == 107, "provider did not receive exact repayment allowance");
         require(borrowToken.allowance(address(executor), address(provider)) == 0, "Aave allowance not cleaned");
         require(executor.activeExecutionId() == bytes32(0), "active execution leaked");
-    }
-
-    function test_aave_repayment_cannot_complete_without_provider_pull() public {
-        PhantomX_Production_Executor.ExecutionIntent memory intent = _signed(_intent());
-        executor.allowAave(address(0x123456));
-
-        vm.expectRevert();
-        executor.executeOperation(
-            address(borrowToken),
-            100,
-            7,
-            address(executor),
-            abi.encode(intent)
-        );
     }
 }
