@@ -8,7 +8,7 @@
   "single_active_task": true,
   "automatic_repairs_max": 3,
   "last_known_project_head": "57c2704a67f39bc8d82140cf89a9174533acd9e2",
-  "automation_head": "35554170ac8a96c0ad2ad096837f9086fae3b073",
+  "automation_head": "f4672264e824fbfe078a819e3d8c1021e6fc9d4f",
   "verification_required": [
     "GitHub Actions control-plane workflow success",
     "state-lock/current-head consistency",
