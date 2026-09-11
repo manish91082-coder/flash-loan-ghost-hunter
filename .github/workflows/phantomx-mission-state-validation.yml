@@ -1,6 +1,14 @@
 name: PHANTOMX Mission State Validation
 
 on:
+  pull_request:
+    paths:
+      - 'automation/PHANTOMX_AUTOMATION_STATE.json'
+      - 'automation/phantomx_control_plane.json'
+      - 'automation/validate_mission_state.py'
+      - 'PHANTOMX_PROJECT_STATE_LOCK.md'
+      - 'automation/phantomx_status_collector.py'
+      - '.github/workflows/**'
   push:
     branches: [main]
     paths:
@@ -18,7 +26,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: phantomx-mission-state-validation
+  group: phantomx-mission-state-validation-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
