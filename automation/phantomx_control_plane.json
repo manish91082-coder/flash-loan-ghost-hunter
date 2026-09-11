@@ -6,8 +6,8 @@
   "live_capital_authorized": false,
   "current": {
     "phase": "0",
-    "gate": "P0-AUTO",
-    "task_id": "P0-AUTO-0.2",
+    "gate": "P0-A.2.2.3",
+    "task_id": "P0-A.2.2.3-A",
     "status": "IN_PROGRESS"
   },
   "tasks": [
@@ -31,7 +31,7 @@
       "prerequisites": ["P0-AUTO-0.1"],
       "required_checks": ["state_schema_v1_1", "head_derived_state", "workflow_name_accuracy", "historical_failure_isolation", "capital_fail_closed", "mission_state_validation"],
       "acceptance": ["current HEAD is runtime-derived", "historical failures are separated from current-head failures", "workflow drift is explicit", "state inconsistency fails closed", "live capital remains blocked", "validation workflow passes on exact HEAD"],
-      "status": "IN_PROGRESS"
+      "status": "GREEN"
     },
     {
       "task_id": "P0-A.2.2.3-A",
@@ -42,7 +42,7 @@
       "prerequisites": ["P0-AUTO-0.2", "P0-A.2.2.2"],
       "required_checks": ["aave_callback_binding", "repayment_pull", "allowance_cleanup", "active_state_cleanup", "short_pull_rejection", "reentrancy"],
       "acceptance": ["realistic repayment path succeeds", "stale Aave allowance is zero after provider return", "active execution state is cleared", "a malicious/noncompliant provider cannot complete an under-repayment lifecycle", "all adversarial checks pass"],
-      "status": "BLOCKED_BY_PREREQUISITE"
+      "status": "IN_PROGRESS"
     },
     {
       "task_id": "P0-A.2.2.3-B",
