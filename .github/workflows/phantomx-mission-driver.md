@@ -12,7 +12,6 @@ permissions:
   issues: read
   pull-requests: read
   actions: read
-  copilot-requests: write
 engine: copilot
 network:
   allowed:
@@ -41,6 +40,7 @@ safe-outputs:
       - ".gitattributes"
   add-comment:
   noop:
+max-ai-credits: 250
 timeout-minutes: 30
 strict: true
 ---
@@ -105,6 +105,9 @@ A missing workflow result, missing artifact, contradictory state, stale snapshot
 ## Economic discipline
 The final authorization path must remain dynamic-only. Do not introduce or preserve unjustified fixed loan size, fixed economic gas, fixed slippage, synthetic spreads/multipliers, stale pool universes, first-two-venue shortcuts, or generic fallback gas as truth when exact live/on-chain calculation is available.
 Final economic certification requires conservative net > $0.50 after all known/conservatively bounded costs, including flash fees, swap fees, exact gas, slippage/price impact, and MEV risk.
+
+## Capital boundary
+Engineering automation must remain non-capital. It may inspect and modify repository code through reviewable PRs but must never broadcast or authorize a live-capital transaction. Mission-control L1-L8 remains the sole production execution gate.
 
 ## Current foundation task
 The repository is bootstrapping `P0-AUTO-0.1` while the underlying semantic security gate is `P0-A.2.2.3`.
