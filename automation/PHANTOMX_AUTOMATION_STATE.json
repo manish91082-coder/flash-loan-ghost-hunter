@@ -3,13 +3,13 @@
   "controller_status": "IN_PROGRESS",
   "mission_goal": "LIVE MARKET -> EXECUTABLE V2/V3 OPPORTUNITY -> ALL KNOWN/CONSERVATIVELY BOUNDED COSTS -> CONSERVATIVE NET PROFIT > $0.50 -> SAFE ATOMIC EXECUTION -> RECEIPT -> INDEPENDENT WALLET BALANCE RECONCILIATION -> REALIZED POSITIVE NET PnL",
   "main_capital_gate": "BLOCKED",
-  "current_engineering_task": "P0-A.2.2.3-A",
+  "current_engineering_task": "P0-A.2.2.3-B",
   "underlying_project_gate": "P0-A.2.2.3",
   "single_active_task": true,
   "automatic_repairs_max": 3,
   "repair_attempts_recorded": 0,
-  "last_verified_green_task": "P0-AUTO-0.2",
-  "last_verified_green_head": "18fc2f77e1e74eccb1bfab3b62164c584fbe9067",
+  "last_verified_green_task": "P0-A.2.2.3-A",
+  "last_verified_green_head": "98fd53a362911c1900602a001c1adda27df68a1a",
   "last_known_project_head": "RUNTIME_DERIVED",
   "automation_head": "RUNTIME_DERIVED",
   "verification_required": [
@@ -21,7 +21,7 @@
     "mission state validation",
     "no secret material"
   ],
-  "next_after_green": "P0-A.2.2.3-B",
+  "next_after_green": "P0-A.2.2.3-C",
   "state_authority": "GITHUB_HEAD_PLUS_CONTROL_PLANE_VERIFIER",
   "live_capital_authorized": false
 }
