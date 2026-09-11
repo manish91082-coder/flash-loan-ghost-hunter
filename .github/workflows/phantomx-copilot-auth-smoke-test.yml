@@ -1,0 +1,56 @@
+name: PHANTOMX Copilot Auth Smoke Test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phantomx-copilot-auth-smoke-test
+  cancel-in-progress: false
+
+jobs:
+  smoke-test:
+    name: Validate Copilot CLI authentication
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact repository state
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+
+      - name: Install GitHub Copilot CLI
+        run: npm install -g @github/copilot
+
+      - name: Show CLI version
+        run: copilot --version
+
+      - name: Smoke test Copilot authentication and inference
+        env:
+          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          test -n "${COPILOT_GITHUB_TOKEN:-}" || { echo 'COPILOT_GITHUB_TOKEN secret is missing or empty.'; exit 2; }
+          copilot -p 'PHANTOMX AUTH SMOKE TEST. Reply with exactly: PHANTOMX_COPILOT_AUTH_OK' -s --no-ask-user > copilot-smoke.txt
+          grep -Fx 'PHANTOMX_COPILOT_AUTH_OK' copilot-smoke.txt
+
+      - name: Publish smoke-test evidence
+        if: always()
+        run: |
+          echo '## PHANTOMX Copilot Auth Smoke Test' >> "$GITHUB_STEP_SUMMARY"
+          echo "- Commit: $GITHUB_SHA" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f copilot-smoke.txt ]; then
+            echo '- Copilot response captured without exposing the credential.' >> "$GITHUB_STEP_SUMMARY"
+            echo '```text' >> "$GITHUB_STEP_SUMMARY"
+            cat copilot-smoke.txt >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo '- No Copilot response file was produced.' >> "$GITHUB_STEP_SUMMARY"
+          fi
