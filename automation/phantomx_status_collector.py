@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """Collect PHANTOMX repository health from GitHub Actions and canonical state.
 
-This collector is deterministic: it does not use an LLM, it never broadcasts
-transactions, and it never changes production authorization. It produces a
-compact JSON/Markdown status record consumed by the status workflow.
+Deterministic only: no LLM, no live capital, no transaction broadcast.
 """
 from __future__ import annotations
 
@@ -18,7 +16,6 @@ REPO = os.environ.get("GITHUB_REPOSITORY", "manish91082-coder/flash-loan-ghost-h
 ROOT = Path(__file__).resolve().parents[1]
 STATE_PATH = ROOT / "automation" / "PHANTOMX_AUTOMATION_STATE.json"
 GRAPH_PATH = ROOT / "automation" / "phantomx_control_plane.json"
-
 WATCHED_WORKFLOWS = {
     "PHANTOMX P0-A.1 Executor Lineage",
     "PHANTOMX P0-A.2.1 Executor Conformance",
@@ -35,30 +32,19 @@ WATCHED_WORKFLOWS = {
 
 
 def run_gh(args: list[str]) -> str:
-    completed = subprocess.run(
-        ["gh", *args],
-        check=True,
-        text=True,
-        capture_output=True,
-        env=os.environ.copy(),
-    )
-    return completed.stdout
-
-
-def load_json(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return subprocess.run(
+        ["gh", *args], check=True, text=True, capture_output=True, env=os.environ.copy()
+    ).stdout
 
 
 def main() -> None:
-    state = load_json(STATE_PATH)
-    graph = load_json(GRAPH_PATH)
+    state = json.loads(STATE_PATH.read_text(encoding="utf-8"))
+    graph = json.loads(GRAPH_PATH.read_text(encoding="utf-8"))
 
-    workflow_rows = json.loads(
-        run_gh([
-            "run", "list", "--repo", REPO, "--limit", "50",
-            "--json", "databaseId,name,status,conclusion,headSha,createdAt,updatedAt,url",
-        ])
-    )
+    workflow_rows = json.loads(run_gh([
+        "run", "list", "--repo", REPO, "--limit", "80",
+        "--json", "databaseId,name,status,conclusion,headSha,createdAt,updatedAt,url",
+    ]))
     watched = [row for row in workflow_rows if row.get("name") in WATCHED_WORKFLOWS]
 
     conclusions: dict[str, int] = {}
@@ -78,26 +64,39 @@ def main() -> None:
         if status == "completed" and conclusion in {"failure", "timed_out", "cancelled", "action_required"}:
             failures.append(row)
 
+    current_status = state["controller_status"]
+    capital_gate = state["main_capital_gate"]
+    if capital_gate != "BLOCKED":
+        verdict = "BLOCKED"
+    elif failures:
+        verdict = "RED"
+    elif current_status in {"FAILED", "BLOCKED"}:
+        verdict = "RED"
+    elif current_status in {"GREEN"}:
+        verdict = "GREEN"
+    else:
+        verdict = "YELLOW"
+
     report = {
-        "schema_version": "PHS-1.0",
+        "schema_version": "PHS-1.1",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "repo": REPO,
         "main_sha": os.environ.get("GITHUB_SHA", "unknown"),
         "goal": state["mission_goal"],
-        "controller_status": state["controller_status"],
+        "controller_status": current_status,
         "current_task": state["current_engineering_task"],
         "underlying_gate": state["underlying_project_gate"],
-        "live_capital_gate": state["main_capital_gate"],
+        "live_capital_gate": capital_gate,
         "single_active_task": state["single_active_task"],
         "task_graph_count": len(graph["tasks"]),
         "latest_workflows": latest_by_workflow,
         "workflow_conclusions": conclusions,
         "active_workflows": active,
         "failures": failures,
-        "verdict": "BLOCKED" if state["main_capital_gate"] != "BLOCKED" else ("RED" if failures else "GREEN"),
+        "verdict": verdict,
         "notes": [
-            "Workflow health is not proof of realized PnL.",
-            "Live capital remains blocked unless the mission-control L1-L8 gates independently authorize it.",
+            "This is an engineering-health verdict, not a realized-PnL verdict.",
+            "Live capital remains blocked until the mission-control L1-L8 gates independently authorize it.",
         ],
     }
 
@@ -111,7 +110,7 @@ def main() -> None:
         f"**Underlying gate:** `{report['underlying_gate']}`",
         f"**Controller:** `{report['controller_status']}`",
         f"**Capital gate:** `{report['live_capital_gate']}`",
-        f"**Workflow verdict:** `{report['verdict']}`",
+        f"**Engineering verdict:** `{report['verdict']}`",
         f"**HEAD:** `{report['main_sha']}`",
         "",
         "## Workflow health",
@@ -140,11 +139,11 @@ def main() -> None:
     lines += [
         "",
         "## Safety",
-        "- This collector never broadcasts transactions or enables live capital.",
-        "- Workflow GREEN is engineering evidence only; it is not realized-PnL proof.",
+        "- Collector never broadcasts transactions or enables live capital.",
+        "- Green engineering status is not realized-PnL proof.",
     ]
     Path("PHANTOMX_STATUS.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    print(json.dumps({"verdict": report["verdict"], "current_task": report["current_task"], "failures": len(failures)}, indent=2))
+    print(json.dumps({"verdict": verdict, "current_task": report["current_task"], "failures": len(failures)}, indent=2))
 
 
 if __name__ == "__main__":
