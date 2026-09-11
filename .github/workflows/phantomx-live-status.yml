@@ -1,6 +1,18 @@
 name: PHANTOMX Live Status / End-to-End Health
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'automation/**'
+      - 'contracts/**'
+      - 'execution/**'
+      - 'phantomx_core/**'
+      - 'strategies/**'
+      - 'test/**'
+      - 'tests/**'
+      - 'PHANTOMX_PROJECT_STATE_LOCK.md'
+      - '.github/workflows/**'
   workflow_dispatch:
     inputs:
       deep:
