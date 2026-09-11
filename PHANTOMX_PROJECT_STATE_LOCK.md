@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-11-GOAL-LOCK-2.4
+Version: PFLC-STATE-2026-09-11-GOAL-LOCK-2.6
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-11
 
@@ -35,7 +35,7 @@ AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity qua
 ## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA at this checkpoint: `1c13f634af5f298f5ed5d2ea0edebdf535afd2ae`
+Current main SHA at this checkpoint: `e7329c0893172b295db7f3c76f474e4aefbb8aac`
 
 ## P0-A DEPLOYED RUNTIME FINDING
 The deployed Polygon executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` was compared through read-only multi-RPC evidence.
@@ -109,7 +109,7 @@ Implemented as a fail-closed, non-capital orchestration layer:
 The control plane enforces one atomic task, bounded repair attempts, explicit dependencies, evidence requirements, fail-closed behavior, and a hard prohibition on live capital authorization. Its CI workflow uses minimal read-only repository permissions.
 
 Current automation checkpoint:
-- exact state-lock update head: `1c13f634af5f298f5ed5d2ea0edebdf535afd2ae`
+- exact latest automation/state checkpoint head: `e7329c0893172b295db7f3c76f474e4aefbb8aac`
 - status: VERIFYING
 - reason: exact-head GitHub Actions success evidence has not yet been observed through the connected GitHub status surface
 - no claim of GREEN is made until that evidence exists
