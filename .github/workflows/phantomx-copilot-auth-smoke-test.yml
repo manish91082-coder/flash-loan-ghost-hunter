@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: read
+  copilot-requests: write
 
 concurrency:
   group: phantomx-copilot-auth-smoke-test
@@ -34,10 +35,9 @@ jobs:
 
       - name: Smoke test Copilot authentication and inference
         env:
-          COPILOT_GITHUB_TOKEN: ${{ secrets.COPILOT_GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          test -n "${COPILOT_GITHUB_TOKEN:-}" || { echo 'COPILOT_GITHUB_TOKEN secret is missing or empty.'; exit 2; }
           copilot -p 'PHANTOMX AUTH SMOKE TEST. Reply with exactly: PHANTOMX_COPILOT_AUTH_OK' -s --no-ask-user > copilot-smoke.txt
           grep -Fx 'PHANTOMX_COPILOT_AUTH_OK' copilot-smoke.txt
 
