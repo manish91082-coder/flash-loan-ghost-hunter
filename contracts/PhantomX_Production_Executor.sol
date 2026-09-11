@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
-interface IERC20 { function balanceOf(address account) external view returns(address); function transfer(address recipient,uint256 amount) external returns(bool); function approve(address spender,uint256 amount) external returns(bool); }
+interface IERC20 { function balanceOf(address account) external view returns(uint256); function transfer(address recipient,uint256 amount) external returns(bool); function approve(address spender,uint256 amount) external returns(bool); }
 library SafeERC20 {
     function safeTransfer(IERC20 token,address to,uint256 value) internal { (bool success,bytes memory data)=address(token).call(abi.encodeWithSelector(IERC20.transfer.selector,to,value)); require(success&&(data.length==0||abi.decode(data,(bool))),"SafeERC20: transfer failed"); }
     function safeApprove(IERC20 token,address spender,uint256 value) internal { (bool success,bytes memory data)=address(token).call(abi.encodeWithSelector(IERC20.approve.selector,spender,value)); if(!success||(data.length>0&&!abi.decode(data,(bool)))){ (bool success0,bytes memory data0)=address(token).call(abi.encodeWithSelector(IERC20.approve.selector,spender,0)); require(success0&&(data0.length==0||abi.decode(data0,(bool))),"SafeERC20: approve 0 failed"); (bool success1,bytes memory data1)=address(token).call(abi.encodeWithSelector(IERC20.approve.selector,spender,value)); require(success1&&(data1.length==0||abi.decode(data1,(bool))),"SafeERC20: approve failed"); } }
