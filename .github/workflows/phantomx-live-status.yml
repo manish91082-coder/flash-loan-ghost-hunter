@@ -1,0 +1,113 @@
+name: PHANTOMX Live Status / End-to-End Health
+
+on:
+  workflow_dispatch:
+    inputs:
+      deep:
+        description: 'Run the deep executor/security test layer in addition to status collection'
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_run:
+    workflows:
+      - PHANTOMX P0-A.1 Executor Lineage
+      - PHANTOMX P0-A.2.1 Executor Conformance
+      - PHANTOMX P0-A Economic Truth Tests
+      - PHANTOMX P0-A Live Polygon Quote Validation
+      - PHANTOMX P0-B Executor Compile
+      - PHANTOMX P0-B Executor Security
+      - Compile PHANTOMX Agentic Workflows
+      - PHANTOMX Autonomous Control Plane
+      - PHANTOMX Mission Driver
+      - PHANTOMX Copilot Auth Smoke Test
+    types: [completed]
+
+permissions:
+  contents: read
+  actions: read
+  issues: write
+  pull-requests: read
+
+concurrency:
+  group: phantomx-live-status
+  cancel-in-progress: false
+
+env:
+  STATUS_ISSUE_NUMBER: '4'
+
+jobs:
+  health:
+    name: Collect PHANTOMX end-to-end health
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact main state
+        uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Validate control plane
+        run: python3 automation/validate_control_plane.py
+
+      - name: Collect deterministic status
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 automation/phantomx_status_collector.py
+
+      - name: Deep executor/security verification
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.deep == true }}
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+
+      - name: Run deep executor/security suites
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.deep == true }}
+        run: |
+          set -euo pipefail
+          forge test --match-path test/PhantomXExecutorSecurity.t.sol -vv
+          forge test --match-path test/PhantomXExecutorCallbackMatrix.t.sol -vv
+          forge test --match-path test/PhantomXExecutorEIP712CrossCheck.t.sol -vv
+          forge test --match-path test/PhantomXExecutorSemanticHardening.t.sol -vv
+          forge test --match-path test/PhantomXExecutorCallbackInvocation.t.sol -vv
+
+      - name: Publish live status summary
+        run: |
+          set -euo pipefail
+          cat PHANTOMX_STATUS.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload machine-readable evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: phantomx-live-status-${{ github.run_id }}
+          path: |
+            PHANTOMX_STATUS.md
+            phantomx-status.json
+          if-no-files-found: error
+
+      - name: Update canonical status issue
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          marker='<!-- PHANTOMX-LIVE-STATUS -->'
+          body="${marker}
+$(cat PHANTOMX_STATUS.md)
+
+_Status issue maintained automatically by PHANTOMX._"
+          comments=$(gh api --paginate "repos/${GITHUB_REPOSITORY}/issues/${STATUS_ISSUE_NUMBER}/comments?per_page=100")
+          comment_id=$(printf '%s' "$comments" | jq -r --arg marker "$marker" '.[] | select(.body | contains($marker)) | .id' | head -n 1)
+          if [ -n "${comment_id:-}" ] && [ "$comment_id" != "null" ]; then
+            gh api --method PATCH "repos/${GITHUB_REPOSITORY}/issues/comments/${comment_id}" -f body="$body" >/dev/null
+          else
+            gh api --method POST "repos/${GITHUB_REPOSITORY}/issues/${STATUS_ISSUE_NUMBER}/comments" -f body="$body" >/dev/null
+          fi
