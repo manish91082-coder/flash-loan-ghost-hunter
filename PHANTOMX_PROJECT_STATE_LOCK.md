@@ -1,7 +1,7 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-10-GOAL-LOCK-2.0
+Version: PFLC-STATE-2026-09-11-GOAL-LOCK-2.1
 Status: LOCKED / ACTIVE MISSION BASELINE
-Date: 2026-09-10
+Date: 2026-09-11
 
 ## MASTER GOAL
 LIVE MARKET -> EXECUTABLE V2/V3 OPPORTUNITY -> ALL KNOWN/CONSERVATIVELY BOUNDED COSTS -> CONSERVATIVE NET PROFIT > $0.50 -> SAFE ATOMIC EXECUTION -> RECEIPT -> INDEPENDENT WALLET BALANCE RECONCILIATION -> REALIZED POSITIVE NET PnL.
@@ -35,7 +35,7 @@ AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity qua
 ## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA at this checkpoint: `97f6f61ca75905a25662253658e36b396819e4ea`
+Current main SHA at this checkpoint: `1d564954178ce598749fd11d7805f8d04840be5b`
 
 ## P0-A DEPLOYED RUNTIME FINDING
 The deployed Polygon executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` was compared through read-only multi-RPC evidence.
@@ -62,7 +62,16 @@ Historical source/build path was reproduced with ground evidence.
 Canonical executor interface remains frozen as previously established.
 
 ## P0-A.2.1 — EXECUTOR ABI CONFORMANCE — GREEN
-Frozen v1 executor ABI was compiled and checked in CI; optimized compile/EIP-170 and prior executor security/callback/EIP712 evidence were green before semantic hardening.
+Fresh exact-head CI on `1d564954178ce598749fd11d7805f8d04840be5b` passed frozen ABI conformance and the two canonical Python interface tests. Optimized runtime measured `18,239` bytes.
+
+Evidence:
+- P0-A.2.1 run: `34516965619`
+- job: `103004668586`
+- `ExecutionIntent ABI: PASS`
+- provider enum mapping: PASS
+- swap enum mapping: PASS
+- callback surface: PASS
+- canonical interface tests: 2 passed, 0 failed
 
 ## P0-A.2.2 SEMANTIC HARDENING — IN PROGRESS
 ### P0-A.2.2.1 CALLBACK INTENT INTEGRITY BINDING — GREEN
@@ -70,29 +79,39 @@ Finding resolved: callbacks previously bound only to `activeExecutionId`, allowi
 
 Regression evidence:
 - `test/PhantomXExecutorSemanticHardening.t.sol` includes malicious Aave, Balancer and Uniswap V3 mocks that mutate `routerA` while retaining the original executionId/provider.
-- First test attempt failed because the mock interface omitted Balancer/V3 callback declarations. This was a test-harness defect, not executor logic failure.
-- Fix commit: `b499250cce95cae5cb565d78f9ec03502f108650`.
-- Fresh P0-B security run: `34513582843`.
-- Head SHA: `b499250cce95cae5cb565d78f9ec03502f108650`.
-- Final job: `102993406909`.
-- Conclusion: `success`.
-- All required suites, including the new semantic-hardening suite, executed successfully.
+- Fresh exact-head security evidence is included below.
 
-CI observability finding also resolved:
-- Earlier `ci-failure-alert` failure was caused by `gh` being invoked without explicit repository targeting outside a git checkout.
-- Commit `e3acd863eaab6db97a5e6ac33a22df15714b4c95` supplied explicit `--repo ${GITHUB_REPOSITORY}` targeting.
+### P0-A.2.2.2 CALLBACK INVOCATION COMPLETENESS — GREEN
+Finding resolved: `executeOpportunity()` previously did not prove that the selected flash provider actually invoked its required callback. A silent or misconfigured allowlisted provider could return without callback, causing the execution path to return without a flash-loan callback/route/repayment while consuming the intent in the successful transaction path.
 
-Live market probe evidence remains separate from this semantic gate. A prior read-only Polygon quote probe succeeded at block `93572001`, while its historical compiler-install substep failed because the runner could not resolve `solc-bin.ethereum.org`. No transaction was broadcast.
+Implementation:
+- After each Aave, Uniswap V3, or Balancer provider invocation, `executeOpportunity()` now requires `activeCallbackConsumed` before clearing active execution state.
+- Callback entrypoints set `activeCallbackConsumed=true` and reject a second callback during the same execution.
+- The invariant is fail-closed: no callback means the provider call path reverts.
+- Source refactor commit `1d564954178ce598749fd11d7805f8d04840be5b` also isolates canonical Uniswap V3 pool validation in `_validatedV3Pool(...)` to clear the optimizer stack-depth gate.
+
+Regression evidence on exact head `1d564954178ce598749fd11d7805f8d04840be5b`:
+- P0-B security run: `34516965651`
+- job: `103004669218`
+- conclusion: `success`
+- security suite: 8/8 passed
+- callback matrix: 9/9 passed
+- EIP712 cross-check: 2/2 passed
+- semantic hardening: 10/10 passed
+- callback invocation: 3/3 passed
+- total: 32/32 tests passed, 0 failed, 0 skipped
+- optimized compile on exact head: runtime `18,239` bytes; EIP-170 gate passed
+
+Source-diff note:
+- Commit `1d564954...` modifies only `contracts/PhantomX_Production_Executor.sol`, with 33 additions and 97 deletions because the file was reformatted/minified while isolating the V3 validation helper. The exact-head ABI/security/semantic suites pass, but formatting-only diff size is not treated as proof of semantic equivalence. Further source audit remains required before deployment authorization.
 
 ### NEXT ACTIVE TASK
-`P0-A.2.2.2 — Flash-provider callback semantic audit: prove provider authenticity, callback initiator/recipient semantics, UniV3 single-asset flash/fee accounting, Balancer callback shape/repayment semantics, Aave callback binding, active-intent lifecycle, and nested/reentrancy behavior.`
-
-This task must finish with implementation changes/tests/evidence as required before any V2/V3 route-integration authorization.
+`P0-A.2.2.3 — Provider authenticity and repayment semantics audit: verify Aave callback/provider binding and repayment approval lifecycle; Balancer callback shape and exact repayment semantics; Uniswap V3 canonical factory provenance, single-asset flash selection, fee-side binding, and repayment transfer; then adversarially test nested/reentrant callback behavior and active-state cleanup.`
 
 ## DEPLOYMENT / CAPITAL GATE
 Live deployment and live capital execution remain BLOCKED.
 
 ## CONTINUITY
-On reconnect: load this state lock -> verify current main SHA -> inspect the frozen interface, production executor and active semantic tests -> resume exactly at P0-A.2.2.2. Never restart the project.
+On reconnect: load this state lock -> verify current main SHA -> inspect the frozen interface, production executor and active semantic tests -> resume exactly at P0-A.2.2.3. Never restart the project.
 
 END STATE LOCK
