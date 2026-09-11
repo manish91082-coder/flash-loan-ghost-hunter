@@ -7,7 +7,7 @@
   "current": {
     "phase": "0",
     "gate": "P0-A.2.2.3",
-    "task_id": "P0-AUTO-0.1",
+    "task_id": "P0-A.2.2.3-A",
     "status": "IN_PROGRESS"
   },
   "tasks": [
@@ -19,7 +19,8 @@
       "objective": "Create a machine-readable, evidence-gated orchestration layer that can resume from exact state and select one atomic next task.",
       "prerequisites": ["P0-A.2.2.2"],
       "required_checks": ["control_plane_schema", "state_lock_consistency", "no_secret_material", "workflow_syntax"],
-      "acceptance": ["state machine is explicit", "master goal is explicit", "live capital remains blocked", "repair budget is bounded", "evidence schema is explicit"]
+      "acceptance": ["state machine is explicit", "master goal is explicit", "live capital remains blocked", "repair budget is bounded", "evidence schema is explicit"],
+      "status": "GREEN"
     },
     {
       "task_id": "P0-A.2.2.3-A",
@@ -29,7 +30,8 @@
       "objective": "Prove provider binding, callback binding, exact repayment approval/pull lifecycle, allowance cleanup, and successful active-state cleanup.",
       "prerequisites": ["P0-AUTO-0.1", "P0-A.2.2.2"],
       "required_checks": ["aave_callback_binding", "repayment_pull", "allowance_cleanup", "active_state_cleanup", "reentrancy"],
-      "acceptance": ["realistic repayment path succeeds", "stale Aave allowance is zero after provider return", "active execution state is cleared", "all adversarial checks pass"]
+      "acceptance": ["realistic repayment path succeeds", "stale Aave allowance is zero after provider return", "active execution state is cleared", "all adversarial checks pass"],
+      "status": "IN_PROGRESS"
     },
     {
       "task_id": "P0-A.2.2.3-B",
