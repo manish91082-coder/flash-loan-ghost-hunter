@@ -1,0 +1,19 @@
+{
+  "schema_version": "AEC-1.0",
+  "controller_status": "VERIFYING",
+  "mission_goal": "LIVE MARKET -> EXECUTABLE V2/V3 OPPORTUNITY -> ALL KNOWN/CONSERVATIVELY BOUNDED COSTS -> CONSERVATIVE NET PROFIT > $0.50 -> SAFE ATOMIC EXECUTION -> RECEIPT -> INDEPENDENT WALLET BALANCE RECONCILIATION -> REALIZED POSITIVE NET PnL",
+  "main_capital_gate": "BLOCKED",
+  "current_engineering_task": "P0-AUTO-0.1",
+  "underlying_project_gate": "P0-A.2.2.3",
+  "single_active_task": true,
+  "automatic_repairs_max": 3,
+  "last_known_project_head": "57c2704a67f39bc8d82140cf89a9174533acd9e2",
+  "automation_head": "35554170ac8a96c0ad2ad096837f9086fae3b073",
+  "verification_required": [
+    "GitHub Actions control-plane workflow success",
+    "state-lock/current-head consistency",
+    "control-plane validator success",
+    "no secret material"
+  ],
+  "next_after_green": "P0-A.2.2.3-A"
+}
