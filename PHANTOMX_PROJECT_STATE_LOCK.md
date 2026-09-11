@@ -1,5 +1,5 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-11-GOAL-LOCK-2.1
+Version: PFLC-STATE-2026-09-11-GOAL-LOCK-2.2
 Status: LOCKED / ACTIVE MISSION BASELINE
 Date: 2026-09-11
 
@@ -35,7 +35,7 @@ AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity qua
 ## CURRENT REPOSITORY
 Repository: manish91082-coder/flash-loan-ghost-hunter
 Visibility: public
-Current main SHA at this checkpoint: `1d564954178ce598749fd11d7805f8d04840be5b`
+Current main SHA at this checkpoint: `754b1f82516424710b5f319c96de17e52ecc9750`
 
 ## P0-A DEPLOYED RUNTIME FINDING
 The deployed Polygon executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` was compared through read-only multi-RPC evidence.
@@ -77,23 +77,13 @@ Evidence:
 ### P0-A.2.2.1 CALLBACK INTENT INTEGRITY BINDING — GREEN
 Finding resolved: callbacks previously bound only to `activeExecutionId`, allowing a theoretical same-ID mutated callback payload. The hardened executor now stores `activeIntentHash = _intentStructHash(intent)` alongside `activeExecutionId` and requires full 16-field intent-hash equality in Aave, Balancer and Uniswap V3 callbacks. Signature is excluded from the struct hash exactly as required by the frozen EIP-712 schema. Active bindings are cleared after the provider call on successful completion.
 
-Regression evidence:
-- `test/PhantomXExecutorSemanticHardening.t.sol` includes malicious Aave, Balancer and Uniswap V3 mocks that mutate `routerA` while retaining the original executionId/provider.
-- Fresh exact-head security evidence is included below.
+### P0-A.2.2.2 CALLBACK INVOCATION COMPLETENESS — GREEN ON CERTIFIED HEAD
+Finding resolved: `executeOpportunity()` now proves that the selected flash provider actually invoked its required callback. After each provider invocation it requires `activeCallbackConsumed`; callback entrypoints set it and reject a second callback.
 
-### P0-A.2.2.2 CALLBACK INVOCATION COMPLETENESS — GREEN
-Finding resolved: `executeOpportunity()` previously did not prove that the selected flash provider actually invoked its required callback. A silent or misconfigured allowlisted provider could return without callback, causing the execution path to return without a flash-loan callback/route/repayment while consuming the intent in the successful transaction path.
-
-Implementation:
-- After each Aave, Uniswap V3, or Balancer provider invocation, `executeOpportunity()` now requires `activeCallbackConsumed` before clearing active execution state.
-- Callback entrypoints set `activeCallbackConsumed=true` and reject a second callback during the same execution.
-- The invariant is fail-closed: no callback means the provider call path reverts.
-- Source refactor commit `1d564954178ce598749fd11d7805f8d04840be5b` also isolates canonical Uniswap V3 pool validation in `_validatedV3Pool(...)` to clear the optimizer stack-depth gate.
-
-Regression evidence on exact head `1d564954178ce598749fd11d7805f8d04840be5b`:
+Regression evidence on certified head `1d564954178ce598749fd11d7805f8d04840be5b`:
 - P0-B security run: `34516965651`
 - job: `103004669218`
-- conclusion: `success`
+- conclusion: success
 - security suite: 8/8 passed
 - callback matrix: 9/9 passed
 - EIP712 cross-check: 2/2 passed
@@ -103,15 +93,36 @@ Regression evidence on exact head `1d564954178ce598749fd11d7805f8d04840be5b`:
 - optimized compile on exact head: runtime `18,239` bytes; EIP-170 gate passed
 
 Source-diff note:
-- Commit `1d564954...` modifies only `contracts/PhantomX_Production_Executor.sol`, with 33 additions and 97 deletions because the file was reformatted/minified while isolating the V3 validation helper. The exact-head ABI/security/semantic suites pass, but formatting-only diff size is not treated as proof of semantic equivalence. Further source audit remains required before deployment authorization.
+- Commit `1d564954...` modifies only `contracts/PhantomX_Production_Executor.sol`, with 33 additions and 97 deletions because the file was reformatted/minified while isolating the V3 validation helper. Passing suites are not treated as proof of semantic equivalence; further source audit remains required before deployment authorization.
 
-### NEXT ACTIVE TASK
-`P0-A.2.2.3 — Provider authenticity and repayment semantics audit: verify Aave callback/provider binding and repayment approval lifecycle; Balancer callback shape and exact repayment semantics; Uniswap V3 canonical factory provenance, single-asset flash selection, fee-side binding, and repayment transfer; then adversarially test nested/reentrant callback behavior and active-state cleanup.`
+### P0-AUTO-0 AUTONOMOUS ENGINEERING CONTROL PLANE — VERIFYING
+Implemented on main as a fail-closed, non-capital orchestration layer:
+- `docs/automation/PHANTOMX_AUTONOMOUS_ENGINEERING_CONTROL_PLANE.md`
+- `automation/phantomx_control_plane.json`
+- `automation/PHANTOMX_AUTOMATION_STATE.json`
+- `automation/validate_control_plane.py`
+- `.github/workflows/phantomx-control-plane.yml`
+- `.github/copilot-instructions.md`
+- `docs/automation/P0-AUTO-0.1-CHECKPOINT.md`
+
+The control plane enforces one atomic task, bounded repair attempts, explicit dependencies, evidence requirements, fail-closed behavior, and a hard prohibition on live capital authorization. Its CI workflow uses minimal read-only repository permissions. GitHub Actions supports explicit workflow/job permissions, so this layer intentionally requests only `contents: read`. citeturn0search0turn0search3
+
+Current automation checkpoint:
+- automation implementation head: `754b1f82516424710b5f319c96de17e52ecc9750`
+- status: VERIFYING
+- reason: exact-head GitHub Actions success evidence has not yet been observed through the connected GitHub status surface
+- no claim of GREEN is made until that evidence exists
+
+### NEXT ACTIVE ENGINEERING TASK AFTER AUTOMATION GREEN
+`P0-A.2.2.3-A — Aave repayment lifecycle: realistic provider transfer/borrow path, callback execution, exact repayment pull, post-provider allowance cleanup, active-state cleanup, and adversarial reentrancy.`
+
+## P0-A.2.2.3 PROVIDER AUTHENTICITY / REPAYMENT SEMANTICS — BLOCKED BY AUTOMATION BOOTSTRAP VERIFICATION
+The underlying semantic mission remains active. No live deployment/capital work is permitted. The current task graph is machine-readable and must advance only after the automation bootstrap is GREEN.
 
 ## DEPLOYMENT / CAPITAL GATE
 Live deployment and live capital execution remain BLOCKED.
 
 ## CONTINUITY
-On reconnect: load this state lock -> verify current main SHA -> inspect the frozen interface, production executor and active semantic tests -> resume exactly at P0-A.2.2.3. Never restart the project.
+On reconnect: load this state lock -> verify exact main SHA -> load `automation/PHANTOMX_AUTOMATION_STATE.json` and `automation/phantomx_control_plane.json` -> verify the control-plane workflow evidence -> resume the single active task. Never restart the project and never replay completed work.
 
 END STATE LOCK
