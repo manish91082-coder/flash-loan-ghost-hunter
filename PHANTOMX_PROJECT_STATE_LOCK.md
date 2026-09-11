@@ -1,131 +1,85 @@
 # PHANTOMX PROJECT STATE LOCK
-Version: PFLC-STATE-2026-09-11-GOAL-LOCK-2.7
+Version: PFLC-STATE-2026-09-12-AUTONOMY-1.0
 Status: LOCKED / ACTIVE MISSION BASELINE
-Date: 2026-09-11
+Date: 2026-09-12
 
 ## MASTER GOAL
 LIVE MARKET -> EXECUTABLE V2/V3 OPPORTUNITY -> ALL KNOWN/CONSERVATIVELY BOUNDED COSTS -> CONSERVATIVE NET PROFIT > $0.50 -> SAFE ATOMIC EXECUTION -> RECEIPT -> INDEPENDENT WALLET BALANCE RECONCILIATION -> REALIZED POSITIVE NET PnL.
 
-Project completion is not established by continuous running, AI prediction, simulation, expected PnL, tests alone, or generated calldata. The final success criterion is live realized positive net PnL under the verified safety envelope.
+The final success criterion is independently evidenced live realized positive net PnL under the verified safety envelope. Tests, simulation, AI prediction, generated calldata, expected PnL, or continuous uptime are not sufficient proof.
 
 ## HARD RULES
-- One active task at a time.
-- Depth first.
+- One active engineering task at a time.
 - Evidence before confidence.
 - Verification before integration.
 - Integration before optimization.
-- Simulation before execution.
-- Receipt/balance evidence before realized-PnL claims.
-- GOAL > SAFETY > GROUND EVIDENCE > MATHEMATICAL CORRECTNESS > CURRENT CODE > HISTORICAL DOCUMENTATION.
+- Simulation before live execution.
+- Receipt and independent balance evidence before realized-PnL claims.
 - Never knowingly authorize conservative non-positive economics.
-- Never use opportunity pressure to bypass a hard gate.
-- No secrets/private keys/seeds in the public repository.
-- Every material change must have tests, evidence, rollback reference and state update.
+- Never bypass a hard safety/economic gate because an opportunity appears time-sensitive.
+- No secrets, private keys, or seed material in repository history.
+- Every material change must have deterministic validation, evidence, rollback reference, and state update.
+- Engineering automation is non-capital and must never broadcast or authorize a live-capital transaction.
 
 ## DYNAMIC-ONLY HOT PATH
-No unjustified fixed economic assumption may survive in the final authorization path where live state or exact on-chain calculation can provide the value. This includes fixed loan size, fixed economic gas, fixed slippage, synthetic spread/multipliers, stale pool universes, first-two-venue shortcuts and generic fallback gas used as truth.
+Do not preserve unjustified fixed economic assumptions where exact live/on-chain values are available. This includes fixed loan size, fixed economic gas, fixed slippage, synthetic spread/multipliers, stale pool universes, first-two-venue shortcuts, or generic fallback gas used as economic truth.
 
 ## CANONICAL HOT PATH
 DISCOVER -> PIN SNAPSHOT -> VERIFY CHAIN/RPC -> VERIFY TOKENS/POOLS/VENUES -> ENUMERATE V2/V3 ROUTES -> EXECUTABLE QUOTES -> LIQUIDITY/PRICE IMPACT -> DYNAMIC LOAN SIZE -> EXACT INTENT -> EXACT GAS -> ALL COSTS -> MEV/RISK -> PROFIT CERTIFICATE (> $0.50) -> FINAL REQUOTE/STATE LOCK -> EXECUTOR IDENTITY/SECURITY -> ATOMIC EXECUTION -> RECEIPT -> BALANCE/PnL RECONCILIATION -> LEARNING -> CHECKPOINT -> LOOP.
 
 ## AI AUTHORITY
 AI proposes. Deterministic verification decides. Executor executes.
-AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity quality, liquidity/price impact, short-horizon forecast, MEV-risk probability, RPC quality and learning parameters. AI cannot override identity, route validity, exact gas, repayment, minOut/slippage, allowlists, signer/authentication, safety caps or final authorization.
+AI may rank market regime, V2/V3, route, timing, size, gas-aware opportunity quality, liquidity/price impact, short-horizon forecast, MEV-risk probability, RPC quality and learning parameters. AI cannot override identity, route validity, exact gas, repayment, minOut/slippage, allowlists, signer/authentication, safety caps, or final authorization.
 
-## CURRENT REPOSITORY
-Repository: manish91082-coder/flash-loan-ghost-hunter
-Visibility: public
-State-lock parent checkpoint SHA: `7e92c9f37b794b8312f3083637128509487019d1`
-State-lock commit is the canonical checkpoint tip; the parent SHA above is the exact repository state audited immediately before this lock update.
+## CURRENT MACHINE STATE AUTHORITY
+Current live state is runtime-derived from the GitHub default branch HEAD plus `automation/PHANTOMX_AUTOMATION_STATE.json` and `automation/phantomx_control_plane.json`.
+Do not pin the current repository HEAD inside this policy lock. A pinned SHA here is evidence of a historical checkpoint only, not the live current state.
+If state files and current HEAD disagree on authoritative task state, automation must fail closed and mark the state STALE until reconciled.
 
-## P0-A DEPLOYED RUNTIME FINDING
-The deployed Polygon executor `0x24056bCA6538693aE94Cc97E82f21Ee4EC7f1286` was compared through read-only multi-RPC evidence.
+## CURRENT ENGINEERING GATE
+- Current task: `P0-A.2.2.3-A — Aave repayment lifecycle`
+- Gate: `P0-A.2.2.3`
+- Controller: `IN_PROGRESS`
+- Live capital: `BLOCKED`
+- Next dependency after GREEN: `P0-A.2.2.3-B`
+- Automatic repair budget: 3 evidence-driven attempts per atomic task
 
-Deployment:
-- tx: `0x92bc4dc8b3450332c281445fb4443f8725586b18e880a063e0892af2c28c595a`
-- block: `93519165`
-- chain ID: `137`
+## P0-A.2.2 SEMANTIC HARDENING
+### P0-A.2.2.1 CALLBACK INTENT INTEGRITY BINDING — GREEN ON CERTIFIED EVIDENCE
+Executor stores and verifies the full frozen 16-field intent hash across Aave, Balancer, and Uniswap V3 callbacks. Signature is excluded from the intent struct hash.
 
-Decisive P0-A evidence:
-- deployed runtime: `6528` bytes
-- deployed runtime Keccak-256: `0x84d804402ada3bac76426aad699fcc5d95bc39d6237a7f15eda238eff606d2fb`
-- current hardened executor is a separate source/runtime lineage and is not this deployed legacy artifact
-- deployed owner matches recorded deployer
-- deployment sender and created address match recorded evidence
-- deployment receipt succeeded
-- `DOMAIN_SEPARATOR()` and `paused()` revert on deployed legacy runtime
-- no live transaction was signed or broadcast during identity work
+### P0-A.2.2.2 CALLBACK INVOCATION COMPLETENESS — GREEN ON CERTIFIED EVIDENCE
+Executor requires the selected flash provider to invoke its expected callback, rejects callback reuse, and clears active callback state after completion.
 
-## P0-A.1 LINEAGE RESOLUTION — COMPLETE
-Historical source/build path was reproduced with ground evidence.
+## P0-A.2.2.3-A AAVE REPAYMENT LIFECYCLE — IN PROGRESS
+Required evidence:
+- Aave callback/provider binding
+- borrowed asset receipt
+- exact repayment amount `amount + premium`
+- exact provider repayment pull
+- temporary allowance cleanup after provider return
+- active execution cleanup
+- adversarial short-pull/noncompliant-provider semantics
+- adversarial reentrancy
+- relevant P0-B regression
 
-## P0-A.2 — INTERFACE FREEZE — COMPLETE
-Canonical executor interface remains frozen as previously established.
+PR #8 currently provides the realistic successful lifecycle test. It is not itself sufficient to prove the executor rejects a noncompliant provider that attempts an under-pull.
 
-## P0-A.2.1 — EXECUTOR ABI CONFORMANCE — GREEN
-Fresh exact-head CI on `1d564954178ce598749fd11d7805f8d04840be5b` passed frozen ABI conformance and the two canonical Python interface tests. Optimized runtime measured `18,239` bytes.
+## LIVE MARKET / ECONOMIC PROOF
+Block-pinned live reads exist, but executable opportunity certification, exact executor-path gas, conservative all-cost profit certification, receipt evidence, independent wallet reconciliation, and realized positive PnL remain unproven.
 
-Evidence:
-- P0-A.2.1 run: `34516965619`
-- job: `103004668586`
-- `ExecutionIntent ABI: PASS`
-- provider enum mapping: PASS
-- swap enum mapping: PASS
-- callback surface: PASS
-- canonical interface tests: 2 passed, 0 failed
+## AUTOMATION BASELINE
+Operational components include the deterministic control plane, live-status collection, workflow compilation validation, Copilot auth smoke testing, issue/artifact reporting, and event-driven/scheduled status triggers.
+The Mission Driver source exists as an agentic-workflow definition but must have a verified compiled operational workflow before it is treated as an autonomous worker.
 
-## P0-A.2.2 SEMANTIC HARDENING — IN PROGRESS
-### P0-A.2.2.1 CALLBACK INTENT INTEGRITY BINDING — GREEN
-Finding resolved: callbacks previously bound only to `activeExecutionId`, allowing a theoretical same-ID mutated callback payload. The hardened executor now stores `activeIntentHash = _intentStructHash(intent)` alongside `activeExecutionId` and requires full 16-field intent-hash equality in Aave, Balancer and Uniswap V3 callbacks. Signature is excluded from the struct hash exactly as required by the frozen EIP-712 schema. Active bindings are cleared after the provider call on successful completion.
-
-### P0-A.2.2.2 CALLBACK INVOCATION COMPLETENESS — GREEN ON CERTIFIED HEAD
-Finding resolved: `executeOpportunity()` now proves that the selected flash provider actually invoked its required callback. After each provider invocation it requires `activeCallbackConsumed`; callback entrypoints set it and reject a second callback.
-
-Regression evidence on certified head `1d564954178ce598749fd11d7805f8d04840be5b`:
-- P0-B security run: `34516965651`
-- job: `103004669218`
-- conclusion: success
-- security suite: 8/8 passed
-- callback matrix: 9/9 passed
-- EIP712 cross-check: 2/2 passed
-- semantic hardening: 10/10 passed
-- callback invocation: 3/3 passed
-- total: 32/32 tests passed, 0 failed, 0 skipped
-- optimized compile on exact head: runtime `18,239` bytes; EIP-170 gate passed
-
-Source-diff note:
-- Commit `1d564954...` modifies only `contracts/PhantomX_Production_Executor.sol`, with 33 additions and 97 deletions because the file was reformatted/minified while isolating the V3 validation helper. Passing suites are not treated as proof of semantic equivalence; further source audit remains required before deployment authorization.
-
-### P0-AUTO-0 AUTONOMOUS ENGINEERING CONTROL PLANE — VERIFYING
-Implemented as a fail-closed, non-capital orchestration layer:
-- `docs/automation/PHANTOMX_AUTONOMOUS_ENGINEERING_CONTROL_PLANE.md`
-- `automation/phantomx_control_plane.json`
-- `automation/PHANTOMX_AUTOMATION_STATE.json`
-- `automation/validate_control_plane.py`
-- `.github/workflows/phantomx-control-plane.yml`
-- `.github/copilot-instructions.md`
-- `docs/automation/P0-AUTO-0.1-CHECKPOINT.md`
-- `docs/automation/AGENT_HANDOFF_PROTOCOL.md`
-- `docs/automation/P0-AUTO-0.1-AGENT-TASK.md`
-
-The control plane enforces one atomic task, bounded repair attempts, explicit dependencies, evidence requirements, fail-closed behavior, and a hard prohibition on live capital authorization. Its CI workflow uses minimal read-only repository permissions.
-
-Current automation checkpoint:
-- audited automation base: `7e92c9f37b794b8312f3083637128509487019d1`
-- status: VERIFYING
-- reason: exact-head GitHub Actions success evidence has not yet been observed through the connected GitHub status surface
-- no claim of GREEN is made until that evidence exists
-
-### NEXT ACTIVE ENGINEERING TASK AFTER AUTOMATION GREEN
-`P0-A.2.2.3-A — Aave repayment lifecycle: realistic provider transfer/borrow path, callback execution, exact repayment pull, post-provider allowance cleanup, active-state cleanup, and adversarial reentrancy.`
-
-## P0-A.2.2.3 PROVIDER AUTHENTICITY / REPAYMENT SEMANTICS — BLOCKED BY AUTOMATION BOOTSTRAP VERIFICATION
-The underlying semantic mission remains active. No live deployment/capital work is permitted. The current task graph is machine-readable and must advance only after the automation bootstrap is GREEN.
-
-## DEPLOYMENT / CAPITAL GATE
-Live deployment and live capital execution remain BLOCKED.
-
-## CONTINUITY
-On reconnect: load this state lock -> verify the state-lock parent checkpoint and current lock tip -> load `automation/PHANTOMX_AUTOMATION_STATE.json` and `automation/phantomx_control_plane.json` -> verify the control-plane workflow evidence -> resume the single active task. Never restart the project and never replay completed work.
+## CONTINUITY / RESUME PROTOCOL
+On reconnect:
+1. Read current GitHub default-branch HEAD.
+2. Read `automation/PHANTOMX_AUTOMATION_STATE.json`.
+3. Read `automation/phantomx_control_plane.json`.
+4. Validate state consistency and current task prerequisites.
+5. Inspect latest relevant workflow conclusions and evidence.
+6. Resume exactly one eligible atomic task.
+7. Never replay completed GREEN work and never declare GREEN without current evidence.
 
 END STATE LOCK
