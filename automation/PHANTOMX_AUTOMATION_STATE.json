@@ -1,19 +1,24 @@
 {
   "schema_version": "AEC-1.0",
-  "controller_status": "VERIFYING",
+  "controller_status": "IN_PROGRESS",
   "mission_goal": "LIVE MARKET -> EXECUTABLE V2/V3 OPPORTUNITY -> ALL KNOWN/CONSERVATIVELY BOUNDED COSTS -> CONSERVATIVE NET PROFIT > $0.50 -> SAFE ATOMIC EXECUTION -> RECEIPT -> INDEPENDENT WALLET BALANCE RECONCILIATION -> REALIZED POSITIVE NET PnL",
   "main_capital_gate": "BLOCKED",
-  "current_engineering_task": "P0-AUTO-0.1",
+  "current_engineering_task": "P0-A.2.2.3-A",
   "underlying_project_gate": "P0-A.2.2.3",
   "single_active_task": true,
   "automatic_repairs_max": 3,
-  "last_known_project_head": "57c2704a67f39bc8d82140cf89a9174533acd9e2",
-  "automation_head": "f4672264e824fbfe078a819e3d8c1021e6fc9d4f",
+  "last_verified_green_task": "P0-AUTO-0.1",
+  "last_verified_green_head": "0783c4c0c81b06cee8ed38232f770547399dd5eb",
+  "last_known_project_head": "0783c4c0c81b06cee8ed38232f770547399dd5eb",
+  "automation_head": "b6e1e66871a8742355f79f853184af9200650b73",
   "verification_required": [
-    "GitHub Actions control-plane workflow success",
-    "state-lock/current-head consistency",
-    "control-plane validator success",
+    "Aave callback binding",
+    "exact repayment pull",
+    "allowance cleanup",
+    "active state cleanup",
+    "adversarial reentrancy",
+    "full relevant P0-B regression",
     "no secret material"
   ],
-  "next_after_green": "P0-A.2.2.3-A"
+  "next_after_green": "P0-A.2.2.3-B"
 }
